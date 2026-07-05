@@ -28,7 +28,7 @@ const userLinks = [
 
 export function Navbar() {
   const { user, signOut } = useAuth();
-  const { isInstallable, installPwa } = usePWA();
+  const { isInstallable, installPwa, isStandalone, isIOS } = usePWA();
   const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -59,6 +59,17 @@ export function Navbar() {
       toast.error('حدث خطأ أثناء تسجيل الخروج');
     }
   }, [signOut, router]);
+
+  const handleInstallClick = useCallback(async () => {
+    if (isInstallable || isIOS) {
+      await installPwa();
+    } else {
+      toast('متصفحك لا يدعم تثبيت التطبيق مباشرة.', {
+        icon: 'ℹ️',
+        duration: 4000,
+      });
+    }
+  }, [isInstallable, isIOS, installPwa]);
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -126,63 +137,72 @@ export function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-2">
-            {isInstallable && (
-              <Button onClick={installPwa} variant="secondary" size="sm" className="gap-1.5 text-xs font-bold bg-primary/10 text-primary hover:bg-primary/20 rounded-full px-4 border-none shadow-none">
-                <Download className="h-3.5 w-3.5" />
-                تحميل التطبيق
+          {/* Actions Container */}
+          <div className="flex items-center gap-2">
+            {!isStandalone && (
+              <Button
+                onClick={handleInstallClick}
+                variant="secondary"
+                size="sm"
+                className="h-8 w-8 p-0 sm:w-auto sm:h-9 sm:px-4 gap-1.5 text-xs font-bold bg-primary/10 text-primary hover:bg-primary/20 rounded-full border-none shadow-none flex items-center justify-center transition-all duration-200"
+              >
+                <Download className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
+                <span className="hidden sm:inline">تحميل التطبيق</span>
               </Button>
             )}
-            {user ? (
-              <>
-                {user.role === 'admin' && (
-                  <Button variant="ghost" size="sm" asChild className="gap-1.5 text-xs font-bold text-primary hover:text-primary hover:bg-primary/10">
-                    <Link href="/admin">
-                      <LayoutDashboard className="h-3.5 w-3.5" />
-                      لوحة التحكم
+
+            {/* Desktop Actions */}
+            <div className="hidden md:flex items-center gap-2">
+              {user ? (
+                <>
+                  {user.role === 'admin' && (
+                    <Button variant="ghost" size="sm" asChild className="gap-1.5 text-xs font-bold text-primary hover:text-primary hover:bg-primary/10">
+                      <Link href="/admin">
+                        <LayoutDashboard className="h-3.5 w-3.5" />
+                        لوحة التحكم
+                      </Link>
+                    </Button>
+                  )}
+                  <NotificationBell />
+                  <Button variant="outline" size="sm" asChild className="gap-1.5 text-xs font-bold border-border/60 hover:border-primary/40 hover:bg-primary/5">
+                    <Link href="/profile">
+                      <div className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center">
+                        <User className="h-3 w-3 text-primary" />
+                      </div>
+                      {user.name ? user.name.split(' ')[0] : 'حسابي'}
                     </Link>
                   </Button>
-                )}
-                <NotificationBell />
-                <Button variant="outline" size="sm" asChild className="gap-1.5 text-xs font-bold border-border/60 hover:border-primary/40 hover:bg-primary/5">
-                  <Link href="/profile">
-                    <div className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center">
-                      <User className="h-3 w-3 text-primary" />
-                    </div>
-                    {user.name ? user.name.split(' ')[0] : 'حسابي'}
-                  </Link>
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={handleLogout}
-                  className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 h-8 w-8"
-                  title="تسجيل الخروج"
-                >
-                  <LogOut className="h-3.5 w-3.5" />
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button variant="ghost" size="sm" asChild className="text-sm font-bold text-foreground/70 hover:text-foreground">
-                  <Link href="/login">تسجيل الدخول</Link>
-                </Button>
-                <Button size="sm" asChild className="text-sm font-bold rounded-full px-5 shadow-sm">
-                  <Link href="/register">ابدأ الآن</Link>
-                </Button>
-              </>
-            )}
-          </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={handleLogout}
+                    className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 h-8 w-8"
+                    title="تسجيل الخروج"
+                  >
+                    <LogOut className="h-3.5 w-3.5" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" size="sm" asChild className="text-sm font-bold text-foreground/70 hover:text-foreground">
+                    <Link href="/login">تسجيل الدخول</Link>
+                  </Button>
+                  <Button size="sm" asChild className="text-sm font-bold rounded-full px-5 shadow-sm">
+                    <Link href="/register">ابدأ الآن</Link>
+                  </Button>
+                </>
+              )}
+            </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden p-2 rounded-xl text-foreground/70 hover:text-foreground hover:bg-muted transition-colors"
-            onClick={() => setMobileMenuOpen(v => !v)}
-            aria-label="قائمة التنقل"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+            {/* Mobile Menu Toggle */}
+            <button
+              className="md:hidden p-2 rounded-xl text-foreground/70 hover:text-foreground hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(v => !v)}
+              aria-label="قائمة التنقل"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Dropdown Menu */}
@@ -221,13 +241,16 @@ export function Navbar() {
               ))}
 
               <div className="border-t border-border/30 mt-2 pt-3 flex flex-col gap-2">
-                {isInstallable && (
+                {!isStandalone && (
                   <button
-                    onClick={() => { installPwa(); setMobileMenuOpen(false); }}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-primary bg-primary/10 hover:bg-primary/20"
+                    onClick={() => {
+                      handleInstallClick();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-primary bg-primary/10 hover:bg-primary/20 transition-all duration-200"
                   >
                     <Download className="h-4 w-4" />
-                    تحميل التطبيق (PWA)
+                    تحميل التطبيق
                   </button>
                 )}
                 {user ? (
