@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { db } from '@/firebase/config';
 import { doc, getDoc, setDoc, Timestamp } from 'firebase/firestore';
 import { auditLogService } from '@/services/firebase/auditLog.service';

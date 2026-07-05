@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProgress } from '@/hooks/features/progress.hooks';
 import { isDueForReview, toDate } from '@/lib/algorithms/spacedRepetition';

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ParsedVerse } from '@/types/verse.types';
 import { versesService } from '@/services/firebase/verses.service';
 import { activityLogService } from '@/services/firebase/activityLog.service';

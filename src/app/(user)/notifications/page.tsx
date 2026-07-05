@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Bell, BookOpen, Award, Info, Sparkles, CheckSquare, Loader2, Calendar } from 'lucide-react';
 import { query, collection, where, orderBy, onSnapshot } from 'firebase/firestore';

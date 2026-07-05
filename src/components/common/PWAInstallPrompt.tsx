@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Download, X, Share, PlusSquare } from 'lucide-react';
 import { usePWA } from '@/contexts/PWAContext';
 

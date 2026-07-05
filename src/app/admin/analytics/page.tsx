@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { analyticsService } from '@/services/firebase/analytics.service';
 import { 
   BarChart3, 

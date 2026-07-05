@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useBook, useBookVerses } from '@/hooks/features/books.hooks';
 import { RecitationInterface } from '@/features/recitation/components/RecitationInterface';

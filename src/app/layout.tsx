@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import { IBM_Plex_Sans_Arabic } from 'next/font/google';
 import '@/styles/globals.css';

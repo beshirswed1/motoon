@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { db } from '@/firebase/config';
 import { collection, collectionGroup, getDocs, query, where, doc, getDoc, setDoc, updateDoc, Timestamp } from 'firebase/firestore';
 import { activityLogService } from '@/services/firebase/activityLog.service';

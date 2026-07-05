@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Bell, BookOpen, Award, Info, Sparkles, CheckSquare } from 'lucide-react';

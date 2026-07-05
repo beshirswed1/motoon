@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import type { Book, Verse, ComparisonResult } from '@/types';
 import { speechService } from '@/services/ai/speech.service';
 import { RecitationComparisonEngine, compareWords, normalizeArabicText } from '@/services/ai/comparison.service';

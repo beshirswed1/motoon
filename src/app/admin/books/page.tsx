@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { booksService } from '@/services/firebase/books.service';
 import { activityLogService } from '@/services/firebase/activityLog.service';
 import { useAuth } from '@/hooks/useAuth';

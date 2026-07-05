@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { Camera, Loader2 } from 'lucide-react';
 import { getUploadProvider } from '@/services/upload/upload.provider';

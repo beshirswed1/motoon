@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { AvatarUpload } from '@/components/common/AvatarUpload';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';

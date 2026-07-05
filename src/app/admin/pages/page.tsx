@@ -1,6 +1,7 @@
 'use client';
+import React from 'react';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { pagesService } from '@/services/firebase/pages.service';
 import { auditLogService } from '@/services/firebase/auditLog.service';
 import { Page } from '@/types/admin.types';

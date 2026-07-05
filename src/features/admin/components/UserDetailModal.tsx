@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { User } from '@/types/user.types';
 import { recitationService } from '@/services/firebase/recitation.service';
 import { db } from '@/firebase/config';

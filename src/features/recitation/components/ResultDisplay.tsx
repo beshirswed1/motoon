@@ -1,3 +1,4 @@
+import React from 'react';
 import type { ComparisonResult } from '@/types';
 import { ArrowUpRight, TrendingDown, Sparkles } from 'lucide-react';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { Book } from '@/types/book.types';
 import { Verse } from '@/types/verse.types';
 import { Progress } from '@/types/progress.types';

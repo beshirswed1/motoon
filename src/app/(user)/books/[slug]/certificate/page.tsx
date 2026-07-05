@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import { useBook } from '@/hooks/features/books.hooks';

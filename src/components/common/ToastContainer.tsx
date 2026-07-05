@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { X, CheckCircle, AlertTriangle, AlertCircle, Info } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { removeToast, selectToasts, Toast } from '@/store/slices/uiSlice';

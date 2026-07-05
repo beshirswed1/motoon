@@ -1,9 +1,9 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   const isAuthenticated = request.cookies.get('isAuthenticated')?.value === 'true';
   const role = request.cookies.get('role')?.value; // 'user' | 'admin'
 
