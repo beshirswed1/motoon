@@ -72,11 +72,6 @@ const nextConfig: NextConfig = {
   // React strict mode for catching potential issues early
   reactStrictMode: true,
 
-  // Ignore ESLint errors during builds to build successfully
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-
   // Compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
