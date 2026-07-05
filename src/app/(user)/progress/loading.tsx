@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { ProgressCardSkeleton } from '@/components/ui/Skeletons';
 
 export default function ProgressLoading() {

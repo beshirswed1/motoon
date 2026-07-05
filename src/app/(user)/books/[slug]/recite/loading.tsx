@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { VerseListSkeleton } from '@/components/ui/Skeletons';
 
 export default function ReciteLoading() {

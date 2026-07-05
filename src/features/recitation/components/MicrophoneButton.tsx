@@ -1,4 +1,3 @@
-import React from 'react';
 import { Mic, Square, Loader2 } from 'lucide-react';
 
 interface MicrophoneButtonProps {

@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useBook, useBookVerses } from '@/hooks/features/books.hooks';
 import { useUserProgress } from '@/hooks/features/progress.hooks';

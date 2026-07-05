@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { WifiOff, RotateCw, BookOpen, Home } from 'lucide-react';
 import Link from 'next/link';
 

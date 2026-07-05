@@ -1,4 +1,3 @@
-import React from 'react';
 import type { ComparisonResult } from '@/types';
 import { CheckCircle2, AlertTriangle, HelpCircle, XCircle } from 'lucide-react';
 
