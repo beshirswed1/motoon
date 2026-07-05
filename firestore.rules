@@ -1,0 +1,223 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ========================================================================
+    // Security Rules - Default Deny
+    // ========================================================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // ========================================================================
+    // Helper Functions
+    // ========================================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      // PRODUCTION RECOMMENDATION:
+      // For better performance and lower read costs, transition this to Custom Claims:
+      // return isAuthenticated() && request.auth.token.role == 'admin';
+      return isAuthenticated() && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Safe isNotDeleted check that handles missing/null isDeleted field correctly
+    function isNotDeleted(resource) {
+      return resource == null || !('isDeleted' in resource.data) || resource.data.isDeleted == false;
+    }
+
+    // ========================================================================
+    // Collection Rules
+    // ========================================================================
+
+    match /users/{userId} {
+      allow read: if isNotDeleted(resource) && (isOwner(userId) || isAdmin());
+      
+      // Strict schema on create
+      allow create: if isAuthenticated() && isOwner(userId)
+        && request.resource.data.keys().hasOnly(['id', 'name', 'email', 'role', 'avatarUrl', 'provider', 'createdAt', 'updatedAt', 'lastLogin', 'emailVerified', 'disabled', 'isDeleted', 'deletedAt', 'deletedBy'])
+        && request.resource.data.id == userId
+        && request.resource.data.role == 'user'
+        && request.resource.data.disabled == false
+        && request.resource.data.isDeleted == false
+        && request.resource.data.name is string
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.provider in ['password', 'google.com']
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp
+        && request.resource.data.lastLogin is timestamp
+        && request.resource.data.emailVerified == request.auth.token.email_verified
+        && (request.resource.data.avatarUrl is string || !('avatarUrl' in request.resource.data) || request.resource.data.avatarUrl == '');
+        
+      // Strict schema on update (only allow modifying non-sensitive fields)
+      allow update: if isNotDeleted(resource) && (
+        (isOwner(userId) 
+          && request.resource.data.id == userId
+          && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'id', 'email', 'provider', 'createdAt', 'disabled', 'isDeleted', 'deletedAt', 'deletedBy'])
+          && request.resource.data.name is string
+          && request.resource.data.updatedAt is timestamp
+          && (request.resource.data.lastLogin is timestamp || !request.resource.data.diff(resource.data).affectedKeys().hasAny(['lastLogin']))
+          && (request.resource.data.avatarUrl is string || !('avatarUrl' in request.resource.data) || request.resource.data.avatarUrl == '')
+        ) ||
+        isAdmin()
+      );
+      
+      allow delete: if isAdmin(); // Physical delete only by admin
+    }
+
+    match /books/{bookId} {
+      allow read: if isNotDeleted(resource) && (resource.data.isPublished == true || isAdmin());
+      allow create, update, delete: if isAdmin();
+
+      match /verses/{verseId} {
+        allow read: if isNotDeleted(resource);
+        allow create, update, delete: if isAdmin();
+      }
+    }
+
+    // Allow collectionGroup('verses') queries for admins (e.g. for dashboard metrics)
+    match /{path=**}/verses/{verseId} {
+      allow read: if isAdmin();
+    }
+
+    match /progress/{progressId} {
+      allow read: if isNotDeleted(resource) && (isOwner(resource.data.userId) || isAdmin());
+      
+      // Strict schema on progress creation (prevent cheating/spoofing scores)
+      allow create: if isAuthenticated() 
+        && request.resource.data.keys().hasOnly(['id', 'userId', 'bookId', 'verseId', 'repetition', 'interval', 'easeFactor', 'mastery', 'nextReviewDate', 'lastReviewDate', 'createdAt', 'updatedAt', 'isDeleted', 'deletedAt', 'deletedBy'])
+        && request.resource.data.id == progressId
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.isDeleted == false
+        && request.resource.data.repetition is int
+        && request.resource.data.interval is int
+        && (request.resource.data.easeFactor is float || request.resource.data.easeFactor is int)
+        && request.resource.data.mastery is int
+        && request.resource.data.mastery >= 0 && request.resource.data.mastery <= 100
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+        
+      // Strict schema on progress updates
+      allow update: if isNotDeleted(resource) && (
+        (isOwner(resource.data.userId) 
+          && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['userId', 'id', 'createdAt'])
+          && request.resource.data.mastery is int
+          && request.resource.data.mastery >= 0 && request.resource.data.mastery <= 100
+          && request.resource.data.updatedAt is timestamp
+        ) ||
+        isAdmin()
+      );
+      
+      allow delete: if isAdmin();
+    }
+
+    match /recitation_sessions/{sessionId} {
+      allow read: if isNotDeleted(resource) && (isOwner(resource.data.userId) || isAdmin());
+      
+      // Strict schema on recitation sessions creation
+      allow create: if isAuthenticated() 
+        && request.resource.data.keys().hasOnly(['id', 'userId', 'bookId', 'verseId', 'durationSeconds', 'score', 'errors', 'createdAt', 'updatedAt', 'isDeleted', 'deletedAt', 'deletedBy', 'audioUrl'])
+        && request.resource.data.id == sessionId
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.isDeleted == false
+        && (request.resource.data.score is int || request.resource.data.score is float)
+        && request.resource.data.score >= 0 && request.resource.data.score <= 100
+        && request.resource.data.durationSeconds is int
+        && request.resource.data.errors is list
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+        
+      allow update: if isNotDeleted(resource) && (
+        (isOwner(resource.data.userId) 
+          && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['userId', 'id', 'createdAt'])
+          && request.resource.data.updatedAt is timestamp
+        ) ||
+        isAdmin()
+      );
+      
+      allow delete: if isAdmin();
+    }
+
+    match /permissions/{permissionId} {
+      allow read: if isAuthenticated() && isNotDeleted(resource);
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /notifications/{notificationId} {
+      allow read: if isNotDeleted(resource) && isOwner(resource.data.userId);
+      
+      // PRODUCTION RECOMMENDATION:
+      // In production, notifications should be created exclusively by the Backend/Cloud Functions.
+      // Once review reminders are migrated to a Cloud Function cron job, disable client writes completely:
+      // allow create: if isAdmin();
+      allow create: if isAdmin() || (
+        isAuthenticated() 
+        && request.resource.data.keys().hasOnly(['id', 'userId', 'type', 'title', 'message', 'isRead', 'actionUrl', 'createdAt', 'updatedAt', 'isDeleted', 'deletedAt', 'deletedBy'])
+        && request.resource.data.id == notificationId
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.isRead == false
+        && request.resource.data.isDeleted == false
+        && request.resource.data.type == 'review_due'
+        && request.resource.data.title is string
+        && request.resource.data.message is string
+        && (request.resource.data.actionUrl is string || !('actionUrl' in request.resource.data))
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp
+      );
+        
+      allow update: if isNotDeleted(resource) && (
+        (isOwner(resource.data.userId) 
+          && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['userId', 'id', 'createdAt', 'type', 'title', 'message'])
+          && request.resource.data.isRead is bool
+          && request.resource.data.updatedAt is timestamp
+        ) ||
+        isAdmin()
+      );
+      
+      allow delete: if isAdmin();
+    }
+
+    match /site_settings/{settingId} {
+      // Allow public read only for 'general' settings. Hide sensitive settings documents.
+      allow read: if settingId == 'general' || isAdmin();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /pages/{pageId} {
+      allow read: if isNotDeleted(resource) && (resource.data.isPublished == true || isAdmin());
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /media/{mediaId} {
+      allow read: if isNotDeleted(resource);
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /activity_logs/{logId} {
+      allow read: if isAdmin();
+      
+      // PRODUCTION RECOMMENDATION:
+      // Activity logs should be written exclusively by the Backend/Cloud Functions to prevent client spamming.
+      allow create: if isAuthenticated() 
+        && request.resource.data.keys().hasOnly(['id', 'userId', 'type', 'durationSeconds', 'details', 'createdAt', 'updatedAt', 'isDeleted', 'deletedAt', 'deletedBy'])
+        && request.resource.data.id == logId
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.createdAt is timestamp;
+      allow update, delete: if false; // Logs are append-only
+    }
+
+    match /audit_logs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin();
+      allow update, delete: if false; // Logs are append-only
+    }
+  }
+}
