@@ -1,0 +1,29 @@
+{
+    "id": "book_al_ajrumiyyah",
+    "title": "نظم الآجرومية",
+    "author": "محمد بن آجروم",
+    "description": "الآجُرُّومِيَّة كتاب في علم النحو ألفه ابن آجرّوم، يُعد من أهم متون النحو العربي. بدأه بالكلام عن الكلام وأنواعه وتسلسل مع المواضيع بأسلوب سهل المنال للطالبين.",
+    "coverImageUrl": "",
+    "difficulty": "beginner",
+    "slug": "al-aj",
+    "status": "published",
+    "tags": [
+        "نحو",
+        "لغة عربية",
+        "مبتدئ"
+    ],
+    "verses": [
+        {
+            "id": "book_al_ajrumiyyah_v_1_mrb3r1wc",
+            "bookId": "book_al_ajrumiyyah",
+            "text": "قَالَ ابْنُ آبَّ وَاسْمُهُ مُحَمَّدُ✽اللهَ فِي كُلِّ الأُمُورِ أَحْمَدُ",
+            "normalizedText": "قال ابن آب واسمه محمد✽الله في كل الأمور أحمد",
+            "order": 1,
+            "isDeleted": false,
+            "deletedAt": null,
+            "deletedBy": null,
+            "createdAt": "2026-07-01T19:25:57Z",
+            "updatedAt": "2026-07-01T19:25:57Z"
+        }
+    ]
+}

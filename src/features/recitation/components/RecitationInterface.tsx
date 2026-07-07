@@ -784,17 +784,17 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
         )}
 
         {/* Primary Controls Row */}
-        <div className="flex items-center justify-between w-full max-w-lg gap-4">
+        <div className="flex items-center justify-between w-full max-w-lg gap-2 sm:gap-4 px-2">
           {/* Left Buttons: Toggle words visibility & Reset */}
-          <div className="flex gap-2 shrink-0">
+          <div className="flex gap-1.5 sm:gap-2 shrink-0">
             <Button
               variant="outline"
               size="icon"
               title={soundEnabled ? 'كتم الصوت' : 'تفعيل الصوت'}
               onClick={() => setSoundEnabled(!soundEnabled)}
-              className="h-12 w-12 rounded-full border"
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border"
             >
-              {soundEnabled ? <Volume2 className="w-5 h-5 text-primary" /> : <VolumeX className="w-5 h-5 text-muted-foreground" />}
+              {soundEnabled ? <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary" /> : <VolumeX className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />}
             </Button>
 
             <Button
@@ -802,9 +802,9 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
               size="icon"
               onClick={handleReset}
               title="إعادة ضبط الجلسة"
-              className="h-12 w-12 rounded-full border text-muted-foreground hover:text-foreground"
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border text-muted-foreground hover:text-foreground"
             >
-              <RotateCcw className="w-5 h-5" />
+              <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           </div>
 
@@ -822,34 +822,34 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
             `}} />
             <button
               onClick={toggleListening}
-              className={`relative flex items-center justify-center w-16 h-16 rounded-full border-4 transition-all duration-300 outline-none ${
+              className={`relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full border-4 transition-all duration-300 outline-none ${
                 isListening
                   ? 'bg-red-500 border-red-200 text-white mic-listening-active hover:bg-red-600'
                   : 'bg-primary border-primary/20 text-primary-foreground hover:bg-primary/95 shadow-lg active:scale-95'
               }`}
               title={isListening ? 'إيقاف مؤقت' : 'بدء التسميع'}
             >
-              {isListening ? <Square className="w-5 h-5 fill-current" /> : <Mic className="w-6 h-6" />}
+              {isListening ? <Square className="w-4 h-4 sm:w-5 sm:h-5 fill-current" /> : <Mic className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
 
           {/* Right Buttons: Hide/Show Words & Finish */}
-          <div className="flex gap-2 shrink-0">
+          <div className="flex gap-1.5 sm:gap-2 shrink-0">
             <Button
               variant="outline"
               size="icon"
               onClick={() => setShowWords(!showWords)}
               title={showWords ? 'إخفاء كلمات المتن' : 'إظهار كلمات المتن'}
-              className={`h-12 w-12 rounded-full border ${showWords ? 'bg-amber-50 border-amber-200 text-amber-600 dark:bg-amber-950/20' : ''}`}
+              className={`h-10 w-10 sm:h-12 sm:w-12 rounded-full border ${showWords ? 'bg-amber-50 border-amber-200 text-amber-600 dark:bg-amber-950/20' : ''}`}
             >
-              {showWords ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+              {showWords ? <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" /> : <Eye className="w-4 h-4 sm:w-5 sm:h-5" />}
             </Button>
 
             <Button
               onClick={handleFinish}
-              className="h-12 px-5 font-bold rounded-full gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white shadow-md active:scale-95 text-xs"
+              className="h-10 px-3 sm:h-12 sm:px-5 font-bold rounded-full gap-1 sm:gap-1.5 bg-emerald-600 hover:bg-emerald-500 text-white shadow-md active:scale-95 text-[10px] sm:text-xs"
             >
-              <Check className="w-4 h-4" />
+              <Check className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               إنهاء التسميع
             </Button>
           </div>

@@ -11,7 +11,12 @@ const withPWA = require('next-pwa')({
   skipWaiting: true,
   reloadOnOnline: true,
   cacheOnFrontEndNav: true,
+  // Provide fallback pages when offline
+  fallbacks: {
+    document: '/offline',
+  },
   runtimeCaching: [
+    // Cache Google Fonts stylesheets
     {
       urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
       handler: 'StaleWhileRevalidate',
@@ -21,6 +26,7 @@ const withPWA = require('next-pwa')({
         cacheableResponse: { statuses: [0, 200] },
       },
     },
+    // Cache Google Fonts font files
     {
       urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
       handler: 'CacheFirst',
@@ -30,6 +36,7 @@ const withPWA = require('next-pwa')({
         cacheableResponse: { statuses: [0, 200] },
       },
     },
+    // Cache static images
     {
       urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|avif|ico|bmp)$/i,
       handler: 'CacheFirst',
@@ -39,23 +46,27 @@ const withPWA = require('next-pwa')({
         cacheableResponse: { statuses: [0, 200] },
       },
     },
+    // Cache Next.js static assets
     {
       urlPattern: /\/_next\/static\/.*/i,
       handler: 'CacheFirst',
       options: {
         cacheName: 'next-static-assets',
-        expiration: { maxEntries: 64, maxAgeSeconds: 24 * 60 * 60 },
+        expiration: { maxEntries: 128, maxAgeSeconds: 30 * 24 * 60 * 60 },
         cacheableResponse: { statuses: [0, 200] },
       },
     },
+    // Cache Next.js image optimization
     {
       urlPattern: /\/_next\/image\?.*/i,
       handler: 'StaleWhileRevalidate',
       options: {
         cacheName: 'next-image-cache',
         expiration: { maxEntries: 64, maxAgeSeconds: 24 * 60 * 60 },
+        cacheableResponse: { statuses: [0, 200] },
       },
     },
+    // Cache Firestore API calls (network first, fall back to cache)
     {
       urlPattern: /^https:\/\/firestore\.googleapis\.com\/.*/i,
       handler: 'NetworkFirst',
@@ -63,6 +74,27 @@ const withPWA = require('next-pwa')({
         cacheName: 'firestore-cache',
         expiration: { maxEntries: 32, maxAgeSeconds: 5 * 60 },
         networkTimeoutSeconds: 10,
+      },
+    },
+    // Cache Firebase Storage files (images, etc.)
+    {
+      urlPattern: /^https:\/\/firebasestorage\.googleapis\.com\/.*/i,
+      handler: 'CacheFirst',
+      options: {
+        cacheName: 'firebase-storage-cache',
+        expiration: { maxEntries: 64, maxAgeSeconds: 7 * 24 * 60 * 60 },
+        cacheableResponse: { statuses: [0, 200] },
+      },
+    },
+    // Cache page navigations (HTML) — network first with offline fallback
+    {
+      urlPattern: /^https?:\/\/.*\/(?!api\/).*/i,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'pages-cache',
+        expiration: { maxEntries: 32, maxAgeSeconds: 24 * 60 * 60 },
+        networkTimeoutSeconds: 10,
+        cacheableResponse: { statuses: [0, 200] },
       },
     },
   ],

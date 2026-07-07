@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
+import type { Book } from '@/types/book.types';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { BookCard } from '@/components/common/BookCard';
 import { FeaturedBooksCarousel } from '@/components/common/FeaturedBooksCarousel';
+import { HeroInstallButton } from '@/components/common/HeroInstallButton';
 import { booksService } from '@/services/firebase/books.service';
 import { getAllLocalBooks } from '@/lib/data';
 import { analyticsService } from '@/services/firebase/analytics.service';
@@ -130,8 +132,10 @@ export default async function HomePage() {
     featuredBooks = getAllLocalBooks();
   }
 
-  const carouselBooks = featuredBooks.slice(0, 5);
-  const gridBooks = featuredBooks.slice(0, 8);
+  // Sanitize books to remove Firebase Timestamp prototype methods which cause Next.js errors
+  const sanitizedBooks: Book[] = JSON.parse(JSON.stringify(featuredBooks));
+  const carouselBooks = sanitizedBooks.slice(0, 5);
+  const gridBooks = sanitizedBooks.slice(0, 8);
 
   return (
     <div className="flex flex-col w-full">
@@ -148,7 +152,7 @@ export default async function HomePage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold">
             <Star className="h-3.5 w-3.5 fill-current" />
-            منصة التعليم الإسلامي المتقدمة
+            منصة حفظ المتون العلمية 
           </div>
 
           {/* Headline */}
@@ -160,7 +164,7 @@ export default async function HomePage() {
                 <path d="M2 8C50 2 100 10 150 6S250 2 298 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="text-primary/40"/>
               </svg>
             </span>{' '}
-            بذكاء وإتقان
+            بسهولة و إتقان
           </h1>
 
           <p className="max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
@@ -183,6 +187,9 @@ export default async function HomePage() {
               </Link>
             </Button>
           </div>
+
+          {/* PWA Install Button */}
+          <HeroInstallButton />
 
           {/* Trust indicators */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground mt-2">

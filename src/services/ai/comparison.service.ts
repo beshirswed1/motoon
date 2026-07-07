@@ -47,9 +47,33 @@ export function normalizeArabicText(text: string): string {
     .trim();
 }
 
+function getEditDistance(a: string, b: string): number {
+  const matrix: number[][] = [];
+  for (let i = 0; i <= a.length; i++) {
+    matrix[i] = [i];
+  }
+  for (let j = 0; j <= b.length; j++) {
+    matrix[0][j] = j;
+  }
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      if (a[i - 1] === b[j - 1]) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(
+          matrix[i - 1][j - 1] + 1, // substitution
+          matrix[i][j - 1] + 1,     // insertion
+          matrix[i - 1][j] + 1      // deletion
+        );
+      }
+    }
+  }
+  return matrix[a.length][b.length];
+}
+
 /**
  * compareWords — compares two Arabic words with normalization.
- * Returns similarity score 0-1 using string-similarity (Dice's Coefficient).
+ * Returns similarity score 0-1 using a robust hybrid approach (exact, prefix-strip, edit-distance, and bigram fallback).
  */
 export function compareWords(expected: string, actual: string): number {
   // تنظيف الكلمتين قبل المقارنة (إزالة التشكيل، توحيد الألف والتاء المربوطة)
@@ -60,9 +84,29 @@ export function compareWords(expected: string, actual: string): number {
 
   if (normExpected.length === 0 || normActual.length === 0) return 0;
 
-  // Use string-similarity for smart comparison
+  // 1. Check if they differ only by a leading conjunction/preposition (و, ف, ب, ل, ك)
+  const stripLeading = (s: string) => s.replace(/^[وفبلك]/, '');
+  if (stripLeading(normExpected) === stripLeading(normActual)) {
+    return 0.95;
+  }
+
+  const maxLen = Math.max(normExpected.length, normActual.length);
+  const distance = getEditDistance(normExpected, normActual);
+
+  // 2. Edit distance heuristics for close pronunciation/typo matching
+  // Avoid being too lenient on very short words (<=3 chars) to prevent false matches
+  if (maxLen >= 4 && distance === 1) {
+    return 0.90;
+  }
+
+  if (maxLen >= 6 && distance <= 2) {
+    return 0.85;
+  }
+
+  // Use string-similarity as fallback
   return stringSimilarity.compareTwoStrings(normExpected, normActual);
 }
+
 
 /**
  * RecitationComparisonEngine

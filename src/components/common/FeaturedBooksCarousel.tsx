@@ -105,7 +105,7 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
         </div>
 
         {/* Content */}
-        <div className="flex flex-col justify-center gap-5 p-8 md:p-10 md:w-3/5">
+        <div className="flex flex-col justify-center gap-5 p-8 pb-12 md:p-10 md:w-3/5">
           <div>
             <p className="text-xs font-bold text-primary uppercase tracking-widest mb-2">متن مميز</p>
             <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2 leading-tight">

@@ -209,6 +209,20 @@ export function Navbar() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border/40 bg-background/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200">
             <div className="container-motoon py-4 flex flex-col gap-1">
+              {/* Logo in mobile menu */}
+              <div className="flex items-center gap-2.5 px-4 pb-3 mb-2 border-b border-border/30">
+                <div className="w-8 h-8 rounded-lg overflow-hidden ring-2 ring-primary/20 flex items-center justify-center bg-transparent">
+                  <img
+                    src="/logo.png"
+                    alt="شعار متون"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <span className="text-lg font-black text-primary tracking-tight">
+                  متون
+                </span>
+              </div>
+
               {navLinks.map(({ href, label, icon: Icon }) => (
                 <Link
                   key={href}

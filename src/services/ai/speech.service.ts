@@ -81,10 +81,26 @@ export interface SpeechRecognitionService {
 
 class WebSpeechService implements SpeechRecognitionService {
   private recognition: any = null;
-  private transcript: string = '';
+  private accumulatedFinalText: string = '';
+  private finalTranscriptParts: string[] = [];
+  private interimText: string = '';
   private isListening: boolean = false;
   private resolveEnd: ((value: string) => void) | null = null;
   private activeOpts: SpeechRecognitionOptions = {};
+
+  private get transcript(): string {
+    const final = this.finalTranscript;
+    const interim = this.interimText.trim();
+    if (final && interim) return final + ' ' + interim;
+    return final || interim;
+  }
+
+  private get finalTranscript(): string {
+    const accumulated = this.accumulatedFinalText.trim();
+    const currentFinal = this.finalTranscriptParts.join(' ').trim();
+    if (accumulated && currentFinal) return accumulated + ' ' + currentFinal;
+    return accumulated || currentFinal;
+  }
 
   private init() {
     if (this.recognition) return;
@@ -96,14 +112,29 @@ class WebSpeechService implements SpeechRecognitionService {
         this.recognition.continuous = true;
         this.recognition.interimResults = true;
         this.recognition.lang = 'ar-SA';
+        this.recognition.maxAlternatives = 1;
 
         this.recognition.onresult = (event: any) => {
-          let fullTranscript = '';
+          // Rebuild final parts from all finalized results
+          // and capture only the latest interim result
+          const newFinalParts: string[] = [];
+          let currentInterim = '';
+
           for (let i = 0; i < event.results.length; ++i) {
-            fullTranscript += (fullTranscript ? ' ' : '') + event.results[i][0].transcript;
+            const result = event.results[i];
+            const text = result[0].transcript.trim();
+            if (!text) continue;
+
+            if (result.isFinal) {
+              newFinalParts.push(text);
+            } else {
+              // Only the latest interim matters (previous interims are replaced by the API)
+              currentInterim = text;
+            }
           }
-          
-          this.transcript = fullTranscript.trim();
+
+          this.finalTranscriptParts = newFinalParts;
+          this.interimText = currentInterim;
           
           if (this.activeOpts.onResult) {
             this.activeOpts.onResult(this.transcript);
@@ -112,18 +143,50 @@ class WebSpeechService implements SpeechRecognitionService {
 
         this.recognition.onerror = (event: any) => {
           console.error('WebSpeech Recognition Error:', event.error);
+          // Auto-restart on network or no-speech errors to keep listening
+          if (event.error === 'network' || event.error === 'no-speech') {
+            if (this.isListening) {
+              try {
+                this.recognition.stop();
+                setTimeout(() => {
+                  if (this.isListening) {
+                    try { this.recognition.start(); } catch (_e) { /* ignore */ }
+                  }
+                }, 300);
+              } catch (_e) { /* ignore */ }
+            }
+            return;
+          }
           if (this.activeOpts.onError) {
             this.activeOpts.onError(event);
           }
         };
 
         this.recognition.onend = () => {
+          // Accumulate the current session's final text before restart
+          const currentFinal = this.finalTranscriptParts.join(' ').trim();
+          if (currentFinal) {
+            this.accumulatedFinalText += (this.accumulatedFinalText ? ' ' : '') + currentFinal;
+          }
+          this.finalTranscriptParts = [];
+          this.interimText = '';
+
+          // Auto-restart if we're still supposed to be listening (browser stops after silence)
+          if (this.isListening) {
+            try {
+              this.recognition.start();
+              return;
+            } catch (_e) {
+              // Fall through to normal end handling
+            }
+          }
+          
           this.isListening = false;
           if (this.activeOpts.onEnd) {
             this.activeOpts.onEnd();
           }
           if (this.resolveEnd) {
-            this.resolveEnd(this.transcript);
+            this.resolveEnd(this.finalTranscript);
             this.resolveEnd = null;
           }
         };
@@ -146,7 +209,9 @@ class WebSpeechService implements SpeechRecognitionService {
       return;
     }
 
-    this.transcript = '';
+    this.accumulatedFinalText = '';
+    this.finalTranscriptParts = [];
+    this.interimText = '';
     this.activeOpts = opts || {};
     this.isListening = true;
     this.resolveEnd = null;
@@ -162,8 +227,11 @@ class WebSpeechService implements SpeechRecognitionService {
   async stopListening(): Promise<string> {
     this.init();
     if (!this.isSupported() || !this.isListening) {
-      return this.transcript;
+      return this.finalTranscript;
     }
+
+    // Mark as not listening BEFORE stopping to prevent auto-restart in onend
+    this.isListening = false;
 
     return new Promise<string>((resolve) => {
       this.resolveEnd = resolve;
@@ -171,7 +239,7 @@ class WebSpeechService implements SpeechRecognitionService {
         this.recognition.stop();
       } catch (err) {
         console.error('Error stopping speech recognition:', err);
-        resolve(this.transcript);
+        resolve(this.finalTranscript);
       }
     });
   }
