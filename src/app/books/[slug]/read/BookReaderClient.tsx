@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { 
-  BookOpen, Search, Plus, Minus, 
+  Search, Plus, Minus, 
   ArrowRight, Download, Loader2, Printer
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
