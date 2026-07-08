@@ -1,4 +1,4 @@
-import React from 'react';
+
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { booksService } from '@/services/firebase/books.service';
