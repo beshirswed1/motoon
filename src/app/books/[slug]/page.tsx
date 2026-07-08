@@ -7,7 +7,7 @@ import { booksService } from '@/services/firebase/books.service';
 import { versesService } from '@/services/firebase/verses.service';
 import { getLocalBookBySlug } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import { Mic, BookOpen, Heart, Hash, BarChart, Tags, Quote, ArrowRight } from 'lucide-react';
+import { Mic, BookOpen, Heart, Hash, BarChart, Tags, Quote, ArrowRight, Eye, Download } from 'lucide-react';
 import type { BookDifficulty } from '@/types/book.types';
 
 type Params = { slug: string };
@@ -186,6 +186,25 @@ export default async function BookDetailsPage(
                 </div>
               </div>
             </div>
+
+            {verses.length > 0 && (
+              <div className="mb-10 p-6 rounded-3xl border border-primary/20 bg-primary/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <Download className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg text-foreground">تحميل وقراءة المتن كاملاً</h3>
+                    <p className="text-sm text-muted-foreground">يمكنك قراءة الأبيات كاملة أو تحميلها كـ PDF للطباعة بشعار الموقع، أو كملف نصي TXT.</p>
+                  </div>
+                </div>
+                <Button asChild className="font-bold rounded-xl gap-1.5 shadow-md shrink-0">
+                  <Link href={`/books/${book.slug}/read`}>
+                    <Eye className="w-4 h-4" /> عرض وتحميل المتن
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Sticky Sidebar */}
@@ -221,6 +240,11 @@ export default async function BookDetailsPage(
                 <Button size="lg" variant="outline" asChild className="w-full text-lg font-bold h-14 rounded-xl border-primary text-primary hover:bg-primary/10 gap-2">
                   <Link href={`/books/${book.slug}/recite`}>
                     <Mic className="w-5 h-5" /> التسميع الذاتي الصوتي
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild className="w-full text-lg font-bold h-14 rounded-xl border-primary/50 text-primary hover:bg-primary/5 gap-2">
+                  <Link href={`/books/${book.slug}/read`}>
+                    <Eye className="w-5 h-5" /> عرض وتحميل المتن
                   </Link>
                 </Button>
                 <Button variant="ghost" size="lg" className="w-full text-muted-foreground hover:bg-accent rounded-xl h-12 gap-2 mt-2">

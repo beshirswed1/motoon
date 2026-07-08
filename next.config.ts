@@ -147,6 +147,18 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['react-icons', 'lucide-react', '@radix-ui/react-icons'],
   },
+
+  // Custom webpack config to fallback node modules on client side
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        path: false,
+      };
+    }
+    return config;
+  },
 };
 
 export default isDev ? nextConfig : withPWA(nextConfig);

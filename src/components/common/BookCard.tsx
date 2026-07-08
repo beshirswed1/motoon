@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { Book as BookType } from '@/types/book.types';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Mic, Hash, Award } from 'lucide-react';
+import { BookOpen, Mic, Hash, Award, Info, Eye } from 'lucide-react';
 
 export interface BookCardProps {
   book: BookType & { versesCount?: number };
@@ -123,27 +123,38 @@ export function BookCard({ book, showProgress, progressValue = 0, masteryScore }
         )}
 
         {/* Actions */}
-        <div className="mt-auto pt-3 flex items-center gap-2 border-t border-border/40">
+        <div className="mt-auto pt-3 flex items-center gap-1.5 border-t border-border/40">
           <Button
             asChild
             variant="default"
-            className="flex-1 gap-1.5 rounded-xl font-bold text-xs h-9"
+            className="flex-1 gap-1 rounded-xl font-bold text-[11px] h-9 px-2"
             size="sm"
           >
             <Link href={`/books/${book.slug}/recite`}>
-              <Mic className="h-3.5 w-3.5" />
+              <Mic className="h-3.5 w-3.5 shrink-0" />
               تسميع
             </Link>
           </Button>
           <Button
             asChild
             variant="outline"
-            className="flex-1 gap-1.5 rounded-xl font-bold text-xs h-9 bg-transparent hover:bg-muted"
+            className="flex-1 gap-1 rounded-xl font-bold text-[11px] h-9 px-2 bg-transparent hover:bg-muted"
             size="sm"
           >
+            <Link href={`/books/${book.slug}/read`}>
+              <Eye className="h-3.5 w-3.5 shrink-0" />
+              عرض وتحميل
+            </Link>
+          </Button>
+          <Button
+            asChild
+            variant="ghost"
+            className="h-9 w-9 rounded-xl p-0 hover:bg-muted text-muted-foreground hover:text-foreground shrink-0"
+            size="sm"
+            title="التفاصيل"
+          >
             <Link href={`/books/${book.slug}`}>
-              <BookOpen className="h-3.5 w-3.5" />
-              التفاصيل
+              <Info className="h-4 w-4" />
             </Link>
           </Button>
         </div>

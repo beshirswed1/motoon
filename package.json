@@ -4,7 +4,7 @@
   "private": true,
   "description": "منصة متون - منصة إسلامية تعليمية عربية احترافية",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
@@ -44,6 +44,7 @@
     "clsx": "2.1.1",
     "date-fns": "4.1.0",
     "firebase": "11.9.0",
+    "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "immer": "10.1.1",
     "jspdf": "^4.2.1",

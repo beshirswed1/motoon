@@ -1,6 +1,4 @@
 import type { Book, Verse } from '@/types';
-import fs from 'fs';
-import path from 'path';
 
 export interface LocalVerseData {
   id: string;
@@ -39,10 +37,16 @@ export interface LocalBookData {
 // is all that's needed — no manual imports required.
 function loadAllBooks(): Record<string, LocalBookData> {
   const registry: Record<string, LocalBookData> = {};
-  const booksDir = path.join(process.cwd(), 'src', 'lib', 'data', 'books');
+  
+  if (typeof window !== 'undefined') {
+    return registry;
+  }
 
   try {
-    const files = fs.readdirSync(booksDir).filter((f) => f.endsWith('.json'));
+    const fs = require('fs');
+    const path = require('path');
+    const booksDir = path.join(process.cwd(), 'src', 'lib', 'data', 'books');
+    const files = fs.readdirSync(booksDir).filter((f: string) => f.endsWith('.json'));
 
     for (const file of files) {
       const filePath = path.join(booksDir, file);
