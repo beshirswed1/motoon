@@ -3,7 +3,7 @@ import Link from 'next/link';
 import type { Book as BookType } from '@/types/book.types';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Mic, Hash, Award, Info, Eye } from 'lucide-react';
+import { Mic, Hash, Award, Info, Eye } from 'lucide-react';
 
 export interface BookCardProps {
   book: BookType & { versesCount?: number };

@@ -9,7 +9,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'react-hot-toast';
-import type { Book, Verse } from '@/types/book.types';
+import type { Book, Verse } from '@/types';
 
 interface BookReaderClientProps {
   book: Book;
