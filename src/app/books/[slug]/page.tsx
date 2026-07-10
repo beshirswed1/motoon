@@ -7,8 +7,9 @@ import { booksService } from '@/services/firebase/books.service';
 import { versesService } from '@/services/firebase/verses.service';
 import { getLocalBookBySlug } from '@/lib/data';
 import { Button } from '@/components/ui/button';
-import { Mic, BookOpen, Heart, Hash, BarChart, Tags, Quote, ArrowRight, Eye, Download } from 'lucide-react';
+import { Mic, BookOpen, Hash, BarChart, Tags, Quote, ArrowRight, Eye, Download } from 'lucide-react';
 import type { BookDifficulty } from '@/types/book.types';
+import { FavoriteButton } from '@/features/books/components/FavoriteButton';
 
 type Params = { slug: string };
 
@@ -247,9 +248,7 @@ export default async function BookDetailsPage(
                     <Eye className="w-5 h-5" /> عرض وتحميل المتن
                   </Link>
                 </Button>
-                <Button variant="ghost" size="lg" className="w-full text-muted-foreground hover:bg-accent rounded-xl h-12 gap-2 mt-2">
-                  <Heart className="w-5 h-5" /> إضافة للمفضلة
-                </Button>
+                <FavoriteButton bookId={book.id} />
               </div>
             </div>
           </div>

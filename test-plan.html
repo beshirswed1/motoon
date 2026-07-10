@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطة الفحص الشاملة لمنصة متون | MOTOON</title>
+    <!-- Cairo Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(17, 24, 39, 0.75);
+            --panel-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --accent-purple: #8b5cf6;
+            --accent-indigo: #6366f1;
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --card-hover: rgba(255, 255, 255, 0.02);
+            --font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-purple) var(--bg-color);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, rgba(168, 85, 247, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+
+        /* Dashboard Metrics */
+        .dashboard-bar {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(12px);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .progress-container {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .progress-bar-outer {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            height: 14px;
+            width: 100%;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            width: 0%;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+        }
+
+        .stats-summary {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--panel-border);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-badge .number {
+            font-weight: 700;
+            color: var(--accent-purple);
+        }
+
+        /* Controls */
+        .controls-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-indigo);
+            box-shadow: 0 0 8px rgba(99, 102, 241, 0.3);
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--panel-border);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--accent-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+        }
+
+        .action-btn {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: var(--font-family);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-right: auto;
+        }
+
+        .action-btn:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* Tasks Grid */
+        .tasks-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .task-card {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            backdrop-filter: blur(8px);
+        }
+
+        .task-card:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .task-card.completed {
+            border-color: rgba(16, 185, 129, 0.25);
+            background: rgba(16, 185, 129, 0.02);
+        }
+
+        .task-header {
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            gap: 1rem;
+        }
+
+        /* Custom Checkbox */
+        .checkbox-container {
+            display: block;
+            position: relative;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 24px;
+            width: 24px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .checkbox-container:hover input ~ .checkmark {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-purple);
+        }
+
+        .checkbox-container input:checked ~ .checkmark {
+            background-color: var(--success);
+            border-color: var(--success);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .checkbox-container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-container .checkmark:after {
+            left: 8px;
+            top: 4px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2.5px 2.5px 0;
+            transform: rotate(45deg);
+        }
+
+        .task-title-group {
+            flex: 1;
+        }
+
+        .task-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: all 0.2s;
+        }
+
+        .task-card.completed .task-title {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.25rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .badge {
+            padding: 0.1rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .badge-user {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .badge-admin {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-pwa {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-audio {
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+        }
+
+        .arrow-icon {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: transform 0.3s;
+        }
+
+        .task-card.expanded .arrow-icon {
+            transform: rotate(180deg);
+            color: var(--accent-purple);
+        }
+
+        /* Task Details Panel */
+        .task-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(0, 0, 0, 0.15);
+            border-top: 0px solid var(--panel-border);
+        }
+
+        .task-card.expanded .task-body {
+            max-height: 1000px;
+            border-top-width: 1px;
+        }
+
+        .task-content {
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .task-content {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .stats-summary {
+                justify-content: space-around;
+            }
+            .action-btn {
+                margin-right: 0;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .content-section-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .steps-list {
+            list-style: none;
+        }
+
+        .steps-list li {
+            position: relative;
+            padding-right: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .steps-list li::before {
+            content: "•";
+            position: absolute;
+            right: 0;
+            color: var(--accent-indigo);
+            font-weight: bold;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        .expected-box {
+            background: rgba(16, 185, 129, 0.03);
+            border: 1px dashed rgba(16, 185, 129, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #a7f3d0;
+            margin-bottom: 1rem;
+        }
+
+        .notes-area {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 0.75rem;
+            font-family: var(--font-family);
+            font-size: 0.85rem;
+            resize: vertical;
+            min-height: 80px;
+            transition: all 0.3s;
+        }
+
+        .notes-area:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Export Bar */
+        .footer-actions {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid var(--panel-border);
+        }
+
+        .primary-btn {
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--panel-border);
+            color: var(--text-primary);
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-family: var(--font-family);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 1rem;
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Empty search state */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            border: 1px dashed var(--panel-border);
+            border-radius: 14px;
+            background: var(--panel-bg);
+        }
+
+        /* Info alert banner */
+        .info-alert {
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .info-alert .icon {
+            font-size: 1.3rem;
+            color: #818cf8;
+            line-height: 1;
+        }
+
+        .info-alert p {
+            color: #c7d2fe;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>خطة الفحص الشاملة لمنصة متون MOTOON</h1>
+        <p class="subtitle">دليل تفاعلي مصمم لفحص جودة التطبيق يدوياً خطوة بخطوة عبر الجوال ولوحة التحكم والتأكد من ملاءمة الميزات قبل الإطلاق الرسمي.</p>
+    </header>
+
+    <div class="info-alert">
+        <div class="icon">💡</div>
+        <div>
+            <p><strong>طريقة فحص الجوال:</strong> قم بتشغيل خادم التطوير المحلي في جهازك، وتأكد من اتصال هاتفك بنفس شبكة الواي فاي. ثم افتح متصفح الجوال واكتب عنوان الـ IP الخاص بحاسوبك مع المنفذ (مثال: <code>http://192.168.1.100:3000</code>). يتم حفظ تقدمك تلقائياً في المتصفح الحالي.</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Bar -->
+    <div class="dashboard-bar">
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>نسبة إنجاز الفحص الكلي</span>
+                <span id="progress-percent">0%</span>
+            </div>
+            <div class="progress-bar-outer">
+                <div class="progress-bar-inner" id="progress-bar"></div>
+            </div>
+        </div>
+        <div class="stats-summary">
+            <div class="stat-badge">
+                <span>المهام المنجزة:</span>
+                <span class="number" id="stats-done">0</span> / <span id="stats-total">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Filter Bar -->
+    <div class="controls-bar">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="ابحث عن صفحة أو ميزة محددة للفحص...">
+        </div>
+        <div class="category-filters">
+            <button class="filter-btn active" data-category="all">الكل</button>
+            <button class="filter-btn" data-category="user">📱 تجربة الجوال</button>
+            <button class="filter-btn" data-category="audio">🎙️ الحفظ والتسميع</button>
+            <button class="filter-btn" data-category="admin">🛡️ لوحة التحكم</button>
+            <button class="filter-btn" data-category="pwa">📶 الـ PWA والأوفلاين</button>
+        </div>
+        <button class="action-btn" id="reset-btn">إعادة تعيين التقدم</button>
+    </div>
+
+    <!-- Tasks Target -->
+    <div class="tasks-list" id="tasks-container">
+        <!-- Generates from JS -->
+    </div>
+
+    <!-- Bottom Actions -->
+    <div class="footer-actions">
+        <button class="primary-btn" id="export-btn">📥 تصدير تقرير الفحص</button>
+        <button class="secondary-btn" onclick="window.print()">🖨️ طباعة النسخة الورقية</button>
+    </div>
+</div>
+
+<script>
+    // System Testing Data
+    const testingTasks = [
+        // CATEGORY: USER (تجربة الجوال والمستخدم)
+        {
+            id: "user-landing",
+            category: "user",
+            title: "الصفحة الرئيسية (Landing Page) والتجاوب",
+            description: "فحص مظهر وسلوك الصفحة الرئيسية على شاشة الجوال الحقيقية.",
+            badge: "تجربة الجوال",
+            badgeClass: "badge-user",
+            steps: [
+                "افتح الصفحة الرئيسية على هاتفك الجوال.",
+                "افتح قائمة التنقل الجانبية (Hamburger Menu) وتأكد من سهولة فتحها وإغلاقها وسلاستها.",
+                "ابحث عن متن معين عبر شريط البحث وتأكد من فلترة النتائج فورياً وبدون أخطاء.",
+                "مرر للأسفل وتأكد من عدم وجود تمدد أفقي أو خروج للعناصر خارج الشاشة (Overflow).",
+                "تأكد من تجاوب صور الخلفية وبطاقات المتون بشكل جذاب ودقة عالية."
+            ],
+            expected: "تجاوب كامل بنسبة 100% مع سهولة اللمس وتصفح كامل للأقسام دون وجود أخطاء برمجية أو مشاكل محاذاة في الجوال."
+        },
+        {
+            id: "user-auth",
+            category: "user",
+            title: "تسجيل الدخول وإنشاء الحساب (Auth System)",
+            description: "اختبار تدفق التسجيل والدخول والتحقق من صحة المدخلات على الجوال.",
+            badge: "تجربة الجوال",
+            badgeClass: "badge-user",
+            steps: [
+                "توجه لصفحة إنشاء حساب جديد (Register / Sign Up).",
+                "أدخل بريد إلكتروني غير صالح وتأكد من ظهور رسالة خطأ واضحة.",
+                "أكمل التسجيل ببيانات صحيحة وتأكد من توجيهك فوراً للوحة تحكم المستخدم أو الصفحة الرئيسية.",
+                "سجل خروجك، ثم توجه لصفحة تسجيل الدخول (Login / Sign In).",
+                "جرب إظهار وإخفاء كلمة المرور من خلال أيقونة العين.",
+                "سجل الدخول ببياناتك الجديدة وتأكد من السرعة وسلاسة عملية المصادقة."
+            ],
+            expected: "نظام مصادقة آمن وسلس، ظهور تنبيهات Toasts تفاعلية تخبر بنجاح أو فشل العملية مع توجيه ذكي للمستخدم."
+        },
+        {
+            id: "user-profile",
+            category: "user",
+            title: "إدارة الحساب والملف الشخصي (User Profile & Avatars)",
+            description: "فحص تعديل البيانات الشخصية وحفظها واختيار الصورة الرمزية.",
+            badge: "تجربة الجوال",
+            badgeClass: "badge-user",
+            steps: [
+                "توجه لصفحة الملف الشخصي (Profile) عبر القائمة.",
+                "جرب تعديل اسم المستخدم الخاص بك.",
+                "اختر صورة رمزية (Avatar) جديدة من الخيارات المتاحة.",
+                "اضغط على زر الحفظ، وتأكد من ظهور إشعار بنجاح الحفظ وتغير الصورة بالأعلى وفي الهيدر فوراً.",
+                "أعد تحميل الصفحة وتأكد من بقاء التغييرات محفوظة من قاعدة البيانات."
+            ],
+            expected: "إمكانية تحديث البيانات بسهولة وسلاسة مع استجابة فورية للصور الرمزية داخل التطبيق."
+        },
+        {
+            id: "user-progress",
+            category: "user",
+            title: "لوحة تتبع التقدم والإنجازات (Learning Progress Dashboard)",
+            description: "فحص الإحصائيات الفردية للمستخدم ونسب الحفظ والقراءة للمتون.",
+            badge: "تجربة الجوال",
+            badgeClass: "badge-user",
+            steps: [
+                "توجه لصفحة التقدم (Progress Page) في حسابك.",
+                "تأكد من دقة الإحصائيات (عدد المتون التي تدرسها، عدد المتون المنجزة بنسبة 100%).",
+                "فحص تمثيل النسب المئوية للمتون وإذا ما كانت متطابقة مع قراءتك وحفظك الحالي.",
+                "تأكد من أن المخططات البيانية (إن وجدت) تظهر بشكل صحيح ولا تخرج عن حدود شاشة الجوال."
+            ],
+            expected: "عرض دقيق وحقيقي لنسب المنجز من المتون الشرعية مع مظهر جذاب وبسيط يعزز دافعية المستخدم."
+        },
+        {
+            id: "user-books-list",
+            category: "user",
+            title: "دليل المتون والتصفية الذكية (Books Catalogue)",
+            description: "فحص تصفح قائمة الكتب وتطبيق تصنيفات التصفية والبحث المتعدد.",
+            badge: "تجربة الجوال",
+            badgeClass: "badge-user",
+            steps: [
+                "ادخل لصفحة قائمة المتون (Books / المتون الشرعية).",
+                "استخدم أزرار تصفية المستوى (مبتدئ - متوسط - متقدم) وتأكد من تحديث القائمة فوراً.",
+                "ابحث عن متن (مثال: تحفة الأطفال) باللغة العربية وتأكد من سرعة العثور عليه.",
+                "اضغط على بطاقة المتن للتوجه لصفحة التفاصيل، وتأكد من تحميل كافة المعلومات المخصصة للمتن (الوصف، المستوى، عدد الأبيات)."
+            ],
+            expected: "عملية فلترة وبحث سريعة دون تحميل الصفحة (Client-side dynamic list) وتجاوب مثالي لبطاقات المتون."
+        },
+        {
+            id: "user-book-reader",
+            category: "user",
+            title: "قارئ المتن والتفاعل الصوتي (Book Reader UI)",
+            description: "فحص صفحة القراءة وتشغيل التسجيلات الصوتية للأبيات.",
+            badge: "تجربة الجوال",
+            badgeClass: "badge-user",
+            steps: [
+                "ادخل لصفحة قراءة متن (مثال: تحفة الأطفال).",
+                "جرب زر تكبير وتصغير حجم خط المتن عدة مرات وتأكد من ثبات التصميم وتجاوبه.",
+                "جرب تفعيل وإلغاء خيارات عرض الشرح والترجمة المصاحبة للأبيات.",
+                "فعل الوضع الليلي (Dark Mode) والوضع النهاري بالقارئ لرؤية مدى راحة العين.",
+                "اضغط على زر تشغيل الصوت للبيت أو للمتن كاملاً وتأكد من عمل الصوت والتحكم بالسرعة (0.75x, 1x, 1.25x...) والتكرار المستمر."
+            ],
+            expected: "تحكم كامل ومثالي بخصائص القراءة والخط مع سلاسة تشغيل الصوت وتطابقه مع النص المعروض دون تقطيع."
+        },
+        
+        // CATEGORY: AUDIO (التسميع والذكاء الاصطناعي)
+        {
+            id: "audio-memorize",
+            category: "audio",
+            title: "نظام التثبيت والاختبار الذاتي (Memorization Mode)",
+            description: "اختبار آليات إخفاء الكلمات والبطاقات التعليمية لمراجعة الحفظ.",
+            badge: "الحفظ والتسميع",
+            badgeClass: "badge-audio",
+            steps: [
+                "ادخل لنظام الحفظ لمتن معين.",
+                "جرب ميزة البطاقات التعليمية (Flashcards) وتأكد من إمكانية قلب البطاقة باللمس لرؤية تفسير البيت أو البيت التالي.",
+                "استخدم وضع الإخفاء (إخفاء كلمات عشوائية / إخفاء الأبيات كاملاً) وتأكد من تدرج تظليل النصوص عند الضغط عليها لتبسيط الاستذكار.",
+                "جرب اختبار ملء الفراغات وأكمل الكلمة الناقصة في البيت وتأكد من صحة التقييم المباشر."
+            ],
+            expected: "أدوات مراجعة تفاعلية تماماً، لا توجد أخطاء برمجية في التعامل مع الضغطات المتتالية وسحب البطاقات على شاشة اللمس."
+        },
+        {
+            id: "audio-recitation",
+            category: "audio",
+            title: "التسميع الصوتي وتقييم الذكاء الاصطناعي (AI Evaluation)",
+            description: "اختبار ميزة تسجيل صوتك ومقارنته بالمتن عبر خوارزميات التقييم الذكية.",
+            badge: "الحفظ والتسميع",
+            badgeClass: "badge-audio",
+            steps: [
+                "توجه لصفحة التسميع الخاصة بأحد الأبيات أو الأقسام.",
+                "اضغط على زر التسجيل وتأكد من إعطاء متصفح الجوال صلاحية الوصول للميكروفون بشكل طبيعي.",
+                "قم بقراءة الأبيات بصوت واضح ثم اضغط إيقاف.",
+                "استمع لتسجيلك الصوتي للتأكد من وضوح وجودة الصوت المسجل.",
+                "اضغط على زر (تسميع / تقييم) للبدء بالمقارنة الذكية للمتن.",
+                "تأكد من دقة النتائج المعروضة: تظليل الكلمات الصحيحة باللون الأخضر والكلمات الخاطئة باللون الأحمر وحساب النسبة الكلية بشكل سليم."
+            ],
+            expected: "طلب سليم للصلاحيات، تسجيل خالٍ من المشاكل، معالجة ذكية لمطابقة الكلمات بالاعتماد على خوارزمية المقارنة وتقديم نتائج واضحة بلون منسق للاختلافات."
+        },
+        {
+            id: "audio-certificate",
+            category: "audio",
+            title: "إصدار ومشاركة شهادات الحفظ (Completion Certificates)",
+            description: "التحقق من إنشاء شهادة تخرج عند إكمال حفظ متن بالكامل.",
+            badge: "الحفظ والتسميع",
+            badgeClass: "badge-audio",
+            steps: [
+                "أكمل قراءة وحفظ متن بالكامل حتى تصل النسبة لـ 100%.",
+                "توجه لصفحة الشهادة (Certificate) للمتن المنجز.",
+                "تأكد من ظهور اسمك الثلاثي المكتوب في الملف الشخصي بوضوح على الشهادة.",
+                "تأكد من صحة تاريخ الإتمام واسم المتن المكتوب بالشهادة.",
+                "اضغط على زر (تحميل الشهادة) وتأكد من حفظها بنجاح في جهاز الجوال بصيغة صورة أو PDF.",
+                "جرب الضغط على أزرار المشاركة وتأكد من فتح خيارات مشاركة الجوال بسلاسة."
+            ],
+            expected: "إصدار وثيقة تخرج رسمية بتصميم إسلامي فاخر تحتوي على بيانات صحيحة مع إمكانية تحميلها الفوري بجودة عالية للمطبوعات."
+        },
+
+        // CATEGORY: ADMIN (لوحة التحكم)
+        {
+            id: "admin-metrics",
+            category: "admin",
+            title: "إحصائيات الإدارة والعمليات الأخيرة (Admin Dashboard Metrics)",
+            description: "التحقق من صحة مؤشرات لوحة التحكم العامة ومطابقتها للبيانات الفعلية.",
+            badge: "لوحة التحكم",
+            badgeClass: "badge-admin",
+            steps: [
+                "سجل الدخول بحساب له صلاحيات مدير (Admin).",
+                "توجه للرابط <code>/admin</code> لرؤية الصفحة العامة للوحة التحكم.",
+                "تأكد من قراءة الأرقام الأربعة: عدد المتون، عدد الأبيات الإجمالي، عدد الأعضاء، وسجل العمليات الكلي.",
+                "افحص جدول العمليات الأخيرة (Activity Logs) وتأكد من مطابقة السجل لآخر إجراء قمت به (تسجيل دخول، تحديث ملف، إلخ)."
+            ],
+            expected: "أرقام صحيحة تتطابق تماماً مع بيانات Firebase Firestore الحالية بدون جمود أو توقف للتحميل."
+        },
+        {
+            id: "admin-users",
+            category: "admin",
+            title: "إدارة الأعضاء والصلاحيات (Users Directory)",
+            description: "فحص البحث عن المستخدمين، ترقية رتبهم وتعديل الحسابات.",
+            badge: "لوحة التحكم",
+            badgeClass: "badge-admin",
+            steps: [
+                "انتقل لتبويب الأعضاء (Users) داخل لوحة التحكم.",
+                "ابحث عن مستخدم معين من خلال شريط البحث المخصص.",
+                "قم بترقية أحد المستخدمين من رتبة مستخدم (user) لمدير (admin). تأكد من ظهور إشعار Toast يفيد بالتحديث.",
+                "حاول تعديل صلاحيات حسابك الشخصي الحلي، وتأكد من منع النظام لذلك مع إشعار تحذير (لا يمكنك تغيير صلاحية حسابك الخاص)."
+            ],
+            expected: "سلاسة التحكم بالمستخدمين وتغيير رتبهم فورياً في قاعدة البيانات مع حماية متكاملة لمنع المدير من خفض صلاحيات نفسه."
+        },
+        {
+            id: "admin-settings",
+            category: "admin",
+            title: "إعدادات المنصة والتحكم في العدادات (Site Configuration)",
+            description: "اختبار حفظ التغييرات العامة للموقع والتحكم بالبيانات الوهمية والواقعية.",
+            badge: "لوحة التحكم",
+            badgeClass: "badge-admin",
+            steps: [
+                "ادخل لتبويب الإعدادات (Settings) في لوحة الإدارة.",
+                "قم بتغيير اسم الموقع ووصفه، واضغط على زر الحفظ والتأكد من نجاح العملية.",
+                "انتقل لتبويب إحصائيات الصفحة الرئيسية (Homepage Stats).",
+                "قم بتعطيل زر استخدام البيانات الحقيقية (useRealData) وأدخل قيماً مخصصة (عدد مستخدمين: 15000، كتب: 80).",
+                "اضغط حفظ، ثم افتح الصفحة الرئيسية للموقع في لسان جديد وتأكد من استعراض الأرقام التي عينتها يدوياً بالصفحة الرئيسية.",
+                "قم بإعادة تفعيل استخدام البيانات الحقيقية وتأكد من عودة الأرقام لحالتها الفعلية."
+            ],
+            expected: "إمكانية إخفاء البيانات الفعلية واستبدالها بإحصائيات مخصصة للتسويق والترويج بشكل مرن وسريع."
+        },
+        {
+            id: "admin-books-crud",
+            category: "admin",
+            title: "إضافة وتعديل وحذف المتون (Books CRUDS & Bulk Actions)",
+            description: "فحص إضافة المتون، والبحث فيها، وتعديل حالات النشر بشكل جماعي.",
+            badge: "لوحة التحكم",
+            badgeClass: "badge-admin",
+            steps: [
+                "توجه لصفحة إدارة الكتب (<code>/admin/books</code>).",
+                "اضغط على زر (إضافة متن جديد) وقم بتعبئة النموذج (العنوان، اسم المؤلف، الوصف، الصعوبة، تصنيف المتن، صورة الغلاف).",
+                "اختر الحالة 'مسودة' ثم اضغط حفظ وتأكد من ظهوره بالقائمة.",
+                "حدد كتابين من القائمة باستخدام مربعات الاختيار الجماعي (Checkbox).",
+                "استخدم الإجراءات الجماعية (Bulk Actions) لتغيير حالتهما دفعة واحدة إلى 'منشور'.",
+                "تأكد من تحديث الحالة في القائمة فوراً."
+            ],
+            expected: "إمكانية إنشاء متون كاملة وتعديلها بسهولة مع كفاءة تامة لإجراءات التعديل الجماعي في Firebase."
+        },
+        {
+            id: "admin-verses-crud",
+            category: "admin",
+            title: "إدارة أسطر وأبيات المتن وتفاصيلها (Verses CRUD)",
+            description: "التحقق من فحص إضافة الأبيات الشعرية وترتيبها داخل المتن وربط التسجيلات الصوتية بها.",
+            badge: "لوحة التحكم",
+            badgeClass: "badge-admin",
+            steps: [
+                "من قائمة المتون، اضغط على زر تعديل الأبيات لمتن معين.",
+                "اضغط على (إضافة بيت جديد) وأدخل نص الصدر والعجز (أو نص البيت)، الترجمة، التفسير ورابط ملف الصوت.",
+                "اضغط حفظ، وتأكد من ظهور البيت الجديد في نهاية القائمة بالرقم الصحيح.",
+                "قم بتعديل بيت قائم بالفعل واحفظ التعديل.",
+                "تأكد من إمكانية تغيير ترتيب الأبيات في القائمة بسلاسة."
+            ],
+            expected: "إدارة مفصلة ودقيقة لمحتوى المتن الشرعي، مع سلاسة إضافة الشروحات والترجمة والروابط الصوتية الملحقة."
+        },
+        {
+            id: "admin-pages-crud",
+            category: "admin",
+            title: "إدارة الصفحات الديناميكية (Pages CRUD Management)",
+            description: "فحص إنشاء صفحات مثل سياسة الخصوصية والشروط وإمكانية تصفحها ديناميكياً.",
+            badge: "لوحة التحكم",
+            badgeClass: "badge-admin",
+            steps: [
+                "توجه لصفحة إدارة الصفحات داخل لوحة التحكم (<code>/admin/pages</code>).",
+                "اضغط (إضافة صفحة جديدة). اكتب العنوان (مثال: الشروط والأحكام).",
+                "لاحظ توليد الرابط (Slug) تلقائياً باللغة العربية (الشروط-والأحكام).",
+                "اكتب محتوى الصفحة باستخدام محرر النصوص المتاح.",
+                "احفظ الصفحة ثم تأكد من إمكانية زيارتها عبر الرابط الخارجي (مثال: <code>/terms</code> أو <code>/privacy</code>)."
+            ],
+            expected: "توليد تلقائي صحيح للروابط مع معالجة ذكية للحروف العربية في المسار وسهولة تعديل وعرض المحتوى الديناميكي للموقع."
+        },
+        {
+            id: "admin-audit-analytics",
+            category: "admin",
+            title: "سجلات الأمان والتحليلات البيانية (Audit & Analytics Check)",
+            description: "التحقق من كفاءة سجلات المراقبة ومخططات التحليل العامة للموقع.",
+            badge: "لوحة التحكم",
+            badgeClass: "badge-admin",
+            steps: [
+                "توجه لصفحة سجلات التدقيق (<code>/admin/audit</code>) وتأكد من ظهور تفاصيل العمليات الحساسة (إنشاء كتاب، ترقية عضو) ومن قام بها ووقتها بدقة.",
+                "توجه لصفحة التحليلات (<code>/admin/analytics</code>).",
+                "تأكد من تحميل المخططات البيانية التي توضح حركة التسجيل الأسبوعية أو الشهرية للأعضاء الجدد ومعدلات إتمام المتون."
+            ],
+            expected: "شفافية عالية في مراقبة نشاط الموقع مع توفر رسوم إحصائية توضح نمو وسلوك المستخدمين بمرور الوقت."
+        },
+
+        // CATEGORY: PWA
+        {
+            id: "pwa-banner",
+            category: "pwa",
+            title: "ظهور لوحة التثبيت (PWA Install Button)",
+            description: "التحقق من ظهور رسالة حث المستخدم على تثبيت التطبيق كـ PWA.",
+            badge: "الـ PWA والأوفلاين",
+            badgeClass: "badge-pwa",
+            steps: [
+                "امسح بيانات التطبيق أو افتحه في نافذة متصفح خفية على الجوال.",
+                "انتظر بضع ثوان وتأكد من ظهور زر (تثبيت التطبيق) في مكان بارز (مثل الهيدر أو البانر الترويجي).",
+                "اضغط على تثبيت التطبيق وتأكد من إظهار المتصفح لرسالة التثبيت الرسمية.",
+                "أكمل التثبيت وتأكد من إضافة أيقونة منصة 'متون' على شاشة جوالك الرئيسية كأي تطبيق هاتف ذكي."
+            ],
+            expected: "ظهور سلس وغير مزعج لعنصر تثبيت الـ PWA متوافق مع نظام التشغيل المستهدف (Android/iOS)."
+        },
+        {
+            id: "pwa-offline",
+            category: "pwa",
+            title: "العمل عند انقطاع الاتصال (Offline Mode Functionality)",
+            description: "اختبار سلوك التطبيق وقراءة المتون في حال فقدان الإنترنت تماماً.",
+            badge: "الـ PWA والأوفلاين",
+            badgeClass: "badge-pwa",
+            steps: [
+                "قم بتثبيت التطبيق على جوالك وافتحه مسبقاً مع تصفح متن معين ليتم حفظه في ذاكرة التخزين المؤقت (Cache Storage).",
+                "فعل وضع الطيران (Airplane Mode) في جوالك لقطع الإنترنت بالكامل.",
+                "قم بإعادة تشغيل التطبيق وتأكد من عدم ظهور شاشة الخطأ التقليدية للمتصفح، وبدلاً منها تفتح صفحة انقطاع الاتصال المخصصة (Offline Page).",
+                "تأكد من قدرتك على الدخول وقراءة المتن الذي تصفحته مسبقاً والاطلاع على الأبيات بوضع عدم الاتصال بنجاح."
+            ],
+            expected: "تجربة تصفح أوفلاين ذكية تقرأ المتون الشرعية من ذاكرة Cache دون الحاجة لشبكة نشطة لضمان الحفظ المستمر."
+        }
+    ];
+
+    // Local Storage state manager
+    const STORAGE_KEY = "motoon_testing_progress";
+    let completedTasks = [];
+
+    // Load progress from Local Storage
+    function loadProgress() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+            try {
+                completedTasks = JSON.parse(stored);
+            } catch (e) {
+                completedTasks = [];
+            }
+        }
+    }
+
+    // Save progress to Local Storage
+    function saveProgress() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(completedTasks));
+        updateProgressUI();
+    }
+
+    // Toggle task state
+    function toggleTask(id, isChecked) {
+        if (isChecked) {
+            if (!completedTasks.includes(id)) {
+                completedTasks.push(id);
+            }
+        } else {
+            completedTasks = completedTasks.filter(item => item !== id);
+        }
+        saveProgress();
+        
+        // Update styling
+        const card = document.getElementById(`card-${id}`);
+        if (card) {
+            if (isChecked) {
+                card.classList.add("completed");
+            } else {
+                card.classList.remove("completed");
+            }
+        }
+    }
+
+    // Toggle Expand Card
+    function toggleExpand(id) {
+        const card = document.getElementById(`card-${id}`);
+        if (card) {
+            card.classList.toggle("expanded");
+        }
+    }
+
+    // Save notes handler
+    function saveNotes(id, text) {
+        // Save dynamically to a separate key or object in local storage
+        const notesKey = `motoon_notes_${id}`;
+        localStorage.setItem(notesKey, text);
+    }
+
+    // Load notes for a task
+    function getNotes(id) {
+        return localStorage.getItem(`motoon_notes_${id}`) || "";
+    }
+
+    // Update Progress UI
+    function updateProgressUI() {
+        const total = testingTasks.length;
+        const done = completedTasks.filter(id => testingTasks.some(t => t.id === id)).length; // count only existing tasks
+        
+        const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+        
+        document.getElementById("progress-percent").innerText = `${percent}%`;
+        document.getElementById("progress-bar").style.width = `${percent}%`;
+        document.getElementById("stats-done").innerText = done;
+        document.getElementById("stats-total").innerText = total;
+    }
+
+    // Render Tasks list
+    function renderTasks(filterCategory = 'all', searchQuery = '') {
+        const container = document.getElementById("tasks-container");
+        container.innerHTML = "";
+
+        const filtered = testingTasks.filter(task => {
+            const matchesCategory = filterCategory === 'all' || task.category === filterCategory;
+            const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                  task.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                  task.badge.toLowerCase().includes(searchQuery.toLowerCase());
+            return matchesCategory && matchesSearch;
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="no-results">لم نجد أي مهام فحص تطابق معايير البحث الحالية.</div>`;
+            return;
+        }
+
+        filtered.forEach(task => {
+            const isCompleted = completedTasks.includes(task.id);
+            const card = document.createElement("div");
+            card.className = `task-card ${isCompleted ? 'completed' : ''}`;
+            card.id = `card-${task.id}`;
+
+            // Create step list items
+            const stepsHtml = task.steps.map(step => `<li>${step}</li>`).join('');
+            const currentNotes = getNotes(task.id);
+
+            card.innerHTML = `
+                <div class="task-header" onclick="toggleExpand('${task.id}')">
+                    <label class="checkbox-container" onclick="event.stopPropagation();">
+                        <input type="checkbox" id="check-${task.id}" ${isCompleted ? 'checked' : ''} onchange="toggleTask('${task.id}', this.checked)">
+                        <span class="checkmark"></span>
+                    </label>
+                    <div class="task-title-group">
+                        <div class="task-title">${task.title}</div>
+                        <div class="task-meta">
+                            <span class="badge ${task.badgeClass}">${task.badge}</span>
+                            <span>خطة الفحص اليدوي لمطور منصة متون</span>
+                        </div>
+                    </div>
+                    <div class="arrow-icon">▼</div>
+                </div>
+                <div class="task-body">
+                    <div class="task-content">
+                        <div>
+                            <div class="content-section-title">📝 خطوات الفحص اليدوية:</div>
+                            <ul class="steps-list">
+                                ${stepsHtml}
+                            </ul>
+                        </div>
+                        <div>
+                            <div class="content-section-title">✨ النتيجة المتوقعة للفحص:</div>
+                            <div class="expected-box">${task.expected}</div>
+                            
+                            <div class="content-section-title">✍️ ملاحظات الفاحص والعيوب المكتشفة:</div>
+                            <textarea class="notes-area" placeholder="اكتب هنا أي ملاحظات أو أخطاء برمجية واجهتك أثناء تجربة الميزة على الهاتف ليتم إصلاحها..." oninput="saveNotes('${task.id}', this.value)">${currentNotes}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // Export report function
+    function exportReport() {
+        let report = `==================================================\n`;
+        report += `    تقرير الفحص الشامل اليدوي لمنصة متون MOTOON    \n`;
+        report += `    التاريخ: ${new Date().toLocaleDateString('ar-EG')} \n`;
+        report += `==================================================\n\n`;
+
+        let doneCount = 0;
+        
+        testingTasks.forEach((task, idx) => {
+            const isDone = completedTasks.includes(task.id);
+            const notes = getNotes(task.id);
+            if (isDone) doneCount++;
+
+            report += `${idx + 1}. [${isDone ? '✔ مكتمل' : '❌ غير منجز'}] - ${task.title} (${task.badge})\n`;
+            if (notes.trim()) {
+                report += `   - ملاحظات الفاحص: ${notes}\n`;
+            }
+            report += `--------------------------------------------------\n`;
+        });
+
+        const percent = Math.round((doneCount / testingTasks.length) * 100);
+        report += `\nإجمالي الإنجاز: ${doneCount} من أصل ${testingTasks.length} (${percent}%)\n`;
+        
+        // Download as file
+        const blob = new Blob([report], { type: "text/plain;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `motoon-test-report-${new Date().toISOString().slice(0,10)}.txt`;
+        link.click();
+    }
+
+    // Set up Events
+    document.addEventListener("DOMContentLoaded", () => {
+        loadProgress();
+        updateProgressUI();
+        renderTasks();
+
+        // Search inputs
+        const searchInput = document.getElementById("search-input");
+        let activeCategory = 'all';
+
+        searchInput.addEventListener("input", (e) => {
+            renderTasks(activeCategory, e.target.value);
+        });
+
+        // Filter buttons
+        const filterBtns = document.querySelectorAll(".filter-btn");
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                activeCategory = btn.getAttribute("data-category");
+                renderTasks(activeCategory, searchInput.value);
+            });
+        });
+
+        // Reset progress
+        document.getElementById("reset-btn").addEventListener("click", () => {
+            if (confirm("هل أنت متأكد من رغبتك في إعادة تعيين كافة خطوات الفحص وملاحظاتك المكتوبة؟")) {
+                completedTasks = [];
+                saveProgress();
+                // Clear notes too
+                testingTasks.forEach(t => {
+                    localStorage.removeItem(`motoon_notes_${t.id}`);
+                });
+                renderTasks(activeCategory, searchInput.value);
+                alert("تمت إعادة تعيين الفحص بنجاح.");
+            }
+        });
+
+        // Export btn
+        document.getElementById("export-btn").addEventListener("click", exportReport);
+    });
+</script>
+</body>
+</html>

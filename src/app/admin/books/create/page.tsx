@@ -9,6 +9,7 @@ import { booksService } from '@/services/firebase/books.service';
 import { activityLogService } from '@/services/firebase/activityLog.service';
 import { useAuth } from '@/hooks/useAuth';
 import { Book, BookDifficulty } from '@/types/book.types';
+import { CATEGORIES } from '@/lib/constants/categories';
 import { Button } from '@/components/ui/button';
 import { nanoid } from 'nanoid';
 import { 
@@ -48,6 +49,11 @@ function CreateBookForm() {
   const [coverUrl, setCoverUrl] = useState('');
   const [uploadingImage, setUploadingImage] = useState(false);
   const [slugManuallyEdited, setSlugManuallyEdited] = useState(false);
+  const [category, setCategory] = useState('');
+  const [subcategory, setSubcategory] = useState('');
+
+  // Get subcategories for selected category
+  const subcategories = category ? (CATEGORIES.find(c => c.id === category)?.subcategories || []) : [];
 
   // Load existing book data if editing
   useEffect(() => {
@@ -68,6 +74,8 @@ function CreateBookForm() {
           setStatus(data.status as any);
           setTagsInput(data.tags?.join('، ') || '');
           setCoverUrl(data.coverImageUrl || '');
+          setCategory(data.category || '');
+          setSubcategory(data.subcategory || '');
           setSlugManuallyEdited(true);
         } else {
           toast.error('المتن غير موجود.');
@@ -168,7 +176,9 @@ function CreateBookForm() {
       status,
       tags,
       isPublished: status === 'published',
-      ...(coverUrl ? { coverImageUrl: coverUrl } : {})
+      ...(coverUrl ? { coverImageUrl: coverUrl } : {}),
+      ...(category ? { category } : {}),
+      ...(subcategory ? { subcategory } : {}),
     };
 
     try {
@@ -370,6 +380,38 @@ function CreateBookForm() {
           <div className="bg-card border p-6 rounded-2xl shadow-sm space-y-5">
             <h3 className="text-sm font-bold text-foreground border-b pb-2">خيارات المتن</h3>
             
+            {/* Category */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-muted-foreground">التصنيف / العلم</label>
+              <select
+                value={category}
+                onChange={(e) => { setCategory(e.target.value); setSubcategory(''); }}
+                className="w-full px-3 py-2 border rounded-xl bg-muted/20 text-xs focus:outline-none focus:ring-1 focus:ring-primary"
+              >
+                <option value="">بدون تصنيف</option>
+                {CATEGORIES.map(cat => (
+                  <option key={cat.id} value={cat.id}>{cat.label}</option>
+                ))}
+              </select>
+            </div>
+
+            {/* Subcategory */}
+            {subcategories.length > 0 && (
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-muted-foreground">التخصص / الفرع</label>
+                <select
+                  value={subcategory}
+                  onChange={(e) => setSubcategory(e.target.value)}
+                  className="w-full px-3 py-2 border rounded-xl bg-muted/20 text-xs focus:outline-none focus:ring-1 focus:ring-primary"
+                >
+                  <option value="">اختر الفرع</option>
+                  {subcategories.map(sub => (
+                    <option key={sub.id} value={sub.id}>{sub.label}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
             {/* Difficulty */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-muted-foreground">صعوبة المتن</label>

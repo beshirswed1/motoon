@@ -11,6 +11,7 @@ import { MaintenanceGuard } from './MaintenanceGuard';
 import { offlineSyncService } from '@/services/firebase/offlineSync.service';
 import { AuthProvider } from '@/context/AuthContext';
 import { PWAProvider } from '@/contexts/PWAContext';
+import { FavoritesProvider } from '@/hooks/useFavorites';
 
 /* ── Query Client factory — one instance per request ─────── */
 function makeQueryClient(): QueryClient {
@@ -67,6 +68,7 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <ReduxProvider store={storeRef.current}>
       <AuthProvider>
+        <FavoritesProvider>
         <PWAProvider>
           <QueryClientProvider client={queryClient}>
             <ThemeProvider
@@ -105,6 +107,7 @@ export function Providers({ children }: ProvidersProps) {
           )}
         </QueryClientProvider>
         </PWAProvider>
+        </FavoritesProvider>
       </AuthProvider>
     </ReduxProvider>
   );

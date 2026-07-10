@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useBook, useBookVerses } from '@/hooks/features/books.hooks';
 import { RecitationInterface } from '@/features/recitation/components/RecitationInterface';
@@ -8,41 +8,49 @@ import { SessionSummary } from '@/features/recitation/components/SessionSummary'
 import type { ComparisonResult } from '@/types';
 import { Loader2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getLocalBookBySlug } from '@/lib/data';
 
 export default function RecitationPage() {
   const router = useRouter();
   const { slug } = useParams<{ slug: string }>();
 
-  // Fetch book and verses using custom react-query hooks
+  // Fetch book and verses using custom react-query hooks (Firebase)
   const decodedSlug = decodeURIComponent(slug || '');
-  const { data: book, isLoading: isLoadingBook, error: bookError } = useBook(decodedSlug);
-  const { data: verses, isLoading: isLoadingVerses, error: versesError } = useBookVerses(book?.id || '');
+  const { data: book, isLoading: isLoadingBook } = useBook(decodedSlug);
+  const { data: verses, isLoading: isLoadingVerses } = useBookVerses(book?.id || '');
+
+  // Local book fallback state
+  const [localBook, setLocalBook] = useState<any>(null);
+  const [localVerses, setLocalVerses] = useState<any[]>([]);
+  const [loadingLocal, setLoadingLocal] = useState(false);
 
   // Session state tracking
   const [results, setResults] = useState<Record<number, ComparisonResult>>({});
   const [sessionFinished, setSessionFinished] = useState<boolean>(false);
 
-  const isLoading = isLoadingBook || isLoadingVerses;
-
-  // Fallback to mock data if Firestore is empty
-  let displayBook = book;
-  let displayVerses = verses;
-
-  if (!isLoading && !displayBook) {
-    const localData = getLocalBookBySlug(decodedSlug);
-    if (localData) {
-      displayBook = localData.book;
-      displayVerses = localData.verses;
+  // Try API endpoint for local book fallback when Firebase doesn't have it
+  useEffect(() => {
+    if (!isLoadingBook && !book && decodedSlug) {
+      setLoadingLocal(true);
+      fetch(`/api/books/${encodeURIComponent(decodedSlug)}`)
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data) {
+            setLocalBook(data.book);
+            setLocalVerses(data.verses || []);
+          }
+        })
+        .catch(console.error)
+        .finally(() => setLoadingLocal(false));
     }
-  }
+  }, [isLoadingBook, book, decodedSlug]);
 
-  // We are in mock mode if we successfully fell back to a local book
-  const isMockMode = !book && !!displayBook;
+  const isLoading = isLoadingBook || isLoadingVerses || loadingLocal;
 
-  const isError = isMockMode 
-    ? false 
-    : (!!bookError || !!versesError || (!isLoading && !displayBook));
+  // Use Firebase data first, then local fallback
+  const displayBook = book || localBook;
+  const displayVerses = (verses && verses.length > 0) ? verses : localVerses;
+
+  const isError = !isLoading && (!displayBook || !displayVerses || displayVerses.length === 0);
 
   const handleResultSave = useCallback((index: number, result: ComparisonResult | null) => {
     setResults((prev) => {
@@ -80,7 +88,7 @@ export default function RecitationPage() {
         <AlertCircle className="w-12 h-12 text-destructive" />
         <h2 className="text-xl font-bold">عذراً، لم نتمكن من العثور على أبيات هذا المتن</h2>
         <p className="text-sm text-muted-foreground">تأكد من اختيار متن متاح ويحتوي على أبيات مسجلة.</p>
-        <Button onClick={handleExitSession} className="w-full mt-2 font-bold py-5">
+        <Button onClick={handleExitSession} className="w-full mt-2 font-bold py-5 rounded-xl">
           العودة للمتون
         </Button>
       </div>

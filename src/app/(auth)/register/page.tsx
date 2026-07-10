@@ -3,11 +3,11 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { registerSchema, RegisterFormValues } from '@/lib/validators/auth.validators';
 import Link from 'next/link';
-import { UserPlus, Chrome, AlertCircle, Loader2, Check, X, ShieldAlert } from 'lucide-react';
+import { UserPlus, Chrome, AlertCircle, Loader2, Check, X, ShieldAlert, LogIn, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { db } from '@/firebase/config';
 import { doc, getDoc } from 'firebase/firestore';
@@ -15,7 +15,6 @@ import { getFriendlyAuthErrorMessage } from '@/lib/utils/authErrors';
 
 function RegisterFormContent() {
   const { register: registerUser, signInWithGoogle } = useAuth();
-  const router = useRouter();
   const searchParams = useSearchParams();
   
   // Extract redirect URL (defaults to /profile)
@@ -56,6 +55,7 @@ function RegisterFormContent() {
       name: '',
       email: '',
       password: '',
+      confirmPassword: '',
     }
   });
 
@@ -91,11 +91,11 @@ function RegisterFormContent() {
 
     try {
       setErrorMsg(null);
-      const user = await registerUser(data.email, data.password, data.name);
-      toast.success(`تم إنشاء الحساب بنجاح، مرحباً بك ${user.name}`);
+      await registerUser(data.email, data.password, data.name);
+      toast.success('تم إنشاء الحساب بنجاح! يرجى إكمال بيانات ملفك الشخصي.');
       
-      // Auto-login handles the redirect immediately
-      router.push(redirectUrl);
+      // Redirect to profile to complete info
+      window.location.href = '/profile';
     } catch (error: any) {
       console.error('Registration error:', error);
       const friendlyMsg = getFriendlyAuthErrorMessage(error);
@@ -110,11 +110,11 @@ function RegisterFormContent() {
       const user = await signInWithGoogle();
       toast.success(`تم تسجيل الدخول بنجاح. مرحباً بك ${user.name}`);
       
-      // Navigate to redirect or dashboard
+      // Use window.location for reliable redirect
       if (searchParams.get('redirect')) {
-        router.push(redirectUrl);
+        window.location.href = redirectUrl;
       } else {
-        router.push(user.role === 'admin' ? '/admin' : '/profile');
+        window.location.href = user.role === 'admin' ? '/admin' : '/profile';
       }
     } catch (error: any) {
       console.error('Google Sign-in error:', error);
@@ -167,7 +167,7 @@ function RegisterFormContent() {
             <Chrome className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
             <div>
               <span className="font-bold text-primary block mb-1">توصية أمان هامة:</span>
-              نوصي بالتسجيل بـ **Google** لتأمين حسابك بأقصى حماية، دون الحاجة لحفظ كلمات مرور معقدة وتخطي قفل الحساب.
+              نوصي بالتسجيل بحساب جوجل لتأمين حسابك بأقصى حماية، دون الحاجة لحفظ كلمات مرور معقدة.
             </div>
           </div>
 
@@ -249,6 +249,19 @@ function RegisterFormContent() {
               )}
             </div>
 
+            {/* Confirm Password */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-muted-foreground">تأكيد كلمة المرور</label>
+              <input
+                type="password"
+                {...register('confirmPassword')}
+                placeholder="••••••••"
+                dir="ltr"
+                className="w-full rounded-xl border bg-background/50 p-3 text-sm text-left focus:outline-none focus:ring-1 focus:ring-primary"
+              />
+              {errors.confirmPassword && <p className="text-[10px] text-destructive font-semibold mt-1">{errors.confirmPassword.message}</p>}
+            </div>
+
             <button
               type="submit"
               disabled={isSubmitting}
@@ -291,12 +304,18 @@ function RegisterFormContent() {
             <span>إنشاء حساب بواسطة Google</span>
           </button>
 
-          <p className="text-center text-xs text-muted-foreground pt-2">
-            لديك حساب بالفعل؟{' '}
-            <Link href={`/login${searchParams.get('redirect') ? `?redirect=${encodeURIComponent(redirectUrl)}` : ''}`} className="text-primary hover:underline font-bold">
-              سجل دخولك هنا
+          {/* Switch to login — IMPROVED */}
+          <div className="pt-3 border-t border-border/40">
+            <Link
+              href={`/login${searchParams.get('redirect') ? `?redirect=${encodeURIComponent(redirectUrl)}` : ''}`}
+              className="flex items-center justify-center gap-2 w-full p-3 rounded-xl border-2 border-dashed border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-200 group"
+            >
+              <LogIn className="h-4 w-4 text-primary" />
+              <span className="text-sm font-bold text-foreground">لديك حساب بالفعل؟</span>
+              <span className="text-sm font-bold text-primary group-hover:underline">سجل دخولك</span>
+              <ArrowLeft className="h-3.5 w-3.5 text-primary" />
             </Link>
-          </p>
+          </div>
         </>
       )}
     </div>

@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useRouter, usePathname } from 'next/navigation';
 import {
   LayoutDashboard, User, LogOut, BookOpen, TrendingUp,
-  Menu, X, Home, Phone, Info, ChevronRight, Download,
+  Home, Download, Heart,
 } from 'lucide-react';
 
 import toast from 'react-hot-toast';
@@ -18,12 +18,6 @@ import { useEffect, useState, useCallback } from 'react';
 const navLinks = [
   { href: '/', label: 'الرئيسية', icon: Home },
   { href: '/books', label: 'المتون', icon: BookOpen },
-  { href: '/about', label: 'عن المنصة', icon: Info },
-  { href: '/contact', label: 'تواصل معنا', icon: Phone },
-];
-
-const userLinks = [
-  { href: '/progress', label: 'تقدمي', icon: TrendingUp },
 ];
 
 export function Navbar() {
@@ -31,7 +25,6 @@ export function Navbar() {
   const { isInstallable, installPwa, isStandalone, isIOS } = usePWA();
   const router = useRouter();
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -39,10 +32,6 @@ export function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     if (user?.id) {
@@ -78,7 +67,7 @@ export function Navbar() {
 
   return (
     <>
-      {/* ── Desktop Header ── */}
+      {/* ── Header ── */}
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           scrolled
@@ -86,7 +75,7 @@ export function Navbar() {
             : 'bg-background/80 backdrop-blur-md border-b border-border/40'
         }`}
       >
-        <div className="container-motoon flex h-16 items-center justify-between">
+        <div className="container-motoon flex h-14 md:h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group shrink-0">
             <div className="w-8 h-8 rounded-lg overflow-hidden ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all flex items-center justify-center bg-transparent">
@@ -119,26 +108,42 @@ export function Navbar() {
                 )}
               </Link>
             ))}
-            {user && userLinks.map(({ href, label }) => (
+            <Link
+              href="/about"
+              className={`relative px-4 py-2 rounded-full transition-all duration-200 ${
+                isActive('/about')
+                  ? 'text-primary bg-primary/10'
+                  : 'text-foreground/70 hover:text-foreground hover:bg-muted'
+              }`}
+            >
+              عن المنصة
+            </Link>
+            <Link
+              href="/contact"
+              className={`relative px-4 py-2 rounded-full transition-all duration-200 ${
+                isActive('/contact')
+                  ? 'text-primary bg-primary/10'
+                  : 'text-foreground/70 hover:text-foreground hover:bg-muted'
+              }`}
+            >
+              تواصل معنا
+            </Link>
+            {user && (
               <Link
-                key={href}
-                href={href}
+                href="/progress"
                 className={`relative px-4 py-2 rounded-full transition-all duration-200 ${
-                  isActive(href)
+                  isActive('/progress')
                     ? 'text-primary bg-primary/10'
                     : 'text-foreground/70 hover:text-foreground hover:bg-muted'
                 }`}
               >
-                {label}
-                {isActive(href) && (
-                  <span className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
-                )}
+                تقدمي
               </Link>
-            ))}
+            )}
           </nav>
 
           {/* Actions Container */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 md:gap-2">
             {!isStandalone && (
               <Button
                 onClick={handleInstallClick}
@@ -149,6 +154,21 @@ export function Navbar() {
                 <Download className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
                 <span className="hidden sm:inline">تحميل التطبيق</span>
               </Button>
+            )}
+
+            {/* Favorites (logged in only) */}
+            {user && (
+              <Link
+                href="/favorites"
+                className={`h-8 w-8 rounded-full flex items-center justify-center transition-all duration-200 ${
+                  isActive('/favorites')
+                    ? 'text-red-500 bg-red-500/10'
+                    : 'text-muted-foreground hover:text-red-500 hover:bg-red-500/10'
+                }`}
+                title="المفضلة"
+              >
+                <Heart className={`h-4 w-4 ${isActive('/favorites') ? 'fill-current' : ''}`} />
+              </Link>
             )}
 
             {/* Desktop Actions */}
@@ -194,145 +214,49 @@ export function Navbar() {
               )}
             </div>
 
-            {/* Mobile Menu Toggle */}
-            <button
-              className="md:hidden p-2 rounded-xl text-foreground/70 hover:text-foreground hover:bg-muted transition-colors"
-              onClick={() => setMobileMenuOpen(v => !v)}
-              aria-label="قائمة التنقل"
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-border/40 bg-background/98 backdrop-blur-xl animate-in slide-in-from-top-2 duration-200">
-            <div className="container-motoon py-4 flex flex-col gap-1">
-              {/* Logo in mobile menu */}
-              <div className="flex items-center gap-2.5 px-4 pb-3 mb-2 border-b border-border/30">
-                <div className="w-8 h-8 rounded-lg overflow-hidden ring-2 ring-primary/20 flex items-center justify-center bg-transparent">
-                  <img
-                    src="/logo.png"
-                    alt="شعار متون"
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-                <span className="text-lg font-black text-primary tracking-tight">
-                  متون
-                </span>
-              </div>
-
-              {navLinks.map(({ href, label, icon: Icon }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                    isActive(href)
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-foreground/70 hover:bg-muted hover:text-foreground'
-                  }`}
-                >
-                  <Icon className="h-4 w-4" />
-                  {label}
-                  <ChevronRight className="h-3.5 w-3.5 mr-auto rotate-180" />
-                </Link>
-              ))}
-              {user && userLinks.map(({ href, label, icon: Icon }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                    isActive(href)
-                      ? 'bg-primary/10 text-primary'
-                      : 'text-foreground/70 hover:bg-muted hover:text-foreground'
-                  }`}
-                >
-                  <Icon className="h-4 w-4" />
-                  {label}
-                  <ChevronRight className="h-3.5 w-3.5 mr-auto rotate-180" />
-                </Link>
-              ))}
-
-              <div className="border-t border-border/30 mt-2 pt-3 flex flex-col gap-2">
-                {!isStandalone && (
-                  <button
-                    onClick={() => {
-                      handleInstallClick();
-                      setMobileMenuOpen(false);
-                    }}
-                    className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-primary bg-primary/10 hover:bg-primary/20 transition-all duration-200"
-                  >
-                    <Download className="h-4 w-4" />
-                    تحميل التطبيق
-                  </button>
-                )}
-                {user ? (
-                  <>
-                    {user.role === 'admin' && (
-                      <Link href="/admin" className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-primary bg-primary/5">
-                        <LayoutDashboard className="h-4 w-4" />
-                        لوحة التحكم
-                      </Link>
-                    )}
-                    <Link href="/profile" className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold hover:bg-muted">
-                      <User className="h-4 w-4 text-muted-foreground" />
-                      {user.name || 'حسابي'}
-                    </Link>
-                    <button
-                      onClick={handleLogout}
-                      className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-destructive hover:bg-destructive/10 w-full text-right"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      تسجيل الخروج
-                    </button>
-                  </>
-                ) : (
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" asChild className="flex-1 font-bold">
-                      <Link href="/login">تسجيل الدخول</Link>
-                    </Button>
-                    <Button size="sm" asChild className="flex-1 font-bold">
-                      <Link href="/register">ابدأ الآن</Link>
-                    </Button>
-                  </div>
-                )}
-              </div>
+            {/* Mobile: Notification bell + Profile */}
+            <div className="flex md:hidden items-center gap-1">
+              {user && <NotificationBell />}
             </div>
           </div>
-        )}
+        </div>
       </header>
 
       {/* ── Mobile Bottom Navigation Bar ── */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-xl border-t border-border/50 shadow-2xl safe-area-pb">
-        <div className="flex items-center justify-around h-16 px-2">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-xl border-t border-border/50 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.1)] safe-area-pb">
+        <div className="flex items-center justify-around h-16 px-1">
           {[
             { href: '/', icon: Home, label: 'الرئيسية' },
             { href: '/books', icon: BookOpen, label: 'المتون' },
             ...(user ? [{ href: '/progress', icon: TrendingUp, label: 'تقدمي' }] : []),
-            { href: '/about', icon: Info, label: 'عن المنصة' },
             ...(user
               ? [{ href: '/profile', icon: User, label: 'حسابي' }]
               : [{ href: '/login', icon: User, label: 'دخول' }]
             ),
-          ].map(({ href, icon: Icon, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className={`flex flex-col items-center gap-0.5 px-3 py-2 rounded-xl transition-all duration-200 min-w-0 ${
-                isActive(href)
-                  ? 'text-primary'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              <div className={`p-1.5 rounded-lg transition-all duration-200 ${
-                isActive(href) ? 'bg-primary/15' : ''
-              }`}>
-                <Icon className={`h-5 w-5 transition-all ${isActive(href) ? 'scale-110' : ''}`} />
-              </div>
-              <span className="text-[10px] font-bold leading-none truncate">{label}</span>
-            </Link>
-          ))}
+          ].map(({ href, icon: Icon, label }) => {
+            const active = isActive(href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                className="flex flex-col items-center justify-center gap-0.5 py-1 min-w-[56px] max-w-[72px] rounded-xl transition-all duration-200 group"
+              >
+                <div className={`relative flex items-center justify-center h-8 transition-all duration-300 ${
+                  active ? 'w-12 rounded-2xl bg-primary/15' : 'w-8 rounded-lg'
+                }`}>
+                  <Icon className={`h-5 w-5 transition-all duration-200 ${
+                    active ? 'text-primary scale-110' : 'text-muted-foreground group-hover:text-foreground'
+                  }`} />
+                  {active && (
+                    <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
+                  )}
+                </div>
+                <span className={`text-[10px] font-bold leading-none truncate transition-colors ${
+                  active ? 'text-primary' : 'text-muted-foreground'
+                }`}>{label}</span>
+              </Link>
+            );
+          })}
         </div>
       </nav>
 

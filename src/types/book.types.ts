@@ -14,6 +14,8 @@ export interface Book {
   isPublished: boolean;
   coverImageUrl?: string;
   versesCount?: number;
+  category?: string;
+  subcategory?: string;
   
   createdAt: Timestamp;
   updatedAt: Timestamp;

@@ -1,15 +1,20 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Book as BookType } from '@/types/book.types';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
-import { Mic, Hash, Award, Info, Eye } from 'lucide-react';
+import { Mic, Hash, Award, Info, Heart } from 'lucide-react';
+import { useFavorites } from '@/hooks/useFavorites';
+import { useAuth } from '@/hooks/useAuth';
 
 export interface BookCardProps {
   book: BookType & { versesCount?: number };
   showProgress?: boolean;
   progressValue?: number;
-  masteryScore?: number; // 0-100
+  masteryScore?: number;
+  viewMode?: 'grid' | 'list';
 }
 
 // Beautiful gradient patterns for books without covers
@@ -33,13 +38,83 @@ function getGradientIndex(title: string): number {
   return Math.abs(hash) % coverGradients.length;
 }
 
-export function BookCard({ book, showProgress, progressValue = 0, masteryScore }: BookCardProps) {
+export function BookCard({ book, showProgress, progressValue = 0, masteryScore, viewMode = 'grid' }: BookCardProps) {
   const gradientClass = coverGradients[getGradientIndex(book.title)];
   const versesCount = book.versesCount ?? 0;
-
   const canGetCertificate = masteryScore !== undefined && masteryScore >= 95;
+  const { user } = useAuth();
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const bookIsFav = isFavorite(book.id);
 
+  if (viewMode === 'list') {
+    return (
+      <div className="group flex overflow-hidden rounded-2xl border border-border/60 bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-lg hover:border-primary/30">
+        {/* Cover */}
+        <Link
+          href={`/books/${book.slug}`}
+          className="relative w-28 md:w-36 shrink-0 overflow-hidden bg-muted block"
+        >
+          {book.coverImageUrl ? (
+            <Image
+              src={book.coverImageUrl}
+              alt={`غلاف ${book.title}`}
+              fill
+              className="object-cover"
+              sizes="144px"
+            />
+          ) : (
+            <div className={`flex h-full items-center justify-center bg-gradient-to-br ${gradientClass} relative overflow-hidden p-3`}
+              style={{ backgroundImage: islamicPatternSvg }}>
+              <p className="text-xs font-black text-foreground text-center line-clamp-3">{book.title}</p>
+            </div>
+          )}
+        </Link>
 
+        {/* Content */}
+        <div className="flex flex-1 flex-col justify-center p-4 min-w-0">
+          <Link href={`/books/${book.slug}`} className="hover:text-primary transition-colors">
+            <h3 className="line-clamp-1 text-base font-bold mb-1 leading-snug">{book.title}</h3>
+          </Link>
+          <p className="line-clamp-1 text-xs text-muted-foreground mb-2 font-medium">{book.author}</p>
+          
+          {versesCount > 0 && (
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3">
+              <Hash className="h-3 w-3 text-primary" />
+              {versesCount} بيت
+            </div>
+          )}
+
+          <div className="flex items-center gap-2 mt-auto">
+            <Button asChild variant="default" className="gap-1.5 rounded-xl font-bold text-xs h-8 px-3" size="sm">
+              <Link href={`/books/${book.slug}/recite`}>
+                <Mic className="h-3.5 w-3.5" />
+                تسميع
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="gap-1.5 rounded-xl font-bold text-xs h-8 px-3" size="sm">
+              <Link href={`/books/${book.slug}`}>
+                <Info className="h-3.5 w-3.5" />
+                التفاصيل
+              </Link>
+            </Button>
+            {user && (
+              <button
+                onClick={() => toggleFavorite(book.id)}
+                className={`h-8 w-8 rounded-xl flex items-center justify-center transition-all mr-auto ${
+                  bookIsFav ? 'text-red-500 bg-red-500/10' : 'text-muted-foreground hover:text-red-500 hover:bg-red-500/10'
+                }`}
+                title={bookIsFav ? 'إزالة من المفضلة' : 'إضافة للمفضلة'}
+              >
+                <Heart className={`h-4 w-4 ${bookIsFav ? 'fill-current' : ''}`} />
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Grid mode
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-border/60 bg-card text-card-foreground shadow-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/8 hover:-translate-y-1 hover:border-primary/30">
       {/* Cover Area */}
@@ -56,17 +131,14 @@ export function BookCard({ book, showProgress, progressValue = 0, masteryScore }
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         ) : (
-          // Beautiful fallback design for books without covers
           <div
             className={`flex h-full items-center justify-center bg-gradient-to-br ${gradientClass} relative overflow-hidden`}
             style={{ backgroundImage: islamicPatternSvg }}
           >
-            {/* Decorative circles */}
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-32 h-32 rounded-full border-2 border-current opacity-10" />
               <div className="absolute w-20 h-20 rounded-full border border-current opacity-15" />
             </div>
-            {/* Title display */}
             <div className="relative z-10 flex flex-col items-center gap-3 p-6 text-center">
               <div className="text-4xl opacity-20">﴾﴿</div>
               <p className="text-base font-black text-foreground leading-snug line-clamp-4 px-2">
@@ -89,6 +161,20 @@ export function BookCard({ book, showProgress, progressValue = 0, masteryScore }
             <Award className="h-3 w-3" />
             شهادة
           </div>
+        )}
+
+        {/* Favorite button */}
+        {user && (
+          <button
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(book.id); }}
+            className={`absolute top-2 right-2 h-8 w-8 rounded-full flex items-center justify-center transition-all shadow-md ${
+              bookIsFav
+                ? 'bg-red-500 text-white'
+                : 'bg-black/40 backdrop-blur-sm text-white/80 hover:bg-red-500 hover:text-white opacity-0 group-hover:opacity-100'
+            }`}
+          >
+            <Heart className={`h-3.5 w-3.5 ${bookIsFav ? 'fill-current' : ''}`} />
+          </button>
         )}
 
         {/* Verses count badge */}
@@ -122,7 +208,7 @@ export function BookCard({ book, showProgress, progressValue = 0, masteryScore }
           </div>
         )}
 
-        {/* Actions */}
+        {/* Actions — Only 2 buttons: تسميع + التفاصيل */}
         <div className="mt-auto pt-3 flex items-center gap-1.5 border-t border-border/40">
           <Button
             asChild
@@ -141,20 +227,9 @@ export function BookCard({ book, showProgress, progressValue = 0, masteryScore }
             className="flex-1 gap-1 rounded-xl font-bold text-[11px] h-9 px-2 bg-transparent hover:bg-muted"
             size="sm"
           >
-            <Link href={`/books/${book.slug}/read`}>
-              <Eye className="h-3.5 w-3.5 shrink-0" />
-              عرض وتحميل
-            </Link>
-          </Button>
-          <Button
-            asChild
-            variant="ghost"
-            className="h-9 w-9 rounded-xl p-0 hover:bg-muted text-muted-foreground hover:text-foreground shrink-0"
-            size="sm"
-            title="التفاصيل"
-          >
             <Link href={`/books/${book.slug}`}>
-              <Info className="h-4 w-4" />
+              <Info className="h-3.5 w-3.5 shrink-0" />
+              التفاصيل
             </Link>
           </Button>
         </div>

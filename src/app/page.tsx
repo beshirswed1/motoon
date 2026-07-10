@@ -2,23 +2,24 @@ import type { Metadata } from 'next';
 import type { Book } from '@/types/book.types';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { BookCard } from '@/components/common/BookCard';
 import { FeaturedBooksCarousel } from '@/components/common/FeaturedBooksCarousel';
 import { HeroInstallButton } from '@/components/common/HeroInstallButton';
 import { booksService } from '@/services/firebase/books.service';
 import { getAllLocalBooks } from '@/lib/data';
 import { analyticsService } from '@/services/firebase/analytics.service';
+import { CATEGORIES } from '@/lib/constants/categories';
 import {
   BookOpen, Mic, Award, TrendingUp, Users, BookMarked,
   Trophy, Star, CheckCircle2, Brain, Shield, Zap,
-  ArrowLeft, GraduationCap, Heart
+  ArrowLeft, GraduationCap, Heart, ScrollText, Scale,
+  Languages, Landmark, Megaphone,
 } from 'lucide-react';
 
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
     title: 'متون | منصة حفظ المتون العلمية',
-    description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بخوارزميات الذكاء الاصطناعي.',
+    description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي.',
     openGraph: {
       title: 'متون | منصة حفظ المتون العلمية',
       description: 'احفظ المتون الشرعية وتتبع تقدمك في الحفظ',
@@ -32,8 +33,8 @@ export async function generateMetadata(): Promise<Metadata> {
 const platformFeatures = [
   {
     icon: Brain,
-    title: 'حفظ ذكي بخوارزمية التكرار المتباعد',
-    desc: 'نظام SM-2 الذكي يحدد وقت المراجعة المثالي لكل بيت بناءً على قدرتك الشخصية، فتحفظ أكثر في وقت أقل.',
+    title: 'حفظ ذكي بنظام التكرار المتباعد',
+    desc: 'نظام ذكي يحدد وقت المراجعة المثالي لكل بيت بناءً على قدرتك الشخصية، فتحفظ أكثر في وقت أقل.',
     color: 'text-primary bg-primary/10',
   },
   {
@@ -62,8 +63,8 @@ const platformFeatures = [
   },
   {
     icon: Shield,
-    title: 'متوافق مع PWA',
-    desc: 'استخدم المنصة كتطبيق على هاتفك دون الإنترنت، وتزامن تلقائي عند عودة الاتصال.',
+    title: 'يعمل بدون إنترنت',
+    desc: 'استخدم المنصة كتطبيق على هاتفك بدون اتصال بالإنترنت، مع مزامنة تلقائية عند عودة الاتصال.',
     color: 'text-violet-600 bg-violet-50 dark:bg-violet-950/30',
   },
 ];
@@ -87,7 +88,7 @@ const howToSteps = [
     step: '٣',
     icon: Brain,
     title: 'احفظ وسمّع',
-    desc: 'احفظ الأبيات بمساعدة خوارزمية الذكاء الاصطناعي وسمّع بصوتك لتوثيق تقدمك.',
+    desc: 'احفظ الأبيات بمساعدة النظام الذكي وسمّع بصوتك لتوثيق تقدمك.',
     color: 'bg-amber-500 text-white',
   },
   {
@@ -98,6 +99,19 @@ const howToSteps = [
     color: 'bg-emerald-600 text-white',
   },
 ];
+
+// Icon mapping for categories
+const categoryIconMap: Record<string, any> = {
+  'BookOpen': BookOpen,
+  'ScrollText': ScrollText,
+  'Shield': Shield,
+  'Scale': Scale,
+  'Languages': Languages,
+  'Landmark': Landmark,
+  'Heart': Heart,
+  'Megaphone': Megaphone,
+  'Brain': Brain,
+};
 
 export default async function HomePage() {
   let featuredBooks: any[] = [];
@@ -135,7 +149,6 @@ export default async function HomePage() {
   // Sanitize books to remove Firebase Timestamp prototype methods which cause Next.js errors
   const sanitizedBooks: Book[] = JSON.parse(JSON.stringify(featuredBooks));
   const carouselBooks = sanitizedBooks.slice(0, 5);
-  const gridBooks = sanitizedBooks.slice(0, 8);
 
   return (
     <div className="flex flex-col w-full">
@@ -169,7 +182,7 @@ export default async function HomePage() {
 
           <p className="max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
             منصة متون توفر لك بيئة تفاعلية لحفظ وتسميع المتون العلمية مع متابعة دقيقة لتقدمك
-            بخوارزمية التكرار المتباعد للوصول إلى الإتقان الحقيقي.
+            بنظام التكرار الذكي للوصول إلى الإتقان الحقيقي.
           </p>
 
           {/* CTA Buttons */}
@@ -229,35 +242,48 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ─── Books Grid ────────────────────────────── */}
-      {gridBooks.length > 0 && (
-        <section className="py-16 section-padding bg-muted/30">
-          <div className="container-motoon">
-            <div className="mb-8 flex items-end justify-between">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-black">المتون المتاحة</h2>
-                <p className="text-muted-foreground mt-1">اختر من مجموعة متنوعة من المتون العلمية</p>
-              </div>
-              <Button variant="ghost" asChild className="hidden md:flex gap-1 font-bold text-primary hover:text-primary">
-                <Link href="/books">
-                  عرض الكل
-                  <ArrowLeft className="h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {gridBooks.map((book) => (
-                <BookCard key={book.id} book={book} />
-              ))}
-            </div>
-            <div className="mt-8 flex justify-center md:hidden">
-              <Button variant="outline" asChild className="font-bold rounded-xl">
-                <Link href="/books">عرض كل المتون</Link>
-              </Button>
-            </div>
+      {/* ─── Categories Section (replaces "المتون المتاحة") ───── */}
+      <section className="py-16 section-padding bg-muted/30">
+        <div className="container-motoon">
+          <div className="mb-10 text-center">
+            <p className="text-sm font-bold text-primary uppercase tracking-widest mb-2">التصنيفات</p>
+            <h2 className="text-2xl md:text-3xl font-black mb-3">أقسام العلوم الشرعية</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              تصفح المتون حسب التخصص العلمي واختر ما يناسب رحلتك في طلب العلم
+            </p>
           </div>
-        </section>
-      )}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
+            {CATEGORIES.map((cat) => {
+              const IconComp = categoryIconMap[cat.icon] || BookOpen;
+              return (
+                <Link
+                  key={cat.id}
+                  href={`/books?category=${cat.id}`}
+                  className="group flex flex-col items-center gap-3 p-5 md:p-6 rounded-2xl border border-border/50 bg-card hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
+                >
+                  <div className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center ${cat.color} transition-transform duration-300 group-hover:scale-110`}>
+                    <IconComp className="h-6 w-6 md:h-7 md:w-7" />
+                  </div>
+                  <div className="text-center">
+                    <h3 className="font-bold text-sm md:text-base text-foreground mb-1">{cat.label}</h3>
+                    <p className="text-[10px] md:text-xs text-muted-foreground">
+                      {cat.subcategories.length} تخصص
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+          <div className="mt-8 flex justify-center">
+            <Button variant="outline" asChild className="font-bold rounded-xl">
+              <Link href="/books">
+                تصفح كل المتون
+                <ArrowLeft className="h-4 w-4 mr-2" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
 
       {/* ─── How It Works ──────────────────────────── */}
       <section className="py-20 section-padding">
@@ -310,7 +336,7 @@ export default async function HomePage() {
             <p className="text-sm font-bold text-primary uppercase tracking-widest mb-2">المميزات</p>
             <h2 className="text-2xl md:text-3xl font-black mb-3">لماذا متون؟</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              منصة شاملة تجمع أحدث تقنيات التعليم مع الأصالة الإسلامية
+              منصة شاملة تجمع أحدث أساليب التعليم مع الأصالة الإسلامية
             </p>
           </div>
 
@@ -382,10 +408,10 @@ export default async function HomePage() {
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4 text-sm font-bold">
                 <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400">
-                  <CheckCircle2 className="h-4 w-4" /> شهادة PDF احترافية
+                  <CheckCircle2 className="h-4 w-4" /> شهادة احترافية
                 </span>
                 <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400">
-                  <CheckCircle2 className="h-4 w-4" /> QR Code للتحقق
+                  <CheckCircle2 className="h-4 w-4" /> رمز تحقق
                 </span>
                 <span className="flex items-center gap-1.5 text-amber-700 dark:text-amber-400">
                   <CheckCircle2 className="h-4 w-4" /> مشاركة فورية

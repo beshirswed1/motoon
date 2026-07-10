@@ -61,10 +61,10 @@ export default function AdminDashboardPage() {
 
   // Homepage statistics control
   const [siteStats, setSiteStats] = useState({
-    totalUsers: 10000,
-    totalBooks: 50,
-    totalSessions: 500000,
-    activeUsersToday: 500,
+    totalUsers: 1,
+    totalBooks: 1,
+    totalSessions: 1,
+    activeUsersToday: 1,
     useRealData: true,
   });
   const [siteStatsSaving, setSiteStatsSaving] = useState(false);

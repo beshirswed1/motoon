@@ -9,6 +9,9 @@ export interface User {
   role: UserRole;
   avatarUrl?: string;
   provider?: string;
+  bio?: string;
+  country?: string;
+  educationLevel?: string;
   createdAt: Timestamp;
   updatedAt: Timestamp;
   lastLogin?: Timestamp;
@@ -18,4 +21,3 @@ export interface User {
   deletedAt: Timestamp | null;
   deletedBy: string | null;
 }
-

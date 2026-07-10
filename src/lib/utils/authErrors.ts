@@ -43,6 +43,9 @@ export function getFriendlyAuthErrorMessage(error: any): string {
     
     case 'auth/network-request-failed':
       return 'فشل الاتصال بالشبكة. يرجى التحقق من اتصال الإنترنت لديك وحالة الاتصال.';
+
+    case 'auth/unauthorized-domain':
+      return 'هذا الدومين غير مسجل في إعدادات المصادقة. إذا كنت تستخدم المنصة من رابط غير رسمي، يرجى استخدام الرابط الرسمي للمنصة.';
     
     default:
       // Fallback translations for generic messages

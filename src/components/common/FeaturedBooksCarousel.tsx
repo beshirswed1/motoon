@@ -65,12 +65,12 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
     <div className="relative w-full overflow-hidden rounded-3xl border border-border/50 bg-card shadow-xl">
       {/* Main slide */}
       <div
-        className={`relative flex flex-col md:flex-row min-h-[360px] md:min-h-[420px] transition-opacity duration-400 ${
+        className={`relative flex flex-col md:flex-row min-h-[320px] md:min-h-[420px] transition-opacity duration-400 ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}
       >
         {/* Cover */}
-        <div className={`relative w-full md:w-2/5 bg-gradient-to-br ${gradientClass} min-h-[200px] md:min-h-full overflow-hidden`}>
+        <div className={`relative w-full md:w-2/5 bg-gradient-to-br ${gradientClass} h-[160px] md:min-h-full overflow-hidden shrink-0`}>
           {book.coverImageUrl ? (
             <Image
               src={book.coverImageUrl}
@@ -81,7 +81,7 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
               priority
             />
           ) : (
-            <div className="flex h-full items-center justify-center p-8 text-center relative">
+            <div className="flex h-full items-center justify-center p-6 text-center relative">
               <div className="absolute inset-0 opacity-5">
                 {[...Array(9)].map((_, i) => (
                   <div
@@ -95,27 +95,27 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
                 ))}
               </div>
               <div className="relative z-10">
-                <div className="text-6xl mb-4 opacity-30">﴾﴿</div>
-                <h3 className="text-2xl font-black text-foreground leading-tight">{book.title}</h3>
+                <div className="text-5xl mb-3 opacity-30">﴾﴿</div>
+                <h3 className="text-xl md:text-2xl font-black text-foreground leading-tight">{book.title}</h3>
               </div>
             </div>
           )}
-          {/* Gradient overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-l md:bg-gradient-to-r from-transparent to-black/20" />
+          {/* Gradient overlay for readability */}
+          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-card/60 via-transparent to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="flex flex-col justify-center gap-5 p-8 pb-12 md:p-10 md:w-3/5">
+        <div className="flex flex-col justify-center gap-4 p-6 md:p-10 md:w-3/5">
           <div>
             <p className="text-xs font-bold text-primary uppercase tracking-widest mb-2">متن مميز</p>
-            <h2 className="text-2xl md:text-3xl font-black text-foreground mb-2 leading-tight">
+            <h2 className="text-xl md:text-3xl font-black text-foreground mb-2 leading-tight">
               {book.title}
             </h2>
-            <p className="text-sm font-semibold text-muted-foreground mb-4">
+            <p className="text-sm font-semibold text-muted-foreground mb-3">
               {book.author}
             </p>
             {book.description && (
-              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 md:line-clamp-3">
                 {book.description}
               </p>
             )}
@@ -128,7 +128,7 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
             </div>
           ) : null}
 
-          <div className="flex flex-col sm:flex-row gap-3 mt-2">
+          <div className="flex flex-col sm:flex-row gap-3 mt-1">
             <Button asChild className="gap-2 rounded-xl font-bold shadow-sm">
               <Link href={`/books/${book.slug}/memorize`}>
                 <BookOpen className="h-4 w-4" />
@@ -145,26 +145,19 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
         </div>
       </div>
 
-      {/* Navigation controls */}
+      {/* Navigation controls — at the bottom, not overlapping text */}
       {totalBooks > 1 && (
-        <>
+        <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-3 z-10 px-4">
           <button
             onClick={() => { prev(); resetAutoPlay(); }}
-            className="absolute top-1/2 right-3 -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border/50 rounded-full p-2 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 shadow-lg z-10"
+            className="bg-background/80 backdrop-blur-sm border border-border/50 rounded-full p-1.5 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 shadow-md"
             aria-label="السابق"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
-          <button
-            onClick={() => { next(); resetAutoPlay(); }}
-            className="absolute top-1/2 left-3 -translate-y-1/2 bg-background/80 backdrop-blur-sm border border-border/50 rounded-full p-2 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 shadow-lg z-10"
-            aria-label="التالي"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </button>
 
           {/* Dots */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+          <div className="flex items-center gap-2">
             {books.map((_, idx) => (
               <button
                 key={idx}
@@ -178,7 +171,15 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
               />
             ))}
           </div>
-        </>
+
+          <button
+            onClick={() => { next(); resetAutoPlay(); }}
+            className="bg-background/80 backdrop-blur-sm border border-border/50 rounded-full p-1.5 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200 shadow-md"
+            aria-label="التالي"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </button>
+        </div>
       )}
     </div>
   );

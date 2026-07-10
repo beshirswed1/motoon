@@ -3,17 +3,16 @@
 import { useState, Suspense } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { loginSchema, LoginFormValues } from '@/lib/validators/auth.validators';
 import Link from 'next/link';
-import { LogIn, Chrome, AlertCircle, Loader2 } from 'lucide-react';
+import { LogIn, Chrome, AlertCircle, Loader2, UserPlus, ArrowLeft } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { getFriendlyAuthErrorMessage } from '@/lib/utils/authErrors';
 
 function LoginFormContent() {
   const { signIn, signInWithGoogle } = useAuth();
-  const router = useRouter();
   const searchParams = useSearchParams();
   
   // Extract redirect URL (defaults to /profile)
@@ -40,11 +39,11 @@ function LoginFormContent() {
       const user = await signIn(data.email, data.password);
       toast.success(`مرحباً بك، ${user.name}`);
       
-      // Dynamic Redirect based on role unless explicit redirect exists
+      // Use window.location for reliable redirect after auth state change
       if (searchParams.get('redirect')) {
-        router.push(redirectUrl);
+        window.location.href = redirectUrl;
       } else {
-        router.push(user.role === 'admin' ? '/admin' : '/profile');
+        window.location.href = user.role === 'admin' ? '/admin' : '/profile';
       }
     } catch (error: any) {
       console.error('Login error:', error);
@@ -60,11 +59,11 @@ function LoginFormContent() {
       const user = await signInWithGoogle();
       toast.success(`تم تسجيل الدخول بنجاح. أهلاً بك ${user.name}`);
       
-      // Dynamic Redirect based on role unless explicit redirect exists
+      // Use window.location for reliable redirect after auth state change
       if (searchParams.get('redirect')) {
-        router.push(redirectUrl);
+        window.location.href = redirectUrl;
       } else {
-        router.push(user.role === 'admin' ? '/admin' : '/profile');
+        window.location.href = user.role === 'admin' ? '/admin' : '/profile';
       }
     } catch (error: any) {
       console.error('Google login error:', error);
@@ -91,7 +90,7 @@ function LoginFormContent() {
         <Chrome className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
         <div>
           <span className="font-bold text-primary block mb-1">توصية أمان للمستخدمين:</span>
-          نوصي بشدة بـ **تسجيل الدخول باستخدام جوجل** لتأمين حسابك بأقصى درجة وحمايته عبر المصادقة الثنائية التلقائية.
+          نوصي بشدة بتسجيل الدخول باستخدام حساب جوجل لتأمين حسابك بأقصى درجة وحمايته عبر المصادقة الثنائية التلقائية.
         </div>
       </div>
 
@@ -173,12 +172,18 @@ function LoginFormContent() {
         <span>تسجيل الدخول بحساب Google</span>
       </button>
 
-      <p className="text-center text-xs text-muted-foreground pt-2">
-        ليس لديك حساب؟{' '}
-        <Link href={`/register${searchParams.get('redirect') ? `?redirect=${encodeURIComponent(redirectUrl)}` : ''}`} className="text-primary hover:underline font-bold">
-          أنشئ حساباً جديداً الآن
+      {/* Switch to register — IMPROVED */}
+      <div className="pt-3 border-t border-border/40">
+        <Link
+          href={`/register${searchParams.get('redirect') ? `?redirect=${encodeURIComponent(redirectUrl)}` : ''}`}
+          className="flex items-center justify-center gap-2 w-full p-3 rounded-xl border-2 border-dashed border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-200 group"
+        >
+          <UserPlus className="h-4 w-4 text-primary" />
+          <span className="text-sm font-bold text-foreground">ليس لديك حساب؟</span>
+          <span className="text-sm font-bold text-primary group-hover:underline">أنشئ حساباً جديداً</span>
+          <ArrowLeft className="h-3.5 w-3.5 text-primary" />
         </Link>
-      </p>
+      </div>
     </div>
   );
 }

@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { analyticsService } from '@/services/firebase/analytics.service';
 import {
   BookOpen, Brain, GraduationCap, Heart, Shield, Zap,
   Target, Users, Star, Award, ArrowLeft, Mic
 } from 'lucide-react';
-
 
 export const metadata: Metadata = {
   title: 'عن منصة متون',
@@ -50,9 +50,17 @@ const features = [
   { icon: BookOpen, text: 'مكتبة متنوعة من المتون تُحدَّث باستمرار' },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  let stats = { totalUsers: 1, totalBooks: 1, totalSessions: 1, activeUsersToday: 1 };
+  
+  try {
+    stats = await analyticsService.getTotalStats();
+  } catch (err) {
+    console.error('Error loading stats for about page:', err);
+  }
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background dir-rtl text-right">
 
       {/* Hero */}
       <section className="relative overflow-hidden py-20 md:py-28 section-padding">
@@ -99,12 +107,12 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[
-                { num: '+50', label: 'متن علمي' },
-                { num: '+10K', label: 'طالب وطالبة' },
-                { num: '+500K', label: 'بيت تم حفظه' },
-                { num: '95%+', label: 'معدل الرضا' },
+                { num: `+${stats.totalUsers.toLocaleString('ar-EG')}`, label: 'طالب وطالبة' },
+                { num: `+${stats.totalBooks.toLocaleString('ar-EG')}`, label: 'متن علمي' },
+                { num: `+${stats.totalSessions.toLocaleString('ar-EG')}`, label: 'جلسة تسميع' },
+                { num: '95%+', label: 'معدل الرضا والاتقان' },
               ].map(({ num, label }) => (
-                <div key={label} className="flex flex-col items-center justify-center gap-2 p-6 rounded-2xl border border-border/50 bg-card text-center">
+                <div key={label} className="flex flex-col items-center justify-center gap-2 p-6 rounded-2xl border border-border/50 bg-card text-center hover:shadow-md transition-shadow">
                   <span className="text-3xl font-black text-primary">{num}</span>
                   <span className="text-sm text-muted-foreground font-semibold">{label}</span>
                 </div>

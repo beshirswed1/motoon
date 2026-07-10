@@ -15,10 +15,10 @@ export const analyticsService = {
         const d = statsDoc.data();
         if (d.useRealData === false) {
           return {
-            totalUsers: d.totalUsers || 10000,
-            totalBooks: d.totalBooks || 50,
-            totalSessions: d.totalSessions || 500000,
-            activeUsersToday: d.activeUsersToday || 500,
+            totalUsers: d.totalUsers || 1,
+            totalBooks: d.totalBooks || 1,
+            totalSessions: d.totalSessions || 1,
+            activeUsersToday: d.activeUsersToday || 1,
           };
         }
       }
@@ -48,18 +48,18 @@ export const analyticsService = {
       const activeUsersToday = activeCount.data().count;
 
       return {
-        totalUsers: totalUsers || 18,
-        totalBooks: totalBooks || 4,
-        totalSessions: totalSessions || 342,
-        activeUsersToday: activeUsersToday || 8
+        totalUsers: totalUsers || 1,
+        totalBooks: totalBooks || 1,
+        totalSessions: totalSessions || 1,
+        activeUsersToday: activeUsersToday || 1
       };
     } catch (e) {
       console.error(e);
       return {
-        totalUsers: 18,
-        totalBooks: 4,
-        totalSessions: 342,
-        activeUsersToday: 8
+        totalUsers: 1,
+        totalBooks: 1,
+        totalSessions: 1,
+        activeUsersToday: 1
       };
     }
   },
