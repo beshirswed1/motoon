@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, Suspense } from 'react';
 
 import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import { useBook } from '@/hooks/features/books.hooks';
@@ -33,7 +33,7 @@ function generateCertId(userId: string, bookId: string): string {
   return `MTN-${ub}-${ts}`;
 }
 
-export default function CertificatePage() {
+function CertificatePageContent() {
   const params = useParams<{ slug: string }>();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -45,6 +45,9 @@ export default function CertificatePage() {
   const scoreParam = searchParams.get('score');
   const score = scoreParam ? Math.round(parseFloat(scoreParam)) : 0;
 
+  const [isMounted, setIsMounted] = useState(false);
+  const [localBook, setLocalBook] = useState<any>(null);
+  const [loadingLocal, setLoadingLocal] = useState(false);
   const [studentName, setStudentName] = useState(user?.name || '');
   const [nameConfirmed, setNameConfirmed] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
@@ -52,25 +55,47 @@ export default function CertificatePage() {
   const [certCanvas, setCertCanvas] = useState<HTMLCanvasElement | null>(null);
   const [certData, setCertData] = useState<CertificateData | null>(null);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Try API endpoint for local book fallback when Firebase doesn't have it
+  useEffect(() => {
+    if (!isLoading && !book && decodedSlug) {
+      setLoadingLocal(true);
+      fetch(`/api/books/${encodeURIComponent(decodedSlug)}`)
+        .then(res => res.ok ? res.json() : null)
+        .then(data => {
+          if (data) {
+            setLocalBook(data.book);
+          }
+        })
+        .catch(console.error)
+        .finally(() => setLoadingLocal(false));
+    }
+  }, [isLoading, book, decodedSlug]);
+
+  const displayBook = book || localBook;
+
   // Build certificate data once name is confirmed
   useEffect(() => {
-    if (!nameConfirmed || !book || !studentName.trim()) return;
+    if (!nameConfirmed || !displayBook || !studentName.trim()) return;
 
     const now = new Date();
-    const certId = generateCertId(user?.id || 'guest', book.id);
+    const certId = generateCertId(user?.id || 'guest', displayBook.id);
     const verifyUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://motoon.app'}/verify/${certId}`;
 
     setCertData({
       studentName: studentName.trim(),
-      bookTitle: book.title,
-      bookAuthor: book.author,
+      bookTitle: displayBook.title,
+      bookAuthor: displayBook.author,
       score,
       date: now.toLocaleDateString('ar-EG', { day: 'numeric', month: 'long', year: 'numeric' }),
       hijriDate: toHijri(now),
       certId,
       verifyUrl,
     });
-  }, [nameConfirmed, book, studentName, score, user?.id]);
+  }, [nameConfirmed, displayBook, studentName, score, user?.id]);
 
   const handleCanvasReady = useCallback((canvas: HTMLCanvasElement) => {
     setCertCanvas(canvas);
@@ -82,7 +107,7 @@ export default function CertificatePage() {
     setIsExporting(true);
     try {
       const link = document.createElement('a');
-      link.download = `شهادة-${book?.title || 'متن'}-${studentName}.png`;
+      link.download = `شهادة-${displayBook?.title || 'متن'}-${studentName}.png`;
       link.href = certCanvas.toDataURL('image/png', 1.0);
       link.click();
       toast.success('تم تحميل الشهادة كصورة');
@@ -91,7 +116,7 @@ export default function CertificatePage() {
     } finally {
       setIsExporting(false);
     }
-  }, [certCanvas, book?.title, studentName]);
+  }, [certCanvas, displayBook?.title, studentName]);
 
   // Download as PDF
   const downloadPDF = useCallback(async () => {
@@ -105,14 +130,14 @@ export default function CertificatePage() {
       const pdfW = pdf.internal.pageSize.getWidth();
       const pdfH = pdf.internal.pageSize.getHeight();
       pdf.addImage(imgData, 'PNG', 0, 0, pdfW, pdfH);
-      pdf.save(`شهادة-${book?.title || 'متن'}-${studentName}.pdf`);
+      pdf.save(`شهادة-${displayBook?.title || 'متن'}-${studentName}.pdf`);
       toast.success('تم تحميل الشهادة كـ PDF');
     } catch {
       toast.error('حدث خطأ أثناء إنشاء PDF');
     } finally {
       setIsExporting(false);
     }
-  }, [certCanvas, book?.title, studentName]);
+  }, [certCanvas, displayBook?.title, studentName]);
 
   // Print
   const printCert = useCallback(() => {
@@ -142,8 +167,8 @@ export default function CertificatePage() {
           const file = new File([blob], 'شهادة-متون.png', { type: 'image/png' });
           if (navigator.canShare({ files: [file] })) {
             await navigator.share({
-              title: `شهادة إتمام ${book?.title}`,
-              text: `أتممت حفظ "${book?.title}" بدرجة ${score}% على منصة متون!`,
+              title: `شهادة إتمام ${displayBook?.title}`,
+              text: `أتممت حفظ "${displayBook?.title}" بدرجة ${score}% على منصة متون!`,
               files: [file],
             });
             return;
@@ -157,25 +182,27 @@ export default function CertificatePage() {
     setCopied(true);
     toast.success('تم نسخ رابط الشهادة');
     setTimeout(() => setCopied(false), 2000);
-  }, [certCanvas, certData, book?.title, score]);
+  }, [certCanvas, certData, displayBook?.title, score]);
 
   // Share on WhatsApp
   const shareWhatsApp = useCallback(() => {
     const text = encodeURIComponent(
-      `🏅 أتممت بحمد الله حفظ "${book?.title}" بدرجة ${score}% على منصة متون!\n🔗 ${certData?.verifyUrl || 'https://motoon.app'}`
+      `🏅 أتممت بحمد الله حفظ "${displayBook?.title}" بدرجة ${score}% على منصة متون!\n🔗 ${certData?.verifyUrl || 'https://motoon.app'}`
     );
     window.open(`https://wa.me/?text=${text}`, '_blank');
-  }, [book?.title, score, certData]);
+  }, [displayBook?.title, score, certData]);
 
   // Share on Twitter
   const shareTwitter = useCallback(() => {
     const text = encodeURIComponent(
-      `🏅 أتممت بحمد الله حفظ "${book?.title}" بدرجة ${score}% على منصة #متون!\n${certData?.verifyUrl || 'https://motoon.app'}`
+      `🏅 أتممت بحمد الله حفظ "${displayBook?.title}" بدرجة ${score}% على منصة #متون!\n${certData?.verifyUrl || 'https://motoon.app'}`
     );
     window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
-  }, [book?.title, score, certData]);
+  }, [displayBook?.title, score, certData]);
 
-  if (isLoading) {
+  const isPageLoading = isLoading || loadingLocal;
+
+  if (!isMounted || isPageLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
@@ -183,7 +210,7 @@ export default function CertificatePage() {
     );
   }
 
-  if (score < 95 || !book) {
+  if (score < 95 || !displayBook) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4 p-6 text-center">
         <Award className="w-16 h-16 text-muted-foreground/30" />
@@ -228,7 +255,7 @@ export default function CertificatePage() {
             </div>
             <h1 className="text-2xl md:text-3xl font-black">مبارك إتمام الحفظ! 🎉</h1>
             <p className="text-muted-foreground mt-1">
-              لقد أتممت حفظ <strong>"{book.title}"</strong> بتفوق — احصل على شهادتك
+              لقد أتممت حفظ <strong>"{displayBook.title}"</strong> بتفوق — احصل على شهادتك
             </p>
           </div>
         </div>
@@ -360,5 +387,17 @@ export default function CertificatePage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function CertificatePage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    }>
+      <CertificatePageContent />
+    </Suspense>
   );
 }
