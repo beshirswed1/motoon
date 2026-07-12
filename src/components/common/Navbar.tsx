@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, User, BookOpen, TrendingUp,
   Home, Download, Heart, Settings
@@ -21,9 +21,8 @@ const navLinks = [
 ];
 
 export function Navbar() {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { isInstallable, installPwa, isStandalone, isIOS } = usePWA();
-  const router = useRouter();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
 

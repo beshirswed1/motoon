@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { BarChart3, User, Settings, LogOut, BookOpen } from 'lucide-react';
+import { BarChart3, User, Settings, BookOpen } from 'lucide-react';
 
 export function Sidebar() {
   const pathname = usePathname();

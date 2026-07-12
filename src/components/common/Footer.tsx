@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Instagram, Twitter, Youtube, Heart, ExternalLink } from 'lucide-react';
+import { Mail, Instagram, Twitter, Youtube, ExternalLink } from 'lucide-react';
 
 
 const quickLinks = [
