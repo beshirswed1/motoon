@@ -87,19 +87,25 @@ export function compareWords(expected: string, actual: string): number {
   // 1. Check if they differ only by a leading conjunction/preposition (و, ف, ب, ل, ك)
   const stripLeading = (s: string) => s.replace(/^[وفبلك]/, '');
   if (stripLeading(normExpected) === stripLeading(normActual)) {
-    return 0.95;
+    return 0.97;
   }
 
   const maxLen = Math.max(normExpected.length, normActual.length);
   const distance = getEditDistance(normExpected, normActual);
 
-  // 2. Edit distance heuristics for close pronunciation/typo matching
-  // Avoid being too lenient on very short words (<=3 chars) to prevent false matches
-  if (maxLen >= 4 && distance === 1) {
+  // 2. Edit distance heuristics — very forgiving for Arabic STT errors
+  // 1-char difference on words >= 3 chars → treat as correct
+  if (maxLen >= 3 && distance === 1) {
+    return 0.95;
+  }
+
+  // 2-char difference on words >= 5 chars → treat as correct
+  if (maxLen >= 5 && distance <= 2) {
     return 0.90;
   }
 
-  if (maxLen >= 6 && distance <= 2) {
+  // 3-char difference on long words >= 8 chars → still acceptable
+  if (maxLen >= 8 && distance <= 3) {
     return 0.85;
   }
 
@@ -320,4 +326,31 @@ export function calculateSimilarityScore(
 ): number {
   const result = RecitationComparisonEngine.compare(expectedText, spokenText);
   return result.accuracy;
+}
+
+/**
+ * filterSpokenDuplicates — removes consecutive duplicate/near-duplicate words
+ * that STT engines (especially on mobile) tend to produce.
+ * e.g. "هذه هذه هذه الأولى" → "هذه الأولى"
+ */
+export function filterSpokenDuplicates(text: string): string {
+  if (!text) return '';
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  if (words.length <= 1) return text.trim();
+
+  const filtered: string[] = [words[0]];
+  for (let i = 1; i < words.length; i++) {
+    const prev = normalizeArabicText(filtered[filtered.length - 1]);
+    const curr = normalizeArabicText(words[i]);
+    // Skip if identical or very similar to the previous kept word
+    if (prev === curr) continue;
+    if (prev.length > 0 && curr.length > 0) {
+      const dist = getEditDistance(prev, curr);
+      const maxLen = Math.max(prev.length, curr.length);
+      // If only 1 char different on a word of 3+ chars, it's a duplicate
+      if (maxLen >= 3 && dist <= 1) continue;
+    }
+    filtered.push(words[i]);
+  }
+  return filtered.join(' ');
 }

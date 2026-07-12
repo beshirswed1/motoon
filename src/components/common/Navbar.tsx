@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter, usePathname } from 'next/navigation';
 import {
-  LayoutDashboard, User, LogOut, BookOpen, TrendingUp,
-  Home, Download, Heart,
+  LayoutDashboard, User, BookOpen, TrendingUp,
+  Home, Download, Heart, Settings
 } from 'lucide-react';
 
 import toast from 'react-hot-toast';
@@ -38,16 +38,6 @@ export function Navbar() {
       reviewReminderService.checkAndCreateReviewReminders(user.id).catch(console.error);
     }
   }, [user?.id]);
-
-  const handleLogout = useCallback(async () => {
-    try {
-      await signOut();
-      toast.success('تم تسجيل الخروج بنجاح');
-      router.push('/login');
-    } catch {
-      toast.error('حدث خطأ أثناء تسجيل الخروج');
-    }
-  }, [signOut, router]);
 
   const handleInstallClick = useCallback(async () => {
     if (isInstallable || isIOS) {
@@ -192,15 +182,6 @@ export function Navbar() {
                       {user.name ? user.name.split(' ')[0] : 'حسابي'}
                     </Link>
                   </Button>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={handleLogout}
-                    className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 h-8 w-8"
-                    title="تسجيل الخروج"
-                  >
-                    <LogOut className="h-3.5 w-3.5" />
-                  </Button>
                 </>
               ) : (
                 <>
@@ -229,6 +210,7 @@ export function Navbar() {
             { href: '/', icon: Home, label: 'الرئيسية' },
             { href: '/books', icon: BookOpen, label: 'المتون' },
             ...(user ? [{ href: '/progress', icon: TrendingUp, label: 'تقدمي' }] : []),
+            ...(user ? [{ href: '/settings', icon: Settings, label: 'الإعدادات' }] : []),
             ...(user
               ? [{ href: '/profile', icon: User, label: 'حسابي' }]
               : [{ href: '/login', icon: User, label: 'دخول' }]

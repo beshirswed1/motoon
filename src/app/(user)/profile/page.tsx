@@ -6,7 +6,8 @@ import { AvatarUpload } from '@/components/common/AvatarUpload';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { User as UserIcon, Mail, Calendar, BookOpen, Award, Sparkles, Loader2, Globe, GraduationCap, Pencil } from 'lucide-react';
+import { User as UserIcon, Mail, Calendar, BookOpen, Award, Sparkles, Loader2, Globe, GraduationCap, Pencil, LogOut } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/useAuth';
 import { useUserProgress } from '@/hooks/features/progress.hooks';
 import { usersService } from '@/services/firebase/users.service';
@@ -28,7 +29,8 @@ const COUNTRIES = [
 ];
 
 export default function ProfilePage() {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
+  const router = useRouter();
   const { data: userProgress } = useUserProgress(user?.id || '');
   const [name, setName] = useState('');
   const [avatarUrl, setAvatarUrl] = useState('');
@@ -58,6 +60,16 @@ export default function ProfilePage() {
         console.error(err);
         toast.error('حدث خطأ أثناء حفظ الصورة الرمزية');
       }
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      toast.success('تم تسجيل الخروج بنجاح');
+      router.push('/login');
+    } catch {
+      toast.error('حدث خطأ أثناء تسجيل الخروج');
     }
   };
 
@@ -164,10 +176,19 @@ export default function ProfilePage() {
           </div>
 
           {/* Join date */}
-          <div className="w-full border-t mt-4 pt-4 flex items-center justify-center gap-1.5 text-xs text-muted-foreground">
+          <div className="w-full border-t mt-4 pt-4 flex items-center justify-center gap-1.5 text-xs text-muted-foreground mb-4">
             <Calendar className="h-3.5 w-3.5" />
             <span>عضو منذ {joinDateStr}</span>
           </div>
+
+          <Button 
+            variant="destructive" 
+            className="w-full gap-2 rounded-xl"
+            onClick={handleLogout}
+          >
+            <LogOut className="h-4 w-4" />
+            تسجيل الخروج
+          </Button>
         </div>
 
         {/* Profile Edit Form */}

@@ -45,15 +45,6 @@ export function Sidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t">
-        <button
-          onClick={() => {}}
-          className="flex w-full items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors"
-        >
-          <LogOut className="h-5 w-5" />
-          <span>تسجيل الخروج</span>
-        </button>
-      </div>
     </aside>
   );
 }

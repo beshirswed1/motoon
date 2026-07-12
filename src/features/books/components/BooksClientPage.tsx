@@ -48,7 +48,14 @@ export function BooksClientPage({ allBooks, initialCategory }: BooksClientPagePr
 
   // Filter and sort books
   const filteredBooks = useMemo(() => {
-    let books = [...allBooks];
+    // Deduplicate books by id to avoid React duplicate key warnings
+    const uniqueMap = new Map<string, any>();
+    for (const book of allBooks) {
+      if (!uniqueMap.has(book.id)) {
+        uniqueMap.set(book.id, book);
+      }
+    }
+    let books = Array.from(uniqueMap.values());
 
     // Search filter (fuzzy Arabic matching)
     if (searchQuery.trim()) {

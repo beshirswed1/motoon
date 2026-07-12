@@ -4,7 +4,7 @@ import React from 'react';
 import { useState, useEffect, useMemo, useRef } from 'react';
 import type { Book, Verse, ComparisonResult } from '@/types';
 import { speechService } from '@/services/ai/speech.service';
-import { RecitationComparisonEngine, compareWords, normalizeArabicText } from '@/services/ai/comparison.service';
+import { RecitationComparisonEngine, compareWords, normalizeArabicText, filterSpokenDuplicates } from '@/services/ai/comparison.service';
 import { audioFeedback } from '../utils/audio';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
@@ -70,22 +70,38 @@ const alignActiveVerse = (
       continue;
     }
 
-    // 1. Direct match check
+    // 1. Direct match check — very forgiving (0.80 threshold)
     const sim = compareWords(expWord, spkWord);
-    // Use 0.85 tolerance based on intelligent string-similarity
-    if (sim >= 0.85) {
+    if (sim >= 0.80) {
       alignments[eIdx].status = 'correct';
       eIdx++;
       sIdx++;
       continue;
     }
 
-    // 2. Lookahead check in expected words (jump/skip check, up to 3 words)
+    // 2. Spoken-word lookahead: skip STT junk/extra words
+    //    Check if ANY of the next 2 spoken words match the current expected word
+    let foundSpokenSkip = false;
+    for (let sd = 1; sd <= 2 && sIdx + sd < spokenWords.length; sd++) {
+      const nextSpk = spokenWords[sIdx + sd];
+      if (compareWords(expWord, nextSpk) >= 0.80) {
+        // The STT inserted junk words — skip them
+        sIdx = sIdx + sd;
+        alignments[eIdx].status = 'correct';
+        eIdx++;
+        sIdx++;
+        foundSpokenSkip = true;
+        break;
+      }
+    }
+    if (foundSpokenSkip) continue;
+
+    // 3. Expected-word lookahead: check if the user skipped expected words (up to 3)
     let foundJump = false;
     for (let d = 1; d <= 3; d++) {
       if (eIdx + d < expectedWords.length) {
         const nextExp = expectedWords[eIdx + d];
-        if (compareWords(nextExp, spkWord) > 0.82) {
+        if (compareWords(nextExp, spkWord) >= 0.80) {
           // Words from eIdx to eIdx + d - 1 were skipped/forgotten!
           for (let k = eIdx; k < eIdx + d; k++) {
             alignments[k].status = 'forgotten';
@@ -102,16 +118,16 @@ const alignActiveVerse = (
 
     if (foundJump) continue;
 
-    // 3. If it's a mismatch and not the last word, it is wrong (replaced)
-    if (sIdx < spokenWords.length - 1) {
+    // 4. If it's a mismatch and not the last 2 spoken words, it is wrong (replaced)
+    //    Allow up to 2-word delay before marking wrong to give STT time to settle
+    if (sIdx < spokenWords.length - 2) {
       alignments[eIdx].status = 'wrong';
       alignments[eIdx].actualSpoken = spkWord;
       eIdx++;
       sIdx++;
     } else {
-      // It is the last spoken word and doesn't match yet.
-      // We don't mark it as wrong (red) to avoid flickering.
-      if (sim > 0.5) {
+      // It is among the last 2 spoken words — don't mark as wrong to avoid flickering
+      if (sim > 0.45) {
         alignments[eIdx].status = 'correct';
       } else {
         alignments[eIdx].status = 'pending';
@@ -161,10 +177,13 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
 
     setError(null);
     setIsListening(true);
+    // Play start chime when mic is activated
+    if (soundEnabled) audioFeedback.playStartChime();
     try {
       await speechService.startListening({
         onResult: (text: string) => {
-          setCurrentSpokenText(text);
+          // Filter duplicate words produced by STT on mobile
+          setCurrentSpokenText(filterSpokenDuplicates(text));
         },
         onError: (err: any) => {
           console.error('Speech recognition error:', err);
@@ -187,7 +206,9 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
     try {
       const finalTranscript = await speechService.stopListening();
       if (finalTranscript) {
-        setSessionSpokenText(prev => (prev ? prev + ' ' : '') + finalTranscript);
+        // Filter duplicates in the final transcript too
+        const filtered = filterSpokenDuplicates(finalTranscript);
+        setSessionSpokenText(prev => (prev ? prev + ' ' : '') + filtered);
         setCurrentSpokenText('');
       }
     } catch (err) {
@@ -226,18 +247,21 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
       }
 
       if (wordIdx >= spokenWords.length) {
-        // No more spoken words, mark as pending (or reciting if it's the current target)
         aligned[verseIdx].status = 'pending';
         verseIdx++;
         continue;
       }
 
-      // 2. Lookahead check for skipping verses
+      // Get expected word count for the current verse
+      const currentVerseExpectedWords = verses[verseIdx].text.trim().split(/\s+/).filter(
+        word => normalizeArabicText(word).length > 0
+      );
+      const expectedWordCount = currentVerseExpectedWords.length;
+
+      // 2. Lookahead check for verse transition
       let foundJump = false;
       let jumpToVerseIdx = verseIdx;
       let jumpToWordIdx = wordIdx;
-
-      // Look ahead up to 20 spoken words, but ONLY look at the VERY NEXT unskipped verse
 
       let nextVerse = verseIdx + 1;
       while (nextVerse < verses.length && manuallySkipped.has(nextVerse)) {
@@ -245,28 +269,26 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
       }
 
       if (nextVerse < verses.length) {
-        const verseWords = verses[nextVerse].text.trim().split(/\s+/).filter(word => normalizeArabicText(word).length > 0);
-        if (verseWords.length > 0) {
-          // Look ahead up to 25 spoken words
+        const nextVerseWords = verses[nextVerse].text.trim().split(/\s+/).filter(
+          word => normalizeArabicText(word).length > 0
+        );
+        if (nextVerseWords.length > 0) {
           const maxSpokenLook = Math.min(spokenWords.length, wordIdx + 25);
-          
-          // Check against the WHOLE verse (or up to 10 words) instead of just the first 3
-          const wordsToCompare = Math.min(10, verseWords.length);
+          const wordsToCompare = Math.min(6, nextVerseWords.length);
           
           for (let w = wordIdx; w < maxSpokenLook; w++) {
             let matchCount = 0;
             for (let offset = 0; offset < wordsToCompare; offset++) {
               if (w + offset < spokenWords.length) {
-                const sim = compareWords(verseWords[offset], spokenWords[w + offset]);
-                if (sim >= 0.7) { // Lower tolerance for jump to allow slight mispronunciations
+                const sim = compareWords(nextVerseWords[offset], spokenWords[w + offset]);
+                if (sim >= 0.65) {
                   matchCount++;
                 }
               }
             }
 
-            // If we find 3 matching words ANYWHERE in the first 10 words, it's definitely the next verse!
-            // Or if the verse is very short (1-2 words), require all to match.
-            const requiredMatches = Math.min(3, verseWords.length);
+            // Only require 2 matching words (or all if verse is 1 word)
+            const requiredMatches = Math.min(2, nextVerseWords.length);
             if (matchCount >= requiredMatches) {
               foundJump = true;
               jumpToVerseIdx = nextVerse;
@@ -277,12 +299,26 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
         }
       }
 
+      // 3. Auto-advance heuristic: if spoken words significantly exceed expected count,
+      //    force transition even without detecting the next verse's start
+      const spokenSoFar = spokenWords.length - wordIdx;
+      if (!foundJump && spokenSoFar > expectedWordCount + 2 && nextVerse < verses.length) {
+        // The user has spoken more words than this verse has — likely moved on
+        // Split at the expected word count boundary
+        foundJump = true;
+        jumpToVerseIdx = nextVerse;
+        jumpToWordIdx = wordIdx + expectedWordCount;
+        // Clamp to not exceed available spoken words
+        if (jumpToWordIdx > spokenWords.length) {
+          jumpToWordIdx = spokenWords.length;
+          foundJump = false; // Not enough words to actually split
+        }
+      }
+
       if (foundJump) {
-        // Words up to jump belong to the current verse
         aligned[verseIdx].spokenWords = spokenWords.slice(wordIdx, jumpToWordIdx);
         aligned[verseIdx].status = aligned[verseIdx].spokenWords.length > 0 ? 'recited' : 'skipped';
 
-        // Intermediate verses are skipped
         for (let v = verseIdx + 1; v < jumpToVerseIdx; v++) {
           if (!manuallySkipped.has(v)) {
             aligned[v].status = 'skipped';
@@ -300,7 +336,7 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
       }
     }
 
-    // 3. Compute ComparisonResults and handle penalty for revealed words
+    // 4. Compute ComparisonResults and handle penalty for revealed words
     for (let v = 0; v < verses.length; v++) {
       const item = aligned[v];
       const expectedText = verses[v].text;
@@ -319,8 +355,8 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
 
         item.result = res;
 
-        // Auto-advance if accuracy is high
-        if (item.status === 'reciting' && res.accuracy >= 80) {
+        // Auto-advance: lower threshold to 60% for faster transitions
+        if (item.status === 'reciting' && res.accuracy >= 60) {
           item.status = 'recited';
         }
       } else if (item.status === 'skipped') {
@@ -450,6 +486,8 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
   };
 
   const handleFinish = () => {
+    // Play completion sound effect
+    if (soundEnabled) audioFeedback.playCompletion();
     // Generate final results record
     const finalResults: Record<number, ComparisonResult> = {};
     alignedVerses.forEach((item) => {
@@ -503,7 +541,13 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
   const finishedCount = alignedVerses.filter(item => item.status === 'recited' || item.status === 'skipped').length;
   const progressPercentage = (finishedCount / totalVerses) * 100;
   
-  const currentFullSpokenText = (sessionSpokenText + ' ' + currentSpokenText).trim();
+  const currentFullSpokenTextRaw = (sessionSpokenText + ' ' + currentSpokenText).trim();
+  // Limit displayed spoken text to last ~20 words to keep the box compact (max ~3 lines)
+  const currentFullSpokenWords = currentFullSpokenTextRaw.split(/\s+/).filter(Boolean);
+  const MAX_DISPLAY_WORDS = 20;
+  const currentFullSpokenText = currentFullSpokenWords.length > MAX_DISPLAY_WORDS
+    ? '… ' + currentFullSpokenWords.slice(-MAX_DISPLAY_WORDS).join(' ')
+    : currentFullSpokenTextRaw;
 
   return (
     <div className="w-full max-w-3xl mx-auto flex flex-col gap-6 p-4 md:p-6 dir-rtl text-right select-none min-h-[85vh] pb-36 md:pb-32">
@@ -743,16 +787,16 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
 
       {/* Floating/Fixed Bottom Control Panel */}
       <div className="fixed bottom-16 md:bottom-0 left-0 right-0 bg-background/90 backdrop-blur-md border-t py-4 px-6 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.15)] z-20 flex flex-col gap-2.5 items-center">
-        {/* Real-time Spoken Text Box */}
+        {/* Real-time Spoken Text Box — limited to ~3 lines max */}
         {isListening && (
           <div className="w-full max-w-lg bg-card/95 border border-primary/20 p-3.5 rounded-2xl shadow-lg flex items-center gap-3.5 animate-slide-up mb-1 backdrop-blur-md">
             <div className="relative flex items-center justify-center">
               <span className="absolute w-2.5 h-2.5 rounded-full bg-red-500 animate-ping" />
               <span className="w-2.5 h-2.5 rounded-full bg-red-600" />
             </div>
-            <div className="flex-1 text-right flex flex-col gap-0.5">
+            <div className="flex-1 text-right flex flex-col gap-0.5 overflow-hidden">
               <span className="text-[9px] text-muted-foreground font-sans font-black tracking-wider uppercase">الكلمات المسموعة حالياً (مباشر):</span>
-              <p className="text-sm font-bold font-arabic text-foreground leading-relaxed min-h-[20px]">
+              <p className="text-sm font-bold font-arabic text-foreground leading-relaxed min-h-[20px] max-h-[4.5rem] overflow-hidden">
                 {currentFullSpokenText || <span className="text-muted-foreground/45 font-sans text-xs font-semibold">تكلم الآن، جاري الاستماع...</span>}
               </p>
             </div>

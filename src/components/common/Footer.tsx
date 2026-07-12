@@ -14,7 +14,7 @@ const quickLinks = [
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-border/50 bg-card mt-auto">
+    <footer className="border-t border-border/50 bg-card mt-auto pb-20 md:pb-0">
       <div className="container-motoon py-10 md:py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
 
@@ -86,23 +86,23 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 pt-6 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
-          <p className="flex items-center gap-1.5">
+        <div className="mt-8 pt-6 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+          <p className="flex items-center gap-1.5 text-center md:text-right">
             © {year} منصة متون. جميع الحقوق محفوظة.
           </p>
-          <div className="flex items-center gap-4">
-            <p className="flex items-center gap-1 text-xs">
-              صُنع بـ <Heart className="h-3 w-3 text-red-500 fill-current" /> لخدمة طلاب العلم
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <p className="text-xs text-center md:text-right">
+              إن يك صوابا فمن الله، وإن يكن خطأ فمني ومن الشيطان
             </p>
-            <span className="text-border">|</span>
+            <span className="hidden md:inline text-border">|</span>
             <a
               href="https://www.beshirswed.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors font-semibold"
+              className="flex items-center gap-1.5 text-xs font-bold text-white bg-gradient-to-r from-primary to-primary/80 px-4 py-1.5 rounded-full shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5"
             >
-              تم التطوير بواسطة <span className="text-primary font-bold">بَشِير</span>
-              <ExternalLink className="h-2.5 w-2.5" />
+              تم التطوير بواسطة <span className="text-white text-sm">بَشِير</span>
+              <ExternalLink className="h-3 w-3" />
             </a>
           </div>
         </div>
