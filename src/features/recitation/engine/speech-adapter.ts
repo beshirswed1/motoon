@@ -2,12 +2,28 @@
  * speech-adapter.ts — Module 6: Speech Recognition Adapter
  *
  * Thin wrapper around the Web Speech API that emits individual
- * NEW words as they are recognized. The adapter diffs each
- * incoming transcript against what was previously emitted,
- * firing the onNewWord callback only for genuinely new words.
+ * NEW words as they are recognized. Uses a "finals-first" strategy:
+ *
+ * - Words from FINAL results (isFinal=true) are emitted immediately.
+ *   These are confirmed by the browser and won't change.
+ * - Words from INTERIM results are NEVER emitted directly. Instead,
+ *   they are debounced: if interim words stabilize for DEBOUNCE_MS
+ *   without a final result arriving, they are emitted as a fallback.
+ *   This prevents partial Arabic words (ع, ن, مص) from being
+ *   evaluated by the state machine.
  */
 
-import { normalizeWord } from './normalizer';
+// ─── Constants ───────────────────────────────────────────────────────────────
+
+/**
+ * How long (ms) to wait for interim words to stabilize before emitting them.
+ * 600ms is long enough that the browser will almost always finalize the result
+ * before this timer fires (making it a pure safety net), yet short enough
+ * that if the browser IS slow, the user doesn't feel a huge lag.
+ */
+const DEBOUNCE_MS = 600;
+
+
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -27,11 +43,12 @@ export class SpeechAdapter {
   private isActive = false;
   private opts: SpeechAdapterOptions | null = null;
 
-  // Track emitted words to detect new ones
+  // Track emitted words count and session state in the current session
   private emittedWordCount = 0;
-  private accumulatedFinalText = '';
-  private finalParts: string[] = [];
-  private currentInterim = '';
+  private currentSessionWords: string[] = [];
+
+  // Debounce state for interim words (safety net)
+  private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
   /** Check if Web Speech API is available */
   isSupported(): boolean {
@@ -52,9 +69,8 @@ export class SpeechAdapter {
 
     this.opts = opts;
     this.emittedWordCount = 0;
-    this.accumulatedFinalText = '';
-    this.finalParts = [];
-    this.currentInterim = '';
+    this.currentSessionWords = [];
+    this.clearDebounce();
     this.isActive = true;
 
     this.initRecognition();
@@ -70,6 +86,8 @@ export class SpeechAdapter {
   /** Stop listening and clean up. */
   stop(): void {
     this.isActive = false;
+    // Flush any pending debounced words before stopping
+    this.flushPendingWords();
     if (this.recognition) {
       try {
         this.recognition.stop();
@@ -82,12 +100,43 @@ export class SpeechAdapter {
   /** Reset the word tracking state (for session restart). */
   reset(): void {
     this.emittedWordCount = 0;
-    this.accumulatedFinalText = '';
-    this.finalParts = [];
-    this.currentInterim = '';
+    this.currentSessionWords = [];
+    this.clearDebounce();
   }
 
   // ─── Private ─────────────────────────────────────────────────────────
+
+  /** Cancel the debounce timer without emitting */
+  private clearDebounce(): void {
+    if (this.debounceTimer !== null) {
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = null;
+    }
+  }
+
+  /**
+   * Flush any pending interim words immediately.
+   */
+  private flushPendingWords(): void {
+    this.clearDebounce();
+    this.emitNewWords();
+  }
+
+  /**
+   * Compute and emit any words that are new in the current session.
+   */
+  private emitNewWords(): void {
+    if (!this.opts?.onNewWord) return;
+
+    // Clamp emittedWordCount to not exceed current session words
+    this.emittedWordCount = Math.min(this.emittedWordCount, this.currentSessionWords.length);
+
+    const newWords = this.currentSessionWords.slice(this.emittedWordCount);
+    for (const word of newWords) {
+      this.opts.onNewWord(word);
+      this.emittedWordCount++;
+    }
+  }
 
   private initRecognition(): void {
     const SR =
@@ -121,14 +170,12 @@ export class SpeechAdapter {
     };
 
     this.recognition.onend = () => {
-      // Accumulate final text before restart
-      const currentFinal = this.finalParts.join(' ').trim();
-      if (currentFinal) {
-        this.accumulatedFinalText +=
-          (this.accumulatedFinalText ? ' ' : '') + currentFinal;
-      }
-      this.finalParts = [];
-      this.currentInterim = '';
+      // Flush any pending interim words before session ends
+      this.flushPendingWords();
+
+      // Reset emittedWordCount for the next session
+      this.emittedWordCount = 0;
+      this.currentSessionWords = [];
 
       // Auto-restart if still active
       if (this.isActive) {
@@ -146,8 +193,10 @@ export class SpeechAdapter {
     try {
       // Small delay to avoid rapid restart loops
       setTimeout(() => {
-        if (this.isActive && this.recognition) {
+        if (this.isActive) {
           try {
+            // Recreate SpeechRecognition to guarantee a fresh state
+            this.initRecognition();
             this.recognition.start();
           } catch (_e) {
             // Failed to restart — stop gracefully
@@ -163,76 +212,54 @@ export class SpeechAdapter {
 
   /**
    * Handle a speech recognition result event.
-   * Build the full transcript, then emit any NEW words.
+   *
+   * Strategy — "finals-first":
+   * 1. Re-build the full session word list from event.results.
+   * 2. If a final result segment is present, emit new words immediately.
+   * 3. If only interim segments are updated, schedule a debounce to emit them later.
    */
   private handleResult(event: any): void {
-    const newFinalParts: string[] = [];
-    let latestInterim = '';
+    const sessionWords: string[] = [];
+    let hasFinal = false;
 
     for (let i = 0; i < event.results.length; i++) {
       const result = event.results[i];
-      const text = result[0].transcript.trim();
+      const text: string = result[0].transcript.trim();
       if (!text) continue;
 
+      const words = text.split(/\s+/).filter(Boolean);
+      sessionWords.push(...words);
+
       if (result.isFinal) {
-        newFinalParts.push(text);
-      } else {
-        latestInterim = text;
+        hasFinal = true;
       }
     }
 
-    this.finalParts = newFinalParts;
-    this.currentInterim = latestInterim;
+    this.currentSessionWords = sessionWords;
 
-    // Build full transcript
-    const parts: string[] = [];
-    if (this.accumulatedFinalText) parts.push(this.accumulatedFinalText);
-    const sessionFinal = this.finalParts.join(' ').trim();
-    if (sessionFinal) parts.push(sessionFinal);
-    if (this.currentInterim) parts.push(this.currentInterim);
-
-    const fullTranscript = parts.join(' ');
-    const allWords = fullTranscript
-      .split(/\s+/)
-      .filter((w) => w.length > 0);
-
-    // Emit only NEW words (words we haven't emitted before)
-    this.emitNewWords(allWords);
+    if (hasFinal) {
+      // Cancel any pending debounce — finals supersede interim guesses
+      this.clearDebounce();
+      this.emitNewWords();
+    } else {
+      // Schedule a debounce for interim words
+      this.scheduleInterimDebounce();
+    }
   }
 
   /**
-   * Compare current word list against previously emitted count.
-   * Only fire onNewWord for words beyond what we've already sent.
-   *
-   * We also do basic deduplication: if a new word is identical
-   * (after normalization) to the previous word, skip it.
+   * Schedule a debounce for interim words.
+   * When the timer fires, it re-computes what's genuinely new
+   * and emits only truly new words.
    */
-  private emitNewWords(allWords: string[]): void {
-    if (!this.opts?.onNewWord) return;
-
-    // Process words from the last emitted position onward
-    while (this.emittedWordCount < allWords.length) {
-      const word = allWords[this.emittedWordCount];
-      const norm = normalizeWord(word);
-
-      // Skip empty words after normalization
-      if (!norm) {
-        this.emittedWordCount++;
-        continue;
-      }
-
-      // Basic consecutive deduplication
-      if (this.emittedWordCount > 0) {
-        const prevWord = allWords[this.emittedWordCount - 1];
-        const prevNorm = normalizeWord(prevWord);
-        if (norm === prevNorm) {
-          this.emittedWordCount++;
-          continue;
-        }
-      }
-
-      this.opts.onNewWord(word);
-      this.emittedWordCount++;
+  private scheduleInterimDebounce(): void {
+    // Reset the timer on each new interim event
+    if (this.debounceTimer !== null) {
+      clearTimeout(this.debounceTimer);
     }
+    this.debounceTimer = setTimeout(() => {
+      this.debounceTimer = null;
+      this.emitNewWords();
+    }, DEBOUNCE_MS);
   }
 }

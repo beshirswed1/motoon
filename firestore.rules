@@ -151,6 +151,12 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    match /favorites/{favoriteId} {
+      allow read: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuthenticated() && (request.resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isAuthenticated() && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+
     match /notifications/{notificationId} {
       allow read: if isNotDeleted(resource) && isOwner(resource.data.userId);
       

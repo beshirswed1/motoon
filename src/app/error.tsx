@@ -34,12 +34,10 @@ export default function RootError({ error, reset }: ErrorPageProps) {
           حصلت مشكلة غير متوقعة أثناء معالجة طلبك. يرجى إعادة المحاولة أو العودة إلى الصفحة الرئيسية.
         </p>
 
-        {/* Error Message Details */}
-        {error && (
-          <div className="w-full bg-muted/65 border rounded-2xl p-4 mb-6 text-right text-xs text-destructive font-mono truncate max-h-24 overflow-y-auto">
-            <span className="font-bold">تفاصيل الخطأ:</span> {error.message || 'خطأ غير معروف'}
-          </div>
-        )}
+        {/* General Guidance instead of detailed technical error details */}
+        <div className="w-full bg-muted/65 border rounded-2xl p-4 mb-6 text-center text-xs text-muted-foreground font-arabic leading-relaxed">
+          نعتذر عن هذا الخلل. قد يكون هناك انقطاع مؤقت في الاتصال أو مشكلة في إعدادات الميكروفون والصلاحيات. يرجى التأكد من اتصال الإنترنت وإذن الميكروفون ثم إعادة المحاولة.
+        </div>
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3 w-full">

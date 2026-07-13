@@ -47,6 +47,7 @@ export function MemorizeView({ book, verses, initialProgress: serverProgress, us
   // Daily Streak (mocked or can be fetched from user stats if available)
   const streakCount = 5; // Example streak
   const [streakBonusXP, setStreakBonusXP] = useState<number>(0);
+  const [showResetProgressConfirm, setShowResetProgressConfirm] = useState(false);
 
   // Group verses by status
   const queues = useMemo(() => {
@@ -197,11 +198,12 @@ export function MemorizeView({ book, verses, initialProgress: serverProgress, us
   };
 
   // Reset progress logic (useful for testing or starting over)
-  const handleResetProgress = async () => {
-    if (!window.confirm('هل أنت متأكد من رغبتك في إعادة ضبط تقدمك في هذا المتن بالكامل؟ لا يمكن التراجع عن هذا الإجراء.')) {
-      return;
-    }
+  const handleResetProgress = () => {
+    setShowResetProgressConfirm(true);
+  };
 
+  const handleResetProgressConfirm = async () => {
+    setShowResetProgressConfirm(false);
     try {
       const bookProgress = localProgress.filter((p) => p.bookId === book.id);
       for (const prog of bookProgress) {
@@ -348,6 +350,37 @@ export function MemorizeView({ book, verses, initialProgress: serverProgress, us
             </Button>
           )}
         </div>
+
+        {/* Custom Reset Progress Confirmation Modal */}
+        {showResetProgressConfirm && (
+          <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+            <div className="bg-card border border-muted p-6 rounded-3xl max-w-sm w-full shadow-2xl flex flex-col items-center text-center animate-in zoom-in-95 duration-200" dir="rtl">
+              <div className="h-12 w-12 rounded-2xl bg-destructive/10 text-destructive flex items-center justify-center mb-4">
+                <RotateCcw className="h-6 w-6" />
+              </div>
+              <h3 className="text-lg font-bold text-foreground mb-2 font-arabic">إعادة ضبط تقدم الحفظ</h3>
+              <p className="text-sm text-muted-foreground mb-6 font-arabic leading-relaxed">
+                هل أنت متأكد من رغبتك في إعادة ضبط تقدمك في هذا المتن بالكامل؟ لا يمكن التراجع عن هذا الإجراء.
+              </p>
+              <div className="flex gap-3 w-full">
+                <Button
+                  variant="destructive"
+                  onClick={handleResetProgressConfirm}
+                  className="flex-1 font-bold rounded-xl py-4 text-xs"
+                >
+                  إعادة ضبط
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowResetProgressConfirm(false)}
+                  className="flex-1 font-bold rounded-xl py-4 text-xs"
+                >
+                  إلغاء
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

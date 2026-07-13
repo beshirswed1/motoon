@@ -219,6 +219,7 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
   const engine = useRecitationEngine(verses);
   const activeVerseRef = useRef<HTMLDivElement | null>(null);
   const [visibleCount, setVisibleCount] = useState(30);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   // ─── Auto-scroll to active verse ───────────────────────────────────
   useEffect(() => {
@@ -249,7 +250,7 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 300
       ) {
-        setVisibleCount((prev) => Math.min(prev + 30, verses.length));
+        setVisibleCount((prev) => Math.max(prev + 30, verses.length));
       }
     };
     window.addEventListener('scroll', handleScroll);
@@ -258,9 +259,7 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
 
   // ─── Handlers ─────────────────────────────────────────────────────
   const handleReset = () => {
-    if (window.confirm('هل تريد بالتأكيد إعادة بدء جلسة التسميع؟')) {
-      engine.reset();
-    }
+    setShowResetConfirm(true);
   };
 
   const handleFinish = () => {
@@ -468,6 +467,40 @@ export const RecitationInterface: React.FC<RecitationInterfaceProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Custom Confirmation Modal */}
+      {showResetConfirm && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-card border border-muted p-6 rounded-3xl max-w-sm w-full shadow-2xl flex flex-col items-center text-center animate-in zoom-in-95 duration-200" dir="rtl">
+            <div className="h-12 w-12 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4">
+              <AlertTriangle className="h-6 w-6" />
+            </div>
+            <h3 className="text-lg font-bold text-foreground mb-2 font-arabic">إعادة ضبط التسميع</h3>
+            <p className="text-sm text-muted-foreground mb-6 font-arabic leading-relaxed">
+              هل تريد بالتأكيد إعادة بدء جلسة التسميع؟ سيؤدي هذا إلى تصفير التقدم الحالي.
+            </p>
+            <div className="flex gap-3 w-full">
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  engine.reset();
+                  setShowResetConfirm(false);
+                }}
+                className="flex-1 font-bold rounded-xl py-4 text-xs"
+              >
+                نعم، أعد البدء
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowResetConfirm(false)}
+                className="flex-1 font-bold rounded-xl py-4 text-xs"
+              >
+                إلغاء
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
