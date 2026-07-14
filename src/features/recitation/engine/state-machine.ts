@@ -117,13 +117,34 @@ export class RecitationStateMachine {
     }
 
     const previousVerseIndex = this.currentVerseIndex;
+    const initialPointer = this.pointer;
+    const expectedWord = this.states[this.pointer].text;
+    const currentVerse = this.states[this.pointer].verseIndex;
+
+    console.log(
+      `[${new Date().toISOString()}] [RecitationStateMachine] processSpokenWord() START:\n` +
+      `  spokenWord: "${spoken}"\n` +
+      `  pointer: ${initialPointer}\n` +
+      `  expectedWord: "${expectedWord}"\n` +
+      `  currentVerse: ${currentVerse}`
+    );
+
+    // --- Helper function to log before returning ---
+    const logAndReturn = (result: ProcessResult): ProcessResult => {
+      console.log(
+        `[${new Date().toISOString()}] [RecitationStateMachine] processSpokenWord() END:\n` +
+        `  newPointer: ${this.pointer}\n` +
+        `  action: "${result.action}"`
+      );
+      return result;
+    };
 
     // --- Check if spoken word matches the CURRENT expected word ---
     const currentState = this.states[this.pointer];
     const currentMatch = matchWords(currentState.text, spoken);
 
     if (currentMatch.decision === 'correct') {
-      return this.markCorrect(this.pointer, spoken, currentMatch, previousVerseIndex);
+      return logAndReturn(this.markCorrect(this.pointer, spoken, currentMatch, previousVerseIndex));
     }
 
     // --- Lookahead: check if spoken word matches a FUTURE expected word ---
@@ -152,12 +173,12 @@ export class RecitationStateMachine {
         this.pointer = futureIdx + 1;
         this.advanceToNextMeaningfulWord();
 
-        return {
+        return logAndReturn({
           affectedIndices: affected,
           action: 'skipped_ahead',
           newVerseStarted: this.currentVerseIndex !== previousVerseIndex,
           previousVerseIndex,
-        };
+        });
       }
     }
 
@@ -168,12 +189,12 @@ export class RecitationStateMachine {
       if (prevState.status === 'correct') {
         const prevMatch = matchWords(prevState.text, spoken);
         if (prevMatch.decision === 'correct') {
-          return {
+          return logAndReturn({
             affectedIndices: [],
             action: 'repeated',
             newVerseStarted: false,
             previousVerseIndex,
-          };
+          });
         }
       }
     }
@@ -189,12 +210,12 @@ export class RecitationStateMachine {
       this.pointer++;
       this.advanceToNextMeaningfulWord();
 
-      return {
+      return logAndReturn({
         affectedIndices: affected,
         action: 'incorrect',
         newVerseStarted: this.currentVerseIndex !== previousVerseIndex,
         previousVerseIndex,
-      };
+      });
     }
 
     // Uncertain match — treat as incorrect but with the uncertain similarity
@@ -206,12 +227,12 @@ export class RecitationStateMachine {
     this.pointer++;
     this.advanceToNextMeaningfulWord();
 
-    return {
+    return logAndReturn({
       affectedIndices: affected,
       action: 'incorrect',
       newVerseStarted: this.currentVerseIndex !== previousVerseIndex,
       previousVerseIndex,
-    };
+    });
   }
 
   /** Manually skip the current word (mark as missed). */

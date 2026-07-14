@@ -2,26 +2,20 @@
  * speech-adapter.ts — Module 6: Speech Recognition Adapter
  *
  * Thin wrapper around the Web Speech API that emits individual
- * NEW words as they are recognized. Uses a "finals-first" strategy:
+ * NEW words as they are recognized.
  *
- * - Words from FINAL results (isFinal=true) are emitted immediately.
- *   These are confirmed by the browser and won't change.
- * - Words from INTERIM results are NEVER emitted directly. Instead,
- *   they are debounced: if interim words stabilize for DEBOUNCE_MS
- *   without a final result arriving, they are emitted as a fallback.
- *   This prevents partial Arabic words (ع, ن, مص) from being
- *   evaluated by the state machine.
+ * Design principles:
+ * - We maintain `sessionEmittedWords`, tracking all words ever emitted in the session.
+ * - Within a single SpeechRecognition instance, we track `instanceTotalEmittedCount`.
+ * - We only emit words at indices >= `instanceTotalEmittedCount`, making the engine
+ *   completely immune to Android Chrome changing past interim words.
+ * - On restart, we calculate an initial skip to handle cumulative vs fresh transcripts.
  */
+
 import { normalizeWord } from './normalizer';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-/**
- * How long (ms) to wait for interim words to stabilize before emitting them.
- * 600ms is long enough that the browser will almost always finalize the result
- * before this timer fires (making it a pure safety net), yet short enough
- * that if the browser IS slow, the user doesn't feel a huge lag.
- */
 const DEBOUNCE_MS = 600;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -41,13 +35,29 @@ export class SpeechAdapter {
   private recognition: any = null;
   private isActive = false;
   private opts: SpeechAdapterOptions | null = null;
+  private recognitionSessionId = '';
+  private emittedWordsCounter = 0;
 
-  // Track emitted words and session state in the current session
-  private emittedWords: string[] = [];
-  private currentSessionWords: string[] = [];
+  /**
+   * All words emitted during the entire active session (survives restarts).
+   */
+  private sessionEmittedWords: string[] = [];
 
-  // Debounce state for interim words (safety net)
+  /**
+   * Words emitted so far from the CURRENT SpeechRecognition instance.
+   */
+  private instanceTotalEmittedCount = 0;
+  private isInstanceInitialized = false;
+
+  /**
+   * Pending interim words from the latest non-final result waiting for debounce.
+   */
+  private pendingInterimWords: string[] = [];
+
+  /** Debounce timer for interim words */
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+  // ─── Public API ─────────────────────────────────────────────────────
 
   /** Check if Web Speech API is available */
   isSupported(): boolean {
@@ -58,23 +68,38 @@ export class SpeechAdapter {
 
   /** Start listening. Words will be emitted via opts.onNewWord. */
   async start(opts: SpeechAdapterOptions): Promise<void> {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] [SpeechAdapter] start() called`);
     if (!this.isSupported()) {
       throw new Error('Web Speech API is not supported in this browser.');
     }
 
-    if (this.isActive) return;
+    if (this.isActive) {
+      console.log(`[${timestamp}] [SpeechAdapter] start() aborted - already active`);
+      return;
+    }
 
     this.opts = opts;
-    this.emittedWords = [];
-    this.currentSessionWords = [];
+    this.sessionEmittedWords = [];
+    this.isInstanceInitialized = false;
+    this.instanceTotalEmittedCount = 0;
+    this.pendingInterimWords = [];
+    this.emittedWordsCounter = 0;
     this.clearDebounce();
     this.isActive = true;
 
     this.initRecognition();
 
     try {
+      console.log(
+        `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] calling recognition.start()`
+      );
       this.recognition.start();
     } catch (err) {
+      console.error(
+        `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] recognition.start() threw error:`,
+        err
+      );
       this.isActive = false;
       throw err;
     }
@@ -82,11 +107,17 @@ export class SpeechAdapter {
 
   /** Stop listening and clean up. */
   stop(): void {
+    const timestamp = new Date().toISOString();
+    console.log(
+      `[${timestamp}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] stop() called`
+    );
     this.isActive = false;
-    // Flush any pending debounced words before stopping
-    this.flushPendingWords();
+    this.flushPendingInterim();
     if (this.recognition) {
       try {
+        console.log(
+          `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] calling recognition.stop()`
+        );
         this.recognition.stop();
       } catch (_e) {
         // Ignore — may already be stopped
@@ -94,10 +125,17 @@ export class SpeechAdapter {
     }
   }
 
-  /** Reset the word tracking state (for session restart). */
+  /** Reset the word tracking state (for full session restart). */
   reset(): void {
-    this.emittedWords = [];
-    this.currentSessionWords = [];
+    const timestamp = new Date().toISOString();
+    console.log(
+      `[${timestamp}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] reset() called`
+    );
+    this.sessionEmittedWords = [];
+    this.isInstanceInitialized = false;
+    this.instanceTotalEmittedCount = 0;
+    this.pendingInterimWords = [];
+    this.emittedWordsCounter = 0;
     this.clearDebounce();
   }
 
@@ -112,32 +150,44 @@ export class SpeechAdapter {
   }
 
   /**
-   * Flush any pending interim words immediately.
+   * Emit a new word and log it as requested.
    */
-  private flushPendingWords(): void {
-    this.clearDebounce();
-    this.emitInterimWords();
+  private emitWord(word: string, reason: 'FINAL' | 'INTERIM'): void {
+    this.emittedWordsCounter++;
+    this.sessionEmittedWords.push(word);
+    console.log(
+      `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] EMIT -> #${this.emittedWordsCounter} ${word} (reason = ${reason})`
+    );
+    this.opts?.onNewWord(word);
   }
 
   /**
-   * Align currentSessionWords with emittedWords and emit any new interim words.
+   * Flush pending interim words immediately.
+   * Called ONLY on explicit stop() — never from onend.
    */
-  private emitInterimWords(): void {
-    if (!this.opts?.onNewWord || this.currentSessionWords.length === 0) return;
-
-    const divIdx = this.findDivergentIndex(this.emittedWords, this.currentSessionWords);
-    const newInterimWords = this.currentSessionWords.slice(divIdx);
-
-    if (newInterimWords.length > 0) {
-      for (const word of newInterimWords) {
-        this.opts.onNewWord(word);
+  private flushPendingInterim(): void {
+    this.clearDebounce();
+    if (this.pendingInterimWords.length > 0 && this.opts?.onNewWord) {
+      console.log(
+        `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] flushPendingInterim() flushing:`,
+        this.pendingInterimWords
+      );
+      for (const word of this.pendingInterimWords) {
+        this.emitWord(word, 'INTERIM');
       }
-      this.emittedWords = [...this.emittedWords.slice(0, divIdx), ...newInterimWords];
+      this.instanceTotalEmittedCount += this.pendingInterimWords.length;
+      this.pendingInterimWords = [];
     }
   }
 
   private initRecognition(): void {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+
+    this.recognitionSessionId = Math.random().toString(36).substring(2, 9).toUpperCase();
+    const timestamp = new Date().toISOString();
+    console.log(
+      `[${timestamp}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] initRecognition() created new SpeechRecognition instance`
+    );
 
     this.recognition = new SR();
     this.recognition.continuous = true;
@@ -145,7 +195,18 @@ export class SpeechAdapter {
     this.recognition.lang = 'ar-SA';
     this.recognition.maxAlternatives = 1;
 
+    this.recognition.onstart = () => {
+      console.log(
+        `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] recognition.onstart event fired`
+      );
+    };
+
     this.recognition.onresult = (event: any) => {
+      const ts = new Date().toISOString();
+      console.log(
+        `[${ts}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] recognition.onresult event fired`
+      );
+      
       this.handleResult(event);
     };
 
@@ -154,11 +215,18 @@ export class SpeechAdapter {
 
       // Auto-restart on transient errors
       if (errorType === 'network' || errorType === 'no-speech') {
+        console.log(
+          `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] transient error "${errorType}" - restarting recognition`
+        );
         if (this.isActive) {
           this.restartRecognition();
         }
         return;
       }
+
+      console.warn(
+        `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] recognition.onerror event fired. Error: ${errorType}`
+      );
 
       if (this.opts?.onError) {
         this.opts.onError(errorType);
@@ -166,17 +234,17 @@ export class SpeechAdapter {
     };
 
     this.recognition.onend = () => {
-      // Flush any pending interim words before session ends
-      this.flushPendingWords();
-
-      // Reset tracking state for the next session (only if not auto-restarting)
-      if (!this.isActive) {
-        this.emittedWords = [];
-      }
-      this.currentSessionWords = [];
+      console.log(
+        `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] recognition.onend event fired`
+      );
+      this.clearDebounce();
+      this.pendingInterimWords = [];
 
       // Auto-restart if still active
       if (this.isActive) {
+        console.log(
+          `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] adapter is active - initiating restartRecognition`
+        );
         this.restartRecognition();
         return;
       }
@@ -188,19 +256,51 @@ export class SpeechAdapter {
   }
 
   private restartRecognition(): void {
+    const timestamp = new Date().toISOString();
+    console.log(
+      `[${timestamp}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] restartRecognition() called`
+    );
     try {
       // Small delay to avoid rapid restart loops
       setTimeout(() => {
         if (this.isActive) {
           try {
-            // Recreate SpeechRecognition to guarantee a fresh state
+            // Detach old recognition handlers to prevent ghost events.
+            const oldRecognition = this.recognition;
+            if (oldRecognition) {
+              console.log(
+                `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] detaching event listeners from old recognition instance`
+              );
+              oldRecognition.onresult = null;
+              oldRecognition.onerror = null;
+              oldRecognition.onend = null;
+            }
+
+            // Create fresh instance
             this.initRecognition();
+
+            // Clear instance tracking
+            this.isInstanceInitialized = false;
+            this.instanceTotalEmittedCount = 0;
+            this.pendingInterimWords = [];
+
+            console.log(
+              `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] calling recognition.start() inside restartRecognition`
+            );
             this.recognition.start();
           } catch (_e) {
+            console.error(
+              `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] restart failed:`,
+              _e
+            );
             // Failed to restart — stop gracefully
             this.isActive = false;
             if (this.opts?.onEnd) this.opts.onEnd();
           }
+        } else {
+          console.log(
+            `[${new Date().toISOString()}] [SpeechAdapter] restartRecognition() timeout fired but adapter is no longer active`
+          );
         }
       }, 200);
     } catch (_e) {
@@ -209,119 +309,117 @@ export class SpeechAdapter {
   }
 
   /**
-   * Find the first index where arr1 and arr2 diverge (differ after normalization).
+   * Determine how many words to skip at the start of a NEW SpeechRecognition instance.
+   * Differentiates between:
+   * - Cumulative restarts (Android Chrome): Redelivers the entire session history.
+   * - Fresh restarts (Desktop/Samsung): Starts with only new words.
    */
-  private findDivergentIndex(arr1: string[], arr2: string[]): number {
-    let i = 0;
-    while (
-      i < arr1.length &&
-      i < arr2.length &&
-      normalizeWord(arr1[i]) === normalizeWord(arr2[i])
-    ) {
-      i++;
+  private calculateInitialSkip(instanceAllWords: string[]): number {
+    if (this.sessionEmittedWords.length === 0 || instanceAllWords.length === 0) {
+      return 0;
     }
-    return i;
-  }
 
-  /**
-   * Find the length of the longest suffix of arr1 that matches a prefix of arr2.
-   */
-  private findOverlap(arr1: string[], arr2: string[]): number {
-    const maxLen = Math.min(arr1.length, arr2.length);
-    for (let len = maxLen; len > 0; len--) {
-      let match = true;
-      for (let i = 0; i < len; i++) {
-        const w1 = normalizeWord(arr1[arr1.length - len + i]);
-        const w2 = normalizeWord(arr2[i]);
-        if (w1 !== w2) {
-          match = false;
-          break;
-        }
+    // Count how many of the first few words match the session history
+    const checkLen = Math.min(5, this.sessionEmittedWords.length, instanceAllWords.length);
+    let matchCount = 0;
+    for (let i = 0; i < checkLen; i++) {
+      if (normalizeWord(instanceAllWords[i]) === normalizeWord(this.sessionEmittedWords[i])) {
+        matchCount++;
       }
-      if (match) return len;
     }
+
+    // Heuristic for Cumulative:
+    // 1. Matches at least one word from the start (allowing for minor variations/errors).
+    // 2. Length is reasonably large compared to what we've seen (>= 40%).
+    const isPrefixMatching = matchCount > 0 && matchCount >= checkLen - 2;
+    const isLengthSimilar = instanceAllWords.length >= this.sessionEmittedWords.length * 0.4;
+
+    if (isPrefixMatching && isLengthSimilar) {
+      // It's a cumulative result! Skip the words we've already emitted.
+      return Math.min(this.sessionEmittedWords.length, instanceAllWords.length);
+    }
+
+    // Otherwise, treat as fresh result
     return 0;
   }
 
   /**
    * Handle a speech recognition result event.
    *
-   * Strategy — Index-by-index divergence alignment with sequential overlap merge:
-   * 1. Rebuild the clean transcript sequence by merging overlapping result segments.
-   * 2. Separate merged words into finalized and interim categories.
-   * 3. Process and emit new finalized words immediately.
-   * 4. Schedule/update the debounce for interim words.
+   * Strategy:
+   * - Maintain `instanceTotalEmittedCount` to track how many words we've emitted in this instance.
+   * - Iterate through new words ONLY (index >= instanceTotalEmittedCount).
+   * - This ignores any changes the engine makes to previous interim words, preventing duplicates.
    */
   private handleResult(event: any): void {
-    // Diagnostic logging to inspect actual speech recognition output on mobile devices
-    console.log(
-      '[SpeechAdapter] resultIndex:',
-      event.resultIndex,
-      'results:',
-      [...event.results].map((r: any) => ({
-        final: r.isFinal,
-        text: r[0].transcript,
-      }))
-    );
+    const instanceFinalWords: string[] = [];
+    const instanceInterimWords: string[] = [];
 
-    interface MergedWord {
-      text: string;
-      isFinal: boolean;
-    }
-
-    const mergedWords: MergedWord[] = [];
-
-    // Reconstruct the deduplicated session words list from the beginning of results
+    // 1. Reconstruct all words from the current instance's results
     for (let i = 0; i < event.results.length; i++) {
       const result = event.results[i];
       const text: string = result[0].transcript.trim();
       if (!text) continue;
 
       const words = text.split(/\s+/).filter(Boolean);
-      const mergedText = mergedWords.map((w) => w.text);
-      const overlap = this.findOverlap(mergedText, words);
-
-      const newWords = words.slice(overlap);
-      for (const word of newWords) {
-        mergedWords.push({
-          text: word,
-          isFinal: result.isFinal,
-        });
+      if (result.isFinal) {
+        instanceFinalWords.push(...words);
+      } else {
+        instanceInterimWords.push(...words);
       }
     }
 
-    // Extract finalized words list
-    const finalWords = mergedWords.filter((w) => w.isFinal).map((w) => w.text);
+    const instanceAllWords = [...instanceFinalWords, ...instanceInterimWords];
+    const F = instanceFinalWords.length;
+    const L = instanceAllWords.length;
 
-    // 1. Process and emit any new finalized words immediately
-    if (finalWords.length > 0) {
-      const divIdx = this.findDivergentIndex(this.emittedWords, finalWords);
-      const newFinalWords = finalWords.slice(divIdx);
+    // 2. Initialize instance skip count if this is the first result of a new instance
+    if (!this.isInstanceInitialized) {
+      this.instanceTotalEmittedCount = this.calculateInitialSkip(instanceAllWords);
+      this.isInstanceInitialized = true;
+      console.log(
+        `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] initialized instance with skip count: ${this.instanceTotalEmittedCount}`
+      );
+    }
 
-      if (newFinalWords.length > 0) {
-        for (const word of newFinalWords) {
-          this.opts?.onNewWord(word);
-        }
-        // Update emittedWords to represent the finalized state up to this point
-        this.emittedWords = [...this.emittedWords.slice(0, divIdx), ...newFinalWords];
+    console.log(
+      `[${new Date().toISOString()}] [SpeechAdapter] [SESSION ${this.recognitionSessionId}] handleResult: F=${F}, L=${L}, instanceTotalEmittedCount=${this.instanceTotalEmittedCount}\n` +
+      `  instanceAllWords: ${JSON.stringify(instanceAllWords)}`
+    );
+
+    const newFinalWordsToEmit: string[] = [];
+    const newInterimWordsToQueue: string[] = [];
+
+    // 3. Process ONLY words at indices we haven't emitted yet
+    for (let i = this.instanceTotalEmittedCount; i < L; i++) {
+      if (i < F) {
+        newFinalWordsToEmit.push(instanceAllWords[i]);
+      } else {
+        newInterimWordsToQueue.push(instanceAllWords[i]);
       }
     }
 
-    // 2. Schedule or update the debounce for interim words
-    const candidateWords = mergedWords.map((w) => w.text);
-    const hasInterim = mergedWords.some((w) => !w.isFinal);
+    // 4. Emit new final words immediately
+    if (newFinalWordsToEmit.length > 0) {
+      for (const word of newFinalWordsToEmit) {
+        this.emitWord(word, 'FINAL');
+      }
+      this.instanceTotalEmittedCount += newFinalWordsToEmit.length;
+    }
 
-    if (hasInterim) {
-      this.currentSessionWords = candidateWords;
+    // 5. Handle interim words with debounce
+    if (newInterimWordsToQueue.length > 0) {
+      this.pendingInterimWords = newInterimWordsToQueue;
       this.scheduleInterimDebounce();
     } else {
       this.clearDebounce();
+      this.pendingInterimWords = [];
     }
   }
 
   /**
    * Schedule a debounce for interim words.
-   * When the timer fires, it calls emitInterimWords to output stabilized interim text.
+   * When the timer fires, emit the pending interim words and update counts.
    */
   private scheduleInterimDebounce(): void {
     if (this.debounceTimer !== null) {
@@ -329,7 +427,13 @@ export class SpeechAdapter {
     }
     this.debounceTimer = setTimeout(() => {
       this.debounceTimer = null;
-      this.emitInterimWords();
+      if (this.pendingInterimWords.length > 0 && this.opts?.onNewWord) {
+        for (const word of this.pendingInterimWords) {
+          this.emitWord(word, 'INTERIM');
+        }
+        this.instanceTotalEmittedCount += this.pendingInterimWords.length;
+        this.pendingInterimWords = [];
+      }
     }, DEBOUNCE_MS);
   }
 }

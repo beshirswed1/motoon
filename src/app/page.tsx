@@ -12,7 +12,7 @@ import {
   BookOpen, Mic, Award, TrendingUp, Users, BookMarked,
   Trophy, Star, CheckCircle2, Brain, Shield, Zap,
   ArrowLeft, GraduationCap, Heart, ScrollText, Scale,
-  Languages, Landmark, Megaphone,
+  Languages, Landmark, Megaphone, MessageCircle, Send,
 } from 'lucide-react';
 
 
@@ -422,6 +422,49 @@ export default async function HomePage() {
               </Button>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ─── Contact CTA Card ──────────────────────── */}
+      <section className="py-16 section-padding bg-muted/30">
+        <div className="container-motoon">
+          <Link
+            href="/contact"
+            className="group relative block overflow-hidden rounded-3xl border border-border/50 bg-card p-8 md:p-12 hover:shadow-2xl hover:border-primary/30 transition-all duration-500"
+          >
+            {/* Background gradient on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            {/* Decorative pattern */}
+            <div className="absolute top-0 left-0 w-32 h-32 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 0L40 20L20 40L0 20Z' fill='none' stroke='%230F766E' stroke-width='1'/%3E%3C/svg%3E")`,
+            }} />
+            <div className="absolute bottom-0 right-0 w-32 h-32 opacity-[0.04] group-hover:opacity-[0.08] transition-opacity" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='10' fill='none' stroke='%23D4AF37' stroke-width='1'/%3E%3C/svg%3E")`,
+            }} />
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-10">
+              {/* Icon */}
+              <div className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-gradient-to-br from-primary/15 to-primary/5 dark:from-primary/20 dark:to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-primary/10">
+                <MessageCircle className="h-10 w-10 md:h-12 md:w-12 text-primary" />
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 text-center md:text-right">
+                <h2 className="text-2xl md:text-3xl font-black text-foreground mb-3">
+                  تواصل معنا
+                </h2>
+                <p className="text-muted-foreground leading-relaxed max-w-xl">
+                  لديك سؤال أو اقتراح؟ نحن هنا لمساعدتك. تواصل مع فريق متون وسنرد عليك في أقرب وقت.
+                </p>
+              </div>
+
+              {/* Arrow */}
+              <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:shadow-lg group-hover:shadow-primary/25 transition-all duration-500">
+                <Send className="h-6 w-6 text-primary group-hover:text-white transition-colors duration-500" />
+              </div>
+            </div>
+          </Link>
         </div>
       </section>
 

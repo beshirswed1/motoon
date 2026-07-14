@@ -123,6 +123,7 @@ export function useRecitationEngine(verses: Verse[]): RecitationEngine {
   // --- Handle a new spoken word from the speech adapter ---
   const handleNewWord = useCallback(
     (word: string) => {
+      console.log(`[${new Date().toISOString()}] [useRecitationEngine] ENGINE RECEIVED: word = "${word}"`);
       const machine = stateMachineRef.current;
       if (!machine) return;
 

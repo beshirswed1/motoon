@@ -5,6 +5,7 @@
 
 /* ── Google Fonts: IBM Plex Sans Arabic ──────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -359,6 +360,19 @@
   }
 }
 
+
+/* ── Hadith Quote Styling ──────────────────────────────── */
+.hadith-quote-text {
+  font-family: 'Amiri', 'Scheherazade New', 'IBM Plex Sans Arabic', serif;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* Shimmer keyframe */
+@keyframes shimmer {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(-100%); }
+}
 
 /* ── Print Styles ───────────────────────────────────────── */
 @media print {
