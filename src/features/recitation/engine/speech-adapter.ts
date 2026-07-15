@@ -27,7 +27,7 @@ import { normalizeWord } from './normalizer';
  * How long (ms) to wait for interim words to stabilize before emitting them.
  * This is a safety net — finals almost always arrive before this fires.
  */
-const DEBOUNCE_MS = 700;
+const DEBOUNCE_MS = 500;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
