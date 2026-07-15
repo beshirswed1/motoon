@@ -50,6 +50,13 @@ export interface ProcessResult {
 // Maximum forward lookahead when a spoken word doesn't match the current expected word
 const MAX_LOOKAHEAD = 2;
 
+// Maximum backward lookback (through a contiguous run of already-correct words)
+// when checking whether a spoken word is just a repeat of something already
+// confirmed. Must be >= the longest repeated phrase the STT engine tends to
+// re-emit (e.g. on Android, restarting recognition after a pause commonly
+// re-emits the last 1-2 words of the previous utterance).
+const MAX_LOOKBACK = 2;
+
 // ─── State Machine ───────────────────────────────────────────────────────────
 
 export class RecitationStateMachine {
@@ -88,10 +95,14 @@ export class RecitationStateMachine {
    * 1. If the current word is already past the end → ignore
    * 2. Compare spoken word against current expected word
    * 3. If match → mark correct, advance
-   * 4. If no match → lookahead up to MAX_LOOKAHEAD words:
+   * 4. If no match → check whether it's a REPEAT of a recently-confirmed
+   *    word (scanning back up to MAX_LOOKBACK through a contiguous run of
+   *    already-correct words) → ignore if so. This is checked before
+   *    lookahead so that a repeated word can never be misread as a
+   *    coincidental match with upcoming content.
+   * 5. If not a repeat → lookahead up to MAX_LOOKAHEAD words:
    *    - If match found → mark intermediate words as missed, matched word as correct
    *    - If no match → mark current as incorrect, advance
-   * 5. Handle repeated words (already-evaluated) → ignore
    */
   processSpokenWord(spoken: string): ProcessResult {
     const spokenNorm = normalizeWord(spoken);
@@ -117,34 +128,32 @@ export class RecitationStateMachine {
     }
 
     const previousVerseIndex = this.currentVerseIndex;
-    const initialPointer = this.pointer;
-    const expectedWord = this.states[this.pointer].text;
-    const currentVerse = this.states[this.pointer].verseIndex;
-
-    console.log(
-      `[${new Date().toISOString()}] [RecitationStateMachine] processSpokenWord() START:\n` +
-      `  spokenWord: "${spoken}"\n` +
-      `  pointer: ${initialPointer}\n` +
-      `  expectedWord: "${expectedWord}"\n` +
-      `  currentVerse: ${currentVerse}`
-    );
-
-    // --- Helper function to log before returning ---
-    const logAndReturn = (result: ProcessResult): ProcessResult => {
-      console.log(
-        `[${new Date().toISOString()}] [RecitationStateMachine] processSpokenWord() END:\n` +
-        `  newPointer: ${this.pointer}\n` +
-        `  action: "${result.action}"`
-      );
-      return result;
-    };
 
     // --- Check if spoken word matches the CURRENT expected word ---
     const currentState = this.states[this.pointer];
     const currentMatch = matchWords(currentState.text, spoken);
 
     if (currentMatch.decision === 'correct') {
-      return logAndReturn(this.markCorrect(this.pointer, spoken, currentMatch, previousVerseIndex));
+      return this.markCorrect(this.pointer, spoken, currentMatch, previousVerseIndex);
+    }
+
+    // --- Check for a repeat of a recently-confirmed word FIRST ---
+    // STT engines — especially on mobile, where recognition sessions restart
+    // far more often than on desktop — frequently re-emit the last word(s)
+    // of an utterance right after a restart. Scanning only one word back
+    // (the old behavior) misses repeats longer than a single word: once the
+    // first repeated word slips past, the "previous word" reference point
+    // shifts along with it and the check never catches up, which is what let
+    // a repeated 2-word phrase corrupt every word after it. Checking a small
+    // window here — before lookahead — means a repeat can never be
+    // misinterpreted as a coincidental match with upcoming content either.
+    if (this.matchesRecentWord(spoken)) {
+      return {
+        affectedIndices: [],
+        action: 'repeated',
+        newVerseStarted: false,
+        previousVerseIndex,
+      };
     }
 
     // --- Lookahead: check if spoken word matches a FUTURE expected word ---
@@ -173,29 +182,12 @@ export class RecitationStateMachine {
         this.pointer = futureIdx + 1;
         this.advanceToNextMeaningfulWord();
 
-        return logAndReturn({
+        return {
           affectedIndices: affected,
           action: 'skipped_ahead',
           newVerseStarted: this.currentVerseIndex !== previousVerseIndex,
           previousVerseIndex,
-        });
-      }
-    }
-
-    // --- Check for repeated word (already evaluated) ---
-    // Look backwards: if the spoken word matches the PREVIOUS word, ignore it
-    if (this.pointer > 0) {
-      const prevState = this.states[this.pointer - 1];
-      if (prevState.status === 'correct') {
-        const prevMatch = matchWords(prevState.text, spoken);
-        if (prevMatch.decision === 'correct') {
-          return logAndReturn({
-            affectedIndices: [],
-            action: 'repeated',
-            newVerseStarted: false,
-            previousVerseIndex,
-          });
-        }
+        };
       }
     }
 
@@ -210,12 +202,12 @@ export class RecitationStateMachine {
       this.pointer++;
       this.advanceToNextMeaningfulWord();
 
-      return logAndReturn({
+      return {
         affectedIndices: affected,
         action: 'incorrect',
         newVerseStarted: this.currentVerseIndex !== previousVerseIndex,
         previousVerseIndex,
-      });
+      };
     }
 
     // Uncertain match — treat as incorrect but with the uncertain similarity
@@ -227,12 +219,12 @@ export class RecitationStateMachine {
     this.pointer++;
     this.advanceToNextMeaningfulWord();
 
-    return logAndReturn({
+    return {
       affectedIndices: affected,
       action: 'incorrect',
       newVerseStarted: this.currentVerseIndex !== previousVerseIndex,
       previousVerseIndex,
-    });
+    };
   }
 
   /** Manually skip the current word (mark as missed). */
@@ -358,6 +350,40 @@ export class RecitationStateMachine {
       newVerseStarted: this.currentVerseIndex !== previousVerseIndex,
       previousVerseIndex,
     };
+  }
+
+  /**
+   * Check whether `spoken` matches one of the last MAX_LOOKBACK
+   * already-confirmed-correct words, scanning backward from the pointer
+   * through a *contiguous* run of 'correct' words (punctuation is skipped
+   * over, not counted as a break). Stops as soon as it hits a word that
+   * isn't 'correct', since only a run of just-confirmed words represents
+   * "things the user might still be finishing saying" — an arbitrary word
+   * from much earlier in the recitation should never be treated as a repeat.
+   */
+  private matchesRecentWord(spoken: string): boolean {
+    let checked = 0;
+    let idx = this.pointer - 1;
+
+    while (idx >= 0 && checked < MAX_LOOKBACK) {
+      const pastState = this.states[idx];
+
+      if (pastState.isPunctuation) {
+        idx--;
+        continue;
+      }
+
+      if (pastState.status !== 'correct') break;
+
+      if (matchWords(pastState.text, spoken).decision === 'correct') {
+        return true;
+      }
+
+      checked++;
+      idx--;
+    }
+
+    return false;
   }
 
   /**
