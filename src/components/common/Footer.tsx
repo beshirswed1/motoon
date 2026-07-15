@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Instagram, Twitter, Youtube, ExternalLink } from 'lucide-react';
+import { Mail, Instagram, ExternalLink } from 'lucide-react';
 
 
 const quickLinks = [
@@ -32,9 +32,7 @@ export function Footer() {
             {/* Social Links */}
             <div className="flex items-center gap-2 mt-1">
               {[
-                { href: 'https://twitter.com', icon: Twitter, label: 'تويتر' },
                 { href: 'https://www.instagram.com/motooncom/', icon: Instagram, label: 'إنستغرام' },
-                { href: 'https://youtube.com', icon: Youtube, label: 'يوتيوب' },
               ].map(({ href, icon: Icon, label }) => (
                 <a
                   key={label}

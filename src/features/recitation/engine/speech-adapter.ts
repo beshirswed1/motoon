@@ -1,29 +1,33 @@
 /**
  * speech-adapter.ts — Module 6: Speech Recognition Adapter
  *
- * Thin wrapper around the Web Speech API that emits individual
- * NEW words as they are recognized. Uses a "finals-first" strategy:
+ * Wraps Web Speech API and emits ONE callback per genuinely-new word.
  *
- * - Words from FINAL results (isFinal=true) are emitted immediately.
- *   These are confirmed by the browser and won't change.
- * - Words from INTERIM results are NEVER emitted directly. Instead,
- *   they are debounced: if interim words stabilize for DEBOUNCE_MS
- *   without a final result arriving, they are emitted as a fallback.
- *   This prevents partial Arabic words (ع, ن, مص) from being
- *   evaluated by the state machine.
+ * Key design for Android Chrome:
+ * ─────────────────────────────────────────────────────────────────
+ * Android Chrome does NOT honor `continuous: true`. It silently ends
+ * recognition after every pause, then we restart it. On restart the
+ * browser often re-delivers the SAME words it already delivered in
+ * the previous instance (cumulative transcript behavior).
+ *
+ * To prevent any word from being emitted twice we keep a single
+ * `globalEmittedCount` that survives across recognition restarts.
+ * Each restart we detect how many of the "old" words the browser
+ * re-sent, skip them, and only emit truly new ones.
+ *
+ * Additionally, we use a `sessionToken` so that late/ghost events
+ * from a dying recognition instance are silently dropped.
  */
+
+import { normalizeWord } from './normalizer';
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
 /**
  * How long (ms) to wait for interim words to stabilize before emitting them.
- * 600ms is long enough that the browser will almost always finalize the result
- * before this timer fires (making it a pure safety net), yet short enough
- * that if the browser IS slow, the user doesn't feel a huge lag.
+ * This is a safety net — finals almost always arrive before this fires.
  */
-const DEBOUNCE_MS = 600;
-
-
+const DEBOUNCE_MS = 700;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -43,24 +47,42 @@ export class SpeechAdapter {
   private isActive = false;
   private opts: SpeechAdapterOptions | null = null;
 
-  // Track emitted words count and session state in the current session
-  private emittedWordCount = 0;
-  private currentSessionWords: string[] = [];
+  /**
+   * Words we have emitted to the state machine across ALL recognition
+   * instances in this listening session. This list is append-only and
+   * NEVER shrinks until an explicit start() or reset().
+   */
+  private globalEmittedWords: string[] = [];
 
-  // Debounce state for interim words (safety net)
+  /** Debounce timer for interim words */
   private debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-  // Monotonically increasing token identifying the "live" recognition instance.
-  // Every initRecognition() call mints a new token and captures it in that
-  // instance's callback closures. If a callback fires after a newer instance
-  // has taken over (e.g. a late/duplicate event from an instance that is
-  // restarting — common on Android, which rarely honors continuous=true and
-  // ends/restarts recognition far more often than desktop browsers), the
-  // captured token will no longer match this.sessionToken and the event is
-  // dropped instead of being processed against shared emittedWordCount /
-  // currentSessionWords state. This is what previously caused the same
-  // trailing word(s) to be emitted 2-3x on mobile after each silent restart.
+  /**
+   * The latest full word list from the CURRENT recognition instance.
+   * Rebuilt on every onresult from that instance's event.results.
+   */
+  private instanceWords: string[] = [];
+
+  /**
+   * How many words from `instanceWords` belong to the PREVIOUS session
+   * (i.e. were re-delivered by the browser). We skip these.
+   */
+  private instanceSkip = 0;
+
+  /**
+   * Whether we've computed instanceSkip for this instance yet.
+   * Set to false each time initRecognition() creates a new instance.
+   */
+  private instanceInitialized = false;
+
+  /**
+   * Monotonically increasing token identifying the "live" instance.
+   * Each initRecognition() mints a new one; callbacks capture it by
+   * value and bail out if it no longer matches this.sessionToken.
+   */
   private sessionToken = 0;
+
+  // ─── Public API ─────────────────────────────────────────────────────
 
   /** Check if Web Speech API is available */
   isSupported(): boolean {
@@ -76,12 +98,13 @@ export class SpeechAdapter {
     if (!this.isSupported()) {
       throw new Error('Web Speech API is not supported in this browser.');
     }
-
     if (this.isActive) return;
 
     this.opts = opts;
-    this.emittedWordCount = 0;
-    this.currentSessionWords = [];
+    this.globalEmittedWords = [];
+    this.instanceWords = [];
+    this.instanceSkip = 0;
+    this.instanceInitialized = false;
     this.clearDebounce();
     this.isActive = true;
 
@@ -98,23 +121,22 @@ export class SpeechAdapter {
   /** Stop listening and clean up. */
   stop(): void {
     this.isActive = false;
-    // Invalidate any callbacks still in flight from the current instance
-    this.sessionToken++;
-    // Flush any pending debounced words before stopping
-    this.flushPendingWords();
+    this.sessionToken++; // invalidate any in-flight callbacks
+    this.flushNewWords();    // emit any pending debounced words
     this.detachRecognition();
   }
 
-  /** Reset the word tracking state (for session restart). */
+  /** Reset the word tracking state (for full session restart). */
   reset(): void {
-    this.emittedWordCount = 0;
-    this.currentSessionWords = [];
+    this.globalEmittedWords = [];
+    this.instanceWords = [];
+    this.instanceSkip = 0;
+    this.instanceInitialized = false;
     this.clearDebounce();
   }
 
   // ─── Private ─────────────────────────────────────────────────────────
 
-  /** Cancel the debounce timer without emitting */
   private clearDebounce(): void {
     if (this.debounceTimer !== null) {
       clearTimeout(this.debounceTimer);
@@ -123,37 +145,48 @@ export class SpeechAdapter {
   }
 
   /**
-   * Flush any pending interim words immediately.
+   * Emit any genuinely new words from instanceWords that we haven't
+   * already sent to the state machine.
+   *
+   * "New" = words at positions >= instanceSkip that haven't been
+   * accounted for in globalEmittedWords yet.
    */
-  private flushPendingWords(): void {
+  private flushNewWords(): void {
     this.clearDebounce();
-    this.emitNewWords();
-  }
-
-  /**
-   * Compute and emit any words that are new in the current session.
-   */
-  private emitNewWords(): void {
     if (!this.opts?.onNewWord) return;
 
-    // NEVER clamp emittedWordCount downwards! If the browser shrinks the transcript
-    // (e.g. deleting a false positive), we ignore the shrink. Shrinking it would
-    // cause us to re-emit the next words, leading to massive repetition loops.
-    if (this.emittedWordCount >= this.currentSessionWords.length) {
-      return;
-    }
+    // How many new words does this instance have beyond the skip zone?
+    const instanceNewWords = this.instanceWords.slice(this.instanceSkip);
 
-    const newWords = this.currentSessionWords.slice(this.emittedWordCount);
-    for (const word of newWords) {
+    // How many of those have we already emitted?
+    // globalEmittedWords.length tells us the total ever emitted.
+    // instanceSkip tells us how many were "old" in this instance.
+    // So truly-new = instanceNewWords that are beyond what we've globally emitted.
+    //
+    // Across all instances:
+    //   globalEmittedWords.length = total ever emitted
+    //   For this instance, the first `instanceSkip` words are old.
+    //   So instance word at position (instanceSkip + k) is the (globalEmittedWords.length-at-start + k)-th new word.
+    //
+    // Simpler: just compare counts.
+    const alreadyEmittedFromThisInstance = Math.max(
+      0,
+      this.globalEmittedWords.length - this.instanceSkip
+    );
+
+    // guard: if the browser shrank the transcript, don't re-emit
+    if (alreadyEmittedFromThisInstance < 0) return;
+
+    const toEmit = instanceNewWords.slice(alreadyEmittedFromThisInstance);
+
+    for (const word of toEmit) {
+      this.globalEmittedWords.push(word);
       this.opts.onNewWord(word);
-      this.emittedWordCount++;
     }
   }
 
   /**
-   * Detach event handlers from the current recognition instance and stop it,
-   * so it cannot deliver any further events to this adapter. Called before
-   * creating a replacement instance (restart) and on explicit stop().
+   * Detach event handlers and stop/abort the current recognition instance.
    */
   private detachRecognition(): void {
     if (!this.recognition) return;
@@ -161,9 +194,6 @@ export class SpeechAdapter {
     this.recognition.onerror = null;
     this.recognition.onend = null;
     try {
-      // abort() is more immediate than stop() and discards in-flight audio,
-      // which also helps avoid the tail-audio-overlap re-hearing effect
-      // some Android devices exhibit when a new session starts right after.
       if (typeof this.recognition.abort === 'function') {
         this.recognition.abort();
       } else {
@@ -174,14 +204,17 @@ export class SpeechAdapter {
     }
   }
 
+  /**
+   * Create a fresh SpeechRecognition instance with event handlers
+   * bound to a new sessionToken.
+   */
   private initRecognition(): void {
-    // Discard any previous instance first so it can't deliver stale events
-    // into the new instance's shared emittedWordCount/currentSessionWords state.
     this.detachRecognition();
 
-    // Guarantee fresh state for the new instance
-    this.emittedWordCount = 0;
-    this.currentSessionWords = [];
+    // Reset per-instance state (but NOT globalEmittedWords!)
+    this.instanceWords = [];
+    this.instanceSkip = 0;
+    this.instanceInitialized = false;
     this.clearDebounce();
 
     const SR =
@@ -194,21 +227,17 @@ export class SpeechAdapter {
     this.recognition.lang = 'ar-SA';
     this.recognition.maxAlternatives = 1;
 
-    // Mint a token for THIS instance. Captured by value in the closures below,
-    // so any event that fires after a *newer* instance has replaced this one
-    // (this.sessionToken will have moved on) is recognized as stale and ignored.
     const myToken = ++this.sessionToken;
 
     this.recognition.onresult = (event: any) => {
-      if (myToken !== this.sessionToken) return; // stale instance — ignore
+      if (myToken !== this.sessionToken) return;
       this.handleResult(event);
     };
 
     this.recognition.onerror = (event: any) => {
-      if (myToken !== this.sessionToken) return; // stale instance — ignore
+      if (myToken !== this.sessionToken) return;
       const errorType = event.error;
 
-      // Auto-restart on transient errors
       if (errorType === 'network' || errorType === 'no-speech') {
         if (this.isActive) {
           this.restartRecognition();
@@ -222,12 +251,11 @@ export class SpeechAdapter {
     };
 
     this.recognition.onend = () => {
-      if (myToken !== this.sessionToken) return; // stale instance — ignore
+      if (myToken !== this.sessionToken) return;
 
-      // Flush any pending interim words before session ends
-      this.flushPendingWords();
+      // Flush any pending debounced words before we lose this instance
+      this.flushNewWords();
 
-      // Auto-restart if still active
       if (this.isActive) {
         this.restartRecognition();
         return;
@@ -241,15 +269,12 @@ export class SpeechAdapter {
 
   private restartRecognition(): void {
     try {
-      // Small delay to avoid rapid restart loops
       setTimeout(() => {
         if (this.isActive) {
           try {
-            // Recreate SpeechRecognition to guarantee a fresh state
             this.initRecognition();
             this.recognition.start();
           } catch (_e) {
-            // Failed to restart — stop gracefully
             this.isActive = false;
             if (this.opts?.onEnd) this.opts.onEnd();
           }
@@ -261,15 +286,60 @@ export class SpeechAdapter {
   }
 
   /**
+   * Determine how many leading words in a new instance's transcript
+   * are just a repetition of words we already emitted.
+   *
+   * Android Chrome often re-delivers the entire session transcript
+   * as the first result of a restarted instance. We detect this by
+   * checking if the first N words of the instance match the last N
+   * words we globally emitted (normalized comparison).
+   */
+  private computeInitialSkip(words: string[]): number {
+    if (this.globalEmittedWords.length === 0 || words.length === 0) {
+      return 0;
+    }
+
+    // Check if the instance starts with a prefix of our globally emitted words.
+    // We compare against the FULL globalEmittedWords from the beginning,
+    // because Android may re-send everything from the very start.
+    const maxCheck = Math.min(words.length, this.globalEmittedWords.length);
+    let matchCount = 0;
+
+    for (let i = 0; i < maxCheck; i++) {
+      const instanceNorm = normalizeWord(words[i]);
+      const globalNorm = normalizeWord(this.globalEmittedWords[i]);
+
+      if (instanceNorm === globalNorm) {
+        matchCount++;
+      } else {
+        // Allow 1 mismatch in the first 5 words (STT sometimes changes spelling)
+        if (i < 5 && matchCount > 0) {
+          matchCount++; // count it as a match (tolerance)
+          continue;
+        }
+        break;
+      }
+    }
+
+    // If we matched at least 1 word from the start, skip those
+    if (matchCount >= 1) {
+      return matchCount;
+    }
+
+    // No overlap detected — fresh instance (desktop behavior)
+    return 0;
+  }
+
+  /**
    * Handle a speech recognition result event.
    *
-   * Strategy — "finals-first":
-   * 1. Re-build the full session word list from event.results.
-   * 2. If a final result segment is present, emit new words immediately.
-   * 3. If only interim segments are updated, schedule a debounce to emit them later.
+   * Rebuilds the full word list from event.results, then:
+   * - On first result of a new instance, computes the skip count
+   * - On final results, emits new words immediately
+   * - On interim-only results, schedules a debounce
    */
   private handleResult(event: any): void {
-    const sessionWords: string[] = [];
+    const allWords: string[] = [];
     let hasFinal = false;
 
     for (let i = 0; i < event.results.length; i++) {
@@ -278,38 +348,30 @@ export class SpeechAdapter {
       if (!text) continue;
 
       const words = text.split(/\s+/).filter(Boolean);
-      sessionWords.push(...words);
+      allWords.push(...words);
 
       if (result.isFinal) {
         hasFinal = true;
       }
     }
 
-    this.currentSessionWords = sessionWords;
+    this.instanceWords = allWords;
+
+    // On the first result of this instance, compute how many words to skip
+    if (!this.instanceInitialized && allWords.length > 0) {
+      this.instanceSkip = this.computeInitialSkip(allWords);
+      this.instanceInitialized = true;
+    }
 
     if (hasFinal) {
-      // Cancel any pending debounce — finals supersede interim guesses
-      this.clearDebounce();
-      this.emitNewWords();
+      this.flushNewWords();
     } else {
-      // Schedule a debounce for interim words
-      this.scheduleInterimDebounce();
+      // Schedule debounce for interim words
+      this.clearDebounce();
+      this.debounceTimer = setTimeout(() => {
+        this.debounceTimer = null;
+        this.flushNewWords();
+      }, DEBOUNCE_MS);
     }
-  }
-
-  /**
-   * Schedule a debounce for interim words.
-   * When the timer fires, it re-computes what's genuinely new
-   * and emits only truly new words.
-   */
-  private scheduleInterimDebounce(): void {
-    // Reset the timer on each new interim event
-    if (this.debounceTimer !== null) {
-      clearTimeout(this.debounceTimer);
-    }
-    this.debounceTimer = setTimeout(() => {
-      this.debounceTimer = null;
-      this.emitNewWords();
-    }, DEBOUNCE_MS);
   }
 }

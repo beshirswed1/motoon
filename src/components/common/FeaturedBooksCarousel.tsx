@@ -65,19 +65,19 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
     <div className="relative w-full overflow-hidden rounded-3xl border border-border/50 bg-card shadow-xl">
       {/* Main slide */}
       <div
-        className={`relative flex flex-col md:flex-row min-h-[320px] md:min-h-[420px] transition-opacity duration-400 ${
+        className={`relative flex flex-col md:flex-row min-h-[380px] md:min-h-[460px] transition-opacity duration-400 ${
           isTransitioning ? 'opacity-0' : 'opacity-100'
         }`}
       >
         {/* Cover */}
-        <div className={`relative w-full md:w-2/5 bg-gradient-to-br ${gradientClass} h-[160px] md:min-h-full overflow-hidden shrink-0`}>
+        <div className={`relative w-full md:w-1/2 bg-gradient-to-br ${gradientClass} h-[240px] md:min-h-full overflow-hidden shrink-0`}>
           {book.coverImageUrl ? (
             <Image
               src={book.coverImageUrl}
               alt={`غلاف ${book.title}`}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority
             />
           ) : (
@@ -96,48 +96,48 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
               </div>
               <div className="relative z-10">
                 <div className="text-5xl mb-3 opacity-30">﴾﴿</div>
-                <h3 className="text-xl md:text-2xl font-black text-foreground leading-tight">{book.title}</h3>
+                <h3 className="text-xl md:text-3xl font-black text-foreground leading-tight">{book.title}</h3>
               </div>
             </div>
           )}
           {/* Gradient overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-card/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-card/80 via-card/20 to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="flex flex-col justify-center gap-4 p-6 md:p-10 md:w-3/5">
+        <div className="flex flex-col justify-center gap-4 p-6 pb-16 md:p-10 md:pb-16 md:w-1/2 z-10">
           <div>
             <p className="text-xs font-bold text-primary uppercase tracking-widest mb-2">متن مميز</p>
-            <h2 className="text-xl md:text-3xl font-black text-foreground mb-2 leading-tight">
+            <h2 className="text-2xl md:text-4xl font-black text-foreground mb-3 leading-tight">
               {book.title}
             </h2>
-            <p className="text-sm font-semibold text-muted-foreground mb-3">
+            <p className="text-base font-semibold text-muted-foreground mb-4">
               {book.author}
             </p>
             {book.description && (
-              <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2 md:line-clamp-3">
+              <p className="text-sm md:text-base text-muted-foreground leading-relaxed line-clamp-3">
                 {book.description}
               </p>
             )}
           </div>
 
           {book.versesCount && book.versesCount > 0 ? (
-            <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground">
-              <Hash className="h-3.5 w-3.5 text-primary" />
+            <div className="flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+              <Hash className="h-4 w-4 text-primary" />
               {book.versesCount} بيت
             </div>
           ) : null}
 
-          <div className="flex flex-col sm:flex-row gap-3 mt-1">
-            <Button asChild className="gap-2 rounded-xl font-bold shadow-sm">
+          <div className="flex flex-col sm:flex-row gap-3 mt-2">
+            <Button asChild className="gap-2 rounded-xl font-bold shadow-sm h-11 text-base">
               <Link href={`/books/${book.slug}/memorize`}>
-                <BookOpen className="h-4 w-4" />
+                <BookOpen className="h-5 w-5" />
                 ابدأ الحفظ
               </Link>
             </Button>
-            <Button asChild variant="outline" className="gap-2 rounded-xl font-bold">
+            <Button asChild variant="outline" className="gap-2 rounded-xl font-bold h-11 text-base">
               <Link href={`/books/${book.slug}/recite`}>
-                <Mic className="h-4 w-4" />
+                <Mic className="h-5 w-5" />
                 تسميع ذاتي
               </Link>
             </Button>

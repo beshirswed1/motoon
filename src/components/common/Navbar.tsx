@@ -6,11 +6,12 @@ import { useAuth } from '@/hooks/useAuth';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, User, BookOpen, TrendingUp,
-  Home, Download, Heart, Settings
+  Home, Download, Heart
 } from 'lucide-react';
 
 import toast from 'react-hot-toast';
 import { NotificationBell } from './NotificationBell';
+import { MobileMenu } from './MobileMenu';
 import { reviewReminderService } from '@/services/firebase/reviewReminder.service';
 import { usePWA } from '@/contexts/PWAContext';
 import { useEffect, useState, useCallback } from 'react';
@@ -196,7 +197,7 @@ export function Navbar() {
 
             {/* Mobile: Notification bell + Profile */}
             <div className="flex md:hidden items-center gap-1">
-              {user && <NotificationBell />}
+              <MobileMenu />
             </div>
           </div>
         </div>
@@ -209,31 +210,42 @@ export function Navbar() {
             { href: '/', icon: Home, label: 'الرئيسية' },
             { href: '/books', icon: BookOpen, label: 'المتون' },
             ...(user ? [{ href: '/progress', icon: TrendingUp, label: 'تقدمي' }] : []),
-            ...(user ? [{ href: '/settings', icon: Settings, label: 'الإعدادات' }] : []),
             ...(user
               ? [{ href: '/profile', icon: User, label: 'حسابي' }]
               : [{ href: '/login', icon: User, label: 'دخول' }]
             ),
           ].map(({ href, icon: Icon, label }) => {
             const active = isActive(href);
+            const isMutoon = href === '/books';
+            
             return (
               <Link
                 key={href}
                 href={href}
                 className="flex flex-col items-center justify-center gap-0.5 py-1 min-w-[56px] max-w-[72px] rounded-xl transition-all duration-200 group"
               >
-                <div className={`relative flex items-center justify-center h-8 transition-all duration-300 ${
-                  active ? 'w-12 rounded-2xl bg-primary/15' : 'w-8 rounded-lg'
+                <div className={`relative flex items-center justify-center transition-all duration-300 ${
+                  isMutoon 
+                    ? 'h-10 w-12 rounded-2xl bg-primary text-white shadow-lg shadow-primary/30 -translate-y-1' 
+                    : active 
+                      ? 'h-8 w-12 rounded-2xl bg-primary/15' 
+                      : 'h-8 w-8 rounded-lg'
                 }`}>
-                  <Icon className={`h-5 w-5 transition-all duration-200 ${
-                    active ? 'text-primary scale-110' : 'text-muted-foreground group-hover:text-foreground'
+                  <Icon className={`transition-all duration-200 ${
+                    isMutoon 
+                      ? 'h-5 w-5 text-white scale-110' 
+                      : active 
+                        ? 'h-5 w-5 text-primary scale-110' 
+                        : 'h-5 w-5 text-muted-foreground group-hover:text-foreground'
                   }`} />
-                  {active && (
+                  {active && !isMutoon && (
                     <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
                   )}
                 </div>
                 <span className={`text-[10px] font-bold leading-none truncate transition-colors ${
-                  active ? 'text-primary' : 'text-muted-foreground'
+                  isMutoon
+                    ? 'text-primary mt-0.5'
+                    : active ? 'text-primary' : 'text-muted-foreground'
                 }`}>{label}</span>
               </Link>
             );

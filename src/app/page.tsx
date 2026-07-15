@@ -468,26 +468,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── Final CTA ─────────────────────────────── */}
-      <section className="py-16 section-padding bg-muted/30 border-t border-border/30">
-        <div className="container-motoon text-center flex flex-col items-center gap-5">
-          <Heart className="h-8 w-8 text-primary" />
-          <h2 className="text-2xl md:text-3xl font-black max-w-xl">
-            ابدأ رحلتك في حفظ المتون الشرعية اليوم
-          </h2>
-          <p className="text-muted-foreground max-w-lg">
-            انضم لآلاف الطلاب الذين يحفظون المتون الشرعية بمنهجية علمية حديثة
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button size="lg" asChild className="font-bold rounded-xl px-8">
-              <Link href="/register">إنشاء حساب مجاني</Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="font-bold rounded-xl px-8">
-              <Link href="/books">تصفح المتون</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
