@@ -136,8 +136,12 @@ export class SpeechAdapter {
   private emitNewWords(): void {
     if (!this.opts?.onNewWord) return;
 
-    // Clamp emittedWordCount to not exceed current session words
-    this.emittedWordCount = Math.min(this.emittedWordCount, this.currentSessionWords.length);
+    // NEVER clamp emittedWordCount downwards! If the browser shrinks the transcript
+    // (e.g. deleting a false positive), we ignore the shrink. Shrinking it would
+    // cause us to re-emit the next words, leading to massive repetition loops.
+    if (this.emittedWordCount >= this.currentSessionWords.length) {
+      return;
+    }
 
     const newWords = this.currentSessionWords.slice(this.emittedWordCount);
     for (const word of newWords) {
@@ -174,6 +178,11 @@ export class SpeechAdapter {
     // Discard any previous instance first so it can't deliver stale events
     // into the new instance's shared emittedWordCount/currentSessionWords state.
     this.detachRecognition();
+
+    // Guarantee fresh state for the new instance
+    this.emittedWordCount = 0;
+    this.currentSessionWords = [];
+    this.clearDebounce();
 
     const SR =
       (window as any).SpeechRecognition ||
@@ -217,10 +226,6 @@ export class SpeechAdapter {
 
       // Flush any pending interim words before session ends
       this.flushPendingWords();
-
-      // Reset emittedWordCount for the next session
-      this.emittedWordCount = 0;
-      this.currentSessionWords = [];
 
       // Auto-restart if still active
       if (this.isActive) {
