@@ -5,15 +5,30 @@
  *
  * Key design for Android Chrome:
  * ─────────────────────────────────────────────────────────────────
- * Android Chrome does NOT honor `continuous: true`. It silently ends
- * recognition after every pause, then we restart it. On restart the
- * browser often re-delivers the SAME words it already delivered in
- * the previous instance (cumulative transcript behavior).
+ * Android Chrome has TWO separate duplication problems:
  *
- * To prevent any word from being emitted twice we keep a single
- * `globalEmittedCount` that survives across recognition restarts.
- * Each restart we detect how many of the "old" words the browser
- * re-sent, skip them, and only emit truly new ones.
+ * 1) CROSS-INSTANCE duplication:
+ *    Android Chrome does NOT honor `continuous: true`. It silently
+ *    ends recognition after every pause, then we restart it. On
+ *    restart the browser often re-delivers the SAME words it already
+ *    delivered in the previous instance (cumulative transcript).
+ *
+ *    → Solved by `computeInstanceSkip()` which compares new words
+ *      against `initialGlobalWords` to find and skip overlaps.
+ *
+ * 2) INTRA-INSTANCE cumulative duplication:
+ *    Within a SINGLE recognition instance, Android Chrome sometimes
+ *    sends `event.results` where each result contains the FULL
+ *    cumulative transcript instead of just its own segment. Or it
+ *    sends multiple results that are cumulative expansions of each
+ *    other. Naively concatenating all results produces duplicates.
+ *
+ *    → Solved by segment-based deduplication:
+ *      - Each result index is tracked as an independent "segment"
+ *      - Final segments are cached and never re-read from the event
+ *      - Cumulative patterns (result text starting with previously
+ *        seen words) are detected and only the new suffix is taken
+ *      - A fingerprint hash prevents processing identical events
  *
  * Additionally, we use a `sessionToken` so that late/ghost events
  * from a dying recognition instance are silently dropped.
@@ -38,6 +53,13 @@ export interface SpeechAdapterOptions {
   onError?: (error: string) => void;
   /** Called when recognition ends (browser stopped) */
   onEnd?: () => void;
+}
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+/** Simple hash of a string array for fingerprinting. */
+function hashWords(words: string[]): string {
+  return words.join('\x1F'); // unit separator — won't appear in Arabic text
 }
 
 // ─── Speech Adapter ──────────────────────────────────────────────────────────
@@ -85,6 +107,23 @@ export class SpeechAdapter {
    */
   private sessionToken = 0;
 
+  // ─── Segment-based deduplication state (intra-instance) ─────────
+
+  /**
+   * Cached final segments from the current recognition instance.
+   * Key = result index, Value = array of words from that segment.
+   * Once a segment becomes isFinal, its words are frozen here and
+   * never re-read from event.results (which may change or duplicate).
+   */
+  private finalizedSegments: Map<number, string[]> = new Map();
+
+  /**
+   * Fingerprint (hash) of the last processed word list.
+   * If the browser fires onresult with exactly the same content,
+   * we skip it entirely. Protects against duplicate events.
+   */
+  private lastTranscriptHash = '';
+
   // ─── Public API ─────────────────────────────────────────────────────
 
   /** Check if Web Speech API is available */
@@ -108,6 +147,8 @@ export class SpeechAdapter {
     this.initialGlobalWords = [];
     this.instanceEmittedCount = 0;
     this.instanceWords = [];
+    this.finalizedSegments.clear();
+    this.lastTranscriptHash = '';
     if (this.restartTimeout) {
       clearTimeout(this.restartTimeout);
       this.restartTimeout = null;
@@ -143,6 +184,8 @@ export class SpeechAdapter {
     this.initialGlobalWords = [];
     this.instanceEmittedCount = 0;
     this.instanceWords = [];
+    this.finalizedSegments.clear();
+    this.lastTranscriptHash = '';
     if (this.restartTimeout) {
       clearTimeout(this.restartTimeout);
       this.restartTimeout = null;
@@ -213,6 +256,8 @@ export class SpeechAdapter {
     this.initialGlobalWords = [...this.globalEmittedWords];
     this.instanceWords = [];
     this.instanceEmittedCount = 0;
+    this.finalizedSegments.clear();
+    this.lastTranscriptHash = '';
     this.clearDebounce();
 
     const SR =
@@ -348,26 +393,119 @@ export class SpeechAdapter {
   /**
    * Handle a speech recognition result event.
    *
-   * Rebuilds the full word list from event.results, then:
-   * - On final results, emits new words immediately
-   * - On interim-only results, schedules a debounce
+   * This is the core fix for Android Chrome duplication. Instead of naively
+   * concatenating all event.results, we:
+   *
+   * 1. Track each result index as an independent "segment"
+   * 2. Cache finalized segments so they're never re-read
+   * 3. Detect cumulative patterns (one result containing all previous text)
+   * 4. Use fingerprint hashing to skip duplicate events
+   *
+   * This handles ALL known Android Chrome behaviors:
+   * - Normal segmented results (Desktop + some Android)
+   * - Cumulative single-result transcripts (some Android versions)
+   * - Duplicate final events (some Android versions)
+   * - Mixed final+interim cumulative results
    */
   private handleResult(event: any): void {
-    const allWords: string[] = [];
+    // ── Step 1: Build word list from segments with deduplication ──
+
+    const finalWords: string[] = [];
+    let latestInterimWords: string[] = [];
     let hasFinal = false;
 
     for (let i = 0; i < event.results.length; i++) {
       const result = event.results[i];
-      const text: string = result[0].transcript.trim();
+      const text: string = (result[0]?.transcript || '').trim();
       if (!text) continue;
 
       const words = text.split(/\s+/).filter(Boolean);
-      allWords.push(...words);
 
       if (result.isFinal) {
         hasFinal = true;
+
+        // Only cache this segment if we haven't seen it before.
+        // This prevents re-processing when the browser re-delivers
+        // the same final result.
+        if (!this.finalizedSegments.has(i)) {
+          this.finalizedSegments.set(i, words);
+        }
+
+        // Always use the cached version (it's the first/authoritative one)
+        finalWords.push(...this.finalizedSegments.get(i)!);
+      } else {
+        // For interim results, always take the LAST one (they replace each other)
+        latestInterimWords = words;
       }
     }
+
+    // ── Step 2: Detect and strip cumulative overlap from interim ──
+    //
+    // Android Chrome sometimes sends an interim result that contains
+    // the FULL text (final + interim) as a single string. Example:
+    //   results[0] (final): "الحمد لله"
+    //   results[1] (interim): "الحمد لله رب"  ← cumulative!
+    //
+    // We detect this by checking if the interim starts with the same
+    // words as the finals, and if so, strip the overlap.
+
+    if (latestInterimWords.length > 0 && finalWords.length > 0) {
+      const overlapLen = this.findPrefixOverlap(finalWords, latestInterimWords);
+      if (overlapLen > 0) {
+        latestInterimWords = latestInterimWords.slice(overlapLen);
+      }
+    }
+
+    // ── Step 3: Combine into the authoritative word list ──
+
+    const allWords = [...finalWords, ...latestInterimWords];
+
+    // ── Step 4: Fingerprint deduplication ──
+    //
+    // If the browser fires onresult with exactly the same transcript
+    // content as last time (common on Android when results shift from
+    // interim → final without adding new words), skip entirely.
+
+    const currentHash = hashWords(allWords);
+    if (currentHash === this.lastTranscriptHash) {
+      return; // Exact same content — nothing new to process
+    }
+    this.lastTranscriptHash = currentHash;
+
+    // ── Step 5: Additional cumulative detection ──
+    //
+    // Even after segment-level dedup, some Android versions deliver
+    // ALL text in a single result (results.length === 1) that grows
+    // cumulatively. Detect this: if the new allWords starts with all
+    // of the current instanceWords, it's cumulative — only the tail
+    // is new.
+    //
+    // We do this ONLY when there's a single result (no segments),
+    // because with proper segments the segment-level logic already
+    // handles it.
+
+    if (event.results.length === 1 && this.instanceWords.length > 0) {
+      const overlap = this.findPrefixOverlap(this.instanceWords, allWords);
+      if (overlap === this.instanceWords.length && allWords.length > overlap) {
+        // The new transcript is a cumulative extension of the old one.
+        // Keep our existing instanceWords and just append the new tail.
+        const newTail = allWords.slice(overlap);
+        this.instanceWords = [...this.instanceWords, ...newTail];
+
+        if (hasFinal) {
+          this.flushNewWords();
+        } else {
+          this.clearDebounce();
+          this.debounceTimer = setTimeout(() => {
+            this.debounceTimer = null;
+            this.flushNewWords();
+          }, DEBOUNCE_MS);
+        }
+        return;
+      }
+    }
+
+    // ── Step 6: Standard path — update instanceWords ──
 
     this.instanceWords = allWords;
 
@@ -381,5 +519,42 @@ export class SpeechAdapter {
         this.flushNewWords();
       }, DEBOUNCE_MS);
     }
+  }
+
+  /**
+   * Find the length of the longest prefix of `candidate` that matches
+   * a prefix of `reference`, using normalized comparison.
+   *
+   * Example:
+   *   reference = ["الحمد", "لله"]
+   *   candidate = ["الحمد", "لله", "رب"]
+   *   → returns 2 (the first 2 words of candidate match reference)
+   *
+   * Allows at most 1 mismatch for sequences of 3+ words to tolerate
+   * minor STT spelling variations.
+   */
+  private findPrefixOverlap(reference: string[], candidate: string[]): number {
+    const maxCheck = Math.min(reference.length, candidate.length);
+    if (maxCheck === 0) return 0;
+
+    let matched = 0;
+    let mismatches = 0;
+
+    for (let i = 0; i < maxCheck; i++) {
+      if (normalizeWord(reference[i]) === normalizeWord(candidate[i])) {
+        matched++;
+      } else {
+        mismatches++;
+        // For short sequences, require exact match
+        // For longer sequences (3+), allow 1 mismatch
+        const maxAllowed = maxCheck >= 3 ? 1 : 0;
+        if (mismatches > maxAllowed) {
+          break;
+        }
+        matched++; // Count the mismatched position as "matched" for overlap purposes
+      }
+    }
+
+    return matched;
   }
 }
