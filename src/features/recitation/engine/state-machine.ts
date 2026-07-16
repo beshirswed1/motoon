@@ -53,9 +53,10 @@ const MAX_LOOKAHEAD = 2;
 // Maximum backward lookback (through a contiguous run of already-correct words)
 // when checking whether a spoken word is just a repeat of something already
 // confirmed. Must be >= the longest repeated phrase the STT engine tends to
-// re-emit (e.g. on Android, restarting recognition after a pause commonly
-// re-emits the last 1-2 words of the previous utterance).
-const MAX_LOOKBACK = 2;
+// re-emit. Set to 3 (rather than 2) because in practice the clean prefix
+// before a restart-triggered glitch varies — sometimes 2 words, sometimes 3 —
+// so the repeated tail can also be up to 3 words long.
+const MAX_LOOKBACK = 3;
 
 // ─── State Machine ───────────────────────────────────────────────────────────
 
