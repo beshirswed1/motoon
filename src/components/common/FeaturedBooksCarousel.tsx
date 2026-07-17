@@ -6,6 +6,8 @@ import Link from 'next/link';
 import type { Book as BookType } from '@/types/book.types';
 import { BookOpen, Mic, ChevronLeft, ChevronRight, Hash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { MatnCover } from '@/components/common/MatnCover';
+import { getCategoryLabel, getSubcategoryLabel } from '@/lib/constants/categories';
 
 interface FeaturedBooksCarouselProps {
   books: (BookType & { versesCount?: number })[];
@@ -61,6 +63,12 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
   const book = books[current];
   const gradientClass = coverGradients[getGradientIndex(book.title)];
 
+  const categoryText = book.category
+    ? (book.subcategory
+        ? `${getCategoryLabel(book.category)} > ${getSubcategoryLabel(book.category, book.subcategory)}`
+        : getCategoryLabel(book.category))
+    : 'متن علمي';
+
   return (
     <div className="relative w-full overflow-hidden rounded-3xl border border-border/50 bg-card shadow-xl">
       {/* Main slide */}
@@ -81,24 +89,11 @@ export function FeaturedBooksCarousel({ books }: FeaturedBooksCarouselProps) {
               priority
             />
           ) : (
-            <div className="flex h-full items-center justify-center p-6 text-center relative">
-              <div className="absolute inset-0 opacity-5">
-                {[...Array(9)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-16 h-16 border border-foreground rounded-full"
-                    style={{
-                      left: `${(i % 3) * 33 + 10}%`,
-                      top: `${Math.floor(i / 3) * 33 + 5}%`,
-                    }}
-                  />
-                ))}
-              </div>
-              <div className="relative z-10">
-                <div className="text-5xl mb-3 opacity-30">﴾﴿</div>
-                <h3 className="text-xl md:text-3xl font-black text-foreground leading-tight">{book.title}</h3>
-              </div>
-            </div>
+            <MatnCover
+              title={book.title}
+              author={book.author}
+              category={categoryText}
+            />
           )}
           {/* Gradient overlay for readability */}
           <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-card/80 via-card/20 to-transparent" />

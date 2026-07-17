@@ -11,6 +11,7 @@ const withPWA = require('next-pwa')({
   skipWaiting: true,
   reloadOnOnline: true,
   cacheOnFrontEndNav: true,
+  importScripts: ['/custom-sw.js'],
   // Provide fallback pages when offline
   fallbacks: {
     document: '/offline',
@@ -86,14 +87,25 @@ const withPWA = require('next-pwa')({
         cacheableResponse: { statuses: [0, 200] },
       },
     },
+    // Cache internal API routes (books data for offline)
+    {
+      urlPattern: /\/api\/books\/.*/i,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'api-books-cache',
+        expiration: { maxEntries: 50, maxAgeSeconds: 7 * 24 * 60 * 60 },
+        networkTimeoutSeconds: 5,
+        cacheableResponse: { statuses: [0, 200] },
+      },
+    },
     // Cache page navigations (HTML) — network first with offline fallback
     {
       urlPattern: /^https?:\/\/.*\/(?!api\/).*/i,
       handler: 'NetworkFirst',
       options: {
         cacheName: 'pages-cache',
-        expiration: { maxEntries: 32, maxAgeSeconds: 24 * 60 * 60 },
-        networkTimeoutSeconds: 10,
+        expiration: { maxEntries: 64, maxAgeSeconds: 3 * 24 * 60 * 60 },
+        networkTimeoutSeconds: 8,
         cacheableResponse: { statuses: [0, 200] },
       },
     },

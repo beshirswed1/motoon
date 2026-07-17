@@ -71,11 +71,11 @@ export function Footer() {
               <ul className="space-y-2.5">
                 <li>
                   <a
-                    href="mailto:support@motoon.app"
+                    href="mailto:beshirswed07@gmail.com"
                     className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium flex items-center gap-1.5"
                   >
                     <Mail className="h-3.5 w-3.5" />
-                    support@motoon.app
+                    beshirswed07@gmail.com
                   </a>
                 </li>
               </ul>

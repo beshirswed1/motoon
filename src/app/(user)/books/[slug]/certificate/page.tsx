@@ -83,7 +83,7 @@ function CertificatePageContent() {
 
     const now = new Date();
     const certId = generateCertId(user?.id || 'guest', displayBook.id);
-    const verifyUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://motoon.app'}/verify/${certId}`;
+    const verifyUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'https://motoon.com.tr'}/verify/${certId}`;
 
     setCertData({
       studentName: studentName.trim(),
@@ -94,6 +94,7 @@ function CertificatePageContent() {
       hijriDate: toHijri(now),
       certId,
       verifyUrl,
+      category: displayBook.category || '',
     });
   }, [nameConfirmed, displayBook, studentName, score, user?.id]);
 
@@ -187,7 +188,7 @@ function CertificatePageContent() {
   // Share on WhatsApp
   const shareWhatsApp = useCallback(() => {
     const text = encodeURIComponent(
-      `🏅 أتممت بحمد الله حفظ "${displayBook?.title}" بدرجة ${score}% على منصة متون!\n🔗 ${certData?.verifyUrl || 'https://motoon.app'}`
+      `🏅 أتممت بحمد الله حفظ "${displayBook?.title}" بدرجة ${score}% على منصة متون!\n🔗 ${certData?.verifyUrl || 'https://motoon.com.tr'}`
     );
     window.open(`https://wa.me/?text=${text}`, '_blank');
   }, [displayBook?.title, score, certData]);
@@ -195,9 +196,9 @@ function CertificatePageContent() {
   // Share on Twitter
   const shareTwitter = useCallback(() => {
     const text = encodeURIComponent(
-      `🏅 أتممت بحمد الله حفظ "${displayBook?.title}" بدرجة ${score}% على منصة #متون!\n${certData?.verifyUrl || 'https://motoon.app'}`
+      `🏅 أتممت بحمد الله حفظ "${displayBook?.title}" بدرجة ${score}% على منصة #متون!\n${certData?.verifyUrl || 'https://motoon.com.tr'}`
     );
-    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    window.open(`https://x.com/intent/tweet?text=${text}`, '_blank');
   }, [displayBook?.title, score, certData]);
 
   const isPageLoading = isLoading || loadingLocal;
@@ -298,10 +299,12 @@ function CertificatePageContent() {
             {/* Certificate Preview */}
             <div className="mb-8 animate-in fade-in zoom-in-95 duration-500">
               {certData && (
-                <CertificateCanvas
-                  data={certData}
-                  onReady={handleCanvasReady}
-                />
+                <div className="animate-in fade-in zoom-in-95 duration-700">
+                  <CertificateCanvas
+                    data={certData}
+                    onReady={handleCanvasReady}
+                  />
+                </div>
               )}
             </div>
 

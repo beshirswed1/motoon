@@ -1,11 +1,12 @@
 'use client';
 import React from 'react';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { toast } from 'react-hot-toast';
-import { Bell, Eye, Lock, Trash2, ShieldAlert } from 'lucide-react';
+import { Bell, Eye, Lock, Trash2, ShieldAlert, Clock, BellRing, CheckCircle2, AlertCircle } from 'lucide-react';
+import { pushNotificationsService } from '@/services/pushNotifications.service';
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState({
@@ -23,6 +24,27 @@ export default function SettingsPage() {
   const [isSavingPassword, setIsSavingPassword] = useState(false);
   const [isDeactivating, setIsDeactivating] = useState(false);
   const [showDeactivateConfirm, setShowDeactivateConfirm] = useState(false);
+
+  // Push notification states
+  const [notifPermission, setNotifPermission] = useState<NotificationPermission | 'unsupported'>('default');
+  const [reminderEnabled, setReminderEnabled] = useState(false);
+  const [reminderTime, setReminderTime] = useState('08:00');
+  const [isEnablingReminder, setIsEnablingReminder] = useState(false);
+
+  // Load notification settings on mount
+  useEffect(() => {
+    const perm = pushNotificationsService.getPermissionStatus();
+    setNotifPermission(perm);
+
+    const savedSettings = pushNotificationsService.getSettings();
+    setReminderEnabled(savedSettings.enabled);
+    setReminderTime(savedSettings.reminderTime);
+
+    // Start scheduler if enabled
+    if (savedSettings.enabled && perm === 'granted') {
+      pushNotificationsService.startReminderScheduler();
+    }
+  }, []);
 
   const handleToggle = (key: keyof typeof settings) => {
     setSettings((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -57,6 +79,57 @@ export default function SettingsPage() {
     }, 1500);
   };
 
+  const handleEnableReminder = async () => {
+    setIsEnablingReminder(true);
+    try {
+      const success = await pushNotificationsService.enableReminder(reminderTime);
+      if (success) {
+        setReminderEnabled(true);
+        setNotifPermission('granted');
+        toast.success(`تم تفعيل التذكير اليومي الساعة ${reminderTime} ✅`);
+        
+        // Show a test notification
+        pushNotificationsService.showNotification(
+          '🔔 تم تفعيل التذكير!',
+          { body: `سيصلك تذكير يومي الساعة ${reminderTime} لمراجعة متونك.` }
+        );
+      } else {
+        toast.error('لم يتم منح إذن الإشعارات. يرجى السماح بالإشعارات من إعدادات المتصفح.');
+      }
+    } catch (err) {
+      toast.error('حدث خطأ أثناء تفعيل التذكير');
+      console.error(err);
+    } finally {
+      setIsEnablingReminder(false);
+    }
+  };
+
+  const handleDisableReminder = () => {
+    pushNotificationsService.disableReminder();
+    setReminderEnabled(false);
+    toast.success('تم إيقاف التذكير اليومي');
+  };
+
+  const handleTimeChange = (newTime: string) => {
+    setReminderTime(newTime);
+    if (reminderEnabled) {
+      // Update the saved time
+      const settings = pushNotificationsService.getSettings();
+      settings.reminderTime = newTime;
+      settings.lastReminderDate = null; // Reset so it triggers at new time
+      pushNotificationsService.saveSettings(settings);
+      toast.success(`تم تحديث وقت التذكير إلى ${newTime}`);
+    }
+  };
+
+  const handleTestNotification = () => {
+    pushNotificationsService.showNotification(
+      '📖 تذكير تجريبي من متون',
+      { body: 'هذا إشعار تجريبي — التذكير يعمل بنجاح!' }
+    );
+    toast.success('تم إرسال إشعار تجريبي');
+  };
+
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
       <div>
@@ -68,7 +141,11 @@ export default function SettingsPage() {
         {/* Navigation Sidebar/Shortcuts */}
         <div className="md:col-span-1 space-y-4">
           <div className="rounded-xl border bg-card p-4 shadow-sm space-y-1">
-            <a href="#notifications" className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-primary bg-primary/10">
+            <a href="#reminder" className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-primary bg-primary/10">
+              <BellRing className="h-4 w-4" />
+              <span>التذكير اليومي</span>
+            </a>
+            <a href="#notifications" className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">
               <Bell className="h-4 w-4" />
               <span>التنبيهات</span>
             </a>
@@ -89,6 +166,99 @@ export default function SettingsPage() {
 
         {/* Settings Form Areas */}
         <div className="md:col-span-2 space-y-8">
+
+          {/* ══ Daily Reminder Section ══ */}
+          <section id="reminder" className="rounded-xl border bg-card p-6 shadow-sm space-y-6 ring-2 ring-primary/10">
+            <div className="flex items-center gap-2 border-b pb-4">
+              <BellRing className="h-5 w-5 text-primary" />
+              <h3 className="text-lg font-bold">التذكير اليومي للمراجعة</h3>
+            </div>
+
+            {/* Permission status */}
+            <div className="flex items-center gap-2 text-xs">
+              {notifPermission === 'granted' ? (
+                <span className="flex items-center gap-1 text-emerald-600 font-bold">
+                  <CheckCircle2 className="h-3.5 w-3.5" />
+                  إذن الإشعارات مفعّل
+                </span>
+              ) : notifPermission === 'denied' ? (
+                <span className="flex items-center gap-1 text-destructive font-bold">
+                  <AlertCircle className="h-3.5 w-3.5" />
+                  إذن الإشعارات مرفوض — يرجى تفعيله من إعدادات المتصفح
+                </span>
+              ) : notifPermission === 'unsupported' ? (
+                <span className="flex items-center gap-1 text-amber-600 font-bold">
+                  <AlertCircle className="h-3.5 w-3.5" />
+                  متصفحك لا يدعم الإشعارات
+                </span>
+              ) : (
+                <span className="flex items-center gap-1 text-muted-foreground font-bold">
+                  <Bell className="h-3.5 w-3.5" />
+                  لم يتم طلب إذن الإشعارات بعد
+                </span>
+              )}
+            </div>
+            
+            <div className="space-y-4">
+              {/* Enable/Disable toggle */}
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <h4 className="font-semibold text-sm">تفعيل التذكير اليومي</h4>
+                  <p className="text-xs text-muted-foreground">سيصلك إشعار يومي في الوقت المحدد لتذكيرك بالمراجعة والحفظ.</p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only peer"
+                    checked={reminderEnabled}
+                    onChange={() => {
+                      if (reminderEnabled) {
+                        handleDisableReminder();
+                      } else {
+                        handleEnableReminder();
+                      }
+                    }}
+                    disabled={isEnablingReminder || notifPermission === 'unsupported'}
+                  />
+                  <div className="w-11 h-6 bg-muted rounded-full peer peer-focus:ring-2 peer-focus:ring-primary/20 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                </label>
+              </div>
+
+              {/* Time picker */}
+              <div className="flex items-center justify-between border-t pt-4">
+                <div className="space-y-0.5">
+                  <h4 className="font-semibold text-sm flex items-center gap-1.5">
+                    <Clock className="h-4 w-4 text-primary" />
+                    وقت التذكير
+                  </h4>
+                  <p className="text-xs text-muted-foreground">اختر الوقت الذي تريد أن يصلك فيه الإشعار يومياً.</p>
+                </div>
+                <input
+                  type="time"
+                  value={reminderTime}
+                  onChange={(e) => handleTimeChange(e.target.value)}
+                  className="h-10 px-3 rounded-xl border bg-background text-sm font-bold focus:outline-none focus:ring-2 focus:ring-primary/50 text-center"
+                  disabled={notifPermission === 'unsupported'}
+                />
+              </div>
+
+              {/* Test notification button */}
+              {reminderEnabled && notifPermission === 'granted' && (
+                <div className="border-t pt-4">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleTestNotification}
+                    className="gap-2 rounded-xl font-bold text-xs"
+                  >
+                    <Bell className="h-3.5 w-3.5" />
+                    إرسال إشعار تجريبي
+                  </Button>
+                </div>
+              )}
+            </div>
+          </section>
+
           {/* Notifications Settings */}
           <section id="notifications" className="rounded-xl border bg-card p-6 shadow-sm space-y-6">
             <div className="flex items-center gap-2 border-b pb-4">

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import toast from 'react-hot-toast';
+import { pushNotificationsService } from '@/services/pushNotifications.service';
 
 interface PWAContextType {
   /** True when the browser fires `beforeinstallprompt` and the app can be installed */
@@ -14,6 +15,10 @@ interface PWAContextType {
   isIOS: boolean;
   /** True when the service worker is registered and active */
   isOfflineReady: boolean;
+  /** Current notification permission */
+  notificationPermission: NotificationPermission | 'unsupported';
+  /** Request notification permission */
+  requestNotificationPermission: () => Promise<NotificationPermission | 'unsupported'>;
 }
 
 const PWAContext = createContext<PWAContextType>({
@@ -22,6 +27,8 @@ const PWAContext = createContext<PWAContextType>({
   isStandalone: false,
   isIOS: false,
   isOfflineReady: false,
+  notificationPermission: 'default',
+  requestNotificationPermission: async () => 'default',
 });
 
 export const usePWA = () => useContext(PWAContext);
@@ -32,6 +39,7 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
   const [isStandalone, setIsStandalone] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
   const [isOfflineReady, setIsOfflineReady] = useState(false);
+  const [notificationPermission, setNotificationPermission] = useState<NotificationPermission | 'unsupported'>('default');
 
   useEffect(() => {
     // Check if running in standalone/installed mode already
@@ -45,6 +53,13 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
     const userAgent = window.navigator.userAgent.toLowerCase();
     const isIOSDevice = /iphone|ipad|ipod/.test(userAgent);
     setIsIOS(isIOSDevice);
+
+    // Check notification permission
+    const perm = pushNotificationsService.getPermissionStatus();
+    setNotificationPermission(perm);
+
+    // Start reminder scheduler if enabled
+    const cleanup = pushNotificationsService.startReminderScheduler();
 
     // Listen for the beforeinstallprompt event
     const handleBeforeInstallPrompt = (e: Event) => {
@@ -93,6 +108,7 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
       window.removeEventListener('appinstalled', handleAppInstalled);
       displayModeQuery.removeEventListener('change', handleDisplayModeChange);
+      if (cleanup) cleanup();
     };
   }, []);
 
@@ -122,8 +138,14 @@ export const PWAProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [deferredPrompt, isIOS, isStandalone]);
 
+  const requestNotificationPermission = useCallback(async () => {
+    const result = await pushNotificationsService.requestPermission();
+    setNotificationPermission(result);
+    return result;
+  }, []);
+
   return (
-    <PWAContext.Provider value={{ isInstallable, installPwa, isStandalone, isIOS, isOfflineReady }}>
+    <PWAContext.Provider value={{ isInstallable, installPwa, isStandalone, isIOS, isOfflineReady, notificationPermission, requestNotificationPermission }}>
       {children}
     </PWAContext.Provider>
   );

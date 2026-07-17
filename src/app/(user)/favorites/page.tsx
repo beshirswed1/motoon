@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useFavorites } from '@/hooks/useFavorites';
 import { BookCard } from '@/components/common/BookCard';
 import { booksService } from '@/services/firebase/books.service';
-import { getAllLocalBooks } from '@/lib/data';
-import { Heart, Loader2, BookOpen } from 'lucide-react';
+import { Heart, Loader2, BookOpen, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
@@ -18,7 +17,18 @@ export default function FavoritesPage() {
   useEffect(() => {
     async function loadBooks() {
       try {
-        const localBooks = getAllLocalBooks();
+        let localBooks: any[] = [];
+        try {
+          // Try API endpoint to get local books on client
+          const res = await fetch('/api/books/all');
+          if (res.ok) {
+            const data = await res.json();
+            localBooks = data.books || [];
+          }
+        } catch {
+          // Ignore — will try Firebase only
+        }
+
         let firebaseBooks: any[] = [];
         try {
           const res = await booksService.getAll({ onlyPublished: true });
@@ -46,7 +56,14 @@ export default function FavoritesPage() {
   }, []);
 
   const loading = favsLoading || loadingBooks;
-  const favoriteBooks = allBooks.filter(b => favoriteIds.has(b.id));
+
+  // Match by id OR slug to handle mismatches between local/firebase ids
+  const favoriteBooks = useMemo(() => {
+    if (favoriteIds.size === 0) return [];
+    return allBooks.filter(b => 
+      favoriteIds.has(b.id) || favoriteIds.has(b.slug)
+    );
+  }, [allBooks, favoriteIds]);
 
   if (loading) {
     return (
@@ -68,15 +85,18 @@ export default function FavoritesPage() {
       </div>
 
       {favoriteBooks.length === 0 ? (
-        <div className="flex min-h-[300px] flex-col items-center justify-center rounded-2xl border border-dashed text-center p-8 bg-card">
-          <Heart className="h-16 w-16 text-muted-foreground/20 mb-4" />
+        <div className="flex min-h-[300px] flex-col items-center justify-center rounded-2xl border border-dashed text-center p-8 bg-card animate-in fade-in duration-500">
+          <div className="relative mb-6">
+            <Heart className="h-20 w-20 text-muted-foreground/10" />
+            <Sparkles className="h-6 w-6 text-primary absolute -top-1 -right-1 animate-pulse" />
+          </div>
           <p className="mb-2 text-lg font-bold text-foreground">قائمة المفضلة فارغة</p>
-          <p className="text-muted-foreground text-sm mb-6">
-            تصفح المتون وأضف ما يعجبك إلى المفضلة بالنقر على أيقونة القلب
+          <p className="text-muted-foreground text-sm mb-6 max-w-xs leading-relaxed">
+            تصفح المتون وأضف ما يعجبك إلى المفضلة بالنقر على أيقونة القلب ❤️
           </p>
-          <Button asChild className="rounded-xl font-bold">
+          <Button asChild className="rounded-xl font-bold gap-2">
             <Link href="/books">
-              <BookOpen className="h-4 w-4 ml-2" />
+              <BookOpen className="h-4 w-4" />
               تصفح المتون
             </Link>
           </Button>

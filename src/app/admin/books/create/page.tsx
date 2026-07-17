@@ -9,8 +9,9 @@ import { booksService } from '@/services/firebase/books.service';
 import { activityLogService } from '@/services/firebase/activityLog.service';
 import { useAuth } from '@/hooks/useAuth';
 import { Book, BookDifficulty } from '@/types/book.types';
-import { CATEGORIES } from '@/lib/constants/categories';
+import { CATEGORIES, getCategoryLabel, getSubcategoryLabel } from '@/lib/constants/categories';
 import { Button } from '@/components/ui/button';
+import { MatnCover } from '@/components/common/MatnCover';
 import { nanoid } from 'nanoid';
 import { 
   ArrowRight, 
@@ -357,22 +358,38 @@ function CreateBookForm() {
                 </button>
               </div>
             ) : (
-              <label className="border-2 border-dashed border-muted-foreground/30 hover:border-primary/50 aspect-[3/4] w-full rounded-xl flex flex-col items-center justify-center p-6 cursor-pointer bg-muted/10 hover:bg-muted/20 transition-all group">
-                {uploadingImage ? (
-                  <Loader2 className="h-10 w-10 text-primary animate-spin" />
-                ) : (
-                  <UploadCloud className="h-10 w-10 text-muted-foreground group-hover:text-primary transition-colors" />
-                )}
-                <span className="text-xs font-bold text-foreground mt-3">ارفع صورة الغلاف</span>
-                <span className="text-[10px] text-muted-foreground mt-1">تنسيق PNG أو JPG (النسبة 3:4)</span>
-                <input 
-                  type="file" 
-                  accept="image/*" 
-                  onChange={handleImageUpload} 
-                  disabled={uploadingImage} 
-                  className="hidden" 
+              <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden border bg-muted shadow-sm group">
+                <MatnCover
+                  title={title || 'عنوان المتن العلمي'}
+                  author={author || 'اسم المؤلف'}
+                  category={
+                    category 
+                      ? (subcategory 
+                          ? `${getCategoryLabel(category)} > ${getSubcategoryLabel(category, subcategory)}`
+                          : getCategoryLabel(category))
+                      : 'التصنيف العلمي'
+                  }
+                  className="w-full h-full"
                 />
-              </label>
+                <label className="absolute inset-0 bg-black/50 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 p-6 text-white text-center">
+                  {uploadingImage ? (
+                    <Loader2 className="h-8 w-8 text-white animate-spin" />
+                  ) : (
+                    <>
+                      <UploadCloud className="h-8 w-8 text-white mb-2" />
+                      <span className="text-xs font-bold">رفع غلاف مخصص (صورة)</span>
+                      <span className="text-[9px] text-white/80 mt-1">PNG أو JPG بنسبة 3:4</span>
+                    </>
+                  )}
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={handleImageUpload} 
+                    disabled={uploadingImage} 
+                    className="hidden" 
+                  />
+                </label>
+              </div>
             )}
           </div>
 

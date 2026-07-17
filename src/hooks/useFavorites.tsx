@@ -5,6 +5,8 @@ import { useAuth } from '@/hooks/useAuth';
 import { favoritesService } from '@/services/firebase/favorites.service';
 import toast from 'react-hot-toast';
 
+const LOCAL_STORAGE_KEY = 'motoon-favorites';
+
 interface FavoritesContextType {
   favoriteIds: Set<string>;
   isFavorite: (bookId: string) => boolean;
@@ -19,25 +21,60 @@ const FavoritesContext = createContext<FavoritesContextType>({
   loading: false,
 });
 
+/** Read favorites from localStorage */
+function getLocalFavorites(): Set<string> {
+  if (typeof window === 'undefined') return new Set();
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (raw) return new Set(JSON.parse(raw));
+  } catch {}
+  return new Set();
+}
+
+/** Save favorites to localStorage */
+function saveLocalFavorites(ids: Set<string>) {
+  if (typeof window === 'undefined') return;
+  try {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...ids]));
+  } catch {}
+}
+
 export function FavoritesProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
-  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
+  const [favoriteIds, setFavoriteIds] = useState<Set<string>>(() => getLocalFavorites());
   const [loading, setLoading] = useState(false);
 
-  // Fetch favorites when user changes
+  // Fetch favorites when user changes — merge with local
   useEffect(() => {
     if (!user?.id) {
-      setFavoriteIds(new Set());
+      // Not logged in: use localStorage only
+      setFavoriteIds(getLocalFavorites());
       return;
     }
 
     let cancelled = false;
     setLoading(true);
+    
     favoritesService.getAll(user.id).then(ids => {
       if (!cancelled) {
-        setFavoriteIds(new Set(ids));
+        const localIds = getLocalFavorites();
+        const merged = new Set([...ids, ...localIds]);
+        setFavoriteIds(merged);
+        saveLocalFavorites(merged);
+
+        // Sync any local-only favorites to Firebase
+        const localOnly = [...localIds].filter(id => !ids.includes(id));
+        for (const id of localOnly) {
+          favoritesService.add(user.id, id).catch(console.error);
+        }
       }
-    }).catch(console.error).finally(() => {
+    }).catch((err) => {
+      console.error('Failed to fetch favorites from Firebase:', err);
+      if (!cancelled) {
+        // Fallback to localStorage
+        setFavoriteIds(getLocalFavorites());
+      }
+    }).finally(() => {
       if (!cancelled) setLoading(false);
     });
 
@@ -49,11 +86,6 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   }, [favoriteIds]);
 
   const toggleFavorite = useCallback(async (bookId: string) => {
-    if (!user?.id) {
-      toast.error('يجب تسجيل الدخول لاستخدام المفضلة');
-      return;
-    }
-
     const isCurrentlyFav = favoriteIds.has(bookId);
 
     // Optimistic update
@@ -64,8 +96,15 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
       } else {
         next.add(bookId);
       }
+      saveLocalFavorites(next);
       return next;
     });
+
+    // If not logged in, just save locally
+    if (!user?.id) {
+      toast.success(isCurrentlyFav ? 'تمت الإزالة من المفضلة' : 'تمت الإضافة إلى المفضلة');
+      return;
+    }
 
     try {
       if (isCurrentlyFav) {
@@ -84,6 +123,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
         } else {
           next.delete(bookId);
         }
+        saveLocalFavorites(next);
         return next;
       });
       toast.error('حدث خطأ. يرجى المحاولة مجدداً');

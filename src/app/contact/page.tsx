@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import toast from 'react-hot-toast';
+import { CommunityCTA } from '@/components/common/CommunityCTA';
 
 
 const WHATSAPP_NUMBER = '905377906230';
@@ -97,8 +98,8 @@ export default function ContactPage() {
                 {
                   icon: Mail,
                   title: 'البريد الإلكتروني',
-                  value: 'support@motoon.app',
-                  href: 'mailto:support@motoon.app',
+                  value: 'beshirswed07@gmail.com',
+                  href: 'mailto:beshirswed07@gmail.com',
                   color: 'bg-primary/10 text-primary',
                 },
                 {
@@ -267,6 +268,7 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <CommunityCTA showContactCard={false} />
     </div>
   );
 }

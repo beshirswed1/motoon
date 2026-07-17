@@ -21,9 +21,9 @@
 // ─── Imports ────────────────────────────────────────────────────────────────
 
 import { normalizeArabic, normalizeWord, isPunctuation, areSimilarLetters } from '../normalizer';
-import { matchWords, isWordCorrect, CORRECT_THRESHOLD } from '../matcher';
+import { matchWords, isWordCorrect } from '../matcher';
 import { ExpectedTextEngine } from '../expected-text';
-import { RecitationStateMachine, type WordState, type ProcessResult } from '../state-machine';
+import { RecitationStateMachine, type ProcessResult } from '../state-machine';
 import { computeStats, buildVerseResult, buildAllResults } from '../evaluation';
 
 // ─── Test Harness ───────────────────────────────────────────────────────────
@@ -142,7 +142,7 @@ assert(engine.words.length > 0, 'Words array is populated');
 // Verse boundaries
 const v0 = engine.getVerseBoundary(0);
 const v1 = engine.getVerseBoundary(1);
-const v2 = engine.getVerseBoundary(2);
+assert(engine.getVerseBoundary(2) !== null, 'Verse 2 exists');
 assert(v0 !== null && v0.startWordIndex === 0, 'Verse 0 starts at index 0');
 assert(v1 !== null && v1.startWordIndex === v0!.endWordIndex, 'Verse 1 starts right after verse 0');
 
@@ -229,8 +229,8 @@ console.log('\n  --- 4c. 2-word repeat detection (Android restart scenario) ---'
   sm.processSpokenWord('أبدأ');   // correct
   sm.processSpokenWord('بالحمد'); // correct
   // Android restarts, re-sends "أبدأ", "بالحمد"
-  const r1 = sm.processSpokenWord('أبدأ');
-  const r2 = sm.processSpokenWord('بالحمد');
+  sm.processSpokenWord('أبدأ');
+  sm.processSpokenWord('بالحمد');
 
   // Both should be caught as repeats — pointer must stay at 2 ("مصليا")
   assert(sm.getCurrentIndex() === 2, 'Pointer stays at 2 after 2-word repeat');
@@ -464,26 +464,7 @@ console.log('\n  --- 6a. Simulate Android session with 3 restarts ---');
   // Simulate the SpeechAdapter's word emission logic
   let globalEmitted: string[] = [];
 
-  function simulateAdapterEmission(
-    initialGlobal: string[],
-    instanceWordsSequence: string[][],
-  ): string[] {
-    const allEmitted: string[] = [];
-    let instanceEmittedCount = 0;
 
-    for (const instanceWords of instanceWordsSequence) {
-      const skip = simulateComputeSkip(initialGlobal, instanceWords);
-      const newWords = instanceWords.slice(skip);
-      const toEmit = newWords.slice(instanceEmittedCount);
-
-      for (const word of toEmit) {
-        allEmitted.push(word);
-        instanceEmittedCount++;
-      }
-    }
-
-    return allEmitted;
-  }
 
   // === Instance 1: User says "أبدأ بالحمد" ===
   let initialGlobal1: string[] = [];
@@ -818,15 +799,7 @@ console.log('\n  --- 9a. Original bug reproduction: 3× word repeat causing casc
   const eng = new ExpectedTextEngine(verses);
   const sm = new RecitationStateMachine(eng);
 
-  // What happens when the same word is delivered 3 times due to Android restarts
-  const wordSequence = [
-    // Instance 1: user says "أبدأ بالحمد"
-    'أبدأ', 'بالحمد',
-    // Instance 2 restart: re-delivers "بالحمد" + new "مصليا"
-    'بالحمد', 'مصليا',
-    // Instance 3 restart: re-delivers "مصليا" + new "على"
-    'مصليا', 'على',
-  ];
+
 
   // Feed through adapter simulation first
   const emitted: string[] = [];

@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Mic, Hash, Award, Info, Heart } from 'lucide-react';
 import { useFavorites } from '@/hooks/useFavorites';
 import { useAuth } from '@/hooks/useAuth';
+import { MatnCover } from '@/components/common/MatnCover';
+import { getCategoryLabel, getSubcategoryLabel } from '@/lib/constants/categories';
 
 export interface BookCardProps {
   book: BookType & { versesCount?: number };
@@ -17,30 +19,14 @@ export interface BookCardProps {
   viewMode?: 'grid' | 'list';
 }
 
-// Beautiful gradient patterns for books without covers
-const coverGradients = [
-  'from-primary/30 via-primary/15 to-emerald-600/20',
-  'from-amber-500/30 via-amber-400/15 to-yellow-300/20',
-  'from-indigo-600/30 via-indigo-500/15 to-blue-400/20',
-  'from-rose-500/30 via-rose-400/15 to-pink-300/20',
-  'from-teal-600/30 via-teal-500/15 to-cyan-400/20',
-  'from-violet-600/30 via-violet-500/15 to-purple-400/20',
-];
-
-const islamicPatternSvg = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23000' stroke-width='0.4' stroke-opacity='0.12'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Cpath d='M15 15 L45 15 L45 45 L15 45 Z'/%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/svg%3E")`;
-
-function getGradientIndex(title: string): number {
-  let hash = 0;
-  for (let i = 0; i < title.length; i++) {
-    hash = (hash << 5) - hash + title.charCodeAt(i);
-    hash |= 0;
-  }
-  return Math.abs(hash) % coverGradients.length;
-}
-
 export function BookCard({ book, showProgress, progressValue = 0, masteryScore, viewMode = 'grid' }: BookCardProps) {
-  const gradientClass = coverGradients[getGradientIndex(book.title)];
   const versesCount = book.versesCount ?? 0;
+
+  const categoryText = book.category
+    ? (book.subcategory
+        ? `${getCategoryLabel(book.category)} > ${getSubcategoryLabel(book.category, book.subcategory)}`
+        : getCategoryLabel(book.category))
+    : 'متن علمي';
   const canGetCertificate = masteryScore !== undefined && masteryScore >= 95;
   const { user } = useAuth();
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -63,10 +49,11 @@ export function BookCard({ book, showProgress, progressValue = 0, masteryScore, 
               sizes="144px"
             />
           ) : (
-            <div className={`flex h-full items-center justify-center bg-gradient-to-br ${gradientClass} relative overflow-hidden p-3`}
-              style={{ backgroundImage: islamicPatternSvg }}>
-              <p className="text-xs font-black text-foreground text-center line-clamp-3">{book.title}</p>
-            </div>
+            <MatnCover
+              title={book.title}
+              author={book.author}
+              category={categoryText}
+            />
           )}
         </Link>
 
@@ -131,25 +118,11 @@ export function BookCard({ book, showProgress, progressValue = 0, masteryScore, 
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         ) : (
-          <div
-            className={`flex h-full items-center justify-center bg-gradient-to-br ${gradientClass} relative overflow-hidden`}
-            style={{ backgroundImage: islamicPatternSvg }}
-          >
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-32 h-32 rounded-full border-2 border-current opacity-10" />
-              <div className="absolute w-20 h-20 rounded-full border border-current opacity-15" />
-            </div>
-            <div className="relative z-10 flex flex-col items-center gap-3 p-6 text-center">
-              <div className="text-4xl opacity-20">﴾﴿</div>
-              <p className="text-base font-black text-foreground leading-snug line-clamp-4 px-2">
-                {book.title}
-              </p>
-              <div className="text-xs opacity-40">◆</div>
-              <p className="text-xs font-semibold text-muted-foreground line-clamp-1">
-                {book.author}
-              </p>
-            </div>
-          </div>
+          <MatnCover
+            title={book.title}
+            author={book.author}
+            category={categoryText}
+          />
         )}
 
         {/* Hover overlay */}

@@ -13,6 +13,7 @@ interface CertificateData {
   hijriDate: string;
   certId: string;
   verifyUrl: string;
+  category?: string;
 }
 
 interface CertificateCanvasProps {
@@ -33,10 +34,63 @@ function getGradeColor(score: number): string {
   return '#0F766E';
 }
 
-function getMotivationalText(score: number): string {
-  if (score === 100) return 'بسم الله الرحمن الرحيم\nأتمّ هذا الطالب حفظ هذا المتن الشريف بإتقان تام وإجادة كاملة\nنسأل الله أن يبارك في علمه وأن ينفع به الإسلام والمسلمين\n«وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا»';
-  if (score >= 97) return 'بسم الله الرحمن الرحيم\nأتمّ هذا الطالب حفظ هذا المتن الشريف بدرجة ممتازة وإجادة عالية\nنسأل الله أن يثبّت حفظه ويبارك في علمه\n«مَن يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ»';
-  return 'بسم الله الرحمن الرحيم\nأتمّ هذا الطالب حفظ هذا المتن الشريف بدرجة مشرّفة\nنسأل الله أن يكون عوناً له في مسيرته العلمية\n«وَقُل رَّبِّ زِدْنِي عِلْمًا»';
+/** قاموس الآيات والأحاديث حسب تصنيف المتن */
+const CATEGORY_VERSES: Record<string, { text: string; source: string }> = {
+  'quran-sciences': {
+    text: '﴿إِنَّا نَحْنُ نَزَّلْنَا الذِّكْرَ وَإِنَّا لَهُ لَحَافِظُونَ﴾',
+    source: 'سورة الحجر: ٩',
+  },
+  'hadith-sciences': {
+    text: '«نَضَّرَ اللهُ امرأً سَمِعَ مِنَّا حَدِيثًا فَحَفِظَهُ حَتَّى يُبَلِّغَهُ»',
+    source: 'رواه الترمذي',
+  },
+  'aqeedah': {
+    text: '﴿فَاعْلَمْ أَنَّهُ لَا إِلَٰهَ إِلَّا اللَّهُ﴾',
+    source: 'سورة محمد: ١٩',
+  },
+  'fiqh': {
+    text: '«مَن يُرِدِ اللَّهُ بِهِ خَيْرًا يُفَقِّهْهُ فِي الدِّينِ»',
+    source: 'متفق عليه',
+  },
+  'arabic-language': {
+    text: '﴿إِنَّا أَنزَلْنَاهُ قُرْآنًا عَرَبِيًّا لَّعَلَّكُمْ تَعْقِلُونَ﴾',
+    source: 'سورة يوسف: ٢',
+  },
+  'seerah-tarikh': {
+    text: '﴿لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ﴾',
+    source: 'سورة الأحزاب: ٢١',
+  },
+  'akhlaq-tazkiya': {
+    text: '«إنَّ مِنْ أَحَبِّكُمْ إِلَيَّ وَأَقْرَبِكُمْ مِنِّي مَجْلِسًا يَوْمَ الْقِيَامَةِ أَحَاسِنُكُمْ أَخْلَاقًا»',
+    source: 'رواه الترمذي',
+  },
+  'dawah': {
+    text: '﴿ادْعُ إِلَى سَبِيلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ﴾',
+    source: 'سورة النحل: ١٢٥',
+  },
+  'mantiq': {
+    text: '﴿وَقُل رَّبِّ زِدْنِي عِلْمًا﴾',
+    source: 'سورة طه: ١١٤',
+  },
+};
+
+/** الحصول على الآية/الحديث المناسب */
+function getCategoryVerse(category?: string): { text: string; source: string } {
+  if (category && CATEGORY_VERSES[category]) {
+    return CATEGORY_VERSES[category];
+  }
+  // Default
+  return {
+    text: '«مَن سَلَكَ طَرِيقًا يَلْتَمِسُ فِيهِ عِلْمًا سَهَّلَ اللَّهُ لَهُ بِهِ طَرِيقًا إِلَى الْجَنَّةِ»',
+    source: 'رواه مسلم',
+  };
+}
+
+/** دعاء مناسب حسب الدرجة */
+function getDua(score: number): string {
+  if (score === 100) return 'بارك الله فيكم ونفع بكم، وجعل هذا الحفظ حجة لكم لا عليكم، وثبّته في صدوركم وزادكم علماً وعملاً';
+  if (score >= 97) return 'بارك الله فيكم ونفع بكم، وجعل هذا الحفظ نوراً ورفعة لكم وزادكم من فضله وتوفيقه';
+  return 'بارك الله فيكم ونفع بكم، وجعل هذا الإنجاز عوناً لكم في مسيرتكم العلمية المباركة';
 }
 
 export async function drawCertificate(
@@ -49,189 +103,266 @@ export async function drawCertificate(
   canvas.height = H;
   const ctx = canvas.getContext('2d')!;
 
-  // ─── Background ───────────────────────────────
+  // ─── Background ─────────────────────────────
   const bg = ctx.createLinearGradient(0, 0, W, H);
   bg.addColorStop(0, '#FEFEFE');
-  bg.addColorStop(0.5, '#F8F4EE');
+  bg.addColorStop(0.3, '#FBF8F1');
+  bg.addColorStop(0.7, '#F8F4EE');
   bg.addColorStop(1, '#FEFEFE');
   ctx.fillStyle = bg;
   ctx.fillRect(0, 0, W, H);
 
-  // ─── Outer border (gold) ───────────────────────
-  const outerM = 20;
+  // Subtle pattern overlay
+  ctx.fillStyle = 'rgba(212, 175, 55, 0.02)';
+  for (let i = 0; i < W; i += 40) {
+    for (let j = 0; j < H; j += 40) {
+      ctx.fillRect(i, j, 1, 1);
+    }
+  }
+
+  // ─── Outer border (gold) ────────────────────
+  const outerM = 18;
   ctx.strokeStyle = '#C9A84C';
-  ctx.lineWidth = 6;
-  roundRect(ctx, outerM, outerM, W - outerM * 2, H - outerM * 2, 24);
+  ctx.lineWidth = 5;
+  roundRect(ctx, outerM, outerM, W - outerM * 2, H - outerM * 2, 20);
   ctx.stroke();
 
-  // ─── Inner border (thin) ──────────────────────
-  const innerM = 34;
+  // ─── Second border ─────────────────────────
+  const m2 = 26;
   ctx.strokeStyle = '#D4AF37';
   ctx.lineWidth = 1.5;
-  roundRect(ctx, innerM, innerM, W - innerM * 2, H - innerM * 2, 18);
+  roundRect(ctx, m2, m2, W - m2 * 2, H - m2 * 2, 16);
   ctx.stroke();
 
-  // ─── Corner ornaments ─────────────────────────
-  drawCornerOrnament(ctx, outerM + 10, outerM + 10, 60);
-  drawCornerOrnament(ctx, W - outerM - 10, outerM + 10, 60, true);
-  drawCornerOrnament(ctx, outerM + 10, H - outerM - 10, 60, false, true);
-  drawCornerOrnament(ctx, W - outerM - 10, H - outerM - 10, 60, true, true);
+  // ─── Inner border ──────────────────────────
+  const innerM = 34;
+  ctx.strokeStyle = 'rgba(212, 175, 55, 0.3)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, innerM, innerM, W - innerM * 2, H - innerM * 2, 12);
+  ctx.stroke();
 
-  // ─── Header band ──────────────────────────────
+  // ─── Corner ornaments ─────────────────────
+  drawCornerOrnament(ctx, outerM + 8, outerM + 8, 65);
+  drawCornerOrnament(ctx, W - outerM - 8, outerM + 8, 65, true);
+  drawCornerOrnament(ctx, outerM + 8, H - outerM - 8, 65, false, true);
+  drawCornerOrnament(ctx, W - outerM - 8, H - outerM - 8, 65, true, true);
+
+  // ─── Header band ──────────────────────────
   const headerGrad = ctx.createLinearGradient(0, 0, W, 0);
-  headerGrad.addColorStop(0, '#0F766E');
-  headerGrad.addColorStop(0.5, '#0d9488');
-  headerGrad.addColorStop(1, '#0F766E');
+  headerGrad.addColorStop(0, '#0d5c56');
+  headerGrad.addColorStop(0.3, '#0F766E');
+  headerGrad.addColorStop(0.5, '#14988e');
+  headerGrad.addColorStop(0.7, '#0F766E');
+  headerGrad.addColorStop(1, '#0d5c56');
   ctx.fillStyle = headerGrad;
-  roundRect(ctx, 50, 50, W - 100, 120, 14);
+  roundRect(ctx, 48, 48, W - 96, 110, 14);
   ctx.fill();
 
-  // ─── Platform name ────────────────────────────
-  ctx.fillStyle = '#FFFFFF';
-  ctx.font = `bold 46px 'IBM Plex Sans Arabic', Arial`;
-  ctx.textAlign = 'center';
-  ctx.fillText('منصة متون', W / 2, 100);
-
-  ctx.fillStyle = 'rgba(255,255,255,0.75)';
-  ctx.font = `20px 'IBM Plex Sans Arabic', Arial`;
-  ctx.fillText('للتعليم الإسلامي وحفظ المتون الشرعية', W / 2, 135);
-
-  // ─── Decorative divider ───────────────────────
-  ctx.strokeStyle = '#D4AF37';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(100, 185);
-  ctx.lineTo(W - 100, 185);
+  // Header inner line
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth = 1;
+  roundRect(ctx, 52, 52, W - 104, 102, 12);
   ctx.stroke();
 
-  // Diamond in center
-  ctx.fillStyle = '#D4AF37';
-  ctx.save();
-  ctx.translate(W / 2, 185);
-  ctx.rotate(Math.PI / 4);
-  ctx.fillRect(-8, -8, 16, 16);
-  ctx.restore();
-
-  // ─── Certificate title ────────────────────────
-  ctx.fillStyle = '#C9A84C';
-  ctx.font = `bold 30px 'IBM Plex Sans Arabic', Arial`;
+  // ─── Platform name ────────────────────────
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = `bold 44px 'IBM Plex Sans Arabic', Arial`;
   ctx.textAlign = 'center';
-  ctx.fillText('شهادة إتمام وإتقان', W / 2, 230);
+  ctx.fillText('منصة متون', W / 2, 96);
 
-  // ─── Motivational text ───────────────────────
-  const motText = getMotivationalText(data.score);
-  const motLines = motText.split('\n');
-  ctx.fillStyle = '#374151';
-  ctx.font = `16px 'IBM Plex Sans Arabic', Arial`;
-  motLines.forEach((line, i) => {
-    ctx.fillText(line, W / 2, 270 + i * 26);
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.font = `18px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText('للتعليم الإسلامي وحفظ المتون الشرعية', W / 2, 128);
+
+  // ─── Decorative divider ────────────────────
+  ctx.strokeStyle = '#D4AF37';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(150, 178);
+  ctx.lineTo(W - 150, 178);
+  ctx.stroke();
+
+  // Diamond ornaments
+  ctx.fillStyle = '#D4AF37';
+  [W / 2, W / 2 - 80, W / 2 + 80].forEach((x, i) => {
+    ctx.save();
+    ctx.translate(x, 178);
+    ctx.rotate(Math.PI / 4);
+    const size = i === 0 ? 8 : 4;
+    ctx.fillRect(-size, -size, size * 2, size * 2);
+    ctx.restore();
   });
 
-  // ─── Student name section ─────────────────────
-  ctx.fillStyle = '#111827';
-  ctx.font = `bold 44px 'IBM Plex Sans Arabic', Arial`;
-  ctx.fillText(data.studentName, W / 2, 420);
+  // ─── Certificate title ────────────────────
+  ctx.fillStyle = '#C9A84C';
+  ctx.font = `bold 28px 'IBM Plex Sans Arabic', Arial`;
+  ctx.textAlign = 'center';
+  ctx.fillText('شهادة إتمام وإتقان', W / 2, 218);
 
-  // Underline
-  const nameW = ctx.measureText(data.studentName).width;
-  ctx.strokeStyle = getGradeColor(data.score);
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.moveTo(W / 2 - nameW / 2, 432);
-  ctx.lineTo(W / 2 + nameW / 2, 432);
-  ctx.stroke();
-
-  // ─── Book name ────────────────────────────────
-  ctx.fillStyle = '#374151';
-  ctx.font = `22px 'IBM Plex Sans Arabic', Arial`;
-  ctx.fillText(`حفظ وأتقن متن: "${data.bookTitle}"`, W / 2, 470);
-
-  ctx.fillStyle = '#6B7280';
-  ctx.font = `16px 'IBM Plex Sans Arabic', Arial`;
-  ctx.fillText(`للإمام ${data.bookAuthor}`, W / 2, 498);
-
-  // ─── Grade badge ──────────────────────────────
+  // ─── Main certificate body (new format) ────
   const gradeColor = getGradeColor(data.score);
   const gradeLabel = getGradeLabel(data.score);
-  const badgeY = 520;
-  const badgeW = 240;
-  const badgeH = 50;
+
+  // Line 1: أتم الطالب
+  ctx.fillStyle = '#4B5563';
+  ctx.font = `20px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText('أتم الطالب:', W / 2, 258);
+
+  // Student name (large, bold)
+  ctx.fillStyle = '#111827';
+  ctx.font = `bold 42px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText(data.studentName, W / 2, 310);
+
+  // Name underline decoration
+  const nameW = ctx.measureText(data.studentName).width;
+  const lineGrad = ctx.createLinearGradient(W / 2 - nameW / 2, 0, W / 2 + nameW / 2, 0);
+  lineGrad.addColorStop(0, 'transparent');
+  lineGrad.addColorStop(0.2, gradeColor);
+  lineGrad.addColorStop(0.8, gradeColor);
+  lineGrad.addColorStop(1, 'transparent');
+  ctx.strokeStyle = lineGrad;
+  ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - nameW / 2 - 20, 320);
+  ctx.lineTo(W / 2 + nameW / 2 + 20, 320);
+  ctx.stroke();
+
+  // Line 2: حفظ متن
+  ctx.fillStyle = '#4B5563';
+  ctx.font = `20px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText('حفظ متن:', W / 2, 360);
+
+  // Book title
+  ctx.fillStyle = '#1F2937';
+  ctx.font = `bold 28px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText(`"${data.bookTitle}"`, W / 2, 398);
+
+  // Author
+  ctx.fillStyle = '#6B7280';
+  ctx.font = `16px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText(`للإمام ${data.bookAuthor}`, W / 2, 425);
+
+  // ─── Grade badge ──────────────────────────
+  const badgeY = 445;
+  const badgeW = 280;
+  const badgeH = 46;
   const badgeX = W / 2 - badgeW / 2;
 
-  ctx.fillStyle = gradeColor + '18';
-  roundRect(ctx, badgeX, badgeY, badgeW, badgeH, 25);
+  // Badge background
+  ctx.fillStyle = gradeColor + '12';
+  roundRect(ctx, badgeX, badgeY, badgeW, badgeH, 23);
   ctx.fill();
-  ctx.strokeStyle = gradeColor;
-  ctx.lineWidth = 2;
-  roundRect(ctx, badgeX, badgeY, badgeW, badgeH, 25);
+  ctx.strokeStyle = gradeColor + '60';
+  ctx.lineWidth = 1.5;
+  roundRect(ctx, badgeX, badgeY, badgeW, badgeH, 23);
   ctx.stroke();
 
   ctx.fillStyle = gradeColor;
-  ctx.font = `bold 22px 'IBM Plex Sans Arabic', Arial`;
-  ctx.fillText(`${data.score}% — ${gradeLabel}`, W / 2, badgeY + 32);
+  ctx.font = `bold 20px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText(`بتقدير: ${gradeLabel} — ${data.score}%`, W / 2, badgeY + 30);
 
-  // ─── Horizontal divider ───────────────────────
+  // ─── Dua ──────────────────────────────────
+  const dua = getDua(data.score);
+  ctx.fillStyle = '#6B7280';
+  ctx.font = `14px 'IBM Plex Sans Arabic', Arial`;
+  // Word-wrap the dua
+  const duaLines = wrapText(ctx, dua, W - 200);
+  duaLines.forEach((line, i) => {
+    ctx.fillText(line, W / 2, 516 + i * 22);
+  });
+
+  const duaEndY = 516 + duaLines.length * 22;
+
+  // ─── Dynamic verse/hadith ─────────────────
+  const verse = getCategoryVerse(data.category);
+  ctx.fillStyle = '#0F766E';
+  ctx.font = `bold 15px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText(verse.text, W / 2, duaEndY + 18);
+  ctx.fillStyle = '#9CA3AF';
+  ctx.font = `12px 'IBM Plex Sans Arabic', Arial`;
+  ctx.fillText(`— ${verse.source}`, W / 2, duaEndY + 38);
+
+  // ─── Horizontal divider ────────────────────
+  const divY = duaEndY + 56;
   ctx.strokeStyle = '#E5E7EB';
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(80, 595);
-  ctx.lineTo(W - 80, 595);
+  ctx.moveTo(80, divY);
+  ctx.lineTo(W - 80, divY);
   ctx.stroke();
 
-  // ─── Footer info row ─────────────────────────
+  // ─── Footer info row ──────────────────────
+  const footerY = divY + 30;
   ctx.fillStyle = '#6B7280';
-  ctx.font = `14px 'IBM Plex Sans Arabic', Arial`;
+  ctx.font = `13px 'IBM Plex Sans Arabic', Arial`;
   ctx.textAlign = 'right';
-  ctx.fillText(`التاريخ: ${data.date}`, W - 100, 635);
-  ctx.fillText(`${data.hijriDate} هـ`, W - 100, 655);
+  ctx.fillText(`التاريخ: ${data.date}`, W - 100, footerY);
+  ctx.fillText(`${data.hijriDate} هـ`, W - 100, footerY + 18);
 
   ctx.textAlign = 'left';
-  ctx.fillText(`رقم الشهادة: ${data.certId}`, 100, 635);
+  ctx.fillText(`رقم الشهادة: ${data.certId}`, 100, footerY);
 
   ctx.textAlign = 'center';
-  ctx.fillText('التحقق من الشهادة: motoon.app', W / 2, 645);
+  ctx.fillText('التحقق من الشهادة: motoon.com.tr', W / 2, footerY + 8);
 
-  // ─── QR Code ─────────────────────────────────
+  // ─── QR Code ──────────────────────────────
+  const qrY = footerY + 30;
   try {
     const qrDataUrl = await QRCode.toDataURL(data.verifyUrl, {
-      width: 100,
+      width: 90,
       margin: 1,
       color: { dark: '#0F766E', light: '#FFFFFF' },
     });
     const qrImg = new Image();
     await new Promise<void>((resolve) => {
       qrImg.onload = () => {
-        ctx.drawImage(qrImg, W / 2 - 50, 670, 100, 100);
+        ctx.drawImage(qrImg, W / 2 - 45, qrY, 90, 90);
         resolve();
       };
       qrImg.src = qrDataUrl;
     });
   } catch {}
 
-  // ─── Platform stamp ───────────────────────────
-  ctx.save();
-  ctx.translate(W - 160, H - 140);
-  ctx.strokeStyle = '#0F766E';
-  ctx.lineWidth = 2.5;
-  ctx.setLineDash([6, 3]);
-  ctx.beginPath();
-  ctx.arc(0, 0, 55, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.fillStyle = '#0F766E';
-  ctx.font = `bold 13px 'IBM Plex Sans Arabic', Arial`;
-  ctx.textAlign = 'center';
-  ctx.fillText('منصة متون', 0, -10);
-  ctx.font = `11px 'IBM Plex Sans Arabic', Arial`;
-  ctx.fillText('motoon.app', 0, 8);
-  ctx.fillText('✦ ختم رسمي ✦', 0, 26);
-  ctx.restore();
-
-  // ─── QR label ─────────────────────────────────
+  // QR label
   ctx.fillStyle = '#9CA3AF';
-  ctx.font = `11px 'IBM Plex Sans Arabic', Arial`;
+  ctx.font = `10px 'IBM Plex Sans Arabic', Arial`;
   ctx.textAlign = 'center';
-  ctx.fillText('امسح للتحقق', W / 2, 785);
+  ctx.fillText('امسح للتحقق', W / 2, qrY + 100);
+
+  // ─── Platform Logo (Instead of stamp) ───────
+  try {
+    const logoImg = new Image();
+    await new Promise<void>((resolve) => {
+      logoImg.onload = () => {
+        // Draw platform logo elegantly in the bottom right corner
+        ctx.drawImage(logoImg, W - 200, H - 150, 90, 90);
+        resolve();
+      };
+      logoImg.onerror = () => {
+        resolve();
+      };
+      logoImg.src = '/logo.png';
+    });
+  } catch {}
+}
+
+/** Word wrap helper */
+function wrapText(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
+  const words = text.split(' ');
+  const lines: string[] = [];
+  let currentLine = '';
+
+  for (const word of words) {
+    const testLine = currentLine ? `${currentLine} ${word}` : word;
+    if (ctx.measureText(testLine).width > maxWidth && currentLine) {
+      lines.push(currentLine);
+      currentLine = word;
+    } else {
+      currentLine = testLine;
+    }
+  }
+  if (currentLine) lines.push(currentLine);
+  return lines;
 }
 
 // ─── Helper: Rounded rectangle ────────────────
@@ -259,6 +390,8 @@ function drawCornerOrnament(
   ctx.translate(x, y);
   ctx.scale(flipX ? -1 : 1, flipY ? -1 : 1);
   ctx.strokeStyle = '#D4AF37';
+
+  // L-shape lines
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(0, 0);
@@ -266,10 +399,36 @@ function drawCornerOrnament(
   ctx.moveTo(0, 0);
   ctx.lineTo(0, size);
   ctx.stroke();
+
+  // Inner parallel lines
+  ctx.lineWidth = 0.8;
+  ctx.strokeStyle = 'rgba(212, 175, 55, 0.5)';
+  ctx.beginPath();
+  ctx.moveTo(8, 8);
+  ctx.lineTo(size - 5, 8);
+  ctx.moveTo(8, 8);
+  ctx.lineTo(8, size - 5);
+  ctx.stroke();
+
+  // Corner dot
   ctx.fillStyle = '#D4AF37';
   ctx.beginPath();
   ctx.arc(0, 0, 5, 0, Math.PI * 2);
   ctx.fill();
+
+  // Small diamond
+  ctx.save();
+  ctx.translate(size * 0.5, 0);
+  ctx.rotate(Math.PI / 4);
+  ctx.fillRect(-2.5, -2.5, 5, 5);
+  ctx.restore();
+
+  ctx.save();
+  ctx.translate(0, size * 0.5);
+  ctx.rotate(Math.PI / 4);
+  ctx.fillRect(-2.5, -2.5, 5, 5);
+  ctx.restore();
+
   ctx.restore();
 }
 

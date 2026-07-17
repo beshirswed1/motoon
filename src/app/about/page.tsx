@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { CommunityCTA } from '@/components/common/CommunityCTA';
 import { analyticsService } from '@/services/firebase/analytics.service';
 import {
   BookOpen, Brain, GraduationCap, Heart, Shield, Zap,
@@ -162,23 +163,8 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 section-padding bg-primary text-primary-foreground">
-        <div className="container-motoon text-center flex flex-col items-center gap-5">
-          <h2 className="text-2xl md:text-3xl font-black">انضم لمجتمع متون اليوم</h2>
-          <p className="opacity-80 max-w-lg">
-            ابدأ رحلتك في حفظ المتون الشرعية مجاناً، وكن جزءاً من مجتمع طلاب العلم
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Button size="lg" variant="secondary" asChild className="font-bold rounded-xl px-8">
-              <Link href="/register">إنشاء حساب مجاني</Link>
-            </Button>
-            <Button size="lg" variant="outline" asChild className="font-bold rounded-xl px-8 border-white/30 text-white hover:bg-white/10">
-              <Link href="/contact">تواصل معنا</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Community & Contact Section */}
+      <CommunityCTA />
     </div>
   );
 }
