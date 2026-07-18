@@ -7,6 +7,8 @@
   "difficulty": "beginner",
   "slug": "bayquniyyah",
   "status": "published",
+  "category": "hadith-sciences",
+  "subcategory": "mustalah",
   "tags": [
     "حديث",
     "مصطلح الحديث",
@@ -14,412 +16,412 @@
   ],
   "verses": [
     {
-      "id": "book_al_bayquniyyah_v_1",
+      "id": "book_al_bayquniyyah_v_1_4a6esffa",
       "bookId": "book_al_bayquniyyah",
       "text": "أَبْدَأُ بِالْحَمْدِ مُصَلِّيًا عَلَى ... مُحَمَّدٍ خَيْرِ نَبِيِّ أُرْسِلَا",
-      "normalizedText": "ابدا بالحمد مصليا على محمد خير نبي ارسلا",
+      "normalizedText": "ابدا بالحمد مصليا علي ... محمد خير نبي ارسلا",
       "order": 1,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_2",
+      "id": "book_al_bayquniyyah_v_2_2mj40nzy",
       "bookId": "book_al_bayquniyyah",
       "text": "وَذِي مِنْ أَقْسَامِ الْحَدِيثِ عِدَّهْ ... وَكُلُّ وَاحِدٍ أَتَى وَحَدَّهْ",
-      "normalizedText": "وذي من اقسام الحديث عده وكل واحد اتى وحده",
+      "normalizedText": "وذي من اقسام الحديث عده ... وكل واحد اتي وحده",
       "order": 2,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_3",
+      "id": "book_al_bayquniyyah_v_3_jrw63fwl",
       "bookId": "book_al_bayquniyyah",
       "text": "أَوَّلُهَا الصَّحِيحُ وَهْوَ مَا اتَّصَلْ ... إِسْنَادُهُ وَلَمْ يَشُذَّ أَوْ يُعَلْ",
-      "normalizedText": "اولها الصحيح وهو ما اتصل اسناده ولم يشذ او يعل",
+      "normalizedText": "اولها الصحيح وهو ما اتصل ... اسناده ولم يشذ او يعل",
       "order": 3,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_4",
+      "id": "book_al_bayquniyyah_v_4_7n5incvo",
       "bookId": "book_al_bayquniyyah",
       "text": "يَرْوِيهِ عَدْلٌ ضَابِطٌ عَنْ مِثْلِهِ ... مُعْتَمَدٌ فِي ضَبْطِهِ وَنَقْلِهِ",
-      "normalizedText": "يرويه عدل ضابط عن مثله معتمد في ضبطه ونقله",
+      "normalizedText": "يرويه عدل ضابط عن مثله ... معتمد في ضبطه ونقله",
       "order": 4,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_5",
+      "id": "book_al_bayquniyyah_v_5_tmxptwji",
       "bookId": "book_al_bayquniyyah",
       "text": "وَالْحَسَنُ الْمَعْرُوفُ طُرْقًا وَغَدَتْ ... رِجَالُهُ لَا كَالصَّحِيحِ اشْتَهَرَتْ",
-      "normalizedText": "والحسن المعروف طرقا وغدت رجاله لا كالصحيح اشتهرت",
+      "normalizedText": "والحسن المعروف طرقا وغدت ... رجاله لا كالصحيح اشتهرت",
       "order": 5,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_6",
+      "id": "book_al_bayquniyyah_v_6_frben84i",
       "bookId": "book_al_bayquniyyah",
       "text": "وَكُلُّ مَا عَنْ رُتْبَةِ الْحُسْنِ قَصُرْ ... فَهْوَ الضَّعِيفُ وَهْوَ أَقْسَامًا كَثُرْ",
-      "normalizedText": "وكل ما عن رتبة الحسن قصر فهو الضعيف وهو اقساما كثر",
+      "normalizedText": "وكل ما عن رتبه الحسن قصر ... فهو الضعيف وهو اقساما كثر",
       "order": 6,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_7",
+      "id": "book_al_bayquniyyah_v_7_cc6izn37",
       "bookId": "book_al_bayquniyyah",
       "text": "وَمَا أُضِيفَ لِلنَّبِي الْمَرْفُوعُ ... وَمَا لِتَابِعٍ هُوَ الْمَقْطُوعُ",
-      "normalizedText": "وما اضيف للنبي المرفوع وما لتابع هو المقطوع",
+      "normalizedText": "وما اضيف للنبي المرفوع ... وما لتابع هو المقطوع",
       "order": 7,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_8",
+      "id": "book_al_bayquniyyah_v_8_1inntrol",
       "bookId": "book_al_bayquniyyah",
       "text": "وَالْمُسْنَدُ الْمُتَّصِلُ الْإِسْنَادِ مِنْ ... رَاوِيهِ حَتَّى الْمُصْطَفَى وَلَمْ يَبِنْ",
-      "normalizedText": "والمسند المتصل الاسناد من راويه حتى المصطفى ولم يبن",
+      "normalizedText": "والمسند المتصل الاسناد من ... راويه حتي المصطفي ولم يبن",
       "order": 8,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_9",
+      "id": "book_al_bayquniyyah_v_9_4up907zz",
       "bookId": "book_al_bayquniyyah",
       "text": "وَمَا بِسَمْعِ كُلِّ رَاوٍ يَتَّصِلْ ... إِسْنَادُهُ لِلْمُصْطَفَى فَالْمُتَّصِلْ",
-      "normalizedText": "وما بسمع كل راو يتصل اسناده للمصطفى فالمتصل",
+      "normalizedText": "وما بسمع كل راو يتصل ... اسناده للمصطفي فالمتصل",
       "order": 9,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_10",
+      "id": "book_al_bayquniyyah_v_10_jr050ic3",
       "bookId": "book_al_bayquniyyah",
       "text": "مُسَلْسَلٌ قُلْ مَا عَلَى وَصْفٍ أَتَى ... مِثْلُ أَمَا وَاللَّهِ أَنْبَانِي الْفَتَى",
-      "normalizedText": "مسلسل قل ما على وصف اتى مثل اما والله انباني الفتى",
+      "normalizedText": "مسلسل قل ما علي وصف اتي ... مثل اما والله انباني الفتي",
       "order": 10,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_11",
+      "id": "book_al_bayquniyyah_v_11_ufvn9x62",
       "bookId": "book_al_bayquniyyah",
       "text": "كَذَاكَ قَدْ حَدَّثَنِيهِ قَائِمًا ... أَوْ بَعْدَ أَنْ حَدَّثَنِي تَبَسَّمَا",
-      "normalizedText": "كذاك قد حدثنيه قائما او بعد ان حدثني تبسما",
+      "normalizedText": "كذاك قد حدثنيه قايما ... او بعد ان حدثني تبسما",
       "order": 11,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_12",
+      "id": "book_al_bayquniyyah_v_12_2ztyqxa8",
       "bookId": "book_al_bayquniyyah",
       "text": "عَزِيزُ مَرْوِيِّ اثْنَيْنِ أَوْ ثَلَاثَهْ ... مَشْهُورُ مَرْوِيِّ فَوْقَ مَا ثَلَاثَهْ",
-      "normalizedText": "عزيز مروي اثنين او ثلاثه مشهور مروي فوق ما ثلاثه",
+      "normalizedText": "عزيز مروي اثنين او ثلاثه ... مشهور مروي فوق ما ثلاثه",
       "order": 12,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_13",
+      "id": "book_al_bayquniyyah_v_13_nl5e4s0t",
       "bookId": "book_al_bayquniyyah",
       "text": "مُعَنْعَنٌ كَعَنْ سَعِيدٍ عَنْ كَرَمْ ... وَمُبْهَمٌ مَا فِيهِ رَاوٍ لَمْ يُسَمْ",
-      "normalizedText": "معنعن كعن سعيد عن كرم ومبهم ما فيه راو لم يسم",
+      "normalizedText": "معنعن كعن سعيد عن كرم ... ومبهم ما فيه راو لم يسم",
       "order": 13,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_14",
+      "id": "book_al_bayquniyyah_v_14_tfjuqrh9",
       "bookId": "book_al_bayquniyyah",
       "text": "وَكُلُّ مَا قَلَّتْ رِجَالُهُ عَلَا ... وَضِدُّهُ ذَاكَ الَّذِي قَدْ نَزَلَا",
-      "normalizedText": "وكل ما قلت رجاله علا وضده ذاك الذي قد نزلا",
+      "normalizedText": "وكل ما قلت رجاله علا ... وضده ذاك الذي قد نزلا",
       "order": 14,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_15",
+      "id": "book_al_bayquniyyah_v_15_yyib2lbk",
       "bookId": "book_al_bayquniyyah",
       "text": "وَمَا أَضَفْتَهُ إِلَى الْأَصْحَابِ مِنْ ... قَوْلٍ وَفِعْلٍ فَهْوَ مَوْقُوفٌ زُكِنْ",
-      "normalizedText": "وما اضفته الى الاصحاب من قول وفعل فهو موقوف زكن",
+      "normalizedText": "وما اضفته الي الاصحاب من ... قول وفعل فهو موقوف زكن",
       "order": 15,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_16",
+      "id": "book_al_bayquniyyah_v_16_n8rux6yy",
       "bookId": "book_al_bayquniyyah",
       "text": "وَمُرْسَلٌ مِنْهُ الصِّحَابِيُّ سَقَطْ ... وَقُلْ غَرِيبٌ مَا رَوَى رَاوٍ فَقَطْ",
-      "normalizedText": "ومرسل منه الصحابي سقط وقل غريب ما روى راو فقط",
+      "normalizedText": "ومرسل منه الصحابي سقط ... وقل غريب ما روي راو فقط",
       "order": 16,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_17",
+      "id": "book_al_bayquniyyah_v_17_zkxpt65o",
       "bookId": "book_al_bayquniyyah",
       "text": "وَكُلُّ مَا لَمْ يَتَّصِلْ بِحَالِ ... إِسْنَادُهُ مُنْقَطِعُ الْأَوْصَالِ",
-      "normalizedText": "وكل ما لم يتصل بحال اسناده منقطع الاوصال",
+      "normalizedText": "وكل ما لم يتصل بحال ... اسناده منقطع الاوصال",
       "order": 17,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_18",
+      "id": "book_al_bayquniyyah_v_18_f6u41k1p",
       "bookId": "book_al_bayquniyyah",
       "text": "وَالْمُعْضَلُ السَّاقِطُ مِنْهُ اثْنَانِ ... وَمَا أَتَى مُدَلَّسًا نَوْعَانِ",
-      "normalizedText": "والمعضل الساقط منه اثنان وما اتى مدلسا نوعان",
+      "normalizedText": "والمعضل الساقط منه اثنان ... وما اتي مدلسا نوعان",
       "order": 18,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_19",
+      "id": "book_al_bayquniyyah_v_19_fwkm8zys",
       "bookId": "book_al_bayquniyyah",
       "text": "الْأَوَّلُ الْإِسْقَاطُ لِلشَّيْخِ وَأَنْ ... يَنْقُلَ عَمَّنْ فَوْقَهُ بِعَنْ وَأَنْ",
-      "normalizedText": "الاول الاسقاط للشيخ وان ينقل عمن فوقه بعن وان",
+      "normalizedText": "الاول الاسقاط للشيخ وان ... ينقل عمن فوقه بعن وان",
       "order": 19,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_20",
+      "id": "book_al_bayquniyyah_v_20_nabw4srt",
       "bookId": "book_al_bayquniyyah",
       "text": "وَالثَّانِ لَا يُسْقِطُهُ لَكِنْ يَصِفْ ... أَوْصَافَهُ بِمَا بِهِ لَا يَنْعَرِفْ",
-      "normalizedText": "والثان لا يسقطه لكن يصف اوصافه بما به لا ينعرف",
+      "normalizedText": "والثان لا يسقطه لكن يصف ... اوصافه بما به لا ينعرف",
       "order": 20,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_21",
+      "id": "book_al_bayquniyyah_v_21_10fnxs37",
       "bookId": "book_al_bayquniyyah",
       "text": "وَمَا يُخَالِفْ ثِقَةٌ بِهِ الْمَلَا ... فَالشَّاذُّ وَالْمَقْلُوبُ قِسْمَانِ تَلَا",
-      "normalizedText": "وما يخالف ثقة به الملا فالشاذ والمقلوب قسمان تلا",
+      "normalizedText": "وما يخالف ثقه به الملا ... فالشاذ والمقلوب قسمان تلا",
       "order": 21,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_22",
+      "id": "book_al_bayquniyyah_v_22_5ksju7cc",
       "bookId": "book_al_bayquniyyah",
       "text": "إِبْدَالُ رَاوٍ مَا بِرَاوٍ قِسْمُ ... وَقَلْبُ إِسْنَادٍ لِمَتْنٍ قِسْمُ",
-      "normalizedText": "ابدال راو ما براو قسم وقلب اسناد لمتن قسم",
+      "normalizedText": "ابدال راو ما براو قسم ... وقلب اسناد لمتن قسم",
       "order": 22,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_23",
+      "id": "book_al_bayquniyyah_v_23_no9lf7gh",
       "bookId": "book_al_bayquniyyah",
       "text": "وَالْفَرْدُ مَا قَيَّدْتَهُ بِثِقَةِ ... أَوْ جَمْعٍ أَوْ قَصْرٍ عَلَى رِوَايَةِ",
-      "normalizedText": "والفرد ما قيدته بثقة او جمع او قصر على رواية",
+      "normalizedText": "والفرد ما قيدته بثقه ... او جمع او قصر علي روايه",
       "order": 23,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_24",
+      "id": "book_al_bayquniyyah_v_24_cn4r2d4o",
       "bookId": "book_al_bayquniyyah",
       "text": "وَمَا بِعِلَّةٍ غُمُوضٍ أَوْ خَفَا ... مُعَلَّلٌ عِنْدَهُمُ قَدْ عُرِفَا",
-      "normalizedText": "وما بعلة غموض او خفا معلل عندهم قد عرفا",
+      "normalizedText": "وما بعله غموض او خفا ... معلل عندهم قد عرفا",
       "order": 24,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_25",
+      "id": "book_al_bayquniyyah_v_25_pbddkaii",
       "bookId": "book_al_bayquniyyah",
       "text": "وَذُو اخْتِلَافِ سَنَدٍ أَوْ مَتْنِ ... مُضْطَرِبٌ عِنْدَ أُهَيْلِ الْفَنِّ",
-      "normalizedText": "وذو اختلاف سند او متن مضطرب عند اهيل الفن",
+      "normalizedText": "وذو اختلاف سند او متن ... مضطرب عند اهيل الفن",
       "order": 25,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_26",
+      "id": "book_al_bayquniyyah_v_26_de1n2aqg",
       "bookId": "book_al_bayquniyyah",
       "text": "وَالْمُدْرَجَاتُ فِي الْحَدِيثِ مَا أَتَتْ ... مِنْ بَعْضِ أَلْفَاظِ الرُّوَاةِ اتَّصَلَتْ",
-      "normalizedText": "والمدرجات في الحديث ما اتت من بعض الفاظ الرواة اتصلت",
+      "normalizedText": "والمدرجات في الحديث ما اتت ... من بعض الفاظ الرواه اتصلت",
       "order": 26,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_27",
+      "id": "book_al_bayquniyyah_v_27_tt1xlctl",
       "bookId": "book_al_bayquniyyah",
       "text": "وَمَا رَوَى كُلُّ قَرِينٍ عَنْ أَخِيهْ ... مُدَبَّجٌ فَاعْرِفْهُ حَقًّا وَانْتَخِيهْ",
-      "normalizedText": "وما روى كل قرين عن اخيه مدبج فاعرفه حقا وانتخيه",
+      "normalizedText": "وما روي كل قرين عن اخيه ... مدبج فاعرفه حقا وانتخيه",
       "order": 27,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_28",
+      "id": "book_al_bayquniyyah_v_28_mi42waik",
       "bookId": "book_al_bayquniyyah",
       "text": "مُتَّفِقٌ لَفْظًا وَخَطًّا مُتَّفِقْ ... وَضِدُّهُ فِيمَا ذَكَرْنَا الْمُفْتَرِقْ",
-      "normalizedText": "متفق لفظا وخطا متفق وضده فيما ذكرنا المفترق",
+      "normalizedText": "متفق لفظا وخطا متفق ... وضده فيما ذكرنا المفترق",
       "order": 28,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_29",
+      "id": "book_al_bayquniyyah_v_29_t8dz6ptx",
       "bookId": "book_al_bayquniyyah",
       "text": "مُؤْتَلِفٌ مُتَّفِقُ الْخَطِّ فَقَطْ ... وَضِدُّهُ مُخْتَلِفٌ فَاخْشَ الْغَلَطْ",
-      "normalizedText": "مؤتلف متفق الخط فقط وضده مختلف فاخش الغلط",
+      "normalizedText": "موتلف متفق الخط فقط ... وضده مختلف فاخش الغلط",
       "order": 29,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_30",
+      "id": "book_al_bayquniyyah_v_30_5dp8dm5k",
       "bookId": "book_al_bayquniyyah",
       "text": "وَالْمُنْكَرُ الْفَرْدُ بِهِ رَاوٍ غَدَا ... تَعْدِيلُهُ لَا يَحْمِلُ التَّفَرُّدَا",
-      "normalizedText": "والمنكر الفرد به راو غدا تعديله لا يحمل التفردا",
+      "normalizedText": "والمنكر الفرد به راو غدا ... تعديله لا يحمل التفردا",
       "order": 30,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_31",
+      "id": "book_al_bayquniyyah_v_31_ydhdwsyr",
       "bookId": "book_al_bayquniyyah",
       "text": "مَتْرُوكُهُ مَا وَاحِدٌ بِهِ انْفَرَدْ ... وَأَجْمَعُوا لِضَعْفِهِ فَهْوَ كَرَدْ",
-      "normalizedText": "متروكه ما واحد به انفرد واجمعوا لضعفه فهو كرد",
+      "normalizedText": "متروكه ما واحد به انفرد ... واجمعوا لضعفه فهو كرد",
       "order": 31,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_32",
+      "id": "book_al_bayquniyyah_v_32_n4exc92h",
       "bookId": "book_al_bayquniyyah",
       "text": "وَالْكَذِبُ الْمُخْتَلَقُ الْمَصْنُوعُ ... عَلَى النَّبِيِّ فَذَلِكَ الْمَوْضُوعُ",
-      "normalizedText": "والكذب المختلق المصنوع على النبي فذلك الموضوع",
+      "normalizedText": "والكذب المختلق المصنوع ... علي النبي فذلك الموضوع",
       "order": 32,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_33",
+      "id": "book_al_bayquniyyah_v_33_u0xv4qqj",
       "bookId": "book_al_bayquniyyah",
       "text": "وَقَدْ أَتَتْ كَالْجَوْهَرِ الْمَكْنُونِ ... سَمَّيْتُهَا مَنْظُومَةَ الْبَيْقُونِي",
-      "normalizedText": "وقد اتت كالجوهر المكنون سميتها منظومة البيقوني",
+      "normalizedText": "وقد اتت كالجوهر المكنون ... سميتها منظومه البيقوني",
       "order": 33,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_bayquniyyah_v_34",
+      "id": "book_al_bayquniyyah_v_34_47s2is7h",
       "bookId": "book_al_bayquniyyah",
       "text": "فَوْقَ الثَّلَاثِينَ بِأَرْبَعٍ أَتَتْ ... أَقْسَامُهَا تَمَّتْ بِخَيْرٍ خُتِمَتْ",
-      "normalizedText": "فوق الثلاثين باربع اتت اقسامها تمت بخير ختمت",
+      "normalizedText": "فوق الثلاثين باربع اتت ... اقسامها تمت بخير ختمت",
       "order": 34,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     }
   ],
   "isPublished": true,
@@ -427,5 +429,5 @@
   "deletedAt": null,
   "deletedBy": null,
   "createdAt": "2026-07-01T19:25:57Z",
-  "updatedAt": "2026-07-01T19:25:57Z"
+  "updatedAt": "2026-07-18T16:00:00Z"
 }

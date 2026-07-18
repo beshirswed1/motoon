@@ -22,6 +22,8 @@ export interface LocalBookData {
   difficulty: string;
   slug: string;
   status: string;
+  category?: string;
+  subcategory?: string;
   tags: string[];
   verses: LocalVerseData[];
   isPublished: boolean;
@@ -95,6 +97,8 @@ function mapLocalBookToAppTypes(data: LocalBookData): { book: Book; verses: Vers
     isDeleted: false,
     deletedAt: null,
     deletedBy: null,
+    ...(data.category ? { category: data.category } : {}),
+    ...(data.subcategory ? { subcategory: data.subcategory } : {}),
   };
 
   if (data.coverImageUrl) {
@@ -148,6 +152,8 @@ export function getAllLocalBooks(): Book[] {
       isDeleted: false,
       deletedAt: null,
       deletedBy: null,
+      ...(data.category ? { category: data.category } : {}),
+      ...(data.subcategory ? { subcategory: data.subcategory } : {}),
     };
     
     if (data.coverImageUrl) {

@@ -21,11 +21,11 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.motoon.com.tr'),
   title: {
-    default: 'متون — منصة التعليم الإسلامي',
+    default: '🟢 متون | منصة التعليم الإسلامي',
     template: '%s | متون',
   },
   description:
-    'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بتقنيات الذكاء الاصطناعي',
+    '📖 احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي وتسميع صوتي بالذكاء الاصطناعي.',
   keywords: ['متون', 'حفظ القرآن', 'تعليم إسلامي', 'متون شرعية', 'فقه', 'عقيدة'],
   authors: [{ name: 'فريق متون' }],
   creator: 'منصة متون',
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
     locale: 'ar_SA',
     url: 'https://www.motoon.com.tr',
     siteName: 'متون',
-    title: 'متون — منصة التعليم الإسلامي لحفظ المتون',
-    description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية، القرآن الكريم، وتتبع تقدمك في الحفظ والمراجعة بتقنيات الذكاء الاصطناعي.',
+    title: '🟢 متون | منصة التعليم الإسلامي',
+    description: '📖 احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي وتسميع صوتي بالذكاء الاصطناعي.',
     images: [
       {
         url: 'https://www.motoon.com.tr/logo.png',
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'متون — منصة التعليم الإسلامي',
-    description: 'احفظ المتون الشرعية وتتبع تقدمك في الحفظ',
+    title: '🟢 متون | منصة التعليم الإسلامي',
+    description: '📖 احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي وتسميع صوتي بالذكاء الاصطناعي.',
     images: ['https://www.motoon.com.tr/logo.png'],
   },
   alternates: {

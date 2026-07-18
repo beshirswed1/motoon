@@ -3,10 +3,12 @@
   "title": "الدرة المضية (العقيدة السفارينية)",
   "author": "محمد بن أحمد السفاريني",
   "description": "العقيدة السفارينية المسماة الدرة المضية في عقد أهل الفرقة المرضية، منظومة في العقيدة الإسلامية جامعة لجل مسائل الاعتقاد من التوحيد والصفات والقدر والنبوة والمعاد.",
-  "coverImageUrl": "https://upload.wikimedia.org/wikipedia/ar/6/6e/%D8%A7%D9%84%D8%B9%D9%82%D9%8A%D8%AF%D8%A9_%D8%A7%D9%84%D8%B3%D9%81%D8%A7%D8%B1%D9%8A%D9%86%D9%8A%D8%A9.jpg",
+  "coverImageUrl": "",
   "difficulty": "intermediate",
   "slug": "al-durrah-al-mudiyyah",
   "status": "published",
+  "category": "quran-sciences",
+  "subcategory": "qiraat",
   "tags": [
     "عقيدة",
     "توحيد",
@@ -14,283 +16,283 @@
   ],
   "verses": [
     {
-      "id": "book_al_durrah_al_mudiyyah_v_1_l6bk274e",
+      "id": "book_al_durrah_al_mudiyyah_v_1_1x7e93ge",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "الْحَمد لله الْقَدِيم الْبَاقِي ... مسبب الْأَسْبَاب والأرزاق",
-      "normalizedText": "الحمد لله القديم الباقي ... مسبب الأسباب والأرزاق",
+      "normalizedText": "الحمد لله القديم الباقي ... مسبب الاسباب والارزاق",
       "order": 1,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_2_ypgrq1yx",
+      "id": "book_al_durrah_al_mudiyyah_v_2_3ibvur7a",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "حَيّ عليم قَادر مَوْجُود ... قَامَت بِهِ الْأَشْيَاء والوجود",
-      "normalizedText": "حي عليم قادر موجود ... قامت به الأشياء والوجود",
+      "normalizedText": "حي عليم قادر موجود ... قامت به الاشيا والوجود",
       "order": 2,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_3_y6q8i83v",
+      "id": "book_al_durrah_al_mudiyyah_v_3_au45myzo",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "دلّت على وجوده الْحَوَادِث ... سُبْحَانَهُ فَهُوَ الْحَكِيم الْوَارِث",
-      "normalizedText": "دلت على وجوده الحوادث ... سبحانه فهو الحكيم الوارث",
+      "normalizedText": "دلت علي وجوده الحوادث ... سبحانه فهو الحكيم الوارث",
       "order": 3,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_4_0ccu2fyj",
+      "id": "book_al_durrah_al_mudiyyah_v_4_lovp7i3m",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ثمَّ الصَّلَاة وَالسَّلَام سرمدا ... على النَّبِي الْمُصْطَفى كنز الْهدى",
-      "normalizedText": "ثم الصلاة والسلام سرمدا ... على النبي المصطفى كنز الهدى",
+      "normalizedText": "ثم الصلاه والسلام سرمدا ... علي النبي المصطفي كنز الهدي",
       "order": 4,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_5_j68vg429",
+      "id": "book_al_durrah_al_mudiyyah_v_5_omrgf9jn",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَبعد فَاعْلَم أَن كل الْعلم ... كالفرع للتوحيد فاسمع نظمي",
-      "normalizedText": "وبعد فاعلم أن كل العلم ... كالفرع للتوحيد فاسمع نظمي",
+      "normalizedText": "وبعد فاعلم ان كل العلم ... كالفرع للتوحيد فاسمع نظمي",
       "order": 5,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_6_zf4ekkld",
+      "id": "book_al_durrah_al_mudiyyah_v_6_xdab3yrp",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لِأَنَّهُ الْعلم الَّذِي لَا يَنْبَغِي ... لعاقل لفهمه لم يبتغ",
-      "normalizedText": "لأنه العلم الذي لا ينبغي ... لعاقل لفهمه لم يبتغ",
+      "normalizedText": "لانه العلم الذي لا ينبغي ... لعاقل لفهمه لم يبتغ",
       "order": 6,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_7_w4no8k6y",
+      "id": "book_al_durrah_al_mudiyyah_v_7_a6elcp0o",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَيعلم الْوَاجِب والمحالا ... ك جَائِز فِي حَقه تَعَالَى",
-      "normalizedText": "ويعلم الواجب والمحالا ... ك جائز في حقه تعالى",
+      "normalizedText": "ويعلم الواجب والمحالا ... ك جايز في حقه تعالي",
       "order": 7,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_8_7gtg6747",
+      "id": "book_al_durrah_al_mudiyyah_v_8_4iz0md7g",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "صَار من عَادَة أهل الْعلم ... أَن يعتنوا فِي سبر ذَا بالنظم",
-      "normalizedText": "صار من عادة أهل العلم ... أن يعتنوا في سبر ذا بالنظم",
+      "normalizedText": "صار من عاده اهل العلم ... ان يعتنوا في سبر ذا بالنظم",
       "order": 8,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_9_kpb439lm",
+      "id": "book_al_durrah_al_mudiyyah_v_9_4hyqm33o",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لِأَنَّهُ يسهل للْحِفْظ كَمَا ... يروق للسمع ويشفي من ظما",
-      "normalizedText": "لأنه يسهل للحفظ كما ... يروق للسمع ويشفي من ظما",
+      "normalizedText": "لانه يسهل للحفظ كما ... يروق للسمع ويشفي من ظما",
       "order": 9,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_10_brhb7era",
+      "id": "book_al_durrah_al_mudiyyah_v_10_m96ph5q4",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمن هُنَا نظمت لي عقيده ... أرجوزة وجيزة مفيده",
-      "normalizedText": "ومن هنا نظمت لي عقيده ... أرجوزة وجيزة مفيده",
+      "normalizedText": "ومن هنا نظمت لي عقيده ... ارجوزه وجيزه مفيده",
       "order": 10,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_11_xethmolo",
+      "id": "book_al_durrah_al_mudiyyah_v_11_3sbhfr52",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "نظمتها فِي سلكها مقدمه ... وست أَبْوَاب كَذَاك خَاتمه",
-      "normalizedText": "نظمتها في سلكها مقدمه ... وست أبواب كذاك خاتمه",
+      "normalizedText": "نظمتها في سلكها مقدمه ... وست ابواب كذاك خاتمه",
       "order": 11,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_12_90s654h4",
+      "id": "book_al_durrah_al_mudiyyah_v_12_a9hg8ev0",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وسمتها ب الدرة المضيه ... فِي عقد أهل الْفرْقَة المرضيه",
-      "normalizedText": "وسمتها ب الدرة المضيه ... في عقد أهل الفرقة المرضيه",
+      "normalizedText": "وسمتها ب الدره المضيه ... في عقد اهل الفرقه المرضيه",
       "order": 12,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_13_8vjst5lh",
+      "id": "book_al_durrah_al_mudiyyah_v_13_616esxrx",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "على اعْتِقَاد ذِي السداد الْحَنْبَلِيّ ... إِمَام أهل الْحق ذِي الْقدر الْعلي",
-      "normalizedText": "على اعتقاد ذي السداد الحنبلي ... إمام أهل الحق ذي القدر العلي",
+      "normalizedText": "علي اعتقاد ذي السداد الحنبلي ... امام اهل الحق ذي القدر العلي",
       "order": 13,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_14_ljf5181e",
+      "id": "book_al_durrah_al_mudiyyah_v_14_5w1sy6m1",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "حبر الملا فَرد العلى الرباني ... رب الحجى ماحي الدجى الشَّيْبَانِيّ",
-      "normalizedText": "حبر الملا فرد العلى الرباني ... رب الحجى ماحي الدجى الشيباني",
+      "normalizedText": "حبر الملا فرد العلي الرباني ... رب الحجي ماحي الدجي الشيباني",
       "order": 14,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_15_o80luyjl",
+      "id": "book_al_durrah_al_mudiyyah_v_15_3riar190",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهُ إِمَام أهل الْأَثر ... فَمن نحا منحاه فَهُوَ الأثري",
-      "normalizedText": "فإنه إمام أهل الأثر ... فمن نحا منحاه فهو الأثري",
+      "normalizedText": "فانه امام اهل الاثر ... فمن نحا منحاه فهو الاثري",
       "order": 15,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_16_z5cryqp7",
+      "id": "book_al_durrah_al_mudiyyah_v_16_xggmciur",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "سقى ضريحا حلّه صوب الرِّضَا ... وَالْعَفو والغفران مَا نجم أضا",
-      "normalizedText": "سقى ضريحا حله صوب الرضا ... والعفو والغفران ما نجم أضا",
+      "normalizedText": "سقي ضريحا حله صوب الرضا ... والعفو والغفران ما نجم اضا",
       "order": 16,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_17_9l1jrtqx",
+      "id": "book_al_durrah_al_mudiyyah_v_17_1y1m8acr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وحله وَسَائِر الأئمه ... منَازِل الرضْوَان أَعلَى الجنه",
-      "normalizedText": "وحله وسائر الأئمه ... منازل الرضوان أعلى الجنه",
+      "normalizedText": "وحله وساير الايمه ... منازل الرضوان اعلي الجنه",
       "order": 17,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_18_prfd965f",
+      "id": "book_al_durrah_al_mudiyyah_v_18_snvrb9os",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "اعْلَم هديت أَنه جَاءَ الْخَبَر ... عَن النَّبِي المقتفى خير الْبشر",
-      "normalizedText": "اعلم هديت أنه جاء الخبر ... عن النبي المقتفى خير البشر",
+      "normalizedText": "اعلم هديت انه جا الخبر ... عن النبي المقتفي خير البشر",
       "order": 18,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_19_guabbvov",
+      "id": "book_al_durrah_al_mudiyyah_v_19_dun4e55b",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "بِأَن ذِي الْأمة سَوف تفترق ... بضعا وَسبعين اعتقادا والمحق",
-      "normalizedText": "بأن ذي الأمة سوف تفترق ... بضعا وسبعين اعتقادا والمحق",
+      "normalizedText": "بان ذي الامه سوف تفترق ... بضعا وسبعين اعتقادا والمحق",
       "order": 19,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_20_kuf8dpu7",
+      "id": "book_al_durrah_al_mudiyyah_v_20_yinxrk98",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "مَا كَانَ فِي نهج النَّبِي الْمُصْطَفى ... وَصَحبه من غير زيغ وجفا",
-      "normalizedText": "ما كان في نهج النبي المصطفى ... وصحبه من غير زيغ وجفا",
+      "normalizedText": "ما كان في نهج النبي المصطفي ... وصحبه من غير زيغ وجفا",
       "order": 20,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_21_focvuiov",
+      "id": "book_al_durrah_al_mudiyyah_v_21_kjedj4fv",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فأثبتوا النُّصُوص ب التَّنْزِيه ... من غير تَعْطِيل وَلَا تَشْبِيه",
-      "normalizedText": "فأثبتوا النصوص ب التنزيه ... من غير تعطيل ولا تشبيه",
+      "normalizedText": "فاثبتوا النصوص ب التنزيه ... من غير تعطيل ولا تشبيه",
       "order": 21,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_22_jewmhzix",
+      "id": "book_al_durrah_al_mudiyyah_v_22_eyfk84vt",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكل مَا جَاءَ من الْآيَات ... أَو صَحَّ فِي الْأَخْبَار عَن ثِقَات",
-      "normalizedText": "فكل ما جاء من الآيات ... أو صح في الأخبار عن ثقات",
+      "normalizedText": "فكل ما جا من الايات ... او صح في الاخبار عن ثقات",
       "order": 22,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_23_hyi6ja8l",
+      "id": "book_al_durrah_al_mudiyyah_v_23_nee28vr6",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "من الْأَحَادِيث نمره كَمَا ... قد جَاءَ فاسمع من نظامي واعلما",
-      "normalizedText": "من الأحاديث نمره كما ... قد جاء فاسمع من نظامي واعلما",
+      "normalizedText": "من الاحاديث نمره كما ... قد جا فاسمع من نظامي واعلما",
       "order": 23,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_24_xq3bakb8",
+      "id": "book_al_durrah_al_mudiyyah_v_24_e4v4gbe8",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَا نرد ذَاك ب الْعُقُول ... لقَوْل مفتر بِهِ جهول",
       "normalizedText": "ولا نرد ذاك ب العقول ... لقول مفتر به جهول",
@@ -299,226 +301,226 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_25_zbs9os8t",
+      "id": "book_al_durrah_al_mudiyyah_v_25_koasdb13",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فعقدنا الْإِثْبَات يَا خليلي ... من غير تَعْطِيل وَلَا تَمْثِيل",
-      "normalizedText": "فعقدنا الإثبات يا خليلي ... من غير تعطيل ولا تمثيل",
+      "normalizedText": "فعقدنا الاثبات يا خليلي ... من غير تعطيل ولا تمثيل",
       "order": 25,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_26_vfwxie35",
+      "id": "book_al_durrah_al_mudiyyah_v_26_6i6mxzei",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكل من أول فِي الصِّفَات ... كذاته من غير مَا إِثْبَات",
-      "normalizedText": "فكل من أول في الصفات ... كذاته من غير ما إثبات",
+      "normalizedText": "فكل من اول في الصفات ... كذاته من غير ما اثبات",
       "order": 26,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_27_yx4ojzp0",
+      "id": "book_al_durrah_al_mudiyyah_v_27_5zo50lsj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فقد تعدى واستطال واجترى ... وخاض فِي بَحر الْهَلَاك وافترى",
-      "normalizedText": "فقد تعدى واستطال واجترى ... وخاض في بحر الهلاك وافترى",
+      "normalizedText": "فقد تعدي واستطال واجتري ... وخاض في بحر الهلاك وافتري",
       "order": 27,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_28_qd1qkmxb",
+      "id": "book_al_durrah_al_mudiyyah_v_28_cqkwnajr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ألم تَرَ اخْتِلَاف أَصْحَاب النّظر ... فِيهِ وَحسن مَا نحاه ذُو الْأَثر",
-      "normalizedText": "ألم تر اختلاف أصحاب النظر ... فيه وحسن ما نحاه ذو الأثر",
+      "normalizedText": "الم تر اختلاف اصحاب النظر ... فيه وحسن ما نحاه ذو الاثر",
       "order": 28,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_29_hpe04znn",
+      "id": "book_al_durrah_al_mudiyyah_v_29_wa4qah3w",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهُم قد اقتدوا بالمصطفى ... وَصَحبه فاقنع بِهَذَا وَكفى",
-      "normalizedText": "فإنهم قد اقتدوا بالمصطفى ... وصحبه فاقنع بهذا وكفى",
+      "normalizedText": "فانهم قد اقتدوا بالمصطفي ... وصحبه فاقنع بهذا وكفي",
       "order": 29,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_30_pye6btjm",
+      "id": "book_al_durrah_al_mudiyyah_v_30_ze1nnmpb",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "أول وَاجِب على العبيد ... معرفَة الْإِلَه بِالتَّشْدِيدِ",
-      "normalizedText": "أول واجب على العبيد ... معرفة الإله بالتشديد",
+      "normalizedText": "اول واجب علي العبيد ... معرفه الاله بالتشديد",
       "order": 30,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_31_ynkngc2i",
+      "id": "book_al_durrah_al_mudiyyah_v_31_46soj4ci",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "بِأَنَّهُ وَاحِد لَا نَظِير ... لَهُ وَلَا شبه وَلَا وَزِير",
-      "normalizedText": "بأنه واحد لا نظير ... له ولا شبه ولا وزير",
+      "normalizedText": "بانه واحد لا نظير ... له ولا شبه ولا وزير",
       "order": 31,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_32_6137sxu4",
+      "id": "book_al_durrah_al_mudiyyah_v_32_ukzv7zae",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "صِفَاته ك ذَاته قديمَة ... أسماؤه ثَابِتَة عَظِيمَة",
-      "normalizedText": "صفاته ك ذاته قديمة ... أسماؤه ثابتة عظيمة",
+      "normalizedText": "صفاته ك ذاته قديمه ... اسماوه ثابته عظيمه",
       "order": 32,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_33_fiefkiva",
+      "id": "book_al_durrah_al_mudiyyah_v_33_s8nhmp88",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لَكِنَّهَا فِي الْحق توقيفيه ... لنا بذا أَدِلَّة وَفِيه",
-      "normalizedText": "لكنها في الحق توقيفيه ... لنا بذا أدلة وفيه",
+      "normalizedText": "لكنها في الحق توقيفيه ... لنا بذا ادله وفيه",
       "order": 33,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_34_dk61spz5",
+      "id": "book_al_durrah_al_mudiyyah_v_34_ixonabjx",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لَهُ الْحَيَاة وَالْكَلَام وَالْبَصَر ... سمع إِرَادَة وَعلم واقتدر",
-      "normalizedText": "له الحياة والكلام والبصر ... سمع إرادة وعلم واقتدر",
+      "normalizedText": "له الحياه والكلام والبصر ... سمع اراده وعلم واقتدر",
       "order": 34,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_35_n3zlvicm",
+      "id": "book_al_durrah_al_mudiyyah_v_35_dydodyel",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ب قدرَة تعلّقت بممكن ... كَذَا إِرَادَة فعي واستبن",
-      "normalizedText": "ب قدرة تعلقت بممكن ... كذا إرادة فعي واستبن",
+      "normalizedText": "ب قدره تعلقت بممكن ... كذا اراده فعي واستبن",
       "order": 35,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_36_0qxuqavm",
+      "id": "book_al_durrah_al_mudiyyah_v_36_8f3oz0fs",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَالْعلم وَالْكَلَام قد تعلقا ... بِكُل شَيْء يَا خليلي مُطلقًا",
-      "normalizedText": "والعلم والكلام قد تعلقا ... بكل شيء يا خليلي مطلقا",
+      "normalizedText": "والعلم والكلام قد تعلقا ... بكل شي يا خليلي مطلقا",
       "order": 36,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_37_spr9rafz",
+      "id": "book_al_durrah_al_mudiyyah_v_37_rzkpecl1",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَسُمْعَة سُبْحَانَهُ ك الْبَصَر ... بِكُل مسموع وكل مبصر",
-      "normalizedText": "وسمعة سبحانه ك البصر ... بكل مسموع وكل مبصر",
+      "normalizedText": "وسمعه سبحانه ك البصر ... بكل مسموع وكل مبصر",
       "order": 37,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_38_do8414iy",
+      "id": "book_al_durrah_al_mudiyyah_v_38_re14hl7z",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأَن مَا جَاءَ مَعَ جِبْرِيل ... من مُحكم الْقُرْآن والتنزيل",
-      "normalizedText": "وأن ما جاء مع جبريل ... من محكم القرآن والتنزيل",
+      "normalizedText": "وان ما جا مع جبريل ... من محكم القران والتنزيل",
       "order": 38,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_39_57uaa1v7",
+      "id": "book_al_durrah_al_mudiyyah_v_39_9bysgl6e",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "كَلَامه سُبْحَانَهُ قديم ... أعيى الورى بِالنَّصِّ يَا عليم",
-      "normalizedText": "كلامه سبحانه قديم ... أعيى الورى بالنص يا عليم",
+      "normalizedText": "كلامه سبحانه قديم ... اعيي الوري بالنص يا عليم",
       "order": 39,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_40_r4n5ovhb",
+      "id": "book_al_durrah_al_mudiyyah_v_40_5cl6l1vl",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَيْسَ فِي طوق الورى من أَصله ... أَن يستطيعوا سُورَة من مثله",
-      "normalizedText": "وليس في طوق الورى من أصله ... أن يستطيعوا سورة من مثله",
+      "normalizedText": "وليس في طوق الوري من اصله ... ان يستطيعوا سوره من مثله",
       "order": 40,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_41_s2ykkqpv",
+      "id": "book_al_durrah_al_mudiyyah_v_41_q0xohpo3",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَيْسَ رَبنَا ب جَوْهَر وَلَا ... عرض وَلَا جسم تَعَالَى ذُو الْعلَا",
-      "normalizedText": "وليس ربنا ب جوهر ولا ... عرض ولا جسم تعالى ذو العلا",
+      "normalizedText": "وليس ربنا ب جوهر ولا ... عرض ولا جسم تعالي ذو العلا",
       "order": 41,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_42_uic5ugvq",
+      "id": "book_al_durrah_al_mudiyyah_v_42_5zdn5sed",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "سُبْحَانَهُ قد اسْتَوَى كَمَا ورد ... من غير كَيفَ قد تَعَالَى أَن يحد",
-      "normalizedText": "سبحانه قد استوى كما ورد ... من غير كيف قد تعالى أن يحد",
+      "normalizedText": "سبحانه قد استوي كما ورد ... من غير كيف قد تعالي ان يحد",
       "order": 42,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_43_86p8egy1",
+      "id": "book_al_durrah_al_mudiyyah_v_43_c6pbgvkp",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَلَا يُحِيط علمنَا ب ذَاته ... كَذَاك لَا يَنْفَكّ عَن صِفَاته",
       "normalizedText": "فلا يحيط علمنا ب ذاته ... كذاك لا ينفك عن صفاته",
@@ -527,94 +529,94 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_44_rierqj1q",
+      "id": "book_al_durrah_al_mudiyyah_v_44_1bh5vskm",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكل مَا قد جَاءَ فِي الدَّلِيل ... فثابت من غير مَا تَمْثِيل",
-      "normalizedText": "فكل ما قد جاء في الدليل ... فثابت من غير ما تمثيل",
+      "normalizedText": "فكل ما قد جا في الدليل ... فثابت من غير ما تمثيل",
       "order": 44,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_45_6dqysp26",
+      "id": "book_al_durrah_al_mudiyyah_v_45_76f6bjky",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "من رَحْمَة وَنَحْوهَا ك وَجهه ... وَيَده وكل مَا من نهجه",
-      "normalizedText": "من رحمة ونحوها ك وجهه ... ويده وكل ما من نهجه",
+      "normalizedText": "من رحمه ونحوها ك وجهه ... ويده وكل ما من نهجه",
       "order": 45,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_46_cjkiqnlb",
+      "id": "book_al_durrah_al_mudiyyah_v_46_fqu55n9s",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فسائر الصِّفَات وَالْأَفْعَال ... قديمَة لله ذِي الْجلَال",
-      "normalizedText": "فسائر الصفات والأفعال ... قديمة لله ذي الجلال",
+      "normalizedText": "فساير الصفات والافعال ... قديمه لله ذي الجلال",
       "order": 46,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_47_jrcmsiiz",
+      "id": "book_al_durrah_al_mudiyyah_v_47_6w6buzhq",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لَكِن بِلَا كَيفَ وَلَا تَمْثِيل ... رغما لأهل الزيغ والتعطيل",
-      "normalizedText": "لكن بلا كيف ولا تمثيل ... رغما لأهل الزيغ والتعطيل",
+      "normalizedText": "لكن بلا كيف ولا تمثيل ... رغما لاهل الزيغ والتعطيل",
       "order": 47,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_48_58gyvqw8",
+      "id": "book_al_durrah_al_mudiyyah_v_48_rx4j8x7w",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَمُرْهَا كَمَا أَتَت فِي الذّكر ... من غير تَأْوِيل وَغير فكر",
-      "normalizedText": "فمرها كما أتت في الذكر ... من غير تأويل وغير فكر",
+      "normalizedText": "فمرها كما اتت في الذكر ... من غير تاويل وغير فكر",
       "order": 48,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_49_2i51pd6b",
+      "id": "book_al_durrah_al_mudiyyah_v_49_cw2lzwpf",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ويستحيل الْجَهْل وَالْعجز كَمَا ... قد اسْتَحَالَ الْمَوْت حَقًا والعمى",
-      "normalizedText": "ويستحيل الجهل والعجز كما ... قد استحال الموت حقا والعمى",
+      "normalizedText": "ويستحيل الجهل والعجز كما ... قد استحال الموت حقا والعمي",
       "order": 49,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_50_gtv1uxeb",
+      "id": "book_al_durrah_al_mudiyyah_v_50_dn8k8fv5",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكل نقص قد تَعَالَى الله ... عَنهُ فيا بشرى لمن وَالَاهُ",
-      "normalizedText": "فكل نقص قد تعالى الله ... عنه فيا بشرى لمن والاه",
+      "normalizedText": "فكل نقص قد تعالي الله ... عنه فيا بشري لمن والاه",
       "order": 50,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_51_ijjzd3c3",
+      "id": "book_al_durrah_al_mudiyyah_v_51_jnrzxkc0",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل مَا يطْلب فِيهِ الْجَزْم ... فَمنع تَقْلِيد بِذَاكَ حتم",
       "normalizedText": "وكل ما يطلب فيه الجزم ... فمنع تقليد بذاك حتم",
@@ -623,118 +625,118 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_52_vk6tez3r",
+      "id": "book_al_durrah_al_mudiyyah_v_52_p8ixdn2i",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لِأَنَّهُ لَا يَكْتَفِي بِالظَّنِّ ... لذِي الحجى فِي قَول أهل الْفَنّ",
-      "normalizedText": "لأنه لا يكتفي بالظن ... لذي الحجى في قول أهل الفن",
+      "normalizedText": "لانه لا يكتفي بالظن ... لذي الحجي في قول اهل الفن",
       "order": 52,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_53_gzcu9bhd",
+      "id": "book_al_durrah_al_mudiyyah_v_53_bhgiuw8w",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَقيل يَكْفِي الْجَزْم إِجْمَاعًا بِمَا ... يطْلب فِيهِ عِنْد بعض العلما",
-      "normalizedText": "وقيل يكفي الجزم إجماعا بما ... يطلب فيه عند بعض العلما",
+      "normalizedText": "وقيل يكفي الجزم اجماعا بما ... يطلب فيه عند بعض العلما",
       "order": 53,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_54_pm3zpms8",
+      "id": "book_al_durrah_al_mudiyyah_v_54_pxow5vqm",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فالجازمون من عوام الْبشر ... فمسلمون عِنْد أهل الْأَثر",
-      "normalizedText": "فالجازمون من عوام البشر ... فمسلمون عند أهل الأثر",
+      "normalizedText": "فالجازمون من عوام البشر ... فمسلمون عند اهل الاثر",
       "order": 54,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_55_imdtz7e6",
+      "id": "book_al_durrah_al_mudiyyah_v_55_evrtdyyk",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَسَائِر الْأَشْيَاء وَغير الذَّات ... وَغير مَا الْأَسْمَاء وَالصِّفَات",
-      "normalizedText": "وسائر الأشياء وغير الذات ... وغير ما الأسماء والصفات",
+      "normalizedText": "وساير الاشيا وغير الذات ... وغير ما الاسما والصفات",
       "order": 55,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_56_136ai6ic",
+      "id": "book_al_durrah_al_mudiyyah_v_56_ikh8u2e9",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "مخلوقة لربنا من الْعَدَم ... وضل من أثنى عَلَيْهَا بالقدم",
-      "normalizedText": "مخلوقة لربنا من العدم ... وضل من أثنى عليها بالقدم",
+      "normalizedText": "مخلوقه لربنا من العدم ... وضل من اثني عليها بالقدم",
       "order": 56,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_57_cronwk39",
+      "id": "book_al_durrah_al_mudiyyah_v_57_pcja41g5",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وربنا يخلق بِاخْتِيَار ... من غير حَاجَة وَلَا اضطرار",
-      "normalizedText": "وربنا يخلق باختيار ... من غير حاجة ولا اضطرار",
+      "normalizedText": "وربنا يخلق باختيار ... من غير حاجه ولا اضطرار",
       "order": 57,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_58_evbcxdlj",
+      "id": "book_al_durrah_al_mudiyyah_v_58_6lzxqyca",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لكنه لَا يخلق الْخلق سدى ... كَمَا أَتَى فِي النَّص فَاتبع الْهدى",
-      "normalizedText": "لكنه لا يخلق الخلق سدى ... كما أتى في النص فاتبع الهدى",
+      "normalizedText": "لكنه لا يخلق الخلق سدي ... كما اتي في النص فاتبع الهدي",
       "order": 58,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_59_e6unsm4y",
+      "id": "book_al_durrah_al_mudiyyah_v_59_g4stf7b3",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "أفعالنا مخلوقة لله ... لَكِنَّهَا كسب لنا يَا لاهي",
-      "normalizedText": "أفعالنا مخلوقة لله ... لكنها كسب لنا يا لاهي",
+      "normalizedText": "افعالنا مخلوقه لله ... لكنها كسب لنا يا لاهي",
       "order": 59,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_60_d2cds1kg",
+      "id": "book_al_durrah_al_mudiyyah_v_60_crbu8i92",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل مَا يَفْعَله الْعباد ... من طَاعَة أَو ضدها مُرَاد",
-      "normalizedText": "وكل ما يفعله العباد ... من طاعة أو ضدها مراد",
+      "normalizedText": "وكل ما يفعله العباد ... من طاعه او ضدها مراد",
       "order": 60,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_61_qyuufntt",
+      "id": "book_al_durrah_al_mudiyyah_v_61_93dv9iav",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لربنا من غير مَا اضطرار ... مِنْهُ لنا فَافْهَم وَلَا تمار",
       "normalizedText": "لربنا من غير ما اضطرار ... منه لنا فافهم ولا تمار",
@@ -743,226 +745,226 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_62_lgfbdf8u",
+      "id": "book_al_durrah_al_mudiyyah_v_62_tylqx1tf",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَجَاز للْمولى يعذب الورى ... من غير مَا ذَنْب وَلَا جرم جرى",
-      "normalizedText": "وجاز للمولى يعذب الورى ... من غير ما ذنب ولا جرم جرى",
+      "normalizedText": "وجاز للمولي يعذب الوري ... من غير ما ذنب ولا جرم جري",
       "order": 62,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_63_k5oavcxj",
+      "id": "book_al_durrah_al_mudiyyah_v_63_0xkycac9",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكل مَا مِنْهُ تَعَالَى يجمل ... لِأَنَّهُ عَن فعله لَا يسْأَل",
-      "normalizedText": "فكل ما منه تعالى يجمل ... لأنه عن فعله لا يسأل",
+      "normalizedText": "فكل ما منه تعالي يجمل ... لانه عن فعله لا يسال",
       "order": 63,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_64_rpaaxcv2",
+      "id": "book_al_durrah_al_mudiyyah_v_64_1sul8rbt",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِن يثب فَإِنَّهُ من فَضله ... وَإِن يعذب فبمحض عدله",
-      "normalizedText": "فإن يثب فإنه من فضله ... وإن يعذب فبمحض عدله",
+      "normalizedText": "فان يثب فانه من فضله ... وان يعذب فبمحض عدله",
       "order": 64,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_65_gojrhjeh",
+      "id": "book_al_durrah_al_mudiyyah_v_65_jopnslm6",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَلم يجب عَلَيْهِ فعل الْأَصْلَح ... وَلَا الصّلاح وَيْح من لم يفلح",
-      "normalizedText": "فلم يجب عليه فعل الأصلح ... ولا الصلاح ويح من لم يفلح",
+      "normalizedText": "فلم يجب عليه فعل الاصلح ... ولا الصلاح ويح من لم يفلح",
       "order": 65,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_66_a91gfkws",
+      "id": "book_al_durrah_al_mudiyyah_v_66_0fcoskj5",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكل من شَاءَ هداه يَهْتَدِي ... وَإِن يرد ضلال عبد يعتدي",
-      "normalizedText": "فكل من شاء هداه يهتدي ... وإن يرد ضلال عبد يعتدي",
+      "normalizedText": "فكل من شا هداه يهتدي ... وان يرد ضلال عبد يعتدي",
       "order": 66,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_67_8g127kkp",
+      "id": "book_al_durrah_al_mudiyyah_v_67_8nz5rrhy",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "والرزق مَا ينفع من حَلَال ... أَو ضِدّه فَحل عَن الْمحَال",
-      "normalizedText": "والرزق ما ينفع من حلال ... أو ضده فحل عن المحال",
+      "normalizedText": "والرزق ما ينفع من حلال ... او ضده فحل عن المحال",
       "order": 67,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_68_57l5grza",
+      "id": "book_al_durrah_al_mudiyyah_v_68_2f2aiij8",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لِأَنَّهُ رَازِق كل الْخلق ... وَلَيْسَ مَخْلُوق بِغَيْر رزق",
-      "normalizedText": "لأنه رازق كل الخلق ... وليس مخلوق بغير رزق",
+      "normalizedText": "لانه رازق كل الخلق ... وليس مخلوق بغير رزق",
       "order": 68,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_69_p2p9mzvu",
+      "id": "book_al_durrah_al_mudiyyah_v_69_oa2t6nwj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمن يمت بقتْله من الْبشر ... أَو غَيره فب الْقَضَاء وَالْقدر",
-      "normalizedText": "ومن يمت بقتله من البشر ... أو غيره فب القضاء والقدر",
+      "normalizedText": "ومن يمت بقتله من البشر ... او غيره فب القضا والقدر",
       "order": 69,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_70_b6xcql3h",
+      "id": "book_al_durrah_al_mudiyyah_v_70_rjr5yp3p",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلم يفت من رزقه وَلَا الْأَجَل ... شَيْء فدع أهل الضلال والخطل",
-      "normalizedText": "ولم يفت من رزقه ولا الأجل ... شيء فدع أهل الضلال والخطل",
+      "normalizedText": "ولم يفت من رزقه ولا الاجل ... شي فدع اهل الضلال والخطل",
       "order": 70,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_71_wcuybw5a",
+      "id": "book_al_durrah_al_mudiyyah_v_71_2dl2vfj8",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وواجب على الْعباد طرا ... أَن يعبدوه طَاعَة وَبرا",
-      "normalizedText": "وواجب على العباد طرا ... أن يعبدوه طاعة وبرا",
+      "normalizedText": "وواجب علي العباد طرا ... ان يعبدوه طاعه وبرا",
       "order": 71,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_72_on34vvsv",
+      "id": "book_al_durrah_al_mudiyyah_v_72_a9vgu2t4",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ويفعلوا الْفِعْل الَّذِي بِهِ أَمر ... حتما ويتركوا الَّذِي عَنهُ زجر",
-      "normalizedText": "ويفعلوا الفعل الذي به أمر ... حتما ويتركوا الذي عنه زجر",
+      "normalizedText": "ويفعلوا الفعل الذي به امر ... حتما ويتركوا الذي عنه زجر",
       "order": 72,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_73_j6dbvuyq",
+      "id": "book_al_durrah_al_mudiyyah_v_73_msvkxbhg",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل مَا قدر أَو قَضَاهُ ... فواقع حتما كَمَا قَضَاهُ",
-      "normalizedText": "وكل ما قدر أو قضاه ... فواقع حتما كما قضاه",
+      "normalizedText": "وكل ما قدر او قضاه ... فواقع حتما كما قضاه",
       "order": 73,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_74_tiak6dhp",
+      "id": "book_al_durrah_al_mudiyyah_v_74_bi9abx6r",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَيْسَ وَاجِبا على العَبْد الرِّضَا ... بِكُل مقضي وَلَكِن بالقضا",
-      "normalizedText": "وليس واجبا على العبد الرضا ... بكل مقضي ولكن بالقضا",
+      "normalizedText": "وليس واجبا علي العبد الرضا ... بكل مقضي ولكن بالقضا",
       "order": 74,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_75_q2zcb8bt",
+      "id": "book_al_durrah_al_mudiyyah_v_75_36653diz",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لِأَنَّهُ من فعله تَعَالَى ... وَذَاكَ من فعل الَّذِي تقالى",
-      "normalizedText": "لأنه من فعله تعالى ... وذاك من فعل الذي تقالى",
+      "normalizedText": "لانه من فعله تعالي ... وذاك من فعل الذي تقالي",
       "order": 75,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_76_wyvhzoho",
+      "id": "book_al_durrah_al_mudiyyah_v_76_8sc37mdd",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ويفسق المذنب ب الْكَبِيرَة ... كَذَا إِذا أصر بالصغيره",
-      "normalizedText": "ويفسق المذنب ب الكبيرة ... كذا إذا أصر بالصغيره",
+      "normalizedText": "ويفسق المذنب ب الكبيره ... كذا اذا اصر بالصغيره",
       "order": 76,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_77_z97kz22x",
+      "id": "book_al_durrah_al_mudiyyah_v_77_mr22owgt",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لَا يخرج الْمَرْء من الْإِيمَان ... ب موبقات الذَّنب والعصيان",
-      "normalizedText": "لا يخرج المرء من الإيمان ... ب موبقات الذنب والعصيان",
+      "normalizedText": "لا يخرج المر من الايمان ... ب موبقات الذنب والعصيان",
       "order": 77,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_78_yzzzrbi2",
+      "id": "book_al_durrah_al_mudiyyah_v_78_hefpvi7r",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وواجب عَلَيْهِ أَن يتوبا ... من كل مَا جر عَلَيْهِ حوبا",
-      "normalizedText": "وواجب عليه أن يتوبا ... من كل ما جر عليه حوبا",
+      "normalizedText": "وواجب عليه ان يتوبا ... من كل ما جر عليه حوبا",
       "order": 78,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_79_98sei06l",
+      "id": "book_al_durrah_al_mudiyyah_v_79_f5abkjfr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَيقبل الْمولى بمحض الْفضل ... من غير عبد كَافِر مُنْفَصِل",
-      "normalizedText": "ويقبل المولى بمحض الفضل ... من غير عبد كافر منفصل",
+      "normalizedText": "ويقبل المولي بمحض الفضل ... من غير عبد كافر منفصل",
       "order": 79,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_80_534zf6hf",
+      "id": "book_al_durrah_al_mudiyyah_v_80_gddhoepr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "مَا لم يتب من كفره بضده ... فيرتجع عَن شركه وصده",
       "normalizedText": "ما لم يتب من كفره بضده ... فيرتجع عن شركه وصده",
@@ -971,46 +973,46 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_81_e407rnk5",
+      "id": "book_al_durrah_al_mudiyyah_v_81_evruronh",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمن يمت وَلم يتب من الخطا ... فَأمره مفوض لذِي العطا",
-      "normalizedText": "ومن يمت ولم يتب من الخطا ... فأمره مفوض لذي العطا",
+      "normalizedText": "ومن يمت ولم يتب من الخطا ... فامره مفوض لذي العطا",
       "order": 81,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_82_ldhsrd99",
+      "id": "book_al_durrah_al_mudiyyah_v_82_08kipepz",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِن يَشَأْ يعْفُو وَإِن شَاءَ انتقم ... وَإِن يَشَأْ أعْطى وأجزل النعم",
-      "normalizedText": "فإن يشأ يعفو وإن شاء انتقم ... وإن يشأ أعطى وأجزل النعم",
+      "normalizedText": "فان يشا يعفو وان شا انتقم ... وان يشا اعطي واجزل النعم",
       "order": 82,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_83_497pjk5r",
+      "id": "book_al_durrah_al_mudiyyah_v_83_x5p6vm3s",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَقيل فِي الدروز والزنادقه ... وَسَائِر الطوائف المنافقه",
-      "normalizedText": "وقيل في الدروز والزنادقه ... وسائر الطوائف المنافقه",
+      "normalizedText": "وقيل في الدروز والزنادقه ... وساير الطوايف المنافقه",
       "order": 83,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_84_kyda3ryo",
+      "id": "book_al_durrah_al_mudiyyah_v_84_7ztv1255",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل دَاع لابتداع يقتل ... كمن تكَرر نكثه لَا يقبل",
       "normalizedText": "وكل داع لابتداع يقتل ... كمن تكرر نكثه لا يقبل",
@@ -1019,58 +1021,58 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_85_hph9m4si",
+      "id": "book_al_durrah_al_mudiyyah_v_85_8u5z3l3n",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لِأَنَّهُ لم يبد من إيمَانه ... إِلَّا الَّذِي أذاع من لِسَانه",
-      "normalizedText": "لأنه لم يبد من إيمانه ... إلا الذي أذاع من لسانه",
+      "normalizedText": "لانه لم يبد من ايمانه ... الا الذي اذاع من لسانه",
       "order": 85,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_86_5e81goei",
+      "id": "book_al_durrah_al_mudiyyah_v_86_bp8ah0hj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ك ملحد وساحره ... وهم على نياتهم فِي الْآخِرَه",
-      "normalizedText": "ك ملحد وساحره ... وهم على نياتهم في الآخره",
+      "normalizedText": "ك ملحد وساحره ... وهم علي نياتهم في الاخره",
       "order": 86,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_87_12n7cyan",
+      "id": "book_al_durrah_al_mudiyyah_v_87_54fftkn5",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "قلت وَإِن دلّت دَلَائِل الْهدى ... كَمَا جرى للعيلبوني اهْتَدَى",
-      "normalizedText": "قلت وإن دلت دلائل الهدى ... كما جرى للعيلبوني اهتدى",
+      "normalizedText": "قلت وان دلت دلايل الهدي ... كما جري للعيلبوني اهتدي",
       "order": 87,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_88_z7f673zg",
+      "id": "book_al_durrah_al_mudiyyah_v_88_flwdgecj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهُ أذاع من أسرارهم ... مَا كَانَ فِيهِ الهتك عَن أستارهم",
-      "normalizedText": "فإنه أذاع من أسرارهم ... ما كان فيه الهتك عن أستارهم",
+      "normalizedText": "فانه اذاع من اسرارهم ... ما كان فيه الهتك عن استارهم",
       "order": 88,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_89_ffzheusv",
+      "id": "book_al_durrah_al_mudiyyah_v_89_xojrefsc",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَكَانَ للدّين القويم ناصرا ... فَصَارَ منا بَاطِنا وظاهرا",
       "normalizedText": "وكان للدين القويم ناصرا ... فصار منا باطنا وظاهرا",
@@ -1079,10 +1081,10 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_90_31idkqtt",
+      "id": "book_al_durrah_al_mudiyyah_v_90_9g4c21kh",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكل زنديق وكل مارق ... وجاحد وملحد مُنَافِق",
       "normalizedText": "فكل زنديق وكل مارق ... وجاحد وملحد منافق",
@@ -1091,274 +1093,274 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_91_bgs0ehbh",
+      "id": "book_al_durrah_al_mudiyyah_v_91_ywvsae7x",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "إِذا استبان نصحه للدّين ... فَإِنَّهُ يقبل عَن يَقِين",
-      "normalizedText": "إذا استبان نصحه للدين ... فإنه يقبل عن يقين",
+      "normalizedText": "اذا استبان نصحه للدين ... فانه يقبل عن يقين",
       "order": 91,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_92_8np7wzz8",
+      "id": "book_al_durrah_al_mudiyyah_v_92_ipz36bea",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "إيمَاننَا قَول وَقصد وَعمل ... تزيده التَّقْوَى وَينْقص بالزلل",
-      "normalizedText": "إيماننا قول وقصد وعمل ... تزيده التقوى وينقص بالزلل",
+      "normalizedText": "ايماننا قول وقصد وعمل ... تزيده التقوي وينقص بالزلل",
       "order": 92,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_93_6po6iejv",
+      "id": "book_al_durrah_al_mudiyyah_v_93_eeg7yb76",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَنحن فِي إيمَاننَا نستثني ... من غير شكّ فاستمع واستبن",
-      "normalizedText": "ونحن في إيماننا نستثني ... من غير شك فاستمع واستبن",
+      "normalizedText": "ونحن في ايماننا نستثني ... من غير شك فاستمع واستبن",
       "order": 93,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_94_81h9ko42",
+      "id": "book_al_durrah_al_mudiyyah_v_94_z1ugmsga",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "نتابع الأخيار من أهل الْأَثر ... ونقتفي الْآثَار لَا أهل الأشر",
-      "normalizedText": "نتابع الأخيار من أهل الأثر ... ونقتفي الآثار لا أهل الأشر",
+      "normalizedText": "نتابع الاخيار من اهل الاثر ... ونقتفي الاثار لا اهل الاشر",
       "order": 94,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_95_m99l528s",
+      "id": "book_al_durrah_al_mudiyyah_v_95_w06ttadb",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَا تقل إيمَاننَا مَخْلُوق ... وَلَا قديم هَكَذَا مطلوق",
-      "normalizedText": "ولا تقل إيماننا مخلوق ... ولا قديم هكذا مطلوق",
+      "normalizedText": "ولا تقل ايماننا مخلوق ... ولا قديم هكذا مطلوق",
       "order": 95,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_96_4pgl0d7j",
+      "id": "book_al_durrah_al_mudiyyah_v_96_zfqmonvq",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهُ يَشْمَل للصَّلَاة ... وَنَحْوهَا من سَائِر الطَّاعَات",
-      "normalizedText": "فإنه يشمل للصلاة ... ونحوها من سائر الطاعات",
+      "normalizedText": "فانه يشمل للصلاه ... ونحوها من ساير الطاعات",
       "order": 96,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_97_smegux4g",
+      "id": "book_al_durrah_al_mudiyyah_v_97_zk0vy6gv",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَفَعَلْنَا نَحْو الرُّكُوع مُحدث ... وكل قُرْآن قديم فابحثوا",
-      "normalizedText": "ففعلنا نحو الركوع محدث ... وكل قرآن قديم فابحثوا",
+      "normalizedText": "ففعلنا نحو الركوع محدث ... وكل قران قديم فابحثوا",
       "order": 97,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_98_8iubor94",
+      "id": "book_al_durrah_al_mudiyyah_v_98_k7os7d5v",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ووكل الله من الْكِرَام ... اثْنَيْنِ حافظين للأنام",
-      "normalizedText": "ووكل الله من الكرام ... اثنين حافظين للأنام",
+      "normalizedText": "ووكل الله من الكرام ... اثنين حافظين للانام",
       "order": 98,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_99_cn578fmc",
+      "id": "book_al_durrah_al_mudiyyah_v_99_v92j7eig",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فيكتبان كل أَفعَال الورى ... كَمَا أَتَى فِي النَّص من غير امترا",
-      "normalizedText": "فيكتبان كل أفعال الورى ... كما أتى في النص من غير امترا",
+      "normalizedText": "فيكتبان كل افعال الوري ... كما اتي في النص من غير امترا",
       "order": 99,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_100_ellg2w2f",
+      "id": "book_al_durrah_al_mudiyyah_v_100_tf6kns9t",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل مَا صَحَّ من الْأَخْبَار ... أَو جَاءَ فِي التَّنْزِيل والْآثَار",
-      "normalizedText": "وكل ما صح من الأخبار ... أو جاء في التنزيل والآثار",
+      "normalizedText": "وكل ما صح من الاخبار ... او جا في التنزيل والاثار",
       "order": 100,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_101_w3jm2a24",
+      "id": "book_al_durrah_al_mudiyyah_v_101_ntb06knr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "من فتْنَة البرزخ والقبور ... وَمَا أَتَى فِي ذَا من الْأُمُور",
-      "normalizedText": "من فتنة البرزخ والقبور ... وما أتى في ذا من الأمور",
+      "normalizedText": "من فتنه البرزخ والقبور ... وما اتي في ذا من الامور",
       "order": 101,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_102_rdh0qswp",
+      "id": "book_al_durrah_al_mudiyyah_v_102_zth1ymqn",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأَن أَرْوَاح الورى لم تعدم ... مَعَ كَونهَا مخلوقة فاستفهم",
-      "normalizedText": "وأن أرواح الورى لم تعدم ... مع كونها مخلوقة فاستفهم",
+      "normalizedText": "وان ارواح الوري لم تعدم ... مع كونها مخلوقه فاستفهم",
       "order": 102,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_103_e83ot2sd",
+      "id": "book_al_durrah_al_mudiyyah_v_103_f65yogd2",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكل مَا عَن سيد الْخلق ورد ... من أَمر هَذَا الْبَاب حق لَا يرد",
-      "normalizedText": "فكل ما عن سيد الخلق ورد ... من أمر هذا الباب حق لا يرد",
+      "normalizedText": "فكل ما عن سيد الخلق ورد ... من امر هذا الباب حق لا يرد",
       "order": 103,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_104_0hy2rego",
+      "id": "book_al_durrah_al_mudiyyah_v_104_xrv2wer6",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمَا أَتَى فِي النَّص من أَشْرَاط ... فكله حق بِلَا شطاط",
-      "normalizedText": "وما أتى في النص من أشراط ... فكله حق بلا شطاط",
+      "normalizedText": "وما اتي في النص من اشراط ... فكله حق بلا شطاط",
       "order": 104,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_105_ehq0tgml",
+      "id": "book_al_durrah_al_mudiyyah_v_105_x5vyftii",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "مِنْهَا الإِمَام الْخَاتم الفصيح ... مُحَمَّد الْمهْدي والمسيح",
-      "normalizedText": "منها الإمام الخاتم الفصيح ... محمد المهدي والمسيح",
+      "normalizedText": "منها الامام الخاتم الفصيح ... محمد المهدي والمسيح",
       "order": 105,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_106_0lx1ba2y",
+      "id": "book_al_durrah_al_mudiyyah_v_106_jeibc1c6",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأَنه يقتل للدجال ... ب بَاب لد خل عَن جِدَال",
-      "normalizedText": "وأنه يقتل للدجال ... ب باب لد خل عن جدال",
+      "normalizedText": "وانه يقتل للدجال ... ب باب لد خل عن جدال",
       "order": 106,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_107_vy4wvy87",
+      "id": "book_al_durrah_al_mudiyyah_v_107_ie4er87v",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأمر يَأْجُوج وَمَأْجُوج أثبت ... فَإِنَّهُ حق ك هدم الْكَعْبَة",
-      "normalizedText": "وأمر يأجوج ومأجوج أثبت ... فإنه حق ك هدم الكعبة",
+      "normalizedText": "وامر ياجوج وماجوج اثبت ... فانه حق ك هدم الكعبه",
       "order": 107,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_108_a1i0c8z3",
+      "id": "book_al_durrah_al_mudiyyah_v_108_vh6zwvn6",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأَن مِنْهَا آيَة الدُّخان ... وَأَنه يذهب ب الْقُرْآن",
-      "normalizedText": "وأن منها آية الدخان ... وأنه يذهب ب القرآن",
+      "normalizedText": "وان منها ايه الدخان ... وانه يذهب ب القران",
       "order": 108,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_109_i3tztxsu",
+      "id": "book_al_durrah_al_mudiyyah_v_109_9g9xwma1",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "طُلُوع شمس الْأُفق من دبور ... ك ذَات أجياد على الْمَشْهُور",
-      "normalizedText": "طلوع شمس الأفق من دبور ... ك ذات أجياد على المشهور",
+      "normalizedText": "طلوع شمس الافق من دبور ... ك ذات اجياد علي المشهور",
       "order": 109,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_110_ds0wuf0e",
+      "id": "book_al_durrah_al_mudiyyah_v_110_7fgupprj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَآخر الْآيَات حشر النَّار ... كَمَا أَتَى فِي مُحكم الْأَخْبَار",
-      "normalizedText": "وآخر الآيات حشر النار ... كما أتى في محكم الأخبار",
+      "normalizedText": "واخر الايات حشر النار ... كما اتي في محكم الاخبار",
       "order": 110,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_111_wke05gp8",
+      "id": "book_al_durrah_al_mudiyyah_v_111_2x7ahfi9",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكلهَا صحت بهَا الْأَخْبَار ... وسطرت آثارها الأخيار",
-      "normalizedText": "فكلها صحت بها الأخبار ... وسطرت آثارها الأخيار",
+      "normalizedText": "فكلها صحت بها الاخبار ... وسطرت اثارها الاخيار",
       "order": 111,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_112_qmanm4mg",
+      "id": "book_al_durrah_al_mudiyyah_v_112_hbgz63vf",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "واجزم بِأَمْر الْبَعْث والنشور ... والحشر جزما بعد نفخ الصُّور",
-      "normalizedText": "واجزم بأمر البعث والنشور ... والحشر جزما بعد نفخ الصور",
+      "normalizedText": "واجزم بامر البعث والنشور ... والحشر جزما بعد نفخ الصور",
       "order": 112,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_113_u0hmw7xg",
+      "id": "book_al_durrah_al_mudiyyah_v_113_tja4diy2",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "كَذَا وقُوف الْخلق لِلْحسابِ ... والصحف وَالْمِيزَان للثَّواب",
       "normalizedText": "كذا وقوف الخلق للحساب ... والصحف والميزان للثواب",
@@ -1367,274 +1369,274 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_114_z1qlfku7",
+      "id": "book_al_durrah_al_mudiyyah_v_114_mx8z1xaf",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "كَذَا الصِّرَاط ثمَّ حَوْض الْمُصْطَفى ... فيا هُنَا لمن بِهِ نَالَ الشفا",
-      "normalizedText": "كذا الصراط ثم حوض المصطفى ... فيا هنا لمن به نال الشفا",
+      "normalizedText": "كذا الصراط ثم حوض المصطفي ... فيا هنا لمن به نال الشفا",
       "order": 114,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_115_p4kicxul",
+      "id": "book_al_durrah_al_mudiyyah_v_115_87ki1d2x",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "عَنهُ يذاد المفتري كَمَا ورد ... وَمن نحا سبل السَّلامَة لم يرد",
-      "normalizedText": "عنه يذاد المفتري كما ورد ... ومن نحا سبل السلامة لم يرد",
+      "normalizedText": "عنه يذاد المفتري كما ورد ... ومن نحا سبل السلامه لم يرد",
       "order": 115,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_116_4sxc1x7r",
+      "id": "book_al_durrah_al_mudiyyah_v_116_ofgshxx5",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَكُن مُطيعًا وَاقِف أهل الطاعه ... فِي الْحَوْض والكوثر والشفاعه",
-      "normalizedText": "فكن مطيعا واقف أهل الطاعه ... في الحوض والكوثر والشفاعه",
+      "normalizedText": "فكن مطيعا واقف اهل الطاعه ... في الحوض والكوثر والشفاعه",
       "order": 116,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_117_zuyxj9hw",
+      "id": "book_al_durrah_al_mudiyyah_v_117_rno9a0gr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهَا ثَابِتَة للمصطفى كَغَيْرِهِ من كل أَرْبَاب الوفا",
-      "normalizedText": "فإنها ثابتة للمصطفى كغيره من كل أرباب الوفا",
+      "normalizedText": "فانها ثابته للمصطفي كغيره من كل ارباب الوفا",
       "order": 117,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_118_sefnql5y",
+      "id": "book_al_durrah_al_mudiyyah_v_118_cqzmzd55",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "من عَالم كالرسل والأبرار ... سوى الَّتِي خصت بِذِي الْأَنْوَار",
-      "normalizedText": "من عالم كالرسل والأبرار ... سوى التي خصت بذي الأنوار",
+      "normalizedText": "من عالم كالرسل والابرار ... سوي التي خصت بذي الانوار",
       "order": 118,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_119_phoxbikv",
+      "id": "book_al_durrah_al_mudiyyah_v_119_34adbewj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل إِنْسَان وكل جنَّة ... فِي دَار نَار أَو نعيم جنَّة",
-      "normalizedText": "وكل إنسان وكل جنة ... في دار نار أو نعيم جنة",
+      "normalizedText": "وكل انسان وكل جنه ... في دار نار او نعيم جنه",
       "order": 119,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_120_y1v0sdm2",
+      "id": "book_al_durrah_al_mudiyyah_v_120_nj4s490r",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "هما مصير الْخلق من كل الورى ... فَالنَّار دَار من تعدى وافترى",
-      "normalizedText": "هما مصير الخلق من كل الورى ... فالنار دار من تعدى وافترى",
+      "normalizedText": "هما مصير الخلق من كل الوري ... فالنار دار من تعدي وافتري",
       "order": 120,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_121_6rx118fz",
+      "id": "book_al_durrah_al_mudiyyah_v_121_03tt5bn1",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمن عصى بِذَنبِهِ لم يخلد ... وَإِن دَخلهَا يَا بوار المعتدي",
-      "normalizedText": "ومن عصى بذنبه لم يخلد ... وإن دخلها يا بوار المعتدي",
+      "normalizedText": "ومن عصي بذنبه لم يخلد ... وان دخلها يا بوار المعتدي",
       "order": 121,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_122_6du5y46h",
+      "id": "book_al_durrah_al_mudiyyah_v_122_9g73ya8h",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وجنة النَّعيم للأبرار ... مصونة عَن سَائِر الْكفَّار",
-      "normalizedText": "وجنة النعيم للأبرار ... مصونة عن سائر الكفار",
+      "normalizedText": "وجنه النعيم للابرار ... مصونه عن ساير الكفار",
       "order": 122,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_123_mv8tidjo",
+      "id": "book_al_durrah_al_mudiyyah_v_123_y7w440nl",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "واجزم بِأَن النَّار ك الْجنَّة فِي ... وجودهَا وَأَنَّهَا لم تتْلف",
-      "normalizedText": "واجزم بأن النار ك الجنة في ... وجودها وأنها لم تتلف",
+      "normalizedText": "واجزم بان النار ك الجنه في ... وجودها وانها لم تتلف",
       "order": 123,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_124_0mbi4tvd",
+      "id": "book_al_durrah_al_mudiyyah_v_124_sb65izop",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فنسأل الله النَّعيم وَالنَّظَر ... لربنا من غير مَا شين غبر",
-      "normalizedText": "فنسأل الله النعيم والنظر ... لربنا من غير ما شين غبر",
+      "normalizedText": "فنسال الله النعيم والنظر ... لربنا من غير ما شين غبر",
       "order": 124,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_125_hqswixc2",
+      "id": "book_al_durrah_al_mudiyyah_v_125_qkrarmvc",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهُ ينظر بالأبصار ... كَمَا أَتَى فِي النَّص وَالْأَخْبَار",
-      "normalizedText": "فإنه ينظر بالأبصار ... كما أتى في النص والأخبار",
+      "normalizedText": "فانه ينظر بالابصار ... كما اتي في النص والاخبار",
       "order": 125,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_126_5qsxcs8h",
+      "id": "book_al_durrah_al_mudiyyah_v_126_bt7thb1a",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لِأَنَّهُ سُبْحَانَهُ لم يحجب ... إِلَّا عَن الْكَافِر والمكذب",
-      "normalizedText": "لأنه سبحانه لم يحجب ... إلا عن الكافر والمكذب",
+      "normalizedText": "لانه سبحانه لم يحجب ... الا عن الكافر والمكذب",
       "order": 126,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_127_vwezm379",
+      "id": "book_al_durrah_al_mudiyyah_v_127_xsh4ebf0",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمن عَظِيم مِنْهُ السَّلَام ... ولطفه بِسَائِر الْأَنَام",
-      "normalizedText": "ومن عظيم منه السلام ... ولطفه بسائر الأنام",
+      "normalizedText": "ومن عظيم منه السلام ... ولطفه بساير الانام",
       "order": 127,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_128_1gvwgedt",
+      "id": "book_al_durrah_al_mudiyyah_v_128_ojnj3w1s",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "أَن أرشد الْخلق إِلَى الْوُصُول ... مُبينًا للحق ب الرَّسُول",
-      "normalizedText": "أن أرشد الخلق إلى الوصول ... مبينا للحق ب الرسول",
+      "normalizedText": "ان ارشد الخلق الي الوصول ... مبينا للحق ب الرسول",
       "order": 128,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_129_0u9wu8ae",
+      "id": "book_al_durrah_al_mudiyyah_v_129_3nh69u5p",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَشرط من أكْرم ب النُّبُوَّة ... حريَّة ذكورة ك قُوَّة",
-      "normalizedText": "وشرط من أكرم ب النبوة ... حرية ذكورة ك قوة",
+      "normalizedText": "وشرط من اكرم ب النبوه ... حريه ذكوره ك قوه",
       "order": 129,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_130_h04vgvrk",
+      "id": "book_al_durrah_al_mudiyyah_v_130_c14rz28d",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَا تنَال رُتْبَة النُّبُوَّة ... ب الْكسْب والتهذيب والفتوة",
-      "normalizedText": "ولا تنال رتبة النبوة ... ب الكسب والتهذيب والفتوة",
+      "normalizedText": "ولا تنال رتبه النبوه ... ب الكسب والتهذيب والفتوه",
       "order": 130,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_131_je6kceb1",
+      "id": "book_al_durrah_al_mudiyyah_v_131_g88mzlvi",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لَكِنَّهَا فضل من الْمولى الْأَجَل ... لمن يشا من خلقه إِلَى الْأَجَل",
-      "normalizedText": "لكنها فضل من المولى الأجل ... لمن يشا من خلقه إلى الأجل",
+      "normalizedText": "لكنها فضل من المولي الاجل ... لمن يشا من خلقه الي الاجل",
       "order": 131,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_132_xyi3yua0",
+      "id": "book_al_durrah_al_mudiyyah_v_132_0rnhqdhb",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلم تزل فِيمَا مضى الأنباء ... من فَضله تَأتي لمن يَشَاء",
-      "normalizedText": "ولم تزل فيما مضى الأنباء ... من فضله تأتي لمن يشاء",
+      "normalizedText": "ولم تزل فيما مضي الانبا ... من فضله تاتي لمن يشا",
       "order": 132,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_133_ee3uyf2k",
+      "id": "book_al_durrah_al_mudiyyah_v_133_a2l9h1ir",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "حَتَّى أَتَى ب الْخَاتم الَّذِي ختم ... بِهِ وأعلانا على كل الْأُمَم",
-      "normalizedText": "حتى أتى ب الخاتم الذي ختم ... به وأعلانا على كل الأمم",
+      "normalizedText": "حتي اتي ب الخاتم الذي ختم ... به واعلانا علي كل الامم",
       "order": 133,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_134_limtijzs",
+      "id": "book_al_durrah_al_mudiyyah_v_134_i6c486pf",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَخَصه بِذَاكَ كالمقام ... وَبَعثه لسَائِر الْأَنَام",
-      "normalizedText": "وخصه بذاك كالمقام ... وبعثه لسائر الأنام",
+      "normalizedText": "وخصه بذاك كالمقام ... وبعثه لساير الانام",
       "order": 134,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_135_crrvsm2e",
+      "id": "book_al_durrah_al_mudiyyah_v_135_kcx5bmbw",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ومعجز الْقُرْآن ك الْمِعْرَاج ... حَقًا بِلَا مين وَلَا اعوجاج",
-      "normalizedText": "ومعجز القرآن ك المعراج ... حقا بلا مين ولا اعوجاج",
+      "normalizedText": "ومعجز القران ك المعراج ... حقا بلا مين ولا اعوجاج",
       "order": 135,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_136_h3lo6s8w",
+      "id": "book_al_durrah_al_mudiyyah_v_136_fgvum0my",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فكم حباه ربه وفضله ... وَخَصه سُبْحَانَهُ وخوله",
       "normalizedText": "فكم حباه ربه وفضله ... وخصه سبحانه وخوله",
@@ -1643,82 +1645,82 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_137_y9uiiha6",
+      "id": "book_al_durrah_al_mudiyyah_v_137_bxep3r81",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأفضل الْعَالم من غير امترا ... نَبينَا الْمَبْعُوث فِي أم الْقرى",
-      "normalizedText": "وأفضل العالم من غير امترا ... نبينا المبعوث في أم القرى",
+      "normalizedText": "وافضل العالم من غير امترا ... نبينا المبعوث في ام القري",
       "order": 137,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_138_xf0lkbiy",
+      "id": "book_al_durrah_al_mudiyyah_v_138_ogqudp4z",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَبعده الْأَفْضَل أهل الْعَزْم ... ف الرُّسُل ثمَّ الأنبيا بِالْجَزْمِ",
-      "normalizedText": "وبعده الأفضل أهل العزم ... ف الرسل ثم الأنبيا بالجزم",
+      "normalizedText": "وبعده الافضل اهل العزم ... ف الرسل ثم الانبيا بالجزم",
       "order": 138,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_139_uc3uirfo",
+      "id": "book_al_durrah_al_mudiyyah_v_139_3q19k8rs",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأَن كل وَاحِد مِنْهُم سلم ... من كل مَا نقص وَمن كفر عصم",
-      "normalizedText": "وأن كل واحد منهم سلم ... من كل ما نقص ومن كفر عصم",
+      "normalizedText": "وان كل واحد منهم سلم ... من كل ما نقص ومن كفر عصم",
       "order": 139,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_140_4zpjpfo3",
+      "id": "book_al_durrah_al_mudiyyah_v_140_klruzhd9",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "كَذَاك من إفْك وَمن خيانه ... لوصفهم ب الصدْق والأمانه",
-      "normalizedText": "كذاك من إفك ومن خيانه ... لوصفهم ب الصدق والأمانه",
+      "normalizedText": "كذاك من افك ومن خيانه ... لوصفهم ب الصدق والامانه",
       "order": 140,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_141_6zgnxaf7",
+      "id": "book_al_durrah_al_mudiyyah_v_141_g6yva11a",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَجَائِز فِي حق كل الرُّسُل ... النّوم وَالنِّكَاح مثل الْأكل",
-      "normalizedText": "وجائز في حق كل الرسل ... النوم والنكاح مثل الأكل",
+      "normalizedText": "وجايز في حق كل الرسل ... النوم والنكاح مثل الاكل",
       "order": 141,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_142_iwbqrnqu",
+      "id": "book_al_durrah_al_mudiyyah_v_142_tn35pk91",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَيْسَ فِي الْأمة بالتحقيق ... فِي الْفضل وَالْمَعْرُوف ك الصّديق",
-      "normalizedText": "وليس في الأمة بالتحقيق ... في الفضل والمعروف ك الصديق",
+      "normalizedText": "وليس في الامه بالتحقيق ... في الفضل والمعروف ك الصديق",
       "order": 142,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_143_pwiwwt34",
+      "id": "book_al_durrah_al_mudiyyah_v_143_82p95oav",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَبعده الْفَارُوق من غير افترا ... وَبعده عُثْمَان فاترك المرا",
       "normalizedText": "وبعده الفاروق من غير افترا ... وبعده عثمان فاترك المرا",
@@ -1727,286 +1729,286 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_144_rp6p7lkt",
+      "id": "book_al_durrah_al_mudiyyah_v_144_mn9aw0eq",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَبعد فالفضل حَقِيقا فاسمع ... نظامي هَذَا للبطين الأنزع",
-      "normalizedText": "وبعد فالفضل حقيقا فاسمع ... نظامي هذا للبطين الأنزع",
+      "normalizedText": "وبعد فالفضل حقيقا فاسمع ... نظامي هذا للبطين الانزع",
       "order": 144,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_145_l5dsx36j",
+      "id": "book_al_durrah_al_mudiyyah_v_145_q91kn9gs",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "مجدل الْأَبْطَال ماضي الْعَزْم ... مفرج الأوجال وافي الحزم",
-      "normalizedText": "مجدل الأبطال ماضي العزم ... مفرج الأوجال وافي الحزم",
+      "normalizedText": "مجدل الابطال ماضي العزم ... مفرج الاوجال وافي الحزم",
       "order": 145,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_146_o8z61yc6",
+      "id": "book_al_durrah_al_mudiyyah_v_146_k6vz2agr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وافي الندى مبدي الْهدى مردي العدا ... مجلي الصدى يَا ويل من فِيهِ اعْتدى",
-      "normalizedText": "وافي الندى مبدي الهدى مردي العدا ... مجلي الصدى يا ويل من فيه اعتدى",
+      "normalizedText": "وافي الندي مبدي الهدي مردي العدا ... مجلي الصدي يا ويل من فيه اعتدي",
       "order": 146,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_147_aqe4oyiu",
+      "id": "book_al_durrah_al_mudiyyah_v_147_l04nuvlv",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فحبه كحبهم حتما وَجب ... وَمن تعدى أَو قلى فقد كذب",
-      "normalizedText": "فحبه كحبهم حتما وجب ... ومن تعدى أو قلى فقد كذب",
+      "normalizedText": "فحبه كحبهم حتما وجب ... ومن تعدي او قلي فقد كذب",
       "order": 147,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_148_ch1cije0",
+      "id": "book_al_durrah_al_mudiyyah_v_148_f589h6xx",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَبعد فَالْأَفْضَل بَاقِي العشره ... ف أهل بدر ثمَّ أهل الشجره",
-      "normalizedText": "وبعد فالأفضل باقي العشره ... ف أهل بدر ثم أهل الشجره",
+      "normalizedText": "وبعد فالافضل باقي العشره ... ف اهل بدر ثم اهل الشجره",
       "order": 148,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_149_bs0vgp7y",
+      "id": "book_al_durrah_al_mudiyyah_v_149_0wcw6hrn",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَقيل أهل أحد المقدمه ... وَالْأول أولى للنصوص المحكمه",
-      "normalizedText": "وقيل أهل أحد المقدمه ... والأول أولى للنصوص المحكمه",
+      "normalizedText": "وقيل اهل احد المقدمه ... والاول اولي للنصوص المحكمه",
       "order": 149,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_150_m3b3fwyw",
+      "id": "book_al_durrah_al_mudiyyah_v_150_pvksgc1y",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَعَائِشَة فِي الْعلم مَعَ خَدِيجَة ... فِي السَّبق فَافْهَم نُكْتَة النتيجه",
-      "normalizedText": "وعائشة في العلم مع خديجة ... في السبق فافهم نكتة النتيجه",
+      "normalizedText": "وعايشه في العلم مع خديجه ... في السبق فافهم نكته النتيجه",
       "order": 150,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_151_mjam6g85",
+      "id": "book_al_durrah_al_mudiyyah_v_151_sxi5n0ic",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَيْسَ فِي الْأمة ك الصَّحَابَة ... فِي الْفضل وَالْمَعْرُوف والإصابة",
-      "normalizedText": "وليس في الأمة ك الصحابة ... في الفضل والمعروف والإصابة",
+      "normalizedText": "وليس في الامه ك الصحابه ... في الفضل والمعروف والاصابه",
       "order": 151,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_152_7qcpvwag",
+      "id": "book_al_durrah_al_mudiyyah_v_152_usz8sh8v",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهُم قد شاهدوا المختارا ... وعاينوا الْأَسْرَار والأنوارا",
-      "normalizedText": "فإنهم قد شاهدوا المختارا ... وعاينوا الأسرار والأنوارا",
+      "normalizedText": "فانهم قد شاهدوا المختارا ... وعاينوا الاسرار والانوارا",
       "order": 152,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_153_912civzs",
+      "id": "book_al_durrah_al_mudiyyah_v_153_8ln96mur",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَجَاهدُوا فِي الله حَتَّى بانا ... دين الْهدى وَقد سما الأديانا",
-      "normalizedText": "وجاهدوا في الله حتى بانا ... دين الهدى وقد سما الأديانا",
+      "normalizedText": "وجاهدوا في الله حتي بانا ... دين الهدي وقد سما الاديانا",
       "order": 153,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_154_t4qlx0fu",
+      "id": "book_al_durrah_al_mudiyyah_v_154_4lu5esrj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَقد أَتَى فِي مُحكم التَّنْزِيل ... من فَضلهمْ مَا يشفي للغليل",
-      "normalizedText": "وقد أتى في محكم التنزيل ... من فضلهم ما يشفي للغليل",
+      "normalizedText": "وقد اتي في محكم التنزيل ... من فضلهم ما يشفي للغليل",
       "order": 154,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_155_4f2j13bx",
+      "id": "book_al_durrah_al_mudiyyah_v_155_6nlvnxv2",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَفِي الْأَحَادِيث وَفِي الْآثَار ... وَفِي كَلَام الْقَوْم والأشعار",
-      "normalizedText": "وفي الأحاديث وفي الآثار ... وفي كلام القوم والأشعار",
+      "normalizedText": "وفي الاحاديث وفي الاثار ... وفي كلام القوم والاشعار",
       "order": 155,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_156_60j4azru",
+      "id": "book_al_durrah_al_mudiyyah_v_156_fpt2tjek",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "مَا قد رَبًّا من أَن يُحِيط نظمي ... عَن بعضه فاقنع وَخذ عَن علم",
-      "normalizedText": "ما قد ربا من أن يحيط نظمي ... عن بعضه فاقنع وخذ عن علم",
+      "normalizedText": "ما قد ربا من ان يحيط نظمي ... عن بعضه فاقنع وخذ عن علم",
       "order": 156,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_157_i5nfsuro",
+      "id": "book_al_durrah_al_mudiyyah_v_157_850pd1cg",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَاحْذَرْ من الْخَوْض الَّذِي قد يزري ... بفضلهم مِمَّا جرى لَو تَدْرِي",
-      "normalizedText": "واحذر من الخوض الذي قد يزري ... بفضلهم مما جرى لو تدري",
+      "normalizedText": "واحذر من الخوض الذي قد يزري ... بفضلهم مما جري لو تدري",
       "order": 157,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_158_97e9ztqg",
+      "id": "book_al_durrah_al_mudiyyah_v_158_p4xqiyn6",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهُ عَن اجْتِهَاد قد صدر ... فَاسْلَمْ أذلّ الله من لَهُم هجر",
-      "normalizedText": "فإنه عن اجتهاد قد صدر ... فاسلم أذل الله من لهم هجر",
+      "normalizedText": "فانه عن اجتهاد قد صدر ... فاسلم اذل الله من لهم هجر",
       "order": 158,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_159_7hvq31mj",
+      "id": "book_al_durrah_al_mudiyyah_v_159_9g1ipyho",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وبعدهم ف التابعون أَحْرَى ... بِالْفَضْلِ ثمَّ تابعوهم طرا",
-      "normalizedText": "وبعدهم ف التابعون أحرى ... بالفضل ثم تابعوهم طرا",
+      "normalizedText": "وبعدهم ف التابعون احري ... بالفضل ثم تابعوهم طرا",
       "order": 159,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_160_gy68bf6y",
+      "id": "book_al_durrah_al_mudiyyah_v_160_8usef6j1",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل خارق أَتَى عَن صَالح ... من تَابع لشرعنا وناصح",
-      "normalizedText": "وكل خارق أتى عن صالح ... من تابع لشرعنا وناصح",
+      "normalizedText": "وكل خارق اتي عن صالح ... من تابع لشرعنا وناصح",
       "order": 160,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_161_jyuzxh05",
+      "id": "book_al_durrah_al_mudiyyah_v_161_vi4my534",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهَا من الكرامات الَّتِي ... بهَا نقُول فاقف للأدلة",
-      "normalizedText": "فإنها من الكرامات التي ... بها نقول فاقف للأدلة",
+      "normalizedText": "فانها من الكرامات التي ... بها نقول فاقف للادله",
       "order": 161,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_162_d4ndtecq",
+      "id": "book_al_durrah_al_mudiyyah_v_162_zpsovgv2",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمن نفاها من ذَوي الضلال ... فقد أَتَى فِي ذَاك بالمحال",
-      "normalizedText": "ومن نفاها من ذوي الضلال ... فقد أتى في ذاك بالمحال",
+      "normalizedText": "ومن نفاها من ذوي الضلال ... فقد اتي في ذاك بالمحال",
       "order": 162,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_163_g6wm6epb",
+      "id": "book_al_durrah_al_mudiyyah_v_163_cztpd7px",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِنَّهَا شهيرة وَلم تزل ... فِي كل عصر يَا شقا أهل الزلل",
-      "normalizedText": "فإنها شهيرة ولم تزل ... في كل عصر يا شقا أهل الزلل",
+      "normalizedText": "فانها شهيره ولم تزل ... في كل عصر يا شقا اهل الزلل",
       "order": 163,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_164_um5unm0y",
+      "id": "book_al_durrah_al_mudiyyah_v_164_o6qyno0v",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَعِنْدنَا تَفْضِيل أَعْيَان الْبشر ... على ملاك رَبنَا كَمَا اشْتهر",
-      "normalizedText": "وعندنا تفضيل أعيان البشر ... على ملاك ربنا كما اشتهر",
+      "normalizedText": "وعندنا تفضيل اعيان البشر ... علي ملاك ربنا كما اشتهر",
       "order": 164,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_165_iletqg7u",
+      "id": "book_al_durrah_al_mudiyyah_v_165_47kyi2to",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "قَالَ وَمن قَالَ سوى هَذَا افترى ... وَقد تعدى فِي الْمقَال واجترى",
-      "normalizedText": "قال ومن قال سوى هذا افترى ... وقد تعدى في المقال واجترى",
+      "normalizedText": "قال ومن قال سوي هذا افتري ... وقد تعدي في المقال واجتري",
       "order": 165,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_166_xgiwmjvq",
+      "id": "book_al_durrah_al_mudiyyah_v_166_ysgym0rj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلَا غنى لأمة الْإِسْلَام ... فِي كل عصر كَانَ عَن إِمَام",
-      "normalizedText": "ولا غنى لأمة الإسلام ... في كل عصر كان عن إمام",
+      "normalizedText": "ولا غني لامه الاسلام ... في كل عصر كان عن امام",
       "order": 166,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_167_4j5ky26o",
+      "id": "book_al_durrah_al_mudiyyah_v_167_t2a1f5jc",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "يذب عَنْهَا كل ذِي جحود ... ويعتني ب الْغَزْو وَالْحُدُود",
       "normalizedText": "يذب عنها كل ذي جحود ... ويعتني ب الغزو والحدود",
@@ -2015,10 +2017,10 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_168_b76a8esh",
+      "id": "book_al_durrah_al_mudiyyah_v_168_u7hfejt4",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَفعل مَعْرُوف وَترك نكر ... وَنصر مظلوم وقمع كفر",
       "normalizedText": "وفعل معروف وترك نكر ... ونصر مظلوم وقمع كفر",
@@ -2027,94 +2029,94 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_169_x2jh5g1s",
+      "id": "book_al_durrah_al_mudiyyah_v_169_v1ikxixh",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأخذ مَال الْفَيْء وَالْخَرَاج ... وَنَحْوه وَالصرْف فِي منهاج",
-      "normalizedText": "وأخذ مال الفيء والخراج ... ونحوه والصرف في منهاج",
+      "normalizedText": "واخذ مال الفي والخراج ... ونحوه والصرف في منهاج",
       "order": 169,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_170_rhjnq8ls",
+      "id": "book_al_durrah_al_mudiyyah_v_170_vtqfav88",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ونصبه ب النَّص وَالْإِجْمَاع ... وقهره فَحل عَن الخداع",
-      "normalizedText": "ونصبه ب النص والإجماع ... وقهره فحل عن الخداع",
+      "normalizedText": "ونصبه ب النص والاجماع ... وقهره فحل عن الخداع",
       "order": 170,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_171_h1949ucy",
+      "id": "book_al_durrah_al_mudiyyah_v_171_11smh66n",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَشَرطه الْإِسْلَام وَالْحريَّة ... عَدَالَة سمع مَعَ الدرية",
-      "normalizedText": "وشرطه الإسلام والحرية ... عدالة سمع مع الدرية",
+      "normalizedText": "وشرطه الاسلام والحريه ... عداله سمع مع الدريه",
       "order": 171,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_172_5uvydjdm",
+      "id": "book_al_durrah_al_mudiyyah_v_172_1fnucnwo",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَأَن يكون من قُرَيْش عَالما ... مُكَلّفا ذَا خبْرَة وحاكما",
-      "normalizedText": "وأن يكون من قريش عالما ... مكلفا ذا خبرة وحاكما",
+      "normalizedText": "وان يكون من قريش عالما ... مكلفا ذا خبره وحاكما",
       "order": 172,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_173_5dcfiecv",
+      "id": "book_al_durrah_al_mudiyyah_v_173_bqqritxr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَكن مُطيعًا أمره فِيمَا أَمر ... مَا لم يكن ب مُنكر فيحتذر",
-      "normalizedText": "وكن مطيعا أمره فيما أمر ... ما لم يكن ب منكر فيحتذر",
+      "normalizedText": "وكن مطيعا امره فيما امر ... ما لم يكن ب منكر فيحتذر",
       "order": 173,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_174_hsbsgcgx",
+      "id": "book_al_durrah_al_mudiyyah_v_174_tdu7m3u1",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَاعْلَم بِأَن الْأَمر وَالنَّهْي مَعًا ... فرضا كِفَايَة على من قد وعا",
-      "normalizedText": "واعلم بأن الأمر والنهي معا ... فرضا كفاية على من قد وعا",
+      "normalizedText": "واعلم بان الامر والنهي معا ... فرضا كفايه علي من قد وعا",
       "order": 174,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_175_416w2wgl",
+      "id": "book_al_durrah_al_mudiyyah_v_175_4sthtss5",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَإِن يكن ذَا وَاحِدًا تعينا ... عَلَيْهِ لَكِن شَرطه أَن يأمنا",
-      "normalizedText": "وإن يكن ذا واحدا تعينا ... عليه لكن شرطه أن يأمنا",
+      "normalizedText": "وان يكن ذا واحدا تعينا ... عليه لكن شرطه ان يامنا",
       "order": 175,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_176_cqtpbl0l",
+      "id": "book_al_durrah_al_mudiyyah_v_176_39mszqp7",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فاصبر وَزَل ب الْيَد وَاللِّسَان ... ل مُنكر وَاحْذَرْ من النُّقْصَان",
       "normalizedText": "فاصبر وزل ب اليد واللسان ... ل منكر واحذر من النقصان",
@@ -2123,130 +2125,130 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_177_k80o4fjf",
+      "id": "book_al_durrah_al_mudiyyah_v_177_h2g2dpf4",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمن نهى عَمَّا لَهُ قد ارْتكب ... فقد أَتَى مِمَّا بِهِ يقْضى الْعجب",
-      "normalizedText": "ومن نهى عما له قد ارتكب ... فقد أتى مما به يقضى العجب",
+      "normalizedText": "ومن نهي عما له قد ارتكب ... فقد اتي مما به يقضي العجب",
       "order": 177,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_178_u0ymh1bx",
+      "id": "book_al_durrah_al_mudiyyah_v_178_jryt1rlz",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَلَو بدا بِنَفسِهِ فزادها ... عَن غيها لَكَانَ قد أفادها",
-      "normalizedText": "فلو بدا بنفسه فزادها ... عن غيها لكان قد أفادها",
+      "normalizedText": "فلو بدا بنفسه فزادها ... عن غيها لكان قد افادها",
       "order": 178,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_179_a0nt0fck",
+      "id": "book_al_durrah_al_mudiyyah_v_179_2crp6zqb",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "مدارك الْعُلُوم فِي العيان ... محصورة فِي الْحَد والبرهان",
-      "normalizedText": "مدارك العلوم في العيان ... محصورة في الحد والبرهان",
+      "normalizedText": "مدارك العلوم في العيان ... محصوره في الحد والبرهان",
       "order": 179,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_180_7q164wru",
+      "id": "book_al_durrah_al_mudiyyah_v_180_3akmwqqp",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَقَالَ قوم عِنْد أَصْحَاب النّظر ... حس وإخبار صَحِيح وَالنَّظَر",
-      "normalizedText": "وقال قوم عند أصحاب النظر ... حس وإخبار صحيح والنظر",
+      "normalizedText": "وقال قوم عند اصحاب النظر ... حس واخبار صحيح والنظر",
       "order": 180,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_181_7ug8irss",
+      "id": "book_al_durrah_al_mudiyyah_v_181_did1strv",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ف الْحَد وَهُوَ أصل كل علم ... وصف مُحِيط كاشف فافتهم",
-      "normalizedText": "ف الحد وهو أصل كل علم ... وصف محيط كاشف فافتهم",
+      "normalizedText": "ف الحد وهو اصل كل علم ... وصف محيط كاشف فافتهم",
       "order": 181,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_182_at2kdl6t",
+      "id": "book_al_durrah_al_mudiyyah_v_182_m525qmle",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَشَرطه طرد وَعكس وَهُوَ إِن ... أنبا عَن الذوات ف التَّام استبن",
-      "normalizedText": "وشرطه طرد وعكس وهو إن ... أنبا عن الذوات ف التام استبن",
+      "normalizedText": "وشرطه طرد وعكس وهو ان ... انبا عن الذوات ف التام استبن",
       "order": 182,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_183_0ciqe9ih",
+      "id": "book_al_durrah_al_mudiyyah_v_183_usexopdh",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَإِن يكن ب الْجِنْس ثمَّ الْخَاصَّة ... فَذَاك رسم فَافْهَم المحاصة",
-      "normalizedText": "وإن يكن ب الجنس ثم الخاصة ... فذاك رسم فافهم المحاصة",
+      "normalizedText": "وان يكن ب الجنس ثم الخاصه ... فذاك رسم فافهم المحاصه",
       "order": 183,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_184_jto85bmo",
+      "id": "book_al_durrah_al_mudiyyah_v_184_f52sen87",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل مَعْلُوم بحس وحجى ... فنكره جهل قَبِيح فِي الهجا",
-      "normalizedText": "وكل معلوم بحس وحجى ... فنكره جهل قبيح في الهجا",
+      "normalizedText": "وكل معلوم بحس وحجي ... فنكره جهل قبيح في الهجا",
       "order": 184,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_185_t59oeb1m",
+      "id": "book_al_durrah_al_mudiyyah_v_185_ohc4j7y6",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "فَإِن يقم بِنَفسِهِ ف جَوْهَر ... أَو لَا فَذَاك عرض مفتقر",
-      "normalizedText": "فإن يقم بنفسه ف جوهر ... أو لا فذاك عرض مفتقر",
+      "normalizedText": "فان يقم بنفسه ف جوهر ... او لا فذاك عرض مفتقر",
       "order": 185,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_186_6hnjmh6g",
+      "id": "book_al_durrah_al_mudiyyah_v_186_imuv4xnz",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "والجسم مَا ألف من جزئين ... فَصَاعِدا فاترك حَدِيث المين",
-      "normalizedText": "والجسم ما ألف من جزئين ... فصاعدا فاترك حديث المين",
+      "normalizedText": "والجسم ما الف من جزيين ... فصاعدا فاترك حديث المين",
       "order": 186,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_187_o9f2d0fz",
+      "id": "book_al_durrah_al_mudiyyah_v_187_270z64dr",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "ومستحيل الذَّات غير مُمكن ... وضده مَا جَازَ فاسمع زكني",
       "normalizedText": "ومستحيل الذات غير ممكن ... وضده ما جاز فاسمع زكني",
@@ -2255,10 +2257,10 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_188_btlvhnol",
+      "id": "book_al_durrah_al_mudiyyah_v_188_6f0y4s6t",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "والضد وَالْخلاف والنقيض ... والمثل والغيران مستفيض",
       "normalizedText": "والضد والخلاف والنقيض ... والمثل والغيران مستفيض",
@@ -2267,10 +2269,10 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_189_d693k2w1",
+      "id": "book_al_durrah_al_mudiyyah_v_189_84ihkzmd",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وكل هَذَا علمه مُحَقّق ... فَلم نطل بِهِ وَلم ننمق",
       "normalizedText": "وكل هذا علمه محقق ... فلم نطل به ولم ننمق",
@@ -2279,199 +2281,199 @@
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_190_r85u34xh",
+      "id": "book_al_durrah_al_mudiyyah_v_190_dyfpghcu",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَالْحَمْد لله على التَّوْفِيق ... لمنهج الْحق على التَّحْقِيق",
-      "normalizedText": "والحمد لله على التوفيق ... لمنهج الحق على التحقيق",
+      "normalizedText": "والحمد لله علي التوفيق ... لمنهج الحق علي التحقيق",
       "order": 190,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_191_no5ino81",
+      "id": "book_al_durrah_al_mudiyyah_v_191_czv4apfc",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "مُسلما لمقْتَضى الحَدِيث ... وَالنَّص فِي الْقَدِيم والْحَدِيث",
-      "normalizedText": "مسلما لمقتضى الحديث ... والنص في القديم والحديث",
+      "normalizedText": "مسلما لمقتضي الحديث ... والنص في القديم والحديث",
       "order": 191,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_192_e7984m1i",
+      "id": "book_al_durrah_al_mudiyyah_v_192_w3e0spqb",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لَا أعتني بِغَيْر قَول السّلف ... مُوَافقا أئمتي وسلفي",
-      "normalizedText": "لا أعتني بغير قول السلف ... موافقا أئمتي وسلفي",
+      "normalizedText": "لا اعتني بغير قول السلف ... موافقا ايمتي وسلفي",
       "order": 192,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_193_39tnsqot",
+      "id": "book_al_durrah_al_mudiyyah_v_193_22cdrjtc",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَلست فِي قولي بذا مُقَلدًا ... إِلَّا النَّبِي الْمُصْطَفى مبدي الْهدى",
-      "normalizedText": "ولست في قولي بذا مقلدا ... إلا النبي المصطفى مبدي الهدى",
+      "normalizedText": "ولست في قولي بذا مقلدا ... الا النبي المصطفي مبدي الهدي",
       "order": 193,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_194_3yrr6gnn",
+      "id": "book_al_durrah_al_mudiyyah_v_194_7qx4zbfe",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "صلى عَلَيْهِ الله مَا قطر نزل ... وَمَا تعانى ذكره من الْأَزَل",
-      "normalizedText": "صلى عليه الله ما قطر نزل ... وما تعانى ذكره من الأزل",
+      "normalizedText": "صلي عليه الله ما قطر نزل ... وما تعاني ذكره من الازل",
       "order": 194,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_195_dap772qc",
+      "id": "book_al_durrah_al_mudiyyah_v_195_y8900y3z",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمَا انجلى بهديه الديجور ... وراقت الْأَوْقَات والدهور",
-      "normalizedText": "وما انجلى بهديه الديجور ... وراقت الأوقات والدهور",
+      "normalizedText": "وما انجلي بهديه الديجور ... وراقت الاوقات والدهور",
       "order": 195,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_196_mr2f14q7",
+      "id": "book_al_durrah_al_mudiyyah_v_196_swowaok9",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَآله وَصَحبه أهل الوفا ... معادن التَّقْوَى وينبوع الصَّفَا",
-      "normalizedText": "وآله وصحبه أهل الوفا ... معادن التقوى وينبوع الصفا",
+      "normalizedText": "واله وصحبه اهل الوفا ... معادن التقوي وينبوع الصفا",
       "order": 196,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_197_8mfrq76c",
+      "id": "book_al_durrah_al_mudiyyah_v_197_fsb4foku",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وتابع وتابع للتابع ... خير الورى حَقًا بِنَصّ الشَّارِع",
-      "normalizedText": "وتابع وتابع للتابع ... خير الورى حقا بنص الشارع",
+      "normalizedText": "وتابع وتابع للتابع ... خير الوري حقا بنص الشارع",
       "order": 197,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_198_bz23nbmy",
+      "id": "book_al_durrah_al_mudiyyah_v_198_5ktxlglu",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَرَحْمَة الله مَعَ الرضْوَان ... وَالْبر والتكريم وَالْإِحْسَان",
-      "normalizedText": "ورحمة الله مع الرضوان ... والبر والتكريم والإحسان",
+      "normalizedText": "ورحمه الله مع الرضوان ... والبر والتكريم والاحسان",
       "order": 198,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_199_axhjln3w",
+      "id": "book_al_durrah_al_mudiyyah_v_199_vw4wjv43",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "تهدي مَعَ التبجيل والإنعام ... مني لمثوى عصمَة الْإِسْلَام",
-      "normalizedText": "تهدي مع التبجيل والإنعام ... مني لمثوى عصمة الإسلام",
+      "normalizedText": "تهدي مع التبجيل والانعام ... مني لمثوي عصمه الاسلام",
       "order": 199,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_200_ukit0l8j",
+      "id": "book_al_durrah_al_mudiyyah_v_200_r65ai71k",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "أَئِمَّة الدّين هداة الْأمة ... أهل التقى من سَائِر الْأَئِمَّة",
-      "normalizedText": "أئمة الدين هداة الأمة ... أهل التقى من سائر الأئمة",
+      "normalizedText": "ايمه الدين هداه الامه ... اهل التقي من ساير الايمه",
       "order": 200,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_201_osm2l42i",
+      "id": "book_al_durrah_al_mudiyyah_v_201_g3rcme7g",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "لَا سِيمَا أَحْمد والنعمان ... وَمَالك مُحَمَّد الصنوان",
-      "normalizedText": "لا سيما أحمد والنعمان ... ومالك محمد الصنوان",
+      "normalizedText": "لا سيما احمد والنعمان ... ومالك محمد الصنوان",
       "order": 201,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_202_wn9q85tu",
+      "id": "book_al_durrah_al_mudiyyah_v_202_prwrclof",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "من لَازم لكل أَرْبَاب الْعَمَل ... تَقْلِيد خبر مِنْهُم فاسمع تخل",
-      "normalizedText": "من لازم لكل أرباب العمل ... تقليد خبر منهم فاسمع تخل",
+      "normalizedText": "من لازم لكل ارباب العمل ... تقليد خبر منهم فاسمع تخل",
       "order": 202,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_203_at29iqhv",
+      "id": "book_al_durrah_al_mudiyyah_v_203_ru07y3iz",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "وَمن نحا لسبلهم من الورى ... مَا دارت الأفلاك أَو نجم سرى",
-      "normalizedText": "ومن نحا لسبلهم من الورى ... ما دارت الأفلاك أو نجم سرى",
+      "normalizedText": "ومن نحا لسبلهم من الوري ... ما دارت الافلاك او نجم سري",
       "order": 203,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_204_sazacw0q",
+      "id": "book_al_durrah_al_mudiyyah_v_204_eb88vxfj",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "هَدِيَّة مني لأرباب السّلف ... مجانبا للخوض من أهل الْخلف",
-      "normalizedText": "هدية مني لأرباب السلف ... مجانبا للخوض من أهل الخلف",
+      "normalizedText": "هديه مني لارباب السلف ... مجانبا للخوض من اهل الخلف",
       "order": 204,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_al_durrah_al_mudiyyah_v_205_4o4vp3jt",
+      "id": "book_al_durrah_al_mudiyyah_v_205_9mpzbzag",
       "bookId": "book_al_durrah_al_mudiyyah",
       "text": "خُذْهَا هديت واقتفي نظامي ... تفز بِمَا أملت وَالسَّلَام",
-      "normalizedText": "خذها هديت واقتفي نظامي ... تفز بما أملت والسلام",
+      "normalizedText": "خذها هديت واقتفي نظامي ... تفز بما املت والسلام",
       "order": 205,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     }
   ],
   "isPublished": true,
@@ -2479,5 +2481,5 @@
   "deletedAt": null,
   "deletedBy": null,
   "createdAt": "2026-07-01T19:25:57Z",
-  "updatedAt": "2026-07-01T19:25:57Z"
+  "updatedAt": "2026-07-18T16:00:00Z"
 }

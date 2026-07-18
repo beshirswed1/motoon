@@ -19,11 +19,11 @@ import {
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'متون | منصة حفظ المتون العلمية',
-    description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي.',
+    title: '🟢 متون | منصة حفظ المتون العلمية',
+    description: '📖 احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام تكرار متباعد ذكي وتسميع صوتي تفاعلي.',
     openGraph: {
-      title: 'متون | منصة حفظ المتون العلمية',
-      description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي.',
+      title: '🟢 متون | منصة حفظ المتون العلمية',
+      description: '📖 احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام تكرار متباعد ذكي وتسميع صوتي تفاعلي.',
       locale: 'ar_SA',
       type: 'website',
       url: 'https://www.motoon.com.tr',
@@ -38,8 +38,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'متون | منصة حفظ المتون العلمية',
-      description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي.',
+      title: '🟢 متون | منصة حفظ المتون العلمية',
+      description: '📖 احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام تكرار متباعد ذكي وتسميع صوتي تفاعلي.',
       images: ['https://www.motoon.com.tr/logo.png'],
     },
   };

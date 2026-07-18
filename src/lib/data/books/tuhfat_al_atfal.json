@@ -3,10 +3,12 @@
   "title": "تحفة الأطفال",
   "author": "سليمان بن حسين الجمزوري",
   "description": "تحفة الأطفال والغلمان في تجويد القرآن هي منظومة شعرية شهيرة للمبتدئين في علم تجويد القرآن الكريم، نظمها الشيخ سليمان بن حسين بن محمد الجمزوري. تمتاز بأبياتها السلسة والسهلة التي يسهل على الأطفال والمبتدئين حفظها وفهمها، ويبلغ عدد أبياتها 61 بيتاً تعتمد على بحر الرجز.",
-  "coverImageUrl": "https://quranonlinelibrary.com/book_images//images/books/3965/3965.jpg",
-  "difficulty": "beginner",
+  "coverImageUrl": "",
+  "difficulty": "intermediate",
   "slug": "tuhfat-al-atfal",
   "status": "published",
+  "category": "quran-sciences",
+  "subcategory": "tajweed",
   "tags": [
     "تجويد",
     "قرآن",
@@ -14,736 +16,736 @@
   ],
   "verses": [
     {
-      "id": "book_tuhfat_al_atfal_v_1",
+      "id": "book_tuhfat_al_atfal_v_1_pktdxmi0",
       "bookId": "book_tuhfat_al_atfal",
       "text": "يَقُولُ رَاجِي رَحْمَةِ الْغَفُورِ ... دَوْمًا سُلَيْمَانُ هُوَ الْجَمْزُورِي",
-      "normalizedText": "يقول راجي رحمة الغفور دوما سليمان هو الجمزوري",
+      "normalizedText": "يقول راجي رحمه الغفور ... دوما سليمان هو الجمزوري",
       "order": 1,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_2",
+      "id": "book_tuhfat_al_atfal_v_2_32jwi8an",
       "bookId": "book_tuhfat_al_atfal",
       "text": "الْحَمْدُ لِلَّهِ مُصَلِّيًا عَلَى ... مُحَمَّدٍ وَآلِهِ وَمَنْ تَلَا",
-      "normalizedText": "الحمد لله مصليا على محمد واله ومن تلا",
+      "normalizedText": "الحمد لله مصليا علي ... محمد واله ومن تلا",
       "order": 2,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_3",
+      "id": "book_tuhfat_al_atfal_v_3_307a6cun",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَبَعْدُ هَذَا النَّظْمُ لِلْمُرِيدِ ... فِي النُّونِ وَالتَّنْوِينِ وَالْمُدُودِ",
-      "normalizedText": "وبعد هذا النظم للمريد في النون والتنوين والمدود",
+      "normalizedText": "وبعد هذا النظم للمريد ... في النون والتنوين والمدود",
       "order": 3,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_4",
+      "id": "book_tuhfat_al_atfal_v_4_3j2ee7p3",
       "bookId": "book_tuhfat_al_atfal",
       "text": "سَمَّيْتُهُ بِتُحْفَةِ الْأَطْفَالِ ... عَنْ شَيْخِنَا الْمَيْهِيِّ ذِي الْكَمَالِ",
-      "normalizedText": "سميته بتحفة الاطفال عن شيخنا الميهي ذي الكمال",
+      "normalizedText": "سميته بتحفه الاطفال ... عن شيخنا الميهي ذي الكمال",
       "order": 4,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_5",
+      "id": "book_tuhfat_al_atfal_v_5_j7qmv3q3",
       "bookId": "book_tuhfat_al_atfal",
       "text": "أَرْجُو بِهِ أَنْ يَنْفَعَ الطُّلَّابَا ... وَالْأَجْرَ وَالْقَبُولَ وَالثَّوَابَا",
-      "normalizedText": "ارجو به ان ينفع الطلابا والاجر والقبول والثوابا",
+      "normalizedText": "ارجو به ان ينفع الطلابا ... والاجر والقبول والثوابا",
       "order": 5,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_6",
+      "id": "book_tuhfat_al_atfal_v_6_b57ke9a8",
       "bookId": "book_tuhfat_al_atfal",
       "text": "لِلنُّونِ إِنْ تَسْكُنْ وَلِلتَّنْوِينِ ... أَرْبَعُ أَحْكَامٍ فَخُذْ تَبْيِينِي",
-      "normalizedText": "للنون ان تسكن وللتنوين اربع احكام فخذ تبييني",
+      "normalizedText": "للنون ان تسكن وللتنوين ... اربع احكام فخذ تبييني",
       "order": 6,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_7",
+      "id": "book_tuhfat_al_atfal_v_7_pvo20ut4",
       "bookId": "book_tuhfat_al_atfal",
       "text": "فَالْأَوَّلُ الْإِظْهَارُ قَبْلَ أَحْرُفِ ... لِلْحَلْقِ سِتٌّ رُتِّبَتْ فَلْتَعْرِفِ",
-      "normalizedText": "فالاول الاظهار قبل احرف للحلق ست رتبت فلتعرف",
+      "normalizedText": "فالاول الاظهار قبل احرف ... للحلق ست رتبت فلتعرف",
       "order": 7,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_8",
+      "id": "book_tuhfat_al_atfal_v_8_j5unvzwz",
       "bookId": "book_tuhfat_al_atfal",
       "text": "هَمْزٌ فَهَاءٌ ثُمَّ عَيْنٌ حَاءُ ... مُهْمَلَتَانِ ثُمَّ غَيْنٌ خَاءُ",
-      "normalizedText": "همز فهاء ثم عين حاء مهملتان ثم غين خاء",
+      "normalizedText": "همز فها ثم عين حا ... مهملتان ثم غين خا",
       "order": 8,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_9",
+      "id": "book_tuhfat_al_atfal_v_9_e148h16k",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالثَّانِ إِدْغَامٌ بِسِتَّةٍ أَتَتْ ... فِي يَرْمَلُونَ عِنْدَهُمْ قَدْ ثَبَتَتْ",
-      "normalizedText": "والثان ادغام بستة اتت في يرملون عندهم قد ثبتت",
+      "normalizedText": "والثان ادغام بسته اتت ... في يرملون عندهم قد ثبتت",
       "order": 9,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_10",
+      "id": "book_tuhfat_al_atfal_v_10_5cp48af1",
       "bookId": "book_tuhfat_al_atfal",
       "text": "لَكِنَّهَا قِسْمَانِ قِسْمٌ يُدْغَمَا ... فِيهِ بِغُنَّةٍ بِيَنْمُو عُلِمَا",
-      "normalizedText": "لكنها قسمان قسم يدغما فيه بغنة بينمو علما",
+      "normalizedText": "لكنها قسمان قسم يدغما ... فيه بغنه بينمو علما",
       "order": 10,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_11",
+      "id": "book_tuhfat_al_atfal_v_11_jx0u8jva",
       "bookId": "book_tuhfat_al_atfal",
       "text": "إِلَّا إِذَا كَانَا بِكِلْمَةٍ فَلَا ... تُدْغِمْ كَدُنْيَا ثُمَّ صِنْوَانٌ تَلَا",
-      "normalizedText": "الا اذا كانا بكلمة فلا تدغم كدنيا ثم صنوان تلا",
+      "normalizedText": "الا اذا كانا بكلمه فلا ... تدغم كدنيا ثم صنوان تلا",
       "order": 11,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_12",
+      "id": "book_tuhfat_al_atfal_v_12_g2toajeb",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالثَّانِ إِدْغَامٌ بِغَيْرِ غُنَّةْ ... فِي اللَّامِ وَالرَّا ثُمَّ كَرِّرَنَّهْ",
-      "normalizedText": "والثان ادغام بغير غنة في اللام والرا ثم كررنه",
+      "normalizedText": "والثان ادغام بغير غنه ... في اللام والرا ثم كررنه",
       "order": 12,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_13",
+      "id": "book_tuhfat_al_atfal_v_13_zqfpa9jz",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالثَّالِثُ الْإِقْلَابُ عِنْدَ الْبَاءِ ... مِيمًا بِغُنَّةٍ مَعَ الْإِخْفَاءِ",
-      "normalizedText": "والثالث الاقلاب عند الباء ميما بغنة مع الاخفاء",
+      "normalizedText": "والثالث الاقلاب عند البا ... ميما بغنه مع الاخفا",
       "order": 13,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_14",
+      "id": "book_tuhfat_al_atfal_v_14_dm5yg82c",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالرَّابِعُ الْإِخْفَاءُ عِنْدَ الْفَاضِلِ ... مِنَ الْحُرُوفِ وَاجِبٌ لِلْفَاضِلِ",
-      "normalizedText": "والرابع الاخفاء عند الفاضل من الحروف واجب للفاضل",
+      "normalizedText": "والرابع الاخفا عند الفاضل ... من الحروف واجب للفاضل",
       "order": 14,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_15",
+      "id": "book_tuhfat_al_atfal_v_15_49ptp75o",
       "bookId": "book_tuhfat_al_atfal",
       "text": "فِي خَمْسَةٍ مِنْ بَعْدِ عَشْرٍ رَمْزُهَا ... فِي كِلْمِ هَذَا الْبَيْتِ قَدْ ضَمَّنْتُهَا",
-      "normalizedText": "في خمسة من بعد عشر رمزها في كلم هذا البيت قد ضمنتها",
+      "normalizedText": "في خمسه من بعد عشر رمزها ... في كلم هذا البيت قد ضمنتها",
       "order": 15,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_16",
+      "id": "book_tuhfat_al_atfal_v_16_3kzs8o54",
       "bookId": "book_tuhfat_al_atfal",
       "text": "صِفْ ذَا ثَنَا كَمْ جَادَ شَخْصٌ قَدْ سَمَا ... دُمْ طَيِّبًا زِدْ فِي تُقًى ضَعْ ظَالِمَا",
-      "normalizedText": "صف ذا ثنا كم جاد شخص قد سما دم طيبا زد في تقى ضع ظالما",
+      "normalizedText": "صف ذا ثنا كم جاد شخص قد سما ... دم طيبا زد في تقي ضع ظالما",
       "order": 16,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_17",
+      "id": "book_tuhfat_al_atfal_v_17_s5zpq44f",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَغُنَّ مِيمًا ثُمَّ نُونًا شُدِّدَا ... وَسَمِّ كُلًّا حَرْفَ غُنَّةٍ بَدَا",
-      "normalizedText": "وغن ميما ثم نونا شددا وسم كلا حرف غنة بدا",
+      "normalizedText": "وغن ميما ثم نونا شددا ... وسم كلا حرف غنه بدا",
       "order": 17,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_18",
+      "id": "book_tuhfat_al_atfal_v_18_820sb4ph",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالْمِيمُ إِنْ تَسْكُنْ تَجِي قَبْلَ الْهِجَا ... لَا أَلِفٍ لَيِّنَةٍ لِذِي الْحِجَا",
-      "normalizedText": "والميم ان تسكن تجي قبل الهجا لا الف لينة لذي الحجا",
+      "normalizedText": "والميم ان تسكن تجي قبل الهجا ... لا الف لينه لذي الحجا",
       "order": 18,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_19",
+      "id": "book_tuhfat_al_atfal_v_19_hkm426vk",
       "bookId": "book_tuhfat_al_atfal",
       "text": "أَحْكَامُهَا ثَلَاثَةٌ لِمَنْ ضَبَطْ ... إِخْفَاءٌ ادْغَامٌ وَإِظْهَارٌ فَقَطْ",
-      "normalizedText": "احكامها ثلاثة لمن ضبط اخفاء ادغام واظهار فقط",
+      "normalizedText": "احكامها ثلاثه لمن ضبط ... اخفا ادغام واظهار فقط",
       "order": 19,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_20",
+      "id": "book_tuhfat_al_atfal_v_20_mgljyho8",
       "bookId": "book_tuhfat_al_atfal",
       "text": "فَالْأَوَّلُ الْإِخْفَاءُ عِنْدَ الْبَاءِ ... وَسَمِّهِ الشَّفَوِيَّ لِلْقُرَّاءِ",
-      "normalizedText": "فالاول الاخفاء عند الباء وسمه الشفوي للقراء",
+      "normalizedText": "فالاول الاخفا عند البا ... وسمه الشفوي للقرا",
       "order": 20,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_21",
+      "id": "book_tuhfat_al_atfal_v_21_kc0zrr18",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالثَّانِ إِدْغَامٌ بِمِثْلِهَا أَتَى ... وَسَمِّ إِدْغَامًا صَغِيرًا يَا فَتَى",
-      "normalizedText": "والثان ادغام بمثلها اتى وسم ادغاما صغيرا يا فتى",
+      "normalizedText": "والثان ادغام بمثلها اتي ... وسم ادغاما صغيرا يا فتي",
       "order": 21,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_22",
+      "id": "book_tuhfat_al_atfal_v_22_rb7pa7gx",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالثَّالِثُ الْإِظْهَارُ فِي الْبَقِيَّةْ ... مِنْ أَحْرُفٍ وَسَمِّهَا شَفَوِيَّهْ",
-      "normalizedText": "والثالث الاظهار في البقية من احرف وسمها شفويه",
+      "normalizedText": "والثالث الاظهار في البقيه ... من احرف وسمها شفويه",
       "order": 22,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_23",
+      "id": "book_tuhfat_al_atfal_v_23_tvamrftq",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَاحْذَرْ لَدَى وَاوٍ وَفَا أَنْ تَخْتَفِي ... لِقُرْبِهَا وَلِاتِّحَادِ فَاعْرِفِ",
-      "normalizedText": "واحذر لدى واو وفا ان تختفي لقربها ولاتحاد فاعرف",
+      "normalizedText": "واحذر لدي واو وفا ان تختفي ... لقربها ولاتحاد فاعرف",
       "order": 23,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_24",
+      "id": "book_tuhfat_al_atfal_v_24_ghmg5hc4",
       "bookId": "book_tuhfat_al_atfal",
       "text": "لِلَامِ أَلْ حَالَانِ قَبْلَ الْأَحْرُفِ ... أُولَاهُمَا إِظْهَارُهَا فَلْتَعْرِفِ",
-      "normalizedText": "للام ال حالان قبل الاحرف اولاهما اظهارها فلتعرف",
+      "normalizedText": "للام ال حالان قبل الاحرف ... اولاهما اظهارها فلتعرف",
       "order": 24,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_25",
+      "id": "book_tuhfat_al_atfal_v_25_5rhf2ivv",
       "bookId": "book_tuhfat_al_atfal",
       "text": "قَبْلَ ارْبَعٍ مَعْ عَشْرَةٍ خُذْ عِلْمَهُ ... مِنْ إِبْغِ حَجَّكَ وَخَفْ عَقِيمَهُ",
-      "normalizedText": "قبل اربع مع عشرة خذ علمه من ابغ حجك وخف عقيمه",
+      "normalizedText": "قبل اربع مع عشره خذ علمه ... من ابغ حجك وخف عقيمه",
       "order": 25,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_26",
+      "id": "book_tuhfat_al_atfal_v_26_wde3681i",
       "bookId": "book_tuhfat_al_atfal",
       "text": "ثَانِيهِمَا إِدْغَامُهَا فِي أَرْبَعِ ... وَعَشْرَةٍ أَيْضًا وَرَمْزَهَا فَعِ",
-      "normalizedText": "ثانيهما ادغامها في اربع وعشرة ايضا ورمزها فع",
+      "normalizedText": "ثانيهما ادغامها في اربع ... وعشره ايضا ورمزها فع",
       "order": 26,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_27",
+      "id": "book_tuhfat_al_atfal_v_27_6j6mmt2v",
       "bookId": "book_tuhfat_al_atfal",
       "text": "طِبْ ثُمَّ صِلْ رَحِمًا تَفُزْ ضِفْ ذَا نِعَمْ ... دَعْ سُوءَ ظَنٍّ زُرْ شَرِيفًا لِلْكَرَمْ",
-      "normalizedText": "طب ثم صل رحما تفز ضف ذا نعم دع سوء ظن زر شريفا للكرم",
+      "normalizedText": "طب ثم صل رحما تفز ضف ذا نعم ... دع سو ظن زر شريفا للكرم",
       "order": 27,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_28",
+      "id": "book_tuhfat_al_atfal_v_28_g0ltsh0h",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَاللَّامَ الْأُولَى سَمِّهَا قَمْرِيَّهْ ... وَاللَّامَ الْأُخْرَى سَمِّهَا شَمْسِيَّهْ",
-      "normalizedText": "واللام الاولى سمها قمريه واللام الاخرى سمها شمسيه",
+      "normalizedText": "واللام الاولي سمها قمريه ... واللام الاخري سمها شمسيه",
       "order": 28,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_29",
+      "id": "book_tuhfat_al_atfal_v_29_juru4cyc",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَأَظْهِرَنَّ لَامَ فِعْلٍ مُطْلَقًا ... فِي نَحْوِ قُلْ نَعَمْ وَقُلْنَا وَالْتَقَى",
-      "normalizedText": "واظهرن لام فعل مطلقا في نحو قل نعم وقلنا والتقى",
+      "normalizedText": "واظهرن لام فعل مطلقا ... في نحو قل نعم وقلنا والتقي",
       "order": 29,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_30",
+      "id": "book_tuhfat_al_atfal_v_30_dmg54qbr",
       "bookId": "book_tuhfat_al_atfal",
       "text": "إِنْ فِي الصِّفَاتِ وَالْمَخَارِجِ اتَّفَقْ ... حَرْفَانِ فَالْمِثْلَانِ فِيهِمَا أَحَقْ",
-      "normalizedText": "ان في الصفات والمخارج اتفق حرفان فالمثلان فيهما احق",
+      "normalizedText": "ان في الصفات والمخارج اتفق ... حرفان فالمثلان فيهما احق",
       "order": 30,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_31",
+      "id": "book_tuhfat_al_atfal_v_31_ixlg60ej",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَإِنْ يَكُونَا مَخْرَجًا تَقَارَبَا ... وَفِي الصِّفَاتِ اخْتَلَفَا يُلَقَّبَا",
-      "normalizedText": "وان يكونا مخرجا تقاربا وفي الصفات اختلفا يلقبا",
+      "normalizedText": "وان يكونا مخرجا تقاربا ... وفي الصفات اختلفا يلقبا",
       "order": 31,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_32",
+      "id": "book_tuhfat_al_atfal_v_32_2z1ro8rc",
       "bookId": "book_tuhfat_al_atfal",
       "text": "مُتَقَارِبَيْنِ أَوْ يَكُونَا اتَّفَقَا ... فِي مَخْرَجٍ دُونَ الصِّفَاتِ حُقِّقَا",
-      "normalizedText": "متقاربين او يكونا اتفقا في مخرج دون الصفات حققا",
+      "normalizedText": "متقاربين او يكونا اتفقا ... في مخرج دون الصفات حققا",
       "order": 32,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_33",
+      "id": "book_tuhfat_al_atfal_v_33_z8ulh4b4",
       "bookId": "book_tuhfat_al_atfal",
       "text": "بِالْمُتَجَانِسَيْنِ ثُمَّ إِنْ سَكَنْ ... أَوَّلُ كُلٍّ فَالصَّغِيرَ سَمِّيَنْ",
-      "normalizedText": "بالمتجانسين ثم ان سكن اول كل فالصغير سمين",
+      "normalizedText": "بالمتجانسين ثم ان سكن ... اول كل فالصغير سمين",
       "order": 33,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_34",
+      "id": "book_tuhfat_al_atfal_v_34_xlaabetl",
       "bookId": "book_tuhfat_al_atfal",
       "text": "أَوْ حُرِّكَ الْحَرْفَانِ فِي كُلٍّ فَقُلْ ... كُلٌّ كَبِيرٌ وَافْهَمَنْهُ بِالْمُثُلْ",
-      "normalizedText": "او حرك الحرفان في كل فقل كل كبير وافهمنه بالمثل",
+      "normalizedText": "او حرك الحرفان في كل فقل ... كل كبير وافهمنه بالمثل",
       "order": 34,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_35",
+      "id": "book_tuhfat_al_atfal_v_35_3lwpit33",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالْمَدُّ أَصْلِيٌّ وَفَرْعِيٌّ لَهُ ... وَسَمِّ أَوَّلًا طَبِيعِيًّا وَهُو",
-      "normalizedText": "والمد اصلي وفرعي له وسم اولا طبيعيا وهو",
+      "normalizedText": "والمد اصلي وفرعي له ... وسم اولا طبيعيا وهو",
       "order": 35,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_36",
+      "id": "book_tuhfat_al_atfal_v_36_93ulhhgr",
       "bookId": "book_tuhfat_al_atfal",
       "text": "مَا لَا تَوَقُّفٌ لَهُ عَلَى سَبَبْ ... وَلَا بِدُونِهِ الْحُرُوفُ تُجْتَلَبْ",
-      "normalizedText": "ما لا توقف له على سبب ولا بدونه الحروف تجتلب",
+      "normalizedText": "ما لا توقف له علي سبب ... ولا بدونه الحروف تجتلب",
       "order": 36,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_37",
+      "id": "book_tuhfat_al_atfal_v_37_lnulmhez",
       "bookId": "book_tuhfat_al_atfal",
       "text": "بَلْ أَيُّ حَرْفٍ غَيْرِ هَمْزٍ أَوْ سُكُونْ ... جَا بَعْدَ مَدٍّ فَالطَّبِيعِيَّ يَكُونْ",
-      "normalizedText": "بل اي حرف غير همز او سكون جا بعد مد فالطبيعي يكون",
+      "normalizedText": "بل اي حرف غير همز او سكون ... جا بعد مد فالطبيعي يكون",
       "order": 37,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_38",
+      "id": "book_tuhfat_al_atfal_v_38_rwq52p7z",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالْآخَرُ الْفَرْعِيُّ مَوْقُوفٌ عَلَى ... سَبَبْ كَهَمْزٍ أَوْ سُكُونٍ مُسْجَلَا",
-      "normalizedText": "والاخر الفرعي موقوف على سبب كهمز او سكون مسجلا",
+      "normalizedText": "والاخر الفرعي موقوف علي ... سبب كهمز او سكون مسجلا",
       "order": 38,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_39",
+      "id": "book_tuhfat_al_atfal_v_39_qzbkisop",
       "bookId": "book_tuhfat_al_atfal",
       "text": "حُرُوفُهُ ثَلَاثَةٌ فَعِيهَا ... مِنْ لَفْظِ وَايٍ وَهْيَ فِي نُوحِيهَا",
-      "normalizedText": "حروفه ثلاثة فعيها من لفظ واي وهي في نوحيها",
+      "normalizedText": "حروفه ثلاثه فعيها ... من لفظ واي وهي في نوحيها",
       "order": 39,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_40",
+      "id": "book_tuhfat_al_atfal_v_40_5lnwrg7x",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالْكَسْرُ قَبْلَ الْيَا وَقَبْلَ الْوَاوِ ضَمْ ... شَرْطٌ وَفَتْحٌ قَبْلَ أَلْفٍ يُلْتَزَمْ",
-      "normalizedText": "والكسر قبل اليا وقبل الواو ضم شرط وفتح قبل الف يلتزم",
+      "normalizedText": "والكسر قبل اليا وقبل الواو ضم ... شرط وفتح قبل الف يلتزم",
       "order": 40,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_41",
+      "id": "book_tuhfat_al_atfal_v_41_054ybigp",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَاللِّينُ مِنْهَا الْيَا وَوَاوٌ سُكِنَا ... إِنِ انْفِتَاحٌ قَبْلَ كُلٍّ أُعْلِنَا",
-      "normalizedText": "واللين منها اليا وواو سكنا ان انفتاح قبل كل اعلنا",
+      "normalizedText": "واللين منها اليا وواو سكنا ... ان انفتاح قبل كل اعلنا",
       "order": 41,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_42",
+      "id": "book_tuhfat_al_atfal_v_42_cgrwxjva",
       "bookId": "book_tuhfat_al_atfal",
       "text": "لِلْمَدِّ أَحْكَامٌ ثَلَاثَةٌ تَدُومْ ... وَهْيَ الْوُجُوبُ وَالْجَوَازُ وَاللُّزُومْ",
-      "normalizedText": "للمد احكام ثلاثة تدوم وهي الوجوب والجواز واللزوم",
+      "normalizedText": "للمد احكام ثلاثه تدوم ... وهي الوجوب والجواز واللزوم",
       "order": 42,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_43",
+      "id": "book_tuhfat_al_atfal_v_43_vueza4hj",
       "bookId": "book_tuhfat_al_atfal",
       "text": "فَوَاجِبٌ إِنْ جَاءَ هَمْزٌ بَعْدَ مَدْ ... فِي كِلْمَةٍ وَذَا بِمُتَّصِلْ يُعَدْ",
-      "normalizedText": "فواجب ان جاء همز بعد مد في كلمة وذا بمتصل يعد",
+      "normalizedText": "فواجب ان جا همز بعد مد ... في كلمه وذا بمتصل يعد",
       "order": 43,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_44",
+      "id": "book_tuhfat_al_atfal_v_44_qrqhxgqe",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَجَائِزٌ مَدٌّ وَقَصْرٌ إِنْ فُصِلْ ... كُلٌّ بِكِلْمَةٍ وَهَذَا الْمُنْفَصِلْ",
-      "normalizedText": "وجائز مد وقصر ان فصل كل بكلمة وهذا المنفصل",
+      "normalizedText": "وجايز مد وقصر ان فصل ... كل بكلمه وهذا المنفصل",
       "order": 44,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_45",
+      "id": "book_tuhfat_al_atfal_v_45_egtr9hv9",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَمِثْلُ ذَا إِنْ عَرَضَ السُّكُونُ ... وَقْفًا كَتَعْلَمُونَ نَسْتَعِينُ",
-      "normalizedText": "ومثل ذا ان عرض السكون وقفا كتعلمون نستعين",
+      "normalizedText": "ومثل ذا ان عرض السكون ... وقفا كتعلمون نستعين",
       "order": 45,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_46",
+      "id": "book_tuhfat_al_atfal_v_46_qzlqyqj3",
       "bookId": "book_tuhfat_al_atfal",
       "text": "أَوْ قُدِّمَ الْهَمْزُ عَلَى الْمَدِّ وَذَا ... بَدَلْ كَآمَنُوا وَإِيمَانًا خُذَا",
-      "normalizedText": "او قدم الهمز على المد وذا بدل كامنوا وايمانا خذا",
+      "normalizedText": "او قدم الهمز علي المد وذا ... بدل كامنوا وايمانا خذا",
       "order": 46,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_47",
+      "id": "book_tuhfat_al_atfal_v_47_ck0g3clh",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَلَازِمٌ إِنِ السُّكُونُ أُصِّلَا ... وَصْلًا وَوَقْفًا بَعْدَ مَدٍّ طُوِّلَا",
-      "normalizedText": "ولازم ان السكون اصلا وصلا ووقفا بعد مد طولا",
+      "normalizedText": "ولازم ان السكون اصلا ... وصلا ووقفا بعد مد طولا",
       "order": 47,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_48",
+      "id": "book_tuhfat_al_atfal_v_48_2yo2nkpe",
       "bookId": "book_tuhfat_al_atfal",
       "text": "أَقْسَامُ لَازِمٍ لَدَيْهِمْ أَرْبَعَةْ ... وَتِلْكَ كِلْمِيٌّ وَحَرْفِيٌّ مَعَهْ",
-      "normalizedText": "اقسام لازم لديهم اربعة وتلك كلمي وحرفي معه",
+      "normalizedText": "اقسام لازم لديهم اربعه ... وتلك كلمي وحرفي معه",
       "order": 48,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_49",
+      "id": "book_tuhfat_al_atfal_v_49_2lby18as",
       "bookId": "book_tuhfat_al_atfal",
       "text": "كِلَاهُمَا مُخَفَّفٌ مُثَقَّلُ ... فَهَذِهِ أَرْبَعَةٌ تُفَصَّلُ",
-      "normalizedText": "كلاهما مخفف مثقل فهذه اربعة تفصل",
+      "normalizedText": "كلاهما مخفف مثقل ... فهذه اربعه تفصل",
       "order": 49,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_50",
+      "id": "book_tuhfat_al_atfal_v_50_746u18im",
       "bookId": "book_tuhfat_al_atfal",
       "text": "فَإِنْ بِكِلْمَةٍ سُكُونٌ اجْتَمَعْ ... مَعْ حَرْفِ مَدٍّ فَهْوَ كِلْمِيٌّ وَقَعْ",
-      "normalizedText": "فان بكلمة سكون اجتمع مع حرف مد فهو كلمي وقع",
+      "normalizedText": "فان بكلمه سكون اجتمع ... مع حرف مد فهو كلمي وقع",
       "order": 50,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_51",
+      "id": "book_tuhfat_al_atfal_v_51_witsby50",
       "bookId": "book_tuhfat_al_atfal",
       "text": "أَوْ فِي ثُلَاثِيِّ الْحُرُوفِ وُجِدَا ... وَالْمَدُّ وَسْطُهُ فَحَرْفِيٌّ بَدَا",
-      "normalizedText": "او في ثلاثي الحروف وجدا والمد وسطه فحرفي بدا",
+      "normalizedText": "او في ثلاثي الحروف وجدا ... والمد وسطه فحرفي بدا",
       "order": 51,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_52",
+      "id": "book_tuhfat_al_atfal_v_52_1z4o02n1",
       "bookId": "book_tuhfat_al_atfal",
       "text": "كِلَاهُمَا مُثَقَّلٌ إِنْ أُدْغِمَا ... مُخَفَّفٌ كُلٌّ إِذَا لَمْ يُدْغَمَا",
-      "normalizedText": "كلاهما مثقل ان ادغما مخفف كل اذا لم يدغما",
+      "normalizedText": "كلاهما مثقل ان ادغما ... مخفف كل اذا لم يدغما",
       "order": 52,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_53",
+      "id": "book_tuhfat_al_atfal_v_53_79uq8eud",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَاللَّازِمُ الْحَرْفِيُّ أَوَّلَ السُّوَرْ ... وُجُودُهُ وَفِي ثَمَانٍ انْحَصَرْ",
-      "normalizedText": "واللازم الحرفي اول السور وجوده وفي ثمان انحصر",
+      "normalizedText": "واللازم الحرفي اول السور ... وجوده وفي ثمان انحصر",
       "order": 53,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_54",
+      "id": "book_tuhfat_al_atfal_v_54_2tcvytdt",
       "bookId": "book_tuhfat_al_atfal",
       "text": "يَجْمَعُهَا حُرُوفُ كَمْ عَسَلْ نَقَصْ ... وَعَيْنُ ذُو وَجْهَيْنِ وَالطُّولُ أَخَصْ",
-      "normalizedText": "يجمعها حروف كم عسل نقص وعين ذو وجهين والطول اخص",
+      "normalizedText": "يجمعها حروف كم عسل نقص ... وعين ذو وجهين والطول اخص",
       "order": 54,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_55",
+      "id": "book_tuhfat_al_atfal_v_55_axj1cnag",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَمَا سِوَى الْحَرْفِ الثُّلَاثِيِّ لَا أَلِفْ ... فَمَدُّهُ مَدٌّ طَبِيعِيٌّ أُلِفْ",
-      "normalizedText": "وما سوى الحرف الثلاثي لا الف فمده مد طبيعي الف",
+      "normalizedText": "وما سوي الحرف الثلاثي لا الف ... فمده مد طبيعي الف",
       "order": 55,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_56",
+      "id": "book_tuhfat_al_atfal_v_56_eayecq3s",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَذَاكَ أَيْضًا فِي فَوَاتِحِ السُّوَرْ ... فِي لَفْظِ حَيٌّ طَاهِرٌ قَدِ انْحَصَرْ",
-      "normalizedText": "وذاك ايضا في فواتح السور في لفظ حي طاهر قد انحصر",
+      "normalizedText": "وذاك ايضا في فواتح السور ... في لفظ حي طاهر قد انحصر",
       "order": 56,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_57",
+      "id": "book_tuhfat_al_atfal_v_57_qpeldajt",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَيَجْمَعُ الْفَوَاتِحَ الْأَرْبَعْ عَشَرْ ... صِلْهُ سُحَيْرًا مَنْ قَطَعْكَ ذَا اشْتَهَرْ",
-      "normalizedText": "ويجمع الفواتح الاربع عشر صله سحيرا من قطعك ذا اشتهر",
+      "normalizedText": "ويجمع الفواتح الاربع عشر ... صله سحيرا من قطعك ذا اشتهر",
       "order": 57,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_58",
+      "id": "book_tuhfat_al_atfal_v_58_565593bc",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَتَمَّ ذَا النَّظْمُ بِحَمْدِ اللَّهِ ... عَلَى تَمَامِهِ بِلَا تَنَاهِي",
-      "normalizedText": "وتم ذا النظم بحمد الله على تمامه بلا تناهي",
+      "normalizedText": "وتم ذا النظم بحمد الله ... علي تمامه بلا تناهي",
       "order": 58,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_59",
+      "id": "book_tuhfat_al_atfal_v_59_992hf5zg",
       "bookId": "book_tuhfat_al_atfal",
       "text": "أَبْيَاتُهُ نَدٌّ بَدَا لِذِي النُّهَى ... تَارِيخُهَا بُشْرَى لِمَنْ يُتْقِنُهَا",
-      "normalizedText": "ابياته ند بدا لذي النهى تاريخها بشرى لمن يتقنها",
+      "normalizedText": "ابياته ند بدا لذي النهي ... تاريخها بشري لمن يتقنها",
       "order": 59,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_60",
+      "id": "book_tuhfat_al_atfal_v_60_4cg0e3w5",
       "bookId": "book_tuhfat_al_atfal",
       "text": "ثُمَّ الصَّلَاةُ وَالسَّلَامُ أَبَدَا ... عَلَى خِتَامِ الْأَنْبِيَاءِ أَحْمَدَا",
-      "normalizedText": "ثم الصلاة والسلام ابدا على ختام الانبياء احمدا",
+      "normalizedText": "ثم الصلاه والسلام ابدا ... علي ختام الانبيا احمدا",
       "order": 60,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     },
     {
-      "id": "book_tuhfat_al_atfal_v_61",
+      "id": "book_tuhfat_al_atfal_v_61_6avxxl8s",
       "bookId": "book_tuhfat_al_atfal",
       "text": "وَالْآلِ وَالصَّحْبِ وَكُلِّ تَابِعِ ... وَكُلِّ قَارِئٍ وَكُلِّ سَامِعِ",
-      "normalizedText": "والال والصحب وكل تابع وكل قارئ وكل سامع",
+      "normalizedText": "والال والصحب وكل تابع ... وكل قاري وكل سامع",
       "order": 61,
       "isDeleted": false,
       "deletedAt": null,
       "deletedBy": null,
       "createdAt": "2026-07-01T19:25:57Z",
-      "updatedAt": "2026-07-01T19:25:57Z"
+      "updatedAt": "2026-07-18T16:00:00Z"
     }
   ],
   "isPublished": true,
@@ -751,5 +753,5 @@
   "deletedAt": null,
   "deletedBy": null,
   "createdAt": "2026-07-01T19:25:57Z",
-  "updatedAt": "2026-07-01T19:25:57Z"
+  "updatedAt": "2026-07-18T16:00:00Z"
 }
