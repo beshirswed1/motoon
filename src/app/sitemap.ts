@@ -3,7 +3,7 @@ import { booksService } from '@/services/firebase/books.service';
 import { getAllLocalBooks } from '@/lib/data';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://motoon.app';
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.motoon.com.tr';
 
   // Base static routes
   const routes = [
