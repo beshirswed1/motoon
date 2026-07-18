@@ -1,7 +1,10 @@
 import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.motoon.com.tr';
+  const rawAppUrl = process.env.NEXT_PUBLIC_APP_URL;
+  const baseUrl = rawAppUrl && !rawAppUrl.includes('localhost')
+    ? rawAppUrl
+    : 'https://www.motoon.com.tr';
 
   return {
     rules: {
