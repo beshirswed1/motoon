@@ -49,6 +49,8 @@ export async function generateMetadata(
     };
   }
 
+  const imageUrl = book.coverImageUrl || 'https://www.motoon.com.tr/logo.png';
+
   return {
     title: `${book.title} | متون`,
     description: book.description,
@@ -57,10 +59,14 @@ export async function generateMetadata(
       description: book.description,
       locale: 'ar_SA',
       type: 'website',
-      images: book.coverImageUrl ? [{ url: book.coverImageUrl }] : [],
+      url: `https://www.motoon.com.tr/books/${encodeURIComponent(book.slug)}`,
+      images: [{ url: imageUrl, width: 800, height: 1000, alt: `غلاف ${book.title}` }],
     },
     twitter: {
       card: 'summary_large_image',
+      title: `${book.title} | متون`,
+      description: book.description,
+      images: [imageUrl],
     },
   };
 }

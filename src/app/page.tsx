@@ -23,11 +23,25 @@ export async function generateMetadata(): Promise<Metadata> {
     description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي.',
     openGraph: {
       title: 'متون | منصة حفظ المتون العلمية',
-      description: 'احفظ المتون الشرعية وتتبع تقدمك في الحفظ',
+      description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي.',
       locale: 'ar_SA',
       type: 'website',
+      url: 'https://www.motoon.com.tr',
+      images: [
+        {
+          url: 'https://www.motoon.com.tr/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'شعار منصة متون',
+        },
+      ],
     },
-    twitter: { card: 'summary_large_image' },
+    twitter: {
+      card: 'summary_large_image',
+      title: 'متون | منصة حفظ المتون العلمية',
+      description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية وتتبع تقدمك في الحفظ بنظام ذكي.',
+      images: ['https://www.motoon.com.tr/logo.png'],
+    },
   };
 }
 

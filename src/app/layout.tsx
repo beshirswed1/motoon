@@ -19,7 +19,7 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
 
 /* ── Metadata ─────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'https://motoon.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.motoon.com.tr'),
   title: {
     default: 'متون — منصة التعليم الإسلامي',
     template: '%s | متون',
@@ -40,15 +40,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ar_SA',
-    url: 'https://motoon.app',
+    url: 'https://www.motoon.com.tr',
     siteName: 'متون',
     title: 'متون — منصة التعليم الإسلامي لحفظ المتون',
     description: 'منصة متون للتعليم الإسلامي — احفظ المتون الشرعية، القرآن الكريم، وتتبع تقدمك في الحفظ والمراجعة بتقنيات الذكاء الاصطناعي.',
     images: [
       {
-        url: '/logo.png',
-        width: 800,
-        height: 600,
+        url: 'https://www.motoon.com.tr/logo.png',
+        width: 1200,
+        height: 630,
         alt: 'شعار منصة متون',
       },
     ],
@@ -57,13 +57,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'متون — منصة التعليم الإسلامي',
     description: 'احفظ المتون الشرعية وتتبع تقدمك في الحفظ',
-    images: ['/logo.png'],
+    images: ['https://www.motoon.com.tr/logo.png'],
   },
   alternates: {
-    canonical: 'https://motoon.app',
-    languages: {
-      'ar-SA': 'https://motoon.app/ar',
-    },
+    canonical: 'https://www.motoon.com.tr',
   },
   manifest: '/manifest.json',
   appleWebApp: {

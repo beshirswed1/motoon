@@ -12,9 +12,21 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'تصفح قائمة المتون الشرعية المتاحة للحفظ والدراسة في منصة متون.',
       locale: 'ar_SA',
       type: 'website',
+      url: 'https://www.motoon.com.tr/books',
+      images: [
+        {
+          url: 'https://www.motoon.com.tr/logo.png',
+          width: 1200,
+          height: 630,
+          alt: 'شعار منصة متون',
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
+      title: 'المتون | متون',
+      description: 'تصفح قائمة المتون الشرعية المتاحة للحفظ والدراسة في منصة متون.',
+      images: ['https://www.motoon.com.tr/logo.png'],
     },
   };
 }
