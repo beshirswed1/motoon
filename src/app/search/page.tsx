@@ -1,11 +1,10 @@
-import React from 'react';
 import type { Metadata } from 'next';
 import { getAllLocalBooks } from '@/lib/data';
 import { AUTHORS } from '@/lib/data/authors.data';
 import { SCIENCES } from '@/lib/data/sciences.data';
 import { createPageMetadata } from '@/lib/seo/metadata.helpers';
 import { createBreadcrumbSchema, combineSchemas } from '@/lib/seo/jsonld.helpers';
-import { SEO_CONFIG, getFullUrl } from '@/lib/seo/seo.config';
+import { getFullUrl } from '@/lib/seo/seo.config';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Breadcrumb } from '@/components/seo/Breadcrumb';
 import { SearchClientPage } from './SearchClientPage';

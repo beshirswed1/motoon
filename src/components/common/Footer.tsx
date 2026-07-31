@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Instagram, ExternalLink, Search } from 'lucide-react';
+import { Mail, Instagram, ExternalLink } from 'lucide-react';
 
 const quickLinks = [
   { href: '/books', label: 'المكتبة العلمية للمتون' },

@@ -1,6 +1,8 @@
+import type { Metadata } from 'next';
+import { FileText, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { createPageMetadata } from '@/lib/seo/metadata.helpers';
 import { createWebPageSchema, createBreadcrumbSchema, combineSchemas } from '@/lib/seo/jsonld.helpers';
-import { SEO_CONFIG, getFullUrl } from '@/lib/seo/seo.config';
+import { getFullUrl } from '@/lib/seo/seo.config';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Breadcrumb } from '@/components/seo/Breadcrumb';
 

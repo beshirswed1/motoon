@@ -1,4 +1,4 @@
-import React from 'react';
+
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -9,7 +9,7 @@ import { getLocalBookBySlug, getAllLocalBooks } from '@/lib/data';
 import { getAuthorByName } from '@/lib/data/authors.data';
 import { getCategoryLabel } from '@/lib/constants/categories';
 import { Button } from '@/components/ui/button';
-import { Mic, BookOpen, Hash, BarChart, Tags, Quote, ArrowRight, Eye, Download, HelpCircle, Layers } from 'lucide-react';
+import { Mic, BookOpen, Hash, BarChart, Quote, Eye, Download, HelpCircle, Layers } from 'lucide-react';
 import type { BookDifficulty } from '@/types/book.types';
 import { FavoriteButton } from '@/features/books/components/FavoriteButton';
 import { createBookMetadata } from '@/lib/seo/metadata.helpers';
@@ -21,7 +21,7 @@ import {
   createBreadcrumbSchema,
   combineSchemas,
 } from '@/lib/seo/jsonld.helpers';
-import { SEO_CONFIG, getFullUrl } from '@/lib/seo/seo.config';
+import { getFullUrl } from '@/lib/seo/seo.config';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Breadcrumb } from '@/components/seo/Breadcrumb';
 import { AuthorCard } from '@/components/seo/AuthorCard';
@@ -70,10 +70,10 @@ export async function generateMetadata(
     slug: book.slug,
     description: book.description,
     author: book.author,
-    category: book.category,
+    category: book.category || undefined,
     difficulty: book.difficulty,
     tags: book.tags,
-    coverImageUrl: book.coverImageUrl,
+    coverImageUrl: book.coverImageUrl || undefined,
     versesCount: book.versesCount,
   });
 }
@@ -134,11 +134,11 @@ export default async function BookDetailsPage(
     slug: book.slug,
     description: book.description,
     author: book.author,
-    authorSlug: authorData?.slug,
+    authorSlug: authorData?.slug || undefined,
     category: categoryLabel,
     difficulty: book.difficulty,
     versesCount: totalVerses,
-    coverImageUrl: book.coverImageUrl,
+    coverImageUrl: book.coverImageUrl || undefined,
     tags: book.tags,
   });
 
@@ -335,7 +335,7 @@ export default async function BookDetailsPage(
             {/* Similar Books Section */}
             <RelatedBooks
               currentBookSlug={book.slug}
-              category={book.category}
+              category={book.category || ''}
               author={book.author}
               allBooks={allLocalBooks}
             />

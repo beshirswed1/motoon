@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -76,12 +75,15 @@ export default async function ScienceDetailPage(
     name: `متون ${science.name}`,
     description: science.fullDescription,
     url: getFullUrl(`/sciences/${science.slug}`),
-    items: scienceBooks.map((b) => ({
-      name: b.title,
-      url: getFullUrl(`/books/${b.slug}`),
-      description: b.description,
-      image: b.coverImageUrl,
-    })),
+    items: scienceBooks.map((b) => {
+      const item: { name: string; url: string; description: string; image?: string } = {
+        name: b.title,
+        url: getFullUrl(`/books/${b.slug}`),
+        description: b.description,
+      };
+      if (b.coverImageUrl) item.image = b.coverImageUrl;
+      return item;
+    }),
   });
 
   const breadcrumbSchema = createBreadcrumbSchema([

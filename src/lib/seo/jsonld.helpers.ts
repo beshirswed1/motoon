@@ -113,12 +113,12 @@ export function createBookSchema(book: {
   slug: string;
   description: string;
   author: string;
-  authorSlug?: string;
-  category?: string;
-  difficulty?: string;
-  versesCount?: number;
-  coverImageUrl?: string;
-  tags?: string[];
+  authorSlug?: string | undefined;
+  category?: string | undefined;
+  difficulty?: string | undefined;
+  versesCount?: number | undefined;
+  coverImageUrl?: string | undefined;
+  tags?: string[] | undefined;
 }): JsonLdObject {
   const difficultyMap: Record<string, string> = {
     beginner: 'Beginner',

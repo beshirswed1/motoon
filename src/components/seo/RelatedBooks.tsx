@@ -1,7 +1,6 @@
-import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BookOpen, User, Hash } from 'lucide-react';
+import { User, Hash } from 'lucide-react';
 import type { Book } from '@/types/book.types';
 
 interface RelatedBooksProps {

@@ -1,6 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
-import { User, BookOpen, ArrowRight } from 'lucide-react';
+import { User, ArrowRight } from 'lucide-react';
 import { getAuthorByName } from '@/lib/data/authors.data';
 
 interface AuthorCardProps {

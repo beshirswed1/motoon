@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Search, X, History, TrendingUp, BookOpen, User, Layers, ArrowRight } from 'lucide-react';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import type { Book } from '@/types/book.types';
 import type { Author } from '@/lib/data/authors.data';
 import type { Science } from '@/lib/data/sciences.data';

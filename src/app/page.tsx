@@ -194,12 +194,15 @@ export default async function HomePage() {
     name: 'أبرز المتون الشرعية للحفظ',
     description: 'قائمة بأشهر المتون الشرعية في العقيدة والفقه والنحو والحديث.',
     url: getFullUrl('/'),
-    items: carouselBooks.map((b) => ({
-      name: b.title,
-      url: getFullUrl(`/books/${b.slug}`),
-      description: b.description,
-      image: b.coverImageUrl,
-    })),
+    items: carouselBooks.map((b) => {
+      const item: { name: string; url: string; description: string; image?: string } = {
+        name: b.title,
+        url: getFullUrl(`/books/${b.slug}`),
+        description: b.description,
+      };
+      if (b.coverImageUrl) item.image = b.coverImageUrl;
+      return item;
+    }),
   });
 
   const pageSchemas = combineSchemas(howToSchema, faqSchema, collectionSchema);

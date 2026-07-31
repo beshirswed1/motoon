@@ -1,6 +1,7 @@
 /**
  * ═══════════════════════════════════════════════════════════════
  * Metadata Helpers — Factory functions for Next.js Metadata API
+ * Optimized for #1 Search Engine Ranking & High CTR
  * ═══════════════════════════════════════════════════════════════
  */
 import type { Metadata } from 'next';
@@ -83,6 +84,7 @@ export function createPageMetadata(options: PageMetadataOptions): Metadata {
       canonical: canonicalUrl,
       languages: {
         'ar-SA': canonicalUrl,
+        'ar': canonicalUrl,
       },
     },
 
@@ -107,7 +109,7 @@ export function createPageMetadata(options: PageMetadataOptions): Metadata {
       type: ogType,
       locale: SEO_CONFIG.locale,
       url: canonicalUrl,
-      siteName: SEO_CONFIG.siteName,
+      siteName: 'متون — منصة حفظ المتون الشرعية',
       title,
       description,
       images: resolvedOgImages,
@@ -165,36 +167,48 @@ export function createPageMetadata(options: PageMetadataOptions): Metadata {
 }
 
 /**
- * Create metadata for a book detail page with rich, unique data
+ * Create metadata for a book detail page optimized for Google Search #1 spot
  */
 export function createBookMetadata(book: {
   title: string;
   slug: string;
   description: string;
   author: string;
-  category?: string;
-  difficulty?: string;
-  tags?: string[];
-  coverImageUrl?: string;
-  versesCount?: number;
+  category?: string | undefined;
+  difficulty?: string | undefined;
+  tags?: string[] | undefined;
+  coverImageUrl?: string | undefined;
+  versesCount?: number | undefined;
 }): Metadata {
+  const isNazmOrMatn = book.title.includes('متن') || book.title.includes('منظومة') ? book.title : `متن ${book.title}`;
+
   const bookKeywords = [
     book.title,
+    isNazmOrMatn,
+    `متن ${book.title} كامل`,
+    `متن ${book.title} مكتوب`,
+    `تحميل ${book.title} PDF`,
     `حفظ ${book.title}`,
     `شرح ${book.title}`,
-    `متن ${book.title}`,
+    `قراءة ${book.title}`,
+    `أبيات ${book.title}`,
+    `متون ${book.title}`,
     book.author,
     `مؤلف ${book.title}`,
+    `تسميع ${book.title}`,
+    'متن',
+    'متون',
+    'م',
     ...(book.tags || []),
-    ...(book.difficulty ? [`متن ${book.difficulty === 'beginner' ? 'للمبتدئين' : book.difficulty === 'intermediate' ? 'متوسط' : 'متقدم'}`] : []),
   ];
 
   const difficultyLabel = book.difficulty === 'beginner' ? 'مبتدئ' : book.difficulty === 'intermediate' ? 'متوسط' : 'متقدم';
-  const enrichedDescription = `${book.title} — ${book.description} | المؤلف: ${book.author} | المستوى: ${difficultyLabel}${book.versesCount ? ` | عدد الأبيات: ${book.versesCount}` : ''} — احفظه الآن في منصة متون.`;
+  const metaTitle = `${isNazmOrMatn} كامل مكتوب مع الحفظ والتسميع — منصة متون`;
+  const enrichedDescription = `${isNazmOrMatn} كاملاً مكتوباً مع إمكانية القراءة والحفظ والتسميع الصوتي بالذكاء الاصطناعي وتحميل PDF. المؤلف: ${book.author} | المستوى: ${difficultyLabel}${book.versesCount ? ` | عدد الأبيات: ${book.versesCount}` : ''}.`;
 
   const opts: PageMetadataOptions = {
-    title: `${book.title} — حفظ وتسميع | متون`,
-    description: enrichedDescription.substring(0, 160),
+    title: metaTitle,
+    description: enrichedDescription.substring(0, 165),
     keywords: bookKeywords,
     path: `/books/${book.slug}`,
     ogType: 'book',
@@ -204,8 +218,8 @@ export function createBookMetadata(book: {
   if (book.coverImageUrl) {
     opts.ogImage = book.coverImageUrl;
     opts.ogImages = [
-      { url: book.coverImageUrl, width: 800, height: 1000, alt: `غلاف ${book.title}` },
-      { url: getOgImageUrl(), width: 1200, height: 630, alt: `${book.title} | متون` },
+      { url: book.coverImageUrl, width: 800, height: 1000, alt: `غلاف ${isNazmOrMatn}` },
+      { url: getOgImageUrl(), width: 1200, height: 630, alt: `${isNazmOrMatn} | منصة متون` },
     ];
   }
 
@@ -222,14 +236,18 @@ export function createAuthorMetadata(author: {
   booksCount: number;
 }): Metadata {
   return createPageMetadata({
-    title: `${author.name} — ترجمة ومتون | متون`,
-    description: `ترجمة ${author.name} وقائمة متونه الشرعية (${author.booksCount} متن). تعرف على حياته وأعماله واحفظ متونه في منصة متون.`.substring(0, 160),
+    title: `ترجمة ومؤلفات ${author.name} — جميع متونه في منصة متون`,
+    description: `تعرف على ترجمة وحياة وسيرة ${author.name} وقائمة جميع متونه ومنظوماته الشرعية (${author.booksCount} متون). احفظ وأتقن مؤلفاته في منصة متون.`.substring(0, 165),
     keywords: [
       author.name,
       `ترجمة ${author.name}`,
+      `سيرة ${author.name}`,
       `متون ${author.name}`,
       `كتب ${author.name}`,
       `مؤلفات ${author.name}`,
+      `منظومات ${author.name}`,
+      'علماء الإسلام',
+      'متون',
     ],
     path: `/authors/${author.slug}`,
     ogType: 'profile',
@@ -246,14 +264,17 @@ export function createScienceMetadata(science: {
   booksCount: number;
 }): Metadata {
   return createPageMetadata({
-    title: `${science.name} — المتون والكتب | متون`,
-    description: `${science.description} — ${science.booksCount} متن متاح للحفظ في منصة متون.`.substring(0, 160),
+    title: `متون ${science.name} كاملة مكتوبة للحفظ والتسميع — منصة متون`,
+    description: `جميع متون ومنظومات ${science.name} مكتوبة ومتاحة للحفظ والتسميع الصوتي التفاعلي (${science.booksCount} متون). ${science.description}`.substring(0, 165),
     keywords: [
       science.name,
       `متون ${science.name}`,
       `كتب ${science.name}`,
+      `منظومات ${science.name}`,
       `حفظ ${science.name}`,
       `تعلم ${science.name}`,
+      'علوم شرعية',
+      'متون',
     ],
     path: `/sciences/${science.slug}`,
   });

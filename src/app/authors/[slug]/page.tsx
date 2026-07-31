@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -16,7 +15,7 @@ import {
 import { getFullUrl } from '@/lib/seo/seo.config';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Breadcrumb } from '@/components/seo/Breadcrumb';
-import { User, BookOpen, ScrollText, ArrowRight, Calendar, Hash, Award } from 'lucide-react';
+import { User, BookOpen, ScrollText, ArrowRight, Calendar } from 'lucide-react';
 
 type Params = { slug: string };
 

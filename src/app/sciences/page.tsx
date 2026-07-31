@@ -1,11 +1,10 @@
-import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getAllSciences } from '@/lib/data/sciences.data';
 import { getAllLocalBooks } from '@/lib/data';
 import { createPageMetadata } from '@/lib/seo/metadata.helpers';
 import { createCollectionPageSchema, createBreadcrumbSchema, combineSchemas } from '@/lib/seo/jsonld.helpers';
-import { SEO_CONFIG, getFullUrl } from '@/lib/seo/seo.config';
+import { getFullUrl } from '@/lib/seo/seo.config';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Breadcrumb } from '@/components/seo/Breadcrumb';
 import {

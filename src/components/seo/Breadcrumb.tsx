@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import { ChevronLeft, Home } from 'lucide-react';
 import { createBreadcrumbSchema } from '@/lib/seo/jsonld.helpers';
