@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard, User, BookOpen, TrendingUp,
-  Home, Download, Heart
+  Home, Download, Heart, Layers, GraduationCap, Search
 } from 'lucide-react';
 
 import toast from 'react-hot-toast';
@@ -19,6 +19,9 @@ import { useEffect, useState, useCallback } from 'react';
 const navLinks = [
   { href: '/', label: 'الرئيسية', icon: Home },
   { href: '/books', label: 'المتون', icon: BookOpen },
+  { href: '/sciences', label: 'العلوم', icon: Layers },
+  { href: '/authors', label: 'العلماء', icon: GraduationCap },
+  { href: '/search', label: 'البحث', icon: Search },
 ];
 
 export function Navbar() {

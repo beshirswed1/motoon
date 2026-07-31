@@ -3,15 +3,31 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { CommunityCTA } from '@/components/common/CommunityCTA';
 import { analyticsService } from '@/services/firebase/analytics.service';
+import { createPageMetadata } from '@/lib/seo/metadata.helpers';
+import { createOrganizationSchema, createBreadcrumbSchema, combineSchemas } from '@/lib/seo/jsonld.helpers';
+import { getFullUrl } from '@/lib/seo/seo.config';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { Breadcrumb } from '@/components/seo/Breadcrumb';
 import {
   BookOpen, Brain, GraduationCap, Heart, Shield, Zap,
   Target, Users, Star, Award, ArrowLeft, Mic
 } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'عن منصة متون',
-  description: 'تعرف على منصة متون — المنصة الرائدة في حفظ المتون الشرعية بالذكاء الاصطناعي وخوارزمية التكرار المتباعد.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return createPageMetadata({
+    title: 'عن منصة متون — رؤيتنا ورسالتنا في خدمة العلم الشرعي | متون',
+    description: 'تعرف على منصة متون — المنصة التعليمية الرائدة في حفظ المتون الشرعية باستخدام الذكاء الاصطناعي وخوارزمية التكرار المتباعد لتيسير الحفظ لطلاب العلم.',
+    keywords: [
+      'عن منصة متون',
+      'منصة متون',
+      'حفظ العلم الشرعي',
+      'تطبيق متون',
+      'رسالة متون',
+      'التعليم الإسلامي الرقمي',
+    ],
+    path: '/about',
+  });
+}
 
 const values = [
   {
@@ -52,24 +68,33 @@ const features = [
 ];
 
 export default async function AboutPage() {
-  let stats = { totalUsers: 1, totalBooks: 1, totalSessions: 1, activeUsersToday: 1 };
-  
+  let stats = { totalUsers: 100, totalBooks: 35, totalSessions: 500, activeUsersToday: 20 };
+
   try {
     stats = await analyticsService.getTotalStats();
   } catch (err) {
     console.error('Error loading stats for about page:', err);
   }
 
+  const orgSchema = createOrganizationSchema();
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'الرئيسية', url: getFullUrl('/') },
+    { name: 'عن المنصة', url: getFullUrl('/about') },
+  ]);
+
   return (
     <div className="min-h-screen bg-background dir-rtl text-right">
+      <JsonLd data={combineSchemas(orgSchema, breadcrumbSchema)} />
 
       {/* Hero */}
-      <section className="relative overflow-hidden py-20 md:py-28 section-padding">
+      <section className="relative overflow-hidden py-16 md:py-24 section-padding">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/8 to-transparent" />
         <div className="container-motoon relative z-10 text-center flex flex-col items-center gap-6">
+          <Breadcrumb items={[{ label: 'عن المنصة' }]} className="mb-2" />
+
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-bold">
             <Star className="h-3.5 w-3.5 fill-current" />
-            تعرف على متون
+            تعرف على منصة متون
           </div>
           <h1 className="text-4xl md:text-5xl font-black max-w-3xl leading-tight">
             منصة{' '}

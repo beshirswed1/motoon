@@ -5,11 +5,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { booksService } from '@/services/firebase/books.service';
 import { versesService } from '@/services/firebase/verses.service';
-import { getLocalBookBySlug } from '@/lib/data';
+import { getLocalBookBySlug, getAllLocalBooks } from '@/lib/data';
+import { getAuthorByName } from '@/lib/data/authors.data';
+import { getCategoryLabel } from '@/lib/constants/categories';
 import { Button } from '@/components/ui/button';
-import { Mic, BookOpen, Hash, BarChart, Tags, Quote, ArrowRight, Eye, Download } from 'lucide-react';
+import { Mic, BookOpen, Hash, BarChart, Tags, Quote, ArrowRight, Eye, Download, HelpCircle, Layers } from 'lucide-react';
 import type { BookDifficulty } from '@/types/book.types';
 import { FavoriteButton } from '@/features/books/components/FavoriteButton';
+import { createBookMetadata } from '@/lib/seo/metadata.helpers';
+import {
+  createBookSchema,
+  createCourseSchema,
+  createLearningResourceSchema,
+  createFAQSchema,
+  createBreadcrumbSchema,
+  combineSchemas,
+} from '@/lib/seo/jsonld.helpers';
+import { SEO_CONFIG, getFullUrl } from '@/lib/seo/seo.config';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { Breadcrumb } from '@/components/seo/Breadcrumb';
+import { AuthorCard } from '@/components/seo/AuthorCard';
+import { RelatedBooks } from '@/components/seo/RelatedBooks';
 
 type Params = { slug: string };
 
@@ -34,7 +50,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const params = await props.params;
   const decodedSlug = decodeURIComponent(params.slug);
-  
+
   let book = null;
   const localData = getLocalBookBySlug(decodedSlug);
   if (localData) {
@@ -49,26 +65,17 @@ export async function generateMetadata(
     };
   }
 
-  const imageUrl = book.coverImageUrl || 'https://www.motoon.com.tr/logo.png';
-
-  return {
-    title: `${book.title} | متون`,
+  return createBookMetadata({
+    title: book.title,
+    slug: book.slug,
     description: book.description,
-    openGraph: {
-      title: `${book.title} | متون`,
-      description: book.description,
-      locale: 'ar_SA',
-      type: 'website',
-      url: `https://www.motoon.com.tr/books/${encodeURIComponent(book.slug)}`,
-      images: [{ url: imageUrl, width: 800, height: 1000, alt: `غلاف ${book.title}` }],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${book.title} | متون`,
-      description: book.description,
-      images: [imageUrl],
-    },
-  };
+    author: book.author,
+    category: book.category,
+    difficulty: book.difficulty,
+    tags: book.tags,
+    coverImageUrl: book.coverImageUrl,
+    versesCount: book.versesCount,
+  });
 }
 
 export default async function BookDetailsPage(
@@ -76,10 +83,10 @@ export default async function BookDetailsPage(
 ) {
   const params = await props.params;
   const decodedSlug = decodeURIComponent(params.slug);
-  
+
   let book = null;
   let verses: any[] = [];
-  
+
   const localData = getLocalBookBySlug(decodedSlug);
   if (localData) {
     book = localData.book;
@@ -94,23 +101,106 @@ export default async function BookDetailsPage(
   if (!book) {
     notFound();
   }
-  const sampleVerses = verses.slice(0, 7); // عرض أول 7 أبيات
+
+  const allLocalBooks = getAllLocalBooks();
+  const authorData = getAuthorByName(book.author);
+  const categoryLabel = book.category ? getCategoryLabel(book.category) : 'علوم شرعية';
+  const totalVerses = verses.length > 0 ? verses.length : book.versesCount || 0;
+  const sampleVerses = verses.slice(0, 7);
+
+  // Dynamic FAQs for the book
+  const bookFaqs = [
+    {
+      question: `ما هو متن ${book.title}؟`,
+      answer: `${book.description}`,
+    },
+    {
+      question: `من هو مؤلف ${book.title}؟`,
+      answer: `${book.author}. ${authorData?.bio || ''}`,
+    },
+    {
+      question: `كم عدد أبيات ${book.title} وما مستواه؟`,
+      answer: `يتكون متن ${book.title} من ${totalVerses} بيتاً، وهو مخصص لمستوى ${difficultyLabels[book.difficulty]}.`,
+    },
+    {
+      question: `كيف يمكنني حفظ ${book.title} في منصة متون؟`,
+      answer: `يمكنك البدء بالحفظ مباشرةً عبر النقر على زر "ابدأ الحفظ والمراجعة". توفر المنصة تكراراً متباعداً وتسميعاً صوتياً تفاعلياً وشهادة إتمام عند الإتقان.`,
+    },
+  ];
+
+  // JSON-LD Schemas
+  const bookSchema = createBookSchema({
+    title: book.title,
+    slug: book.slug,
+    description: book.description,
+    author: book.author,
+    authorSlug: authorData?.slug,
+    category: categoryLabel,
+    difficulty: book.difficulty,
+    versesCount: totalVerses,
+    coverImageUrl: book.coverImageUrl,
+    tags: book.tags,
+  });
+
+  const courseSchema = createCourseSchema({
+    title: book.title,
+    slug: book.slug,
+    description: book.description,
+    author: book.author,
+    difficulty: book.difficulty,
+    versesCount: totalVerses,
+    category: categoryLabel,
+  });
+
+  const resourceSchema = createLearningResourceSchema({
+    title: book.title,
+    slug: book.slug,
+    description: book.description,
+    author: book.author,
+    difficulty: book.difficulty,
+  });
+
+  const faqSchema = createFAQSchema(bookFaqs);
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'الرئيسية', url: getFullUrl('/') },
+    { name: 'المكتبة العلمية للمتون', url: getFullUrl('/books') },
+    { name: book.title, url: getFullUrl(`/books/${book.slug}`) },
+  ]);
+
+  const pageSchemas = combineSchemas(bookSchema, courseSchema, resourceSchema, faqSchema, breadcrumbSchema);
 
   return (
     <div className="min-h-screen bg-background pb-20">
-      {/* Hero Header Section */}
-      <div className="relative bg-muted/30 border-b overflow-hidden pt-12 pb-8">
+      <JsonLd data={pageSchemas} />
+
+      {/* Header Banner */}
+      <div className="relative bg-muted/30 border-b overflow-hidden pt-8 pb-8">
         <div className="absolute inset-0 bg-primary/5 pattern-dots opacity-50" />
         <div className="container-motoon relative z-10">
-          <Link href="/books" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm font-semibold mb-6 px-3 py-1.5 rounded-full hover:bg-primary/10">
-            <ArrowRight className="w-4 h-4" /> العودة للمتون
-          </Link>
+          <Breadcrumb
+            className="mb-6"
+            items={[
+              { label: 'المتون', href: '/books' },
+              ...(book.category ? [{ label: categoryLabel, href: `/sciences/${book.category}` }] : []),
+              { label: book.title },
+            ]}
+          />
+
           <div className="flex flex-col md:flex-row gap-6 md:gap-10 items-start md:items-end">
-            <h1 className="text-4xl md:text-5xl font-black text-foreground">{book.title}</h1>
-            <div className="flex gap-2">
+            <h1 className="text-3xl md:text-5xl font-black text-foreground">{book.title}</h1>
+            <div className="flex flex-wrap gap-2">
               <span className={`rounded-full px-4 py-1.5 text-sm font-bold border shadow-sm ${difficultyColors[book.difficulty]}`}>
                 {difficultyLabels[book.difficulty]}
               </span>
+              {book.category && (
+                <Link
+                  href={`/sciences/${book.category}`}
+                  className="rounded-full px-4 py-1.5 text-sm font-bold border bg-card hover:bg-muted text-foreground transition-colors"
+                >
+                  {categoryLabel}
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -118,104 +208,141 @@ export default async function BookDetailsPage(
 
       <div className="container-motoon py-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
-          {/* Main Content Area */}
-          <div className="flex flex-col md:col-span-8 lg:col-span-8 order-2 md:order-1">
-            <div className="prose prose-slate dark:prose-invert max-w-none mb-10 text-lg leading-relaxed">
-              <p className="text-xl font-medium text-foreground/90 border-r-4 border-primary/50 pr-4 py-1 bg-primary/5 rounded-l-lg mb-8">
-                <span className="text-primary font-bold">المؤلف:</span> {book.author}
-              </p>
+          {/* Main Content */}
+          <main className="flex flex-col md:col-span-8 lg:col-span-8 order-2 md:order-1">
+            <div className="prose prose-slate dark:prose-invert max-w-none mb-8 text-lg leading-relaxed">
+              <div className="text-xl font-medium text-foreground/90 border-r-4 border-primary/50 pr-4 py-2 bg-primary/5 rounded-l-lg mb-8 flex items-center justify-between flex-wrap gap-2">
+                <span>
+                  <span className="text-primary font-bold">المؤلف:</span>{' '}
+                  {authorData ? (
+                    <Link href={`/authors/${authorData.slug}`} className="text-primary hover:underline font-bold">
+                      {book.author}
+                    </Link>
+                  ) : (
+                    book.author
+                  )}
+                </span>
+                {authorData && (
+                  <span className="text-xs text-muted-foreground font-normal">
+                    توفي ({authorData.era})
+                  </span>
+                )}
+              </div>
+
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
                 <InfoIcon className="w-6 h-6 text-primary" /> عن المتن
               </h2>
-              <p>{book.description}</p>
+              <p className="text-base md:text-lg leading-relaxed">{book.description}</p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+            {/* Quick Stats Cards */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
               <div className="flex items-center gap-4 p-4 border rounded-2xl bg-card shadow-sm hover:shadow-md transition-shadow">
                 <div className="p-3 bg-primary/10 rounded-full text-primary">
                   <Hash className="w-6 h-6" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm text-muted-foreground font-medium">عدد الأبيات</span>
-                  <span className="font-bold text-xl">{verses.length > 0 ? verses.length : book.versesCount}</span>
+                  <span className="text-xs text-muted-foreground font-medium">عدد الأبيات</span>
+                  <span className="font-bold text-xl">{totalVerses}</span>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-4 p-4 border rounded-2xl bg-card shadow-sm hover:shadow-md transition-shadow">
                 <div className="p-3 bg-amber-500/10 rounded-full text-amber-500">
                   <BarChart className="w-6 h-6" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm text-muted-foreground font-medium">المستوى</span>
+                  <span className="text-xs text-muted-foreground font-medium">المستوى</span>
                   <span className="font-bold text-lg">{difficultyLabels[book.difficulty]}</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-4 p-4 border rounded-2xl bg-card shadow-sm hover:shadow-md transition-shadow col-span-2 md:col-span-1">
                 <div className="p-3 bg-indigo-500/10 rounded-full text-indigo-500">
-                  <Tags className="w-6 h-6" />
+                  <Layers className="w-6 h-6" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm text-muted-foreground font-medium">التصنيف</span>
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {book.tags.slice(0, 2).map(tag => (
-                      <span key={tag} className="text-xs font-semibold">{tag}</span>
-                    ))}
-                    {book.tags.length > 2 && <span className="text-xs text-muted-foreground">+{book.tags.length - 2}</span>}
-                  </div>
+                  <span className="text-xs text-muted-foreground font-medium">التخصص</span>
+                  <span className="font-bold text-sm truncate">{categoryLabel}</span>
                 </div>
               </div>
             </div>
 
+            {/* Author Biography Section (Internal Link) */}
+            <AuthorCard authorName={book.author} />
+
+            {/* Sample Verses */}
             <div className="mb-10 relative">
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Quote className="w-6 h-6 text-primary" /> مقتطف من المتن
+                <Quote className="w-6 h-6 text-primary" /> مقتطف من أبيات المتن
               </h2>
               <div className="relative rounded-3xl border bg-card overflow-hidden shadow-sm">
                 <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary/40 via-primary to-primary/40" />
                 <div className="p-8 md:p-12 text-center font-arabic leading-loose space-y-6">
                   {sampleVerses.length > 0 ? (
                     <>
-                      {sampleVerses.map(verse => (
+                      {sampleVerses.map((verse) => (
                         <p key={verse.id} className="text-xl md:text-2xl font-bold text-foreground">
                           {verse.text}
                         </p>
                       ))}
                       {verses.length > 7 && (
                         <div className="pt-6 mt-6 border-t border-dashed">
-                          <p className="text-sm font-semibold text-muted-foreground">... (عينة من الأبيات الأولى للمتن) ...</p>
+                          <p className="text-sm font-semibold text-muted-foreground">... (عينة من أول الأبيات) ...</p>
                         </div>
                       )}
                     </>
                   ) : (
-                    <p className="text-muted-foreground font-semibold">لم يتم إضافة أبيات لهذا المتن بعد.</p>
+                    <p className="text-muted-foreground font-semibold">تصفح القراءة الكاملة لعرض أبيات هذا المتن.</p>
                   )}
                 </div>
               </div>
             </div>
 
-            {verses.length > 0 && (
-              <div className="mb-10 p-6 rounded-3xl border border-primary/20 bg-primary/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                    <Download className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg text-foreground">تحميل وقراءة المتن كاملاً</h3>
-                    <p className="text-sm text-muted-foreground">يمكنك قراءة الأبيات كاملة أو تحميلها كـ PDF للطباعة بشعار الموقع، أو كملف نصي TXT.</p>
-                  </div>
+            {/* Download & Read CTA */}
+            <div className="mb-10 p-6 rounded-3xl border border-primary/20 bg-primary/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                  <Download className="w-6 h-6" />
                 </div>
-                <Button asChild className="font-bold rounded-xl gap-1.5 shadow-md shrink-0">
-                  <Link href={`/books/${book.slug}/read`}>
-                    <Eye className="w-4 h-4" /> عرض وتحميل المتن
-                  </Link>
-                </Button>
+                <div>
+                  <h3 className="font-bold text-lg text-foreground">قراءة وتحميل المتن كاملاً</h3>
+                  <p className="text-sm text-muted-foreground">يمكنك قراءة الأبيات كاملة أو تحميلها كـ PDF للطباعة أو TXT.</p>
+                </div>
               </div>
-            )}
-          </div>
+              <Button asChild className="font-bold rounded-xl gap-1.5 shadow-md shrink-0">
+                <Link href={`/books/${book.slug}/read`}>
+                  <Eye className="w-4 h-4" /> عرض وتحميل المتن
+                </Link>
+              </Button>
+            </div>
+
+            {/* FAQ Section */}
+            <div className="mb-10">
+              <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+                <HelpCircle className="w-6 h-6 text-primary" /> أسئلة شائعة عن {book.title}
+              </h2>
+              <div className="grid gap-4">
+                {bookFaqs.map((faq, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl border border-border/50 bg-card">
+                    <h3 className="font-bold text-base text-foreground mb-1">{faq.question}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Similar Books Section */}
+            <RelatedBooks
+              currentBookSlug={book.slug}
+              category={book.category}
+              author={book.author}
+              allBooks={allLocalBooks}
+            />
+          </main>
 
           {/* Sticky Sidebar */}
-          <div className="md:col-span-4 lg:col-span-4 order-1 md:order-2">
+          <aside className="md:col-span-4 lg:col-span-4 order-1 md:order-2">
             <div className="sticky top-24 flex flex-col gap-6">
               <div className="relative aspect-[3/4] w-full max-w-sm mx-auto overflow-hidden rounded-2xl border bg-muted shadow-lg ring-1 ring-border/50">
                 {book.coverImageUrl ? (
@@ -257,7 +384,7 @@ export default async function BookDetailsPage(
                 <FavoriteButton bookId={book.id} />
               </div>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
     </div>

@@ -2,33 +2,28 @@ import type { Metadata } from 'next';
 import { booksService } from '@/services/firebase/books.service';
 import { getAllLocalBooks } from '@/lib/data';
 import { BooksClientPage } from '@/features/books/components/BooksClientPage';
+import { createPageMetadata } from '@/lib/seo/metadata.helpers';
+import { createCollectionPageSchema, createBreadcrumbSchema, combineSchemas } from '@/lib/seo/jsonld.helpers';
+import { getFullUrl } from '@/lib/seo/seo.config';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { Breadcrumb } from '@/components/seo/Breadcrumb';
 
 export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: 'المتون | متون',
-    description: 'تصفح قائمة المتون الشرعية المتاحة للحفظ والدراسة في منصة متون.',
-    openGraph: {
-      title: 'المتون | متون',
-      description: 'تصفح قائمة المتون الشرعية المتاحة للحفظ والدراسة في منصة متون.',
-      locale: 'ar_SA',
-      type: 'website',
-      url: 'https://www.motoon.com.tr/books',
-      images: [
-        {
-          url: 'https://www.motoon.com.tr/logo.png',
-          width: 1200,
-          height: 630,
-          alt: 'شعار منصة متون',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: 'المتون | متون',
-      description: 'تصفح قائمة المتون الشرعية المتاحة للحفظ والدراسة في منصة متون.',
-      images: ['https://www.motoon.com.tr/logo.png'],
-    },
-  };
+  return createPageMetadata({
+    title: 'المكتبة العلمية للمتون الشرعية — تصفح كافة المتون | متون',
+    description: 'تصفح كافة المتون الشرعية المتاحة للحفظ والدراسة والتسميع في منصة متون. متون النحو والفقه والعقيدة والحديث والأصول مع الإحصائيات والشروح.',
+    keywords: [
+      'المتون الشرعية',
+      'مكتبة المتون',
+      'حفظ المتون',
+      'قائمة المتون العلمية',
+      'متون الفقه',
+      'متون العقيدة',
+      'متون الحديث',
+      'متون النحو',
+    ],
+    path: '/books',
+  });
 }
 
 export default async function BooksPage(props: {
@@ -37,10 +32,7 @@ export default async function BooksPage(props: {
   const searchParams = await props.searchParams;
   const initialCategory = typeof searchParams?.category === 'string' ? searchParams.category : '';
 
-  // Load local books (always available, offline-ready)
   const localBooks = getAllLocalBooks();
-
-  // Try to fetch Firebase books (admin-added)
   let firebaseBooks: any[] = [];
   try {
     const res = await booksService.getAll({ onlyPublished: true });
@@ -49,7 +41,6 @@ export default async function BooksPage(props: {
     console.error('Error fetching books from Firebase:', err);
   }
 
-  // Merge: Firebase books take priority over local (by slug)
   const slugSet = new Set<string>();
   let allBooks: any[] = [];
 
@@ -67,8 +58,33 @@ export default async function BooksPage(props: {
     }
   }
 
-  // Sanitize books to remove Firebase Timestamp prototype methods
   const sanitizedBooks = JSON.parse(JSON.stringify(allBooks));
 
-  return <BooksClientPage allBooks={sanitizedBooks} initialCategory={initialCategory} />;
+  // Schemas
+  const collectionSchema = createCollectionPageSchema({
+    name: 'المكتبة العلمية للمتون الشرعية',
+    description: 'تصفح واحتفظ بالمتون الشرعية في مختلف العلوم الإسلامية.',
+    url: getFullUrl('/books'),
+    items: sanitizedBooks.map((b: any) => ({
+      name: b.title,
+      url: getFullUrl(`/books/${b.slug}`),
+      description: b.description,
+      image: b.coverImageUrl,
+    })),
+  });
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'الرئيسية', url: getFullUrl('/') },
+    { name: 'المكتبة العلمية للمتون', url: getFullUrl('/books') },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={combineSchemas(collectionSchema, breadcrumbSchema)} />
+      <div className="container-motoon pt-6">
+        <Breadcrumb items={[{ label: 'المكتبة العلمية للمتون' }]} />
+      </div>
+      <BooksClientPage allBooks={sanitizedBooks} initialCategory={initialCategory} />
+    </>
+  );
 }

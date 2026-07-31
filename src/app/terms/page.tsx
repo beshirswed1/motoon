@@ -1,11 +1,17 @@
-import type { Metadata } from 'next';
-import { FileText, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { createPageMetadata } from '@/lib/seo/metadata.helpers';
+import { createWebPageSchema, createBreadcrumbSchema, combineSchemas } from '@/lib/seo/jsonld.helpers';
+import { SEO_CONFIG, getFullUrl } from '@/lib/seo/seo.config';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { Breadcrumb } from '@/components/seo/Breadcrumb';
 
-
-export const metadata: Metadata = {
-  title: 'الشروط والأحكام | متون',
-  description: 'شروط وأحكام استخدام منصة متون للتعليم الإسلامي وحفظ المتون الشرعية.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return createPageMetadata({
+    title: 'الشروط والأحكام — سياسة الاستخدام | متون',
+    description: 'شروط وأحكام استخدام منصة متون للتعليم الإسلامي وحفظ المتون الشرعية. القواعد والالتزامات للخدمات والشهادات.',
+    keywords: ['الشروط والأحكام', 'شروط الاستخدام', 'اتفاقية متون'],
+    path: '/terms',
+  });
+}
 
 const sections = [
   {
@@ -94,13 +100,28 @@ const sections = [
 ];
 
 export default function TermsPage() {
-  const lastUpdated = '3 يوليو 2026';
+  const lastUpdated = '30 يوليو 2026';
+
+  const webPageSchema = createWebPageSchema({
+    name: 'الشروط والأحكام — منصة متون',
+    description: 'شروط وأحكام استخدام منصة متون للتعليم الإسلامي.',
+    url: getFullUrl('/terms'),
+  });
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'الرئيسية', url: getFullUrl('/') },
+    { name: 'الشروط والأحكام', url: getFullUrl('/terms') },
+  ]);
 
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={combineSchemas(webPageSchema, breadcrumbSchema)} />
+
       {/* Hero */}
-      <section className="py-14 section-padding bg-muted/30 border-b border-border/30">
-        <div className="container-motoon flex flex-col items-center text-center gap-4">
+      <section className="relative overflow-hidden py-16 md:py-20 section-padding">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 to-transparent" />
+        <div className="container-motoon relative z-10 text-center flex flex-col items-center gap-4">
+          <Breadcrumb items={[{ label: 'الشروط والأحكام' }]} className="mb-2" />
           <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
             <FileText className="h-7 w-7 text-primary" />
           </div>

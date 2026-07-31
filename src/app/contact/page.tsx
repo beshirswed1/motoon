@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import toast from 'react-hot-toast';
 import { CommunityCTA } from '@/components/common/CommunityCTA';
+import { Breadcrumb } from '@/components/seo/Breadcrumb';
 
 
 const WHATSAPP_NUMBER = '905377906230';
@@ -69,6 +70,7 @@ export default function ContactPage() {
       <section className="relative overflow-hidden py-16 md:py-20 section-padding">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/8 to-transparent" />
         <div className="container-motoon relative z-10 text-center flex flex-col items-center gap-4">
+          <Breadcrumb items={[{ label: 'تواصل معنا' }]} className="mb-2" />
           <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
             <MessageSquare className="h-7 w-7 text-primary" />
           </div>

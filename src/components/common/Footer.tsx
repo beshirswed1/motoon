@@ -1,11 +1,24 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Instagram, ExternalLink } from 'lucide-react';
-
+import { Mail, Instagram, ExternalLink, Search } from 'lucide-react';
 
 const quickLinks = [
-  { href: '/books', label: 'تصفح المتون' },
+  { href: '/books', label: 'المكتبة العلمية للمتون' },
+  { href: '/sciences', label: 'أقسام العلوم الشرعية' },
+  { href: '/authors', label: 'أعلام العلماء والمؤلفين' },
+  { href: '/search', label: 'البحث الشامل' },
   { href: '/about', label: 'عن المنصة' },
+];
+
+const featuredMotoonLinks = [
+  { href: '/books/al-ajrumiyyah', label: 'متن الآجرومية' },
+  { href: '/books/alfiyyat-ibn-malik', label: 'ألفية ابن مالك' },
+  { href: '/books/bayquniyyah', label: 'المنظومة البيقونية' },
+  { href: '/books/al_aqeedah_al_tahawiyyah', label: 'العقيدة الطحاوية' },
+  { href: '/books/tuhfat-al-atfal', label: 'تحفة الأطفال' },
+];
+
+const legalLinks = [
   { href: '/contact', label: 'تواصل معنا' },
   { href: '/terms', label: 'الشروط والأحكام' },
   { href: '/privacy', label: 'سياسة الخصوصية' },
@@ -14,9 +27,9 @@ const quickLinks = [
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-border/50 bg-card mt-auto pb-20 md:pb-0">
+    <footer className="border-t border-border/50 bg-card mt-auto pb-20 md:pb-0" role="contentinfo">
       <div className="container-motoon py-10 md:py-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-4 md:grid-cols-2">
 
           {/* Brand Column */}
           <div className="flex flex-col gap-4">
@@ -27,7 +40,7 @@ export function Footer() {
               <span className="text-xl font-black text-primary">متون</span>
             </Link>
             <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
-              منصة رائدة في حفظ وتعلم المتون الشرعية بأحدث أساليب التعلم الذكي ونظام التكرار المتباعد.
+              الموسوعة التعليمية الأولى لحفظ وتعلّم المتون الشرعية بأحدث أساليب التعلم الذكي ونظام التكرار المتباعد.
             </p>
             {/* Social Links */}
             <div className="flex items-center gap-2 mt-1">
@@ -48,65 +61,86 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Links + Contact */}
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-bold text-foreground mb-4 text-sm">روابط سريعة</h4>
-              <ul className="space-y-2.5">
-                {quickLinks.map(({ href, label }) => (
-                  <li key={href}>
-                    <Link
-                      href={href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-foreground mb-4 text-sm">تواصل معنا</h4>
-              <ul className="space-y-2.5">
-                <li>
-                  <a
-                    href="mailto:beshirswed07@gmail.com"
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium flex items-center gap-1.5"
+          {/* Column 2: Navigation */}
+          <div>
+            <h4 className="font-bold text-foreground mb-4 text-sm">استكشف الموسوعة</h4>
+            <ul className="space-y-2.5">
+              {quickLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
                   >
-                    <Mail className="h-3.5 w-3.5" />
-                    beshirswed07@gmail.com
-                  </a>
+                    {label}
+                  </Link>
                 </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
           </div>
+
+          {/* Column 3: Featured Books */}
+          <div>
+            <h4 className="font-bold text-foreground mb-4 text-sm">أبرز المتون للحفظ</h4>
+            <ul className="space-y-2.5">
+              {featuredMotoonLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 4: Contact & Legal */}
+          <div>
+            <h4 className="font-bold text-foreground mb-4 text-sm">الدعم والسياسات</h4>
+            <ul className="space-y-2.5">
+              {legalLinks.map(({ href, label }) => (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="mailto:beshirswed07@gmail.com"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors font-medium flex items-center gap-1.5 pt-1"
+                >
+                  <Mail className="h-3.5 w-3.5" />
+                  beshirswed07@gmail.com
+                </a>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
         {/* ─── Hadith Quote ─────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border/40">
           <div className="relative flex flex-col items-center text-center py-6 px-4 rounded-2xl bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/5 dark:from-primary/10 dark:via-secondary/10 dark:to-primary/10 border border-primary/15 dark:border-primary/20 overflow-hidden">
-            {/* Decorative corner ornaments */}
             <span className="absolute top-2 right-3 text-primary/20 text-3xl leading-none select-none" aria-hidden="true">﴿</span>
             <span className="absolute top-2 left-3 text-primary/20 text-3xl leading-none select-none" aria-hidden="true">﴾</span>
-            <span className="absolute bottom-2 right-3 text-secondary/20 text-3xl leading-none select-none rotate-180" aria-hidden="true">﴿</span>
-            <span className="absolute bottom-2 left-3 text-secondary/20 text-3xl leading-none select-none rotate-180" aria-hidden="true">﴾</span>
 
-            {/* Ornamental divider top */}
             <div className="flex items-center gap-3 mb-3">
               <div className="w-12 h-px bg-gradient-to-l from-primary/50 to-transparent" />
               <span className="text-primary/60 text-lg select-none" aria-hidden="true">❋</span>
               <div className="w-12 h-px bg-gradient-to-r from-primary/50 to-transparent" />
             </div>
 
-            {/* Quote text */}
             <p className="hadith-quote-text text-lg md:text-xl font-bold leading-loose tracking-wide" dir="rtl">
               <span className="bg-gradient-to-r from-primary via-emerald-600 to-primary dark:from-primary dark:via-emerald-400 dark:to-primary bg-clip-text text-transparent">
                 إن يك صواباً فمن الله، وإن يكن خطأً فمنّي ومن الشيطان
               </span>
             </p>
 
-            {/* Ornamental divider bottom */}
             <div className="flex items-center gap-3 mt-3">
               <div className="w-12 h-px bg-gradient-to-l from-secondary/50 to-transparent" />
               <span className="text-secondary/60 text-lg select-none" aria-hidden="true">❋</span>
@@ -118,7 +152,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-6 pt-5 border-t border-border/40 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p className="flex items-center gap-1.5 text-center md:text-right">
-            © {year} منصة متون. جميع الحقوق محفوظة.
+            © {year} منصة متون — الموسوعة التعليمية الإسلامية. جميع الحقوق محفوظة.
           </p>
           <a
             href="https://www.beshirswed.com/"

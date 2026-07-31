@@ -1,10 +1,17 @@
-import type { Metadata } from 'next';
-import { Shield, Eye, Database, Lock, UserCheck, Mail } from 'lucide-react';
+import { createPageMetadata } from '@/lib/seo/metadata.helpers';
+import { createWebPageSchema, createBreadcrumbSchema, combineSchemas } from '@/lib/seo/jsonld.helpers';
+import { SEO_CONFIG, getFullUrl } from '@/lib/seo/seo.config';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { Breadcrumb } from '@/components/seo/Breadcrumb';
 
-export const metadata: Metadata = {
-  title: 'سياسة الخصوصية | متون',
-  description: 'سياسة الخصوصية لمنصة متون — كيف نجمع بياناتك ونحافظ عليها.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return createPageMetadata({
+    title: 'سياسة الخصوصية وحماية البيانات | متون',
+    description: 'سياسة الخصوصية وحماية البيانات في منصة متون — كيف نجمع بياناتك وحفظ تقدمك بأعلى معايير الأمان والشفافية.',
+    keywords: ['سياسة الخصوصية', 'خصوصية متون', 'حماية البيانات', 'أمان البيانات'],
+    path: '/privacy',
+  });
+}
 
 const sections = [
   {
@@ -116,13 +123,28 @@ const sections = [
 ];
 
 export default function PrivacyPage() {
-  const lastUpdated = '3 يوليو 2026';
+  const lastUpdated = '30 يوليو 2026';
+
+  const webPageSchema = createWebPageSchema({
+    name: 'سياسة الخصوصية — منصة متون',
+    description: 'سياسة الخصوصية وحماية البيانات في منصة متون.',
+    url: getFullUrl('/privacy'),
+  });
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'الرئيسية', url: getFullUrl('/') },
+    { name: 'سياسة الخصوصية', url: getFullUrl('/privacy') },
+  ]);
 
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={combineSchemas(webPageSchema, breadcrumbSchema)} />
+
       {/* Hero */}
-      <section className="py-14 section-padding bg-muted/30 border-b border-border/30">
-        <div className="container-motoon flex flex-col items-center text-center gap-4">
+      <section className="relative overflow-hidden py-16 md:py-20 section-padding">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 to-transparent" />
+        <div className="container-motoon relative z-10 text-center flex flex-col items-center gap-4">
+          <Breadcrumb items={[{ label: 'سياسة الخصوصية' }]} className="mb-2" />
           <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
             <Shield className="h-7 w-7 text-primary" />
           </div>
